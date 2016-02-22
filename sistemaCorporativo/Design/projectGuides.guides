@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<ProjectGuidesConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectItemGuides>
+    <ProjectItemGuide TargetFile="LoginScreen.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Left" Position="320" />
+            <Guide Alignment="Left" Position="80" />
+            <Guide Alignment="Left" Position="240" />
+            <Guide Alignment="Left" Position="-1" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
+    <ProjectItemGuide TargetFile="FORMS\PrincipalScreen.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Left" Position="516" />
+            <Guide Alignment="Left" Position="630" />
+            <Guide Alignment="Left" Position="295" />
+            <Guide Alignment="Left" Position="66" />
+            <Guide Alignment="Top" Position="660" />
+            <Guide Alignment="Top" Position="146" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
+    <ProjectItemGuide TargetFile="FORMS\SplashScreen.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Left" Position="80" />
+            <Guide Alignment="Left" Position="344" />
+            <Guide Alignment="Top" Position="165" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
+  </ProjectItemGuides>
+</ProjectGuidesConfiguration>

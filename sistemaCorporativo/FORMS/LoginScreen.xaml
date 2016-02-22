@@ -1,0 +1,28 @@
+﻿<Controls:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="loginScreen" x:Class="sistemaCorporativo.LoginScreen"
+        Title="Acesso Restrito" Height="448" Width="326.5" WindowStartupLocation="CenterScreen"
+		ResizeMode="NoResize" Icon="/sistemaCorporativo;component/IMAGES/Login_Icon.png" Loaded="loginScreen_Loaded" KeyUp="loginScreen_KeyUp"
+		>
+    <Grid x:Name="Back" Margin="0,0,-6,1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="153*"/>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="68*"/>
+            <RowDefinition Height="117*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="289*"/>
+            <ColumnDefinition Width="35*"/>
+        </Grid.ColumnDefinitions>
+        <Image Margin="10,0,-291.85,0" Height="394.5" VerticalAlignment="Top" HorizontalAlignment="Left" Width="608.35" Source="/sistemaCorporativo;component/IMAGES/Icon_Login FLAT DESIGN.png" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
+        <TextBox x:Name="txtAgente" Height="26" Margin="85,0,0,0" TextWrapping="Wrap" Controls:TextBoxHelper.ClearTextButton="true" Controls:TextBoxHelper.Watermark="Agente" VerticalAlignment="Top" Grid.Row="3" />
+        <PasswordBox x:Name="txtSenha" Margin="85,37,0,0" Controls:TextBoxHelper.Watermark="Senha" Controls:PasswordBoxHelper.CapsLockIcon="Capslock Ativado" VerticalAlignment="Top" Grid.Row="3" Height="26"/>
+        <Button x:Name="btnAcessar" Style="{DynamicResource SquareButtonStyle}" Content="Acessar" Margin="199.676,19,0,0" VerticalAlignment="Top" Height="36.3" Grid.Row="4" Click="btnAcessar_Click" RenderTransformOrigin="0.502,0.5"/>
+    </Grid>
+</Controls:MetroWindow>

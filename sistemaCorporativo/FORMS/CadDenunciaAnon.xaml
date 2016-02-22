@@ -1,0 +1,67 @@
+﻿<Controls:MetroWindow
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+	x:Class="sistemaCorporativo.CadDenunciaAnon"
+	Title="Cadastro Denuncia Anônima"
+	Width="607" Height="659.375"
+	BorderBrush="{DynamicResource AccentColorBrush}"
+    BorderThickness="1" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+	<Grid x:Name="LayoutRoot">
+		<TabControl>
+			<TabItem Header="Consultar" Margin="10,0,-10,0">
+				<Grid>
+					<TextBox Controls:TextBoxHelper.Watermark="Pesquisar" Height="23" Margin="131,25.027,145.5,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+					<DataGrid HorizontalAlignment="Left" Margin="10,86.526,0,0" VerticalAlignment="Top" Height="394.46" Width="573"/>
+					<Button x:Name="btnCancelar_Copy" Style="{DynamicResource SquareButtonStyle}" Content="Cancelar" HorizontalAlignment="Left" Margin="339.874,513.102,0,0" VerticalAlignment="Top" Width="107.626" Height="41.8" Click="btnCancelar_Click"/>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Cadastrar" Margin="7.5,0,-7.5,0">
+				<Grid x:Name="grdCadastro">
+					<Label Content="Dados do Local e Fato" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="37.025" Width="207.594" FontSize="20" FontFamily="Segoe WP Light"/>
+					<Label Content="Data do Fato*" HorizontalAlignment="Left" Margin="10,52.025,0,0" VerticalAlignment="Top"/>
+					<TextBox Controls:TextBoxHelper.Watermark="DD/MM/AAAA" HorizontalAlignment="Left" Height="23" Margin="10,77.985,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
+					<Label Content="Hora*" HorizontalAlignment="Left" Margin="131,52.025,0,0" VerticalAlignment="Top"/>
+					<TextBox Controls:TextBoxHelper.Watermark="HH:MM" HorizontalAlignment="Left" Height="23" Margin="131,77.985,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="59"/>
+					<Label Content="Data/Hora do Fato Incerta" HorizontalAlignment="Left" Margin="405,52.025,0,0" VerticalAlignment="Top"/>
+					<TextBox Controls:TextBoxHelper.Watermark="DD/MM/AAAA HH:MM" HorizontalAlignment="Left" Height="23" Margin="405,77.985,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178"/>
+					<Label Content="Logradouro" HorizontalAlignment="Left" Margin="10,145.025,0,0" VerticalAlignment="Top"/>
+					<TextBox Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="23" Margin="10,170.985,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="573"/>
+					<Label Content="Número" HorizontalAlignment="Left" Margin="10,201.985,0,0" VerticalAlignment="Top"/>
+					<TextBox Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="23" Margin="10,227.945,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78.427"/>
+					<Label Content="Complemento" HorizontalAlignment="Left" Margin="269,201.985,0,0" VerticalAlignment="Top"/>
+					<TextBox Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="23" Margin="269,227.945,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="314"/>
+					<Label Content="CEP" HorizontalAlignment="Left" Margin="10,258.945,0,0" VerticalAlignment="Top"/>
+					<TextBox Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="23" Margin="10,284.905,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78.427"/>
+					<Label Content="Bairro" HorizontalAlignment="Left" Margin="269,258.945,0,0" VerticalAlignment="Top"/>
+					<TextBox Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="23" Margin="269,284.905,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="314"/>
+					<Label Content="Múnicipio*" HorizontalAlignment="Left" Margin="10,315.905,0,0" VerticalAlignment="Top"/>
+					<TextBox Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="23" Margin="10,341.865,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138.427"/>
+					<Label Content="Estado" HorizontalAlignment="Left" Margin="269,315.905,0,0" VerticalAlignment="Top"/>
+					<ComboBox HorizontalAlignment="Left" Margin="269,341.865,0,0" VerticalAlignment="Top" Width="85.533"/>
+					<Label Content="Referência" HorizontalAlignment="Left" Margin="10,372.865,0,0" VerticalAlignment="Top"/>
+					<TextBox Controls:TextBoxHelper.Watermark="Caso não saiba o endereço completo preencha esse campo!" HorizontalAlignment="Left" Height="23" Margin="10,398.825,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="573"/>
+					<Label Content="Tipo de Local*" HorizontalAlignment="Left" Margin="10,429.825,0,0" VerticalAlignment="Top"/>
+					<ComboBox HorizontalAlignment="Left" Margin="10,455.785,0,0" VerticalAlignment="Top" Width="138.427"/>
+					<Button x:Name="btnAvanca" Style="{DynamicResource SquareButtonStyle}" Content="Avançar" HorizontalAlignment="Left" Margin="173.53,531.102,0,0" VerticalAlignment="Top" Width="110.885" Height="41.8" Background="#FF35A3CD"/>
+					<Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}" Content="Cancelar" HorizontalAlignment="Left" Margin="298.856,531.102,0,0" VerticalAlignment="Top" Width="107.626" Height="41.8" Click="btnCancelar_Click"/>
+				</Grid>
+			</TabItem>
+		</TabControl>
+		<Canvas x:Name="cnvDenuncia" HorizontalAlignment="Left" Height="562.902" Margin="10,10,0,0" VerticalAlignment="Top" Width="573" Visibility="Hidden">
+						
+			<Label Content="Relato da Denuncia" Canvas.Left="10" Canvas.Top="21.526"/>
+			<RichTextBox Height="346" Canvas.Left="10" Canvas.Top="47.486" Width="553">
+				<FlowDocument/>
+			</RichTextBox>
+			<Button x:Name="btnAvanca_Copy" Style="{DynamicResource SquareButtonStyle}" Content="Avançar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110.885" Height="41.8" Background="#FF35A3CD" Canvas.Left="239.53" Canvas.Top="511.102"/>
+			<Button x:Name="btnCancelar_Copy1" Style="{DynamicResource SquareButtonStyle}" Content="Cancelar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="107.626" Height="41.8" Click="btnCancelar_Click" Canvas.Left="367.856" Canvas.Top="511.102"/>
+			<Button x:Name="btnAvanca_Copy1" Style="{DynamicResource SquareButtonStyle}" Content="Retornar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110.885" Height="41.8" Background="#FF35A3CD" Canvas.Left="110.53" Canvas.Top="511.102"/>
+		</Canvas>
+		
+	</Grid>
+</Controls:MetroWindow>

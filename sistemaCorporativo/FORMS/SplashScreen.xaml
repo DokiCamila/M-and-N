@@ -1,0 +1,30 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" mc:Ignorable="d" x:Class="sistemaCorporativo.FORMS.SplashScreen"
+        Title="SplashScreen" Height="361.814" Width="688.56" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Background="{x:Null}" BorderBrush="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown" ShowInTaskbar="False" ResizeMode="NoResize">
+    <Grid x:Name="action" Height="358.231" VerticalAlignment="Top" >
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://siteoforigin:,,,/IMAGES/SplashScreenBackground5.png"/>
+        </Grid.Background>
+        <Image x:Name="logo" HorizontalAlignment="Left" Height="304" Margin="82,0,0,0" VerticalAlignment="Top" Width="532" Source="/sistemaCorporativo;component/IMAGES/SPPDI-Logo OFFICIAL br.png" Stretch="Fill"/>
+        <Label Content="          de&#xA;Investigação" HorizontalAlignment="Left" Margin="249,280.744,0,0" VerticalAlignment="Top" FontFamily="Dolce Vita A Few Extra Pounds" FontSize="29.333"/>
+        <Controls:MetroProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Margin="0,358.23,0,-5.999" VerticalAlignment="Top" Width="688.56" Height="1.5" RenderTransformOrigin="0.5,0.5" Minimum="0" Maximum="100" Background="#FFDEDCDB" Foreground="#FF2ADEBD"/>
+        <Label Content="(C) Copyright Equipe07 - ITB Brasílio 2015. All rights reserved" HorizontalAlignment="Left" Margin="354,-4.64,0,0" VerticalAlignment="Top" Height="25.64"/>
+        <Label Content="v1.0b" HorizontalAlignment="Left" Margin="405,271,0,0" VerticalAlignment="Top" FontFamily="Dolce Vita A Few Extra Pounds" FontSize="13.333" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-3.222"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label x:Name="lblStatus" Content="" HorizontalAlignment="Left" Margin="0,331.317,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,246 @@
+﻿<Controls:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="PrincipalScreen1" x:Class="sistemaCorporativo.FORMS.principalScreen.PrincipalScreen"
+        Title="D.P.I.C.S.P Departamento Policial de Investigação Criminal de São Paulo" Height="729" Width="1361"
+
+		BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+		WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="PrincipalScreen1_Loaded"
+	    >
+    <Controls:MetroWindow.Resources>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Button x:Name="button" BorderBrush="#FF7A7979" Background="White" Content="claro" Foreground="#FF020202" Style="{DynamicResource SquareButtonStyle}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Background" TargetName="button" Value="#FF272424"/>
+                                <Setter Property="Foreground" TargetName="button" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="button" Value="#FFCBC6C6"/>
+                            </Trigger>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Foreground" TargetName="button" Value="White"/>
+                                <Setter Property="Background" TargetName="button" Value="#FF212020"/>
+                            </Trigger>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle Fill="#FFF4F4F5"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="claro"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle3" TargetType="{x:Type Button}"/>
+        <Style x:Key="ButtonStyle4" TargetType="{x:Type Button}"/>
+        <Style x:Key="ButtonStyle5" TargetType="{x:Type Button}"/>
+        <Style x:Key="ButtonStyleClaro" TargetType="{x:Type Button}"/>
+        <Style x:Key="ButtonStyle6" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle x:Name="rectangle" Fill="White" Stroke="#FF6A6969" StrokeThickness="2"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="claro"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Fill" TargetName="rectangle" Value="#FF767070"/>
+                            </Trigger>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Fill" TargetName="rectangle" Value="#FF302E2E"/>
+                            </Trigger>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Controls:MetroWindow.Resources>
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button x:Name="btnPerfil" Click="btnPerfil_Click">
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Margin="4 0 0 0"
+    			VerticalAlignment="Center"
+    			Text="Perfil" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    <Grid x:Name="grdPrincipal">
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/sistemaCorporativo;component/IMAGES/Wallpaper Oficial SPPDI material.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="221*"/>
+            <RowDefinition Height="23*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Grid.RowSpan="2" Height="Auto" MaxHeight="{Binding ElementName=grdPrincipal, Path=ActualHeight}">
+            <Grid x:Name="grdPrincipal1" HorizontalAlignment="Left" Height="514" Margin="65,145,-310,0" VerticalAlignment="Top" Width="1596" Grid.RowSpan="2">
+
+                <Label Content="Software" HorizontalAlignment="Left" Margin="883.5,2.017,0,0" VerticalAlignment="Top" FontFamily="Segoe WP Light" FontSize="29.333"/>
+
+                <Controls:Tile Margin="961,51.034,575.5,409.964" Height="Auto" Width="Auto" TiltFactor="2" ToolTip="Configurações">
+                    <Controls:Tile.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                    </Controls:Tile.Background>
+                    <Image Source="/sistemaCorporativo;component/IMAGES/Settings_FLAT.png" Margin="30,11,0,0"  Width="69.5" Height="64.002"/>
+                </Controls:Tile>
+
+                <Label Content="Ferramentas" HorizontalAlignment="Left" Margin="566,2.017,0,0" VerticalAlignment="Top" FontFamily="Segoe WP Light" FontSize="29.333"/>
+
+                <Label Content="Cadastro" HorizontalAlignment="Left" Margin="27,2.017,0,0" VerticalAlignment="Top" FontFamily="Segoe WP Light" FontSize="29.333"/>
+
+                <Controls:Tile Margin="687,344.034,792.5,74.964" Height="Auto" Width="Auto" TiltFactor="2" ToolTip="Comparar Assinatura">
+                    <Controls:Tile.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                    </Controls:Tile.Background>
+                    <Image Source="/sistemaCorporativo;component/IMAGES/Assinatura_FLAT.png" Margin="67,21,10,0"  Width="115.5" Height="140.002"/>
+                </Controls:Tile>
+                <Controls:Tile Margin="566,344.034,914,74.966" Height="Auto" Width="Auto" TiltFactor="2" Title="" ToolTip="Analisar DNA">
+                    <Controls:Tile.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                    </Controls:Tile.Background>
+                    <Image Source="/sistemaCorporativo;component/IMAGES/dna_FLAT.png" Margin="84,18,10,0"  Height="120" Width="150"/>
+                </Controls:Tile>
+                <Controls:Tile Margin="566,243.035,792.5,174.966" Height="Auto" Width="Auto" TiltFactor="2" Title="Reconhecimento Facial">
+                    <Controls:Tile.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                    </Controls:Tile.Background>
+                    <Image Source="/sistemaCorporativo;component/IMAGES/Reconhecimento_Facial_FLAT.png" Margin="69,16,10,0"  Height="120.999" Width="237.5"/>
+                </Controls:Tile>
+                <Controls:Tile Margin="566,51.034,792.5,275.965" Height="Auto" Width="Auto" TiltFactor="2" Title="Comparar Impressão Digital">
+                    <Controls:Tile.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                    </Controls:Tile.Background>
+                    <Image Source="/sistemaCorporativo;component/IMAGES/Finger_Print_tools_FLAT.png" Margin="146,27,10,0"  Height="280.001" Width="250.5"/>
+                </Controls:Tile>
+                <Controls:Tile Margin="242,243,1116,175" Height="Auto" Width="Auto" Click="Tile_Click_2" Title="Cadastrar Ocorrência">
+                    <Controls:Tile.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                    </Controls:Tile.Background>
+                    <Image Source="/sistemaCorporativo;component/IMAGES/Ocorrencia_FLAT.png" Margin="168,2,90,0"  Height="149.999" Width="270.5"/>
+                </Controls:Tile>
+                <Controls:Tile Margin="242.5,344.034,1237.5,74.964" Height="Auto" Width="Auto" Click="Tile_Click_3" Title="" ToolTip="Cadastrar Denuncia">
+                    <Controls:Tile.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                    </Controls:Tile.Background>
+                    <Image Source="/sistemaCorporativo;component/IMAGES/Denuncia_Normal_FLAT.png" Margin="73,12,10,0"  Height="121" Width="250"/>
+                </Controls:Tile>
+                <Controls:Tile Margin="363.5,344.034,1116.5,74.966" Height="Auto" Width="Auto" Click="Tile_Click_4" ToolTip="Cadastrar Denuncia Anônima">
+                    <Controls:Tile.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                    </Controls:Tile.Background>
+                    <Image Source="/sistemaCorporativo;component/IMAGES/Denuncia_Anonima_FLAT.png" Margin="85,19,10,0"  Height="131" Width="250"/>
+                </Controls:Tile>
+                <Controls:Tile Margin="242,51.034,1116.5,275.965" Height="Auto" Width="Auto" Click="Tile_Click_1" Title="Cadastrar Viatura">
+                    <Controls:Tile.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                    </Controls:Tile.Background>
+                    <Image Source="/sistemaCorporativo;component/IMAGES/Viatura_FLAT.png" Margin="118,53,10,0"  Height="229" Width="240" Stretch="Fill"/>
+                </Controls:Tile>
+                <Controls:Tile Margin="27,51.036,1359,74.964" Height="Auto" Width="Auto" Click="Tile_Click" Title="Cadastrar Agente" >
+                    <Controls:Tile.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                    </Controls:Tile.Background>
+                    <Image Source="/sistemaCorporativo;component/IMAGES/Police_man_menu_FLAT.png" Margin="169,105,10,10" Height="273" Width="312"/>
+                </Controls:Tile>
+                <Controls:Tile Margin="883.5,51.034,653,409.964" Height="Auto" Width="Auto" TiltFactor="2" ToolTip="Sobre">
+                    <Controls:Tile.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                    </Controls:Tile.Background>
+                    <Image Source="/sistemaCorporativo;component/IMAGES/Sobre_FLAT.png" Margin="52,9,0,0" Width="79.5" Height="75.002"/>
+                </Controls:Tile>
+
+            </Grid>
+        </ScrollViewer>
+        <Menu IsMainMenu="True" Height="29" VerticalAlignment="Top">
+            <MenuItem Header="Cadastrar" Width="72.937">
+                <MenuItem Header="Investigação">
+                    <MenuItem Header="Denuncia" Click="DenunciaMenuItem_Click" />
+                    <MenuItem Header="Denuncia Anônima" Click="DenunciaAnonMenuItem_Click" />
+                    <MenuItem Header="Ocorrência" Click="OcorrenciaMenuItem_Click"/>
+                </MenuItem>
+                <MenuItem Header="Departamento" Click="MenuItem_Click" >
+                    <MenuItem Header="Agente" Click="AgenteMenuItem_Click"/>
+                    <MenuItem Header="Viatura" Click="ViaturaMenuItem_Click"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Consultar" Width="72.937">
+                <MenuItem Header="Investigação" >
+                    <MenuItem Header="Crime"/>
+                    <MenuItem Header="Criminoso"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Ajuda" Width="56.46" >
+                <MenuItem Header="Sobre"/>
+            </MenuItem>
+        </Menu>
+    </Grid>
+
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl x:Name="FlyoutPrincipal">
+            <Controls:Flyout x:Name="flyoutAgente" Width="304.5" Grid.RowSpan="2" AllowDrop="False" AllowFocusElement="True" IsPinned="False" AnimateOnPositionChange="True" Theme="Adapt" Loaded="FlyoutAgente_Loaded">
+                <Canvas>
+                    <Image Height="157" Canvas.Left="68" Width="168.667" Source="/sistemaCorporativo;component/IMAGES/User_Login adapt.png"/>
+                    <Label x:Name="lblNomeAgente" Content="" Canvas.Left="60.1" Canvas.Top="162" Width="171.167" FontFamily="Segoe WP Light" FontSize="21.333" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                    <Label Content="Nível:" Canvas.Left="10" Canvas.Top="234.22" FontFamily="Segoe WP SemiLight" FontSize="14"/>
+                    <Label x:Name="lblNivel" Content="" Canvas.Left="47" Canvas.Top="234.22" FontFamily="Segoe WP SemiLight" FontSize="14"/>
+                    <Image x:Name="imgBrooch" HorizontalAlignment="Left" Height="54" VerticalAlignment="Top" Width="101" Source="/sistemaCorporativo;component/IMAGES/escudo nivel 1.png" Stretch="Fill" Canvas.Left="193" Canvas.Top="216"/>
+                    <Label Content="Cargo:" Canvas.Left="10" Canvas.Top="261.953" FontFamily="Segoe WP SemiLight" FontSize="14"/>
+                    <Label x:Name="lblCargo" Content="" Canvas.Left="54" Canvas.Top="261.953" FontFamily="Segoe WP SemiLight" FontSize="14"/>
+                    <Label Content="Casos resolvidos:" Canvas.Left="10" Canvas.Top="289.686" FontFamily="Segoe WP SemiLight" FontSize="14"/>
+                    <Label x:Name="lblCasosResolvidos" Content="" Canvas.Left="115" Canvas.Top="289.686" FontFamily="Segoe WP SemiLight" FontSize="14"/>
+                    <Controls:ToggleSwitch x:Name="tgsTema" Header="Tema Claro" Canvas.Left="10" Canvas.Top="509.72" Height="64.28" Width="109.83" Checked="tgsTema_Checked" IsCheckedChanged="tgsTema_IsCheckedChanged" Content="" />
+                    <Button x:Name="btnFzrLogoff" Content="Fazer logoff" Canvas.Top="619" Width="304.5" Height="34.333" FontSize="10.667" FontFamily="Segoe UI Light" Background="#FF262626" Foreground="White" Click="btnFzrLogoff_Click"/>
+
+                </Canvas>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+
+</Controls:MetroWindow>
