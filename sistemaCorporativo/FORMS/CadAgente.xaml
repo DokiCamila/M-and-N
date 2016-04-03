@@ -5,7 +5,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:ControlsA="clr-namespace:AC.AvalonControlsLibrary.Controls;assembly=AvalonControlsLibrary"
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Name="MetroWindow" mc:Ignorable="d" x:Class="sistemaCorporativo.FORMS.cadAgente.CadAgente"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" x:Name="MetroWindow" mc:Ignorable="d" x:Class="sistemaCorporativo.FORMS.cadAgente.CadAgente"
         Title="Cadastro Agente" Height="672.036" Width="873.266" ResizeMode="NoResize"
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
@@ -467,7 +467,10 @@
                         <Button x:Name="btnCadastrar" Style="{DynamicResource SquareButtonStyle}" Content="Cadastrar" HorizontalAlignment="Left" Margin="177,161,0,0" VerticalAlignment="Top" Width="110" Height="42" Background="#FF35A3CD" Grid.Row="4" Click="btnCadastrar_Click" TabIndex="30" Grid.Column="1"/>
                         <Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}" Content="Cancelar" HorizontalAlignment="Left" Margin="302,161,0,0" VerticalAlignment="Top" Width="107" Height="42" Click="btnCancelar_Click" Grid.Row="4" TabIndex="31" Grid.Column="1"/>
                         <ComboBox x:Name="cmbCargo" HorizontalAlignment="Left" Margin="18,26,0,0" VerticalAlignment="Top" Width="121" Height="26" Grid.ColumnSpan="2" Grid.Row="2" TabIndex="10">
-                            <ComboBoxItem Content="Investigador forense"/>
+                            <ComboBoxItem Content="Policial"/>
+                            <ComboBoxItem Content="Técnico Criminal"/>
+                            <ComboBoxItem Content="Cientista Forense"/>
+                            <ComboBoxItem Content="Biologo Forense"/>
                         </ComboBox>
                         <Label Content="Cargo*" HorizontalAlignment="Left" Margin="18,0,0,0" VerticalAlignment="Top" Height="26" Width="54" Grid.ColumnSpan="2" Grid.Row="2"/>
                         <RadioButton x:Name="rdbArmSim" Grid.ColumnSpan="2" Content="Sim" HorizontalAlignment="Left" Margin="18,62,0,0" VerticalAlignment="Top" Grid.Row="4" Checked="rdbArmSim_Checked" GroupName="arm" TabIndex="18"/>
@@ -482,8 +485,9 @@
                             <ComboBoxItem Content="Separado(a)"/>
                             <ComboBoxItem Content="Companheiro(a)"/>
                         </ComboBox>
+                        <TextBox x:Name="txtRg" HorizontalAlignment="Left" Height="26" Margin="18,121,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="121" Grid.RowSpan="2" Grid.ColumnSpan="2" TabIndex="1"/>
                         <Button x:Name="btnLimpar" Style="{DynamicResource SquareButtonStyle}" Content="Limpar" HorizontalAlignment="Left" Margin="426,161,0,0" VerticalAlignment="Top" Width="107" Height="42" Click="btnLimpar_Click" Grid.Row="4" TabIndex="32" Grid.Column="1"/>
-                        <Canvas x:Name="cnvPhoto" HorizontalAlignment="Left" Height="190" Margin="248,105,0,0" Grid.RowSpan="4" VerticalAlignment="Top" Width="350" Background="#FF343434" RenderTransformOrigin="0.5,0.5" IsEnabled="False" Visibility="Hidden" Grid.Column="1">
+                        <Canvas x:Name="cnvPhoto" HorizontalAlignment="Left" Height="190" Margin="248,105,0,0" Grid.RowSpan="4" VerticalAlignment="Top" Width="350" Background="#FF343434" RenderTransformOrigin="0.5,0.5" IsEnabled="False" Grid.Column="1" Visibility="Hidden">
                             <Canvas.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -510,7 +514,6 @@
                                 <Button x:Name="btnClose" Style="{DynamicResource MetroCircleButtonStyle}" Content="X" HorizontalAlignment="Left" VerticalAlignment="Top" Width="33" Height="34" Click="btnClose_Click" Margin="297,0,0,0"/>
                             </Grid>
                         </Canvas>
-                        <TextBox x:Name="txtRg" HorizontalAlignment="Left" Height="26" Margin="18,121,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="121" Grid.RowSpan="2" Grid.ColumnSpan="2" TabIndex="1"/>
                     </Grid>
                 </Grid>
             </TabItem>

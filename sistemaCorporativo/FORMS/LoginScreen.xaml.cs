@@ -68,7 +68,7 @@ namespace sistemaCorporativo
                 if (this.tentativas < 3)
                 {
                     //Criar string com o comando para autenticar 
-                    string SQL_AUTENTICAR_AGENTE = "SELECT count(f.NOME_USER) as total FROM LOGIN_AGENTE f, CARGO c where f.CARGO_ID_CARGO = c.ID_CARGO and f.SENHA_USER ='" + senhaUser + "' and f.NOME_USER ='" + nomeUser + "' and f.status = 1";
+                    string SQL_AUTENTICAR_AGENTE = "SELECT count(f.NOME_USER) as total FROM LOGIN_AGENTE f, CARGO c where f.id_Cargo = c.ID_CARGO and f.SENHA_USER ='" + senhaUser + "' and f.NOME_USER ='" + nomeUser + "' and f.status = 1";
 
                     //Criar conexão com o banco de dados pelo endereço
                    

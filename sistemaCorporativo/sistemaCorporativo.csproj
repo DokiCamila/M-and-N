@@ -146,6 +146,9 @@
     <Compile Include="FORMS\CadInvestigacao.xaml.cs">
       <DependentUpon>CadInvestigacao.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FORMS\CortarImagem.xaml.cs">
+      <DependentUpon>CortarImagem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FORMS\gerarLoginWindow.xaml.cs">
       <DependentUpon>gerarLoginWindow.xaml</DependentUpon>
     </Compile>
@@ -158,7 +161,9 @@
     <Compile Include="TO\Agente.cs" />
     <Compile Include="UTIL\checkPassword.cs" />
     <Compile Include="TO\Viatura.cs" />
+    <Compile Include="UTIL\CroppingAdorner.cs" />
     <Compile Include="UTIL\nameAndLastName.cs" />
+    <Compile Include="UTIL\PuncturedRect.cs" />
     <Page Include="FORMS\CadAgente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FORMS\CadViatura.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FORMS\CortarImagem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

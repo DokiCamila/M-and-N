@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Matheus\Documents\Matheus\Git\sppdi\sistemaCorporativo\obj\Debug\
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\
 sistemaCorporativo
 none
 false
 DEBUG;TRACE
-C:\Users\Matheus\Documents\Matheus\Git\sppdi\sistemaCorporativo\App.xaml
-12-1155488229
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\App.xaml
+13-1452452367
 
-19481398783
-26444799601
-FORMS\CadAgente.xaml;FORMS\CadDenuncia.xaml;FORMS\CadDenunciaAnon.xaml;FORMS\CadInvestigacao.xaml;FORMS\CadViatura.xaml;FORMS\gerarLoginWindow.xaml;FORMS\LoginScreen.xaml;FORMS\LogoffSplash.xaml;FORMS\PrincipalScreen.xaml;FORMS\SplashScreen.xaml;FORMS\WebcamWindow.xaml;Resources\Icons.xaml;
+221189982872
+26289249523
+FORMS\CadAgente.xaml;FORMS\CadDenuncia.xaml;FORMS\CadDenunciaAnon.xaml;FORMS\CadInvestigacao.xaml;FORMS\CadViatura.xaml;FORMS\CortarImagem.xaml;FORMS\gerarLoginWindow.xaml;FORMS\LoginScreen.xaml;FORMS\LogoffSplash.xaml;FORMS\PrincipalScreen.xaml;FORMS\SplashScreen.xaml;FORMS\WebcamWindow.xaml;Resources\Icons.xaml;
 
 False
 

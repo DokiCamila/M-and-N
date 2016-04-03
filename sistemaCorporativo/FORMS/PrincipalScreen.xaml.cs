@@ -52,7 +52,6 @@ namespace sistemaCorporativo.FORMS.principalScreen
         string idAgente;
         string name;
         string nivel;
-        string idCargo;
         
         
         private void AgenteMenuItem_Click(object sender, RoutedEventArgs e)
@@ -250,8 +249,8 @@ namespace sistemaCorporativo.FORMS.principalScreen
             idAgente = Convert.ToString(read[0].ToString());
 
             //String para buscar informações do usuario
-            string SQL_SEARCH_ADVANCED = "select a.id_Agente, a.nome, l.nome_User, l.cargo_id_cargo from agente a Join LOGIN_AGENTE l on (l.id_Agente = '" + idAgente + "' and l.ID_AGENTE = a.ID_AGENTE and a.status != 0)";
-            string SQL_PROFILE_SEARCH = "select nivel_Agente, casos_resolvidos from perfil_Agente where id_Agente ='"+idAgente+"'";
+            string SQL_SEARCH_ADVANCED = "select a.id_Agente, a.nome, l.nome_User from agente a Join LOGIN_AGENTE l on (l.id_Agente = '" + idAgente + "' and l.ID_AGENTE = a.ID_AGENTE and a.status != 0)";
+            string SQL_PROFILE_SEARCH = "select nivel_Agente, casos_resolvidos from perfil_Agente where id_Agente ='" + idAgente + "'";
             OracleCommand cmdConsulta = new OracleCommand(SQL_SEARCH_ADVANCED, Oracon);
             OracleCommand cmdProfile = new OracleCommand(SQL_PROFILE_SEARCH, Oracon);
             OracleDataReader reader = cmdConsulta.ExecuteReader();
@@ -260,20 +259,19 @@ namespace sistemaCorporativo.FORMS.principalScreen
             rProfile.Read();
 
             name = Convert.ToString(reader[1].ToString());
-            idCargo = Convert.ToString(reader[3].ToString());
             nivel = Convert.ToString(rProfile[0].ToString());
             casosResolvidos = Convert.ToInt32(rProfile[1].ToString());
 
-            string SQL_SEARCH_CARGO = "select id_Cargo, nome_Cargo from Cargo where status != 0 and ID_CARGO ='" + idCargo + "'";
+            string SQL_SEARCH_CARGO = "select a.nome, a.id_cargo, c.nome_cargo from CARGO c inner join agente a on c.ID_CARGO = a.ID_CARGO and a.ID_AGENTE ='" + idAgente + "'";
             OracleCommand cmdCargo = new OracleCommand(SQL_SEARCH_CARGO, Oracon);
             OracleDataReader rCargo = cmdCargo.ExecuteReader();
             rCargo.Read();
 
-            cargo = Convert.ToString(rCargo[1].ToString());
+            cargo = Convert.ToString(rCargo[2].ToString());
 
             Oracon.Close();
 
-            name = nameAndLastName.FormataNome(name);            
+            name = nameAndLastName.FormataNome(name);       
         }
 
         private void FlyoutAgente_Loaded(object sender, RoutedEventArgs e)

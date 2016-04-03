@@ -1,0 +1,49 @@
+﻿<Controls:MetroWindow x:Name="fotoPerfil" x:Class="sistemaCorporativo.FORMS.CortarImagem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Foto Perfil" Height="483.681" Width="782.618" Loaded="fotoPerfil_Loaded" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" SizeChanged="Window_SizeChanged">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Imagem -->
+        <Image RenderTransformOrigin="0.722,0.713" x:Name="myProfilePic" Stretch="Fill" Margin="10,5,165,0" />
+
+        <!-- Painel -->
+        <StackPanel VerticalAlignment="Stretch" Height="Auto" Background="{x:Null}" Margin="633,0,17,0" RenderTransformOrigin="0.5,0.5">
+            <StackPanel.Resources>
+                <Style x:Key="{x:Type CheckBox}" TargetType="{x:Type CheckBox}">
+                    <Setter Property="Margin" Value="5,5,5,5"/>
+                </Style>
+            </StackPanel.Resources>
+            <Image x:Name="imgCrop" Height="130" Margin="0,5,0,0"/>
+            <GroupBox Foreground="#FFFFFFFF" Header="Editar" Margin="0,5,0,0" BorderBrush="#FFFFFFFF">
+                <StackPanel Height="Auto">
+                    <RadioButton Content="Cortar Imagem" IsChecked="True" Checked="CropImage_Checked" Width="Auto" Height="Auto" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Margin="0,8,0,0" Foreground="#FFFFFFFF" Header="Cor (seleção)" Height="83">
+                <StackPanel Height="Auto">
+                    <RadioButton x:Name="rbRed" Content="Vermelho"  IsChecked="True" Checked="Red_Checked" Height="22"/>
+                    <RadioButton Content="Cinza" Checked="Grey_Checked" Height="22"/>
+                </StackPanel>
+            </GroupBox>
+            <Grid Height="146">
+                <Button x:Name="btnFinalizar" Style="{DynamicResource SquareButtonStyle}" Background="#FF35A3CD" Content="Finalizar" VerticalAlignment="Center" Height="33" Click="btnFinalizar_Click" TabIndex="4"/>
+                <Button x:Name="btnFechar" Style="{DynamicResource SquareButtonStyle}" Content="Fechar" VerticalAlignment="Center" Height="34" Click="btnFechar_Click" TabIndex="4" Margin="0,94,0,18"/>
+            </Grid>
+
+        </StackPanel>
+        <DockPanel LastChildFill="True" Margin="5,5,6,5" Visibility="Hidden" x:Name="dckControls"></DockPanel>
+        <TextBlock HorizontalAlignment="Stretch" Margin="5,0,0,5" x:Name="tblkClippingRectangle" VerticalAlignment="Top" Width="Auto" Height="Auto" Grid.Row="1" Foreground="#FFFFFFFF" Text="ClippingRectangle" TextWrapping="Wrap"/>
+
+    </Grid>
+</Controls:MetroWindow>

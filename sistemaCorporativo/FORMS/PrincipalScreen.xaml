@@ -103,6 +103,13 @@
             <Button x:Name="btnPerfil" Click="btnPerfil_Click">
                 <StackPanel Orientation="Horizontal">
 
+                   <Rectangle Width="20"
+                   Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_user}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
                     <TextBlock Margin="4 0 0 0"
     			VerticalAlignment="Center"
     			Text="Perfil" />

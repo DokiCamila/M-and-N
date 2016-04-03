@@ -58,7 +58,7 @@ namespace sistemaCorporativo.FORMS
             }
             else
             {
-                await this.ShowMessageAsync("Aviso", "Ligue a camera primeiro!");;
+                System.Windows.MessageBox.Show("Ligue a camera primeiro!", "Aviso");;
             }
             
         }
@@ -113,7 +113,7 @@ namespace sistemaCorporativo.FORMS
             }
             else
             {
-                await this.ShowMessageAsync("Aviso", "Tire uma foto antes!");
+                System.Windows.MessageBox.Show("Tire uma foto antes!", "Aviso");
             }
             
         }
@@ -164,19 +164,22 @@ namespace sistemaCorporativo.FORMS
 
         private void btnMirror_Click(object sender, RoutedEventArgs e)
         {
-            //Checar se esta o inverso é verdadeiro para espelhar
-            if (inverse == true)
+            if (cam.IsRunning)
             {
-                cam.Stop();
-                btnComeçar_Click(sender, e);
-            }
-            else
-            {
-                cam.Stop();
-                cam = new VideoCaptureDevice(webcam[cmbDevices.SelectedIndex].MonikerString);
-                cam.NewFrame += new NewFrameEventHandler(cam_NewFrameMirrortwo);
-                cam.Start();
-                inverse = true;
+                //Checar se esta o inverso é verdadeiro para espelhar
+                if (inverse == true)
+                {
+                    cam.Stop();
+                    btnComeçar_Click(sender, e);
+                }
+                else
+                {
+                    cam.Stop();
+                    cam = new VideoCaptureDevice(webcam[cmbDevices.SelectedIndex].MonikerString);
+                    cam.NewFrame += new NewFrameEventHandler(cam_NewFrameMirrortwo);
+                    cam.Start();
+                    inverse = true;
+                } 
             }
            
         }

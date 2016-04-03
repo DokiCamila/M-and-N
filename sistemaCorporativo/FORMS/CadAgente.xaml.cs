@@ -27,6 +27,8 @@ using sistemaCorporativo.FORMS;
 using AC.AvalonControlsLibrary.Controls;
 using AC.AvalonControlsLibrary.Core;
 using System.Text.RegularExpressions;
+using System.Drawing;
+using sistemaCorporativo.UTIL.Adorners;
 
 
 namespace sistemaCorporativo.FORMS.cadAgente
@@ -36,6 +38,15 @@ namespace sistemaCorporativo.FORMS.cadAgente
     /// </summary>
     public partial class CadAgente : MetroWindow
     {
+        //Ferramenta para cropping
+        CroppingAdorner _clp;
+        FrameworkElement _felCur = null;
+        System.Windows.Media.Brush _brOriginal;
+
+        //Bitmap para Foto Perfil
+        BitmapImage FotoPerfil;
+
+
         public CadAgente()
         {
             InitializeComponent();
@@ -49,11 +60,11 @@ namespace sistemaCorporativo.FORMS.cadAgente
         //Criar string com o comando para inserir
         private string SQL_INSERT = "insert into Agente(ID_AGENTE,NOME,SEXO,DATA_NASCIMENTO,RG,"
                      +"CPF,TIPO_SANGUINEO,ETNIA,ESTADO_CIVIL,CEP,LOGRADOURO,NUMERO,COMPLEMENTO,BAIRRO,"
-                     + "CIDADE,UF,FOTOAGENTE,IMPRESSAOAGENTE,CARGO,STATUS) values (seq_agente.NEXTVAL,:nome,:sexo,:data_nascimento,"
+                     + "CIDADE,UF,FOTOAGENTE,IMPRESSAOAGENTE, ID_CARGO,  STATUS, ADMINISTRADOR) values (seq_agente.NEXTVAL,:nome,:sexo,:data_nascimento,"
                      +":rg,:cpf,:tipo_sanguineo,:etnia,:estado_civil,:cep,:logradouro,:numero,:complemento,"
-                     +":bairro,:cidade,:uf,:fotoagente,:impressaoagente,:cargo,'1')";
+                     +":bairro,:cidade,:uf,:fotoagente,:impressaoagente, :cargo, '1','0')";
         //Criar string com o comando para listar
-        private string SQL_SELECT_ALL = "select * from agente where status = 1";
+        private string SQL_SELECT_ALL = "select id_Agente, nome, sexo, data_Nascimento,rg, cpf,tipo_Sanguineo, etnia, estado_Civil, cep, logradouro, numero, complemento, bairro, cidade, uf, fotoAgente, ImpressaoAgente from agente where status = 1 and administrador = 0";
         //Criar Variável para edições(atualizações) e exclusões;
         public string id;
         //Criar string (sem o comando) para deletar
@@ -88,6 +99,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
         private Boolean alterPhoto = false;
         //Variável id para gerar Login's
         public string idAgente;
+
  
         private void rdbArmNao_Checked(object sender, RoutedEventArgs e)
         {
@@ -138,7 +150,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
                 OracleCommand createCommand = new OracleCommand(SQL_SELECT_ALL, Oracon);
                 createCommand.ExecuteNonQuery();
-
+               
                 OracleDataAdapter adapter = new OracleDataAdapter(createCommand);
                 DataTable dt = new DataTable("agente");
                 adapter.Fill(dt);
@@ -161,15 +173,12 @@ namespace sistemaCorporativo.FORMS.cadAgente
                 dgvConteudo.Columns[15].Header = "UF";
                 dgvConteudo.Columns[16].Header = "Foto Agente";
                 dgvConteudo.Columns[17].Header = "Impressão Digital";
-                dgvConteudo.Columns[18].Header = "Cargo";
-                dgvConteudo.Columns[19].Header = "STATUS";
+
 
 
                 //Escondendo colunas
-                dgvConteudo.Columns[16].Visibility = Visibility.Hidden;
-                dgvConteudo.Columns[17].Visibility = Visibility.Hidden;
-                dgvConteudo.Columns[19].Visibility = Visibility.Hidden;
-
+                //dgvConteudo.Columns[16].Visibility = Visibility.Hidden;
+                
                 adapter.Update(dt);
 
                 Oracon.Close();
@@ -196,6 +205,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
             digitalsource = "";
             alterFinger = false;
             alterPhoto = false;
+
         }
 
         private void btnCarregar_Click(object sender, RoutedEventArgs e)
@@ -354,12 +364,13 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                     //Criar a pasta para armazenar fotos do perfil
                                                                     //Pegar o folder da aplicação
                                                                     var applicationPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                                                                    var dir = new System.IO.DirectoryInfo(System.IO.Path.Combine(applicationPath, "ProfilePicture"));
+                                                                    var dir = new System.IO.DirectoryInfo(System.IO.Path.Combine(applicationPath, "FotoPerfil"));
                                                                     if (!dir.Exists)
                                                                         dir.Create();
                                                                     //Copiar para o diretório do sistema
                                                                     namefoto = System.IO.Path.GetFileName(imagepath);
-                                                                    destinationPathFoto = GetDestinationPath(namefoto, "ProfilePicture");
+                                                                    destinationPathFoto = GetDestinationPath(namefoto, "FotoPerfil");
+                                                                  
                                                                     File.Copy(imagepath, destinationPathFoto, true);
 
                                                                 }
@@ -432,7 +443,27 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                     insertCommand.Parameters.Add("uf", objAgente.getuf());
                                                                     insertCommand.Parameters.Add("fotoagente", objAgente.getFoto());
                                                                     insertCommand.Parameters.Add("impressaoagente", objAgente.getimpressaDigital());
-                                                                    insertCommand.Parameters.Add("cargo", objAgente.getCargo());
+
+                                                                    string cargo = cmbCargo.Text;
+                                                                    switch (cargo)
+                                                                    {
+                                                                        case "Policial":
+                                                                            insertCommand.Parameters.Add("cargo", "2");
+                                                                            break;
+                                                                        case "Técnico Criminal":
+                                                                            insertCommand.Parameters.Add("cargo", "3");
+                                                                            break;
+                                                                        case "Cientista Forense":
+                                                                            insertCommand.Parameters.Add("cargo", "4");
+                                                                            break;
+                                                                        case "Biologo Forense":
+                                                                            insertCommand.Parameters.Add("cargo", "5");
+                                                                            break;
+                                                                        default:
+                                                                            await this.ShowMessageAsync("Aviso", "Cargo Inválido!");   
+                                                                            break;
+                                                                    }
+                                                                    
                                                                     //ESSE CAMPO ABAIXO NÃO É OBRIGATÓRIO POIS SERÁ PREENCHIDO AUTOMATICAMENTE
                                                                     //insertCommand.Parameters.Add("status", objAgente.getStatus());
                                                                     insertCommand.ExecuteNonQuery();
@@ -489,7 +520,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
                                                                 //A-T-U-A-L-I-Z-A-R
                                                                 //Checar se foi upado uma Foto
-                                                                SQL_UPDATE = "update agente set NOME = :nome, SEXO = :sexo, DATA_NASCIMENTO = :data_nascimento, RG = :rg, CPF = :cpf, TIPO_SANGUINEO = :tipo_sanguineo, ETNIA = :etnia, ESTADO_CIVIL = :estado_civil, CEP = :cep, LOGRADOURO = :logradouro, NUMERO = :numero, COMPLEMENTO = :complemento, BAIRRO = :bairro, CIDADE = :cidade, UF = :uf, FOTOAGENTE = :fotoagente, IMPRESSAOAGENTE = :impressaoagente, CARGO = :cargo where id_Agente=" + id;
+                                                                SQL_UPDATE = "update agente set NOME = :nome, SEXO = :sexo, DATA_NASCIMENTO = :data_nascimento, RG = :rg, CPF = :cpf, TIPO_SANGUINEO = :tipo_sanguineo, ETNIA = :etnia, ESTADO_CIVIL = :estado_civil, CEP = :cep, LOGRADOURO = :logradouro, NUMERO = :numero, COMPLEMENTO = :complemento, BAIRRO = :bairro, CIDADE = :cidade, UF = :uf, FOTOAGENTE = :fotoagente, IMPRESSAOAGENTE = :impressaoagente, ID_CARGO = :cargo where id_Agente=" + id;
 
                                                                 //Acessar a classe TO 
                                                                 Agente objAgente = new Agente();
@@ -547,7 +578,29 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                     insertCommand.Parameters.Add("uf", objAgente.getuf());
                                                                     insertCommand.Parameters.Add("fotoagente", objAgente.getFoto());
                                                                     insertCommand.Parameters.Add("impressaoagente", objAgente.getimpressaDigital());
-                                                                    insertCommand.Parameters.Add("cargo", objAgente.getCargo());
+
+                                                                    string cargo = cmbCargo.Text;
+                                                                    switch (cargo)
+                                                                    {
+                                                                        case "Policial":
+                                                                            insertCommand.Parameters.Add("cargo", "2");
+                                                                            break;
+                                                                        case "Técnico Criminal":
+                                                                            insertCommand.Parameters.Add("cargo", "3");
+                                                                            break;
+                                                                        case "Cientista Forense":
+                                                                            insertCommand.Parameters.Add("cargo", "4");
+                                                                            break;
+                                                                        case "Biologo Forense":
+                                                                            insertCommand.Parameters.Add("cargo", "5");
+                                                                            break;
+                                                                        default:
+                                                                            await this.ShowMessageAsync("Aviso", "Cargo Inválido!");
+                                                                            break;
+                                                                    }
+                                                                    
+                                                                    
+
                                                                     //ESSE CAMPO ABAIXO NÃO É OBRIGATÓRIO POIS SERÁ PREENCHIDO AUTOMATICAMENTE
                                                                     //insertCommand.Parameters.Add("status", objAgente.getStatus());
                                                                     insertCommand.ExecuteNonQuery();
@@ -610,7 +663,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
         {
             try
             {
-                String caminhoFoto;
+               
                 Microsoft.Win32.OpenFileDialog opf = new Microsoft.Win32.OpenFileDialog();
                 opf.Title = "Selecione uma foto para o perfil!";
                 opf.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
@@ -618,20 +671,18 @@ namespace sistemaCorporativo.FORMS.cadAgente
                   "Portable Network Graphic (*.png)|*.png";
                 if (opf.ShowDialog() == true)
                 {
-                    //Receber Imagem
-                    imgFoto.Source = new BitmapImage(new Uri(opf.FileName));
-
-                    //Coletar informações da imagem
-                    caminhoFoto = opf.FileName.ToString();
-                    imagepath = caminhoFoto.ToString();
-                    var imageFoto = new System.IO.FileInfo(imagepath);
-                    checkFoto = true;
                     cnvPhoto.IsEnabled = false;
                     cnvPhoto.Visibility = Visibility.Hidden;
-                    alterPhoto = true;
+
+                    FotoPerfil = new BitmapImage(new Uri(opf.FileName));
+         
+                    //Abrir Janela Foto Perfil
+                    CortarImagem newWindowCrop = new CortarImagem(this, FotoPerfil);
+                    newWindowCrop.ShowDialog();
+                    
+
 
                 }
-
 
             }
             catch (Exception ex)
@@ -722,7 +773,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                         id.ToString();
 
                         //executando comando usando o ID como base para "apagar" um item
-                        SQL_DELETE = "update agente set status=0 where ID_AGENTE=" + id;
+                        SQL_DELETE = "update agente set status = 0 where ID_AGENTE=" + id;
                         SQL_UPDATE_LOGIN = "update login_Agente set status = 0 where ID_AGENTE ="+id;
 
                         OracleCommand deleteCommand = new OracleCommand(SQL_DELETE, Oracon);
@@ -767,15 +818,16 @@ namespace sistemaCorporativo.FORMS.cadAgente
                     id = (dgvConteudo.SelectedCells[0].Column.GetCellContent(itemid) as TextBlock).Text;
                     id.ToString();
 
-                    object item1 = dgvConteudo.SelectedItem;
-                    string value1 = (dgvConteudo.SelectedCells[1].Column.GetCellContent(item1) as TextBlock).Text;
-                    value1.ToString();
-                    txtNome.Text = value1;
+                    string SQL_SELECT_THIS = "select * from agente where id_Agente='"+id+"'";
+                    OracleConnection Oracon = new OracleConnection(oradb);
+                    Oracon.Open();
+                    OracleCommand selectall = new OracleCommand(SQL_SELECT_THIS, Oracon);
+                    OracleDataReader read = selectall.ExecuteReader();
+                    read.Read();
+                    txtNome.Text = Convert.ToString(read[1].ToString());
 
-                    object item2 = dgvConteudo.SelectedItem;
-                    string value2 = (dgvConteudo.SelectedCells[2].Column.GetCellContent(item2) as TextBlock).Text;
-                    value2.ToString();
-                    if (value2 == "Masculino")
+                    string sexo = Convert.ToString(read[2].ToString());
+                    if (sexo == "Masculino")
                     {
                         rdbMasc.IsChecked = true;
                     }
@@ -784,94 +836,59 @@ namespace sistemaCorporativo.FORMS.cadAgente
                         rdbFem.IsChecked = true;
                     }
 
-                    object item3 = dgvConteudo.SelectedItem;
-                    string value3 = (dgvConteudo.SelectedCells[3].Column.GetCellContent(item3) as TextBlock).Text;
-                    value3.ToString();
-                    txtNascimento.Text = value3;
+                    txtNascimento.Text = Convert.ToString(read[3].ToString());
+                    txtRg.Text = Convert.ToString(read[4].ToString());
+                    txtCpf.Text = Convert.ToString(read[5].ToString());
+                    cmbTipoSangue.Text = Convert.ToString(read[6].ToString());
+                    cmbEtnia.Text = Convert.ToString(read[7].ToString());
+                    cmbEstadoCivil.Text = Convert.ToString(read[8].ToString());
 
-                    object item4 = dgvConteudo.SelectedItem;
-                    string value4 = (dgvConteudo.SelectedCells[4].Column.GetCellContent(item4) as TextBlock).Text;
-                    value4.ToString();
-                    txtRg.Text = value4;
+                    string cargo = Convert.ToString(read[18].ToString());
+                    switch (cargo)
+                    {
+                        case "2" :
+                            cmbCargo.Text = "Policial";
+                            break;
+                        case "3":
+                            cmbCargo.Text = "Técnico Criminal";
+                            break;
+                        case "4":
+                            cmbCargo.Text = "Cientista Forense";
+                            break;
+                        case "5":
+                            cmbCargo.Text = "Biologo Forense";
+                            break;
+                        default:
+                            await this.ShowMessageAsync("Aviso", "Cargo Inválido!");
+                            break;
+                    }
 
-                    object item5 = dgvConteudo.SelectedItem;
-                    string value5 = (dgvConteudo.SelectedCells[5].Column.GetCellContent(item5) as TextBlock).Text;
-                    value5.ToString();
-                    txtCpf.Text = value5;
+                    txtCep.Text = Convert.ToString(read[9].ToString());
+                    txtLogradouro.Text = Convert.ToString(read[10].ToString());
+                    txtNumero.Text = Convert.ToString(read[11].ToString());
+                    txtComplemento.Text = Convert.ToString(read[12].ToString());
+                    txtBairro.Text = Convert.ToString(read[13].ToString());
+                    txtCidade.Text = Convert.ToString(read[14].ToString());
+                    cmbUf.Text = Convert.ToString(read[15].ToString());
 
-                    object item6 = dgvConteudo.SelectedItem;
-                    string value6 = (dgvConteudo.SelectedCells[6].Column.GetCellContent(item6) as TextBlock).Text;
-                    value6.ToString();
-                    cmbTipoSangue.Text = value6;
-
-                    object item7 = dgvConteudo.SelectedItem;
-                    string value7 = (dgvConteudo.SelectedCells[7].Column.GetCellContent(item7) as TextBlock).Text;
-                    value7.ToString();
-                    cmbEtnia.Text = value7;
-
-                    object item8 = dgvConteudo.SelectedItem;
-                    string value8 = (dgvConteudo.SelectedCells[8].Column.GetCellContent(item8) as TextBlock).Text;
-                    value8.ToString();
-                    cmbEstadoCivil.Text = value8;
-
-                    object item9 = dgvConteudo.SelectedItem;
-                    string value9 = (dgvConteudo.SelectedCells[9].Column.GetCellContent(item9) as TextBlock).Text;
-                    value9.ToString();
-                    txtCep.Text = value9;
-
-                    object item10 = dgvConteudo.SelectedItem;
-                    string value10 = (dgvConteudo.SelectedCells[10].Column.GetCellContent(item10) as TextBlock).Text;
-                    value10.ToString();
-                    txtLogradouro.Text = value10;
-
-                    object item11 = dgvConteudo.SelectedItem;
-                    string value11 = (dgvConteudo.SelectedCells[11].Column.GetCellContent(item11) as TextBlock).Text;
-                    value11.ToString();
-                    txtNumero.Text = value11;
-
-                    object item12 = dgvConteudo.SelectedItem;
-                    string value12 = (dgvConteudo.SelectedCells[12].Column.GetCellContent(item12) as TextBlock).Text;
-                    value12.ToString();
-                    txtComplemento.Text = value12;
-
-                    object item13 = dgvConteudo.SelectedItem;
-                    string value13 = (dgvConteudo.SelectedCells[13].Column.GetCellContent(item13) as TextBlock).Text;
-                    value13.ToString();
-                    txtBairro.Text = value13;
-
-                    object item14 = dgvConteudo.SelectedItem;
-                    string value14 = (dgvConteudo.SelectedCells[14].Column.GetCellContent(item14) as TextBlock).Text;
-                    value14.ToString();
-                    txtCidade.Text = value14;
-
-                    object item15 = dgvConteudo.SelectedItem;
-                    string value15 = (dgvConteudo.SelectedCells[15].Column.GetCellContent(item15) as TextBlock).Text;
-                    value15.ToString();
-                    cmbUf.Text = value15;
-
-                    string SQL_SELECT_THIS = "select * from agente where id_Agente='"+id+"'";
-                    OracleConnection Oracon = new OracleConnection(oradb);
-                    Oracon.Open();
-                    OracleCommand selectall = new OracleCommand(SQL_SELECT_THIS, Oracon);
-                    OracleDataReader read = selectall.ExecuteReader();
-                    read.Read();
                     fotoAgentesource = Convert.ToString(read[16].ToString());
                     digitalsource = Convert.ToString(read[17].ToString());
                     Oracon.Close();
 
-                    ImageSource photoProfile = new BitmapImage(new Uri(fotoAgentesource));
-                    imgFoto.Source = photoProfile;
-                    destinationPathFoto = photoProfile.ToString();
+                    if (fotoAgentesource != "")
+                    {
+                        ImageSource photoProfile = new BitmapImage(new Uri(fotoAgentesource));
+                        imgFoto.Source = photoProfile;
+                        destinationPathFoto = photoProfile.ToString();
+                    }
 
-                    ImageSource fingerPrint = new BitmapImage(new Uri(digitalsource));
-                    imgDigital.Source = fingerPrint;
-                    destinationPathFinger = fingerPrint.ToString();
-                    checkFinger = true;
-
-                    object item18 = dgvConteudo.SelectedItem;
-                    string value18 = (dgvConteudo.SelectedCells[18].Column.GetCellContent(item18) as TextBlock).Text;
-                    value18.ToString();
-                    cmbCargo.Text = value18;
+                    if (digitalsource != "")
+                    {
+                        ImageSource fingerPrint = new BitmapImage(new Uri(digitalsource));
+                        imgDigital.Source = fingerPrint;
+                        destinationPathFinger = fingerPrint.ToString();
+                        checkFinger = true;
+                    }
 
                     gConsultar.IsSelected = false;
                     gCadastrar.IsSelected = true;
@@ -928,7 +945,6 @@ namespace sistemaCorporativo.FORMS.cadAgente
                 e.Handled = true;
             }
         }
-
 
     }
 
