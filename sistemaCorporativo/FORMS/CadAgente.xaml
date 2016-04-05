@@ -485,7 +485,7 @@
                             <ComboBoxItem Content="Separado(a)"/>
                             <ComboBoxItem Content="Companheiro(a)"/>
                         </ComboBox>
-                        <TextBox x:Name="txtRg" HorizontalAlignment="Left" Height="26" Margin="18,121,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="121" Grid.RowSpan="2" Grid.ColumnSpan="2" TabIndex="1"/>
+                        <TextBox x:Name="txtRg" HorizontalAlignment="Left" Height="26" Margin="18,121,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="121" Grid.RowSpan="2" Grid.ColumnSpan="2" TabIndex="5"/>
                         <Button x:Name="btnLimpar" Style="{DynamicResource SquareButtonStyle}" Content="Limpar" HorizontalAlignment="Left" Margin="426,161,0,0" VerticalAlignment="Top" Width="107" Height="42" Click="btnLimpar_Click" Grid.Row="4" TabIndex="32" Grid.Column="1"/>
                         <Canvas x:Name="cnvPhoto" HorizontalAlignment="Left" Height="190" Margin="248,105,0,0" Grid.RowSpan="4" VerticalAlignment="Top" Width="350" Background="#FF343434" RenderTransformOrigin="0.5,0.5" IsEnabled="False" Grid.Column="1" Visibility="Hidden">
                             <Canvas.RenderTransform>

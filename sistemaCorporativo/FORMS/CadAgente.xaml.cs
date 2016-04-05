@@ -83,8 +83,8 @@ namespace sistemaCorporativo.FORMS.cadAgente
         private string fingerpath;
         private string imagepath;
         //Criar boolean para checar se foi upado uma finger
-        private Boolean checkFinger = false;
-        private Boolean checkFoto = false;
+        public Boolean FingerInserido = false;
+        public Boolean fotoInserida = false;
         //Criar boolean para checar se o armamento esta presente
         private Boolean Armamento = false;
         //Criar string para verificar se texto;
@@ -95,8 +95,8 @@ namespace sistemaCorporativo.FORMS.cadAgente
         private string fotoAgentesource;
         private string digitalsource;
         //Boolean para checar se a impressao e a foto foi alterada na atualização
-        private Boolean alterFinger = false;
-        private Boolean alterPhoto = false;
+        public Boolean alterFinger = false;
+        public Boolean alterPhoto = false;
         //Variável id para gerar Login's
         public string idAgente;
 
@@ -198,8 +198,8 @@ namespace sistemaCorporativo.FORMS.cadAgente
             namefinger = "";
             fingerpath = "";
             imagepath = "";
-            checkFinger = false;
-            checkFoto = false;
+            FingerInserido = false;
+            fotoInserida = false;
             Armamento = false;
             fotoAgentesource = "";
             digitalsource = "";
@@ -237,7 +237,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                     caminhoImpressao = op.FileName.ToString();
                     fingerpath = caminhoImpressao.ToString();
                     var imageFinger = new System.IO.FileInfo(fingerpath);
-                    checkFinger = true;
+                    FingerInserido = true;
                     //Houve alteração na digital
                     if (id != null)
                     {
@@ -260,7 +260,8 @@ namespace sistemaCorporativo.FORMS.cadAgente
             //Voltar ao padrão da foto de perfil
             imgFoto.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/User_Profile.png"));
             destinationPathFoto = "pack://application:,,,/IMAGES/User_Profile.png";
-            checkFoto = false;
+            fotoInserida = false;
+           
           
         }
 
@@ -269,7 +270,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
             //Voltar ao padrão da digital
             imgDigital.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/Finger_Print.png"));
             destinationPathFinger = "pack://application:,,,/IMAGES/Finger_Print.png";
-            checkFinger = false;
+            FingerInserido = false;
 
         }
 
@@ -348,7 +349,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                     else
                                                     {
                                                         //Checar se a impressão foi inserida (OBRIGATORIO)
-                                                        if (checkFinger == false)
+                                                        if (FingerInserido == false)
                                                         {
                                                             await this.ShowMessageAsync("Aviso", "A impressão digital é obrigatória para o cadastro do agente!");
                                                         }
@@ -358,18 +359,18 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                             {
                                                                 //C-A-D-A-S-T-R-A-R
                                                                 //Checar se foi upado uma Foto
-                                                                if (checkFoto == true)
+                                                                if (fotoInserida == true)
                                                                 {
                                                                     //--FOTO PERFIL
                                                                     //Criar a pasta para armazenar fotos do perfil
                                                                     //Pegar o folder da aplicação
                                                                     var applicationPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                                                                    var dir = new System.IO.DirectoryInfo(System.IO.Path.Combine(applicationPath, "FotoPerfil"));
+                                                                    var dir = new System.IO.DirectoryInfo(System.IO.Path.Combine(applicationPath, "ProfilePicture"));
                                                                     if (!dir.Exists)
                                                                         dir.Create();
                                                                     //Copiar para o diretório do sistema
                                                                     namefoto = System.IO.Path.GetFileName(imagepath);
-                                                                    destinationPathFoto = GetDestinationPath(namefoto, "FotoPerfil");
+                                                                    destinationPathFoto = GetDestinationPath(namefoto, "ProfilePicture");
                                                                   
                                                                     File.Copy(imagepath, destinationPathFoto, true);
 
@@ -495,6 +496,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                     if (!dir.Exists)
                                                                         dir.Create();
                                                                     //Copiar para o diretório do sistema
+                                                                    imagepath = imgFoto.Source.ToString();
                                                                     namefoto = System.IO.Path.GetFileName(imagepath);
                                                                     destinationPathFoto = GetDestinationPath(namefoto, "ProfilePicture");
                                                                     File.Copy(imagepath, destinationPathFoto, true);
@@ -675,7 +677,8 @@ namespace sistemaCorporativo.FORMS.cadAgente
                     cnvPhoto.Visibility = Visibility.Hidden;
 
                     FotoPerfil = new BitmapImage(new Uri(opf.FileName));
-         
+                    fotoInserida = true;
+
                     //Abrir Janela Foto Perfil
                     CortarImagem newWindowCrop = new CortarImagem(this, FotoPerfil);
                     newWindowCrop.ShowDialog();
@@ -700,7 +703,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
         private void btnLoadCam_Click(object sender, RoutedEventArgs e)
         {
-            WebcamWindow webCam = new WebcamWindow();
+            WebcamWindow webCam = new WebcamWindow(this);
             cnvPhoto.IsEnabled = false;
             cnvPhoto.Visibility = Visibility.Hidden;
             webCam.ShowDialog();
@@ -728,10 +731,10 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
             imgFoto.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/User_Profile.png"));
             destinationPathFoto = "pack://application:,,,/IMAGES/User_Profile.png";
-            checkFoto = false;
+            fotoInserida = false;
             imgDigital.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/Finger_Print.png"));
             destinationPathFinger = "pack://application:,,,/IMAGES/Finger_Print.png";
-            checkFinger = false;
+            FingerInserido = false;
 
             txtRegistro.Text = "";
             cmbTipo.Text = "";
@@ -810,7 +813,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                 {
                     
                     //Padrão do checkPhoto
-                    checkFoto = false;
+                    fotoInserida = false;
 
                     //Coletando valores para atualização
 
@@ -887,7 +890,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                         ImageSource fingerPrint = new BitmapImage(new Uri(digitalsource));
                         imgDigital.Source = fingerPrint;
                         destinationPathFinger = fingerPrint.ToString();
-                        checkFinger = true;
+                        FingerInserido = true;
                     }
 
                     gConsultar.IsSelected = false;

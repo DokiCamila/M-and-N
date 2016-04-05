@@ -143,6 +143,9 @@
     <Compile Include="FORMS\CadDenunciaAnon.xaml.cs">
       <DependentUpon>CadDenunciaAnon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FORMS\CadFingerPrints.xaml.cs">
+      <DependentUpon>CadFingerPrints.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FORMS\CadInvestigacao.xaml.cs">
       <DependentUpon>CadInvestigacao.xaml</DependentUpon>
     </Compile>
@@ -175,6 +178,10 @@
     <Page Include="FORMS\CadDenunciaAnon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FORMS\CadFingerPrints.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FORMS\CadInvestigacao.xaml">
       <SubType>Designer</SubType>

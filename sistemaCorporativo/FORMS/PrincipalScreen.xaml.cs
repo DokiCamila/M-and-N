@@ -46,12 +46,15 @@ namespace sistemaCorporativo.FORMS.principalScreen
                + "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))"
                + "(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=orcl.itb.com)));"
                + "User Id=matheus_23177;Password=123456;";
-        //Strings para informações do usuario
+
+        //Strings para informações do usuario (FLYOUT)
         int casosResolvidos;
         string cargo;
         string idAgente;
         string name;
-        string nivel;
+        int nivel;
+        BitmapImage profilePicture;
+
         
         
         private void AgenteMenuItem_Click(object sender, RoutedEventArgs e)
@@ -71,6 +74,13 @@ namespace sistemaCorporativo.FORMS.principalScreen
         {
             CadDenuncia cadDenuncia = new CadDenuncia();
             cadDenuncia.ShowDialog();
+        }
+
+        private void DenunciaAnonMenuItem_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            CadDenunciaAnon cadDenunciaAnon = new CadDenunciaAnon();
+            cadDenunciaAnon.ShowDialog();
+        	
         }
 
         private void btnPerfil_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -131,11 +141,6 @@ namespace sistemaCorporativo.FORMS.principalScreen
             }
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ViaturaMenuItem_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -151,7 +156,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
             
         }
 
-        private void Tile_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void TileAgente_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             try
             {
@@ -167,7 +172,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
             
         }
 
-        private void Tile_Click_1(object sender, System.Windows.RoutedEventArgs e)
+        private void TileViatura_Click_(object sender, System.Windows.RoutedEventArgs e)
         {
             try
             {
@@ -181,7 +186,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
             }
         }
 
-        private void Tile_Click_2(object sender, System.Windows.RoutedEventArgs e)
+        private void TileOcorrencia_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 			try{
 		     CadOcorrencia cadOcorrencia = new CadOcorrencia();
@@ -195,7 +200,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
         	
         }
 
-        private void Tile_Click_3(object sender, System.Windows.RoutedEventArgs e)
+        private void TileDenuncia_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             try
             {
@@ -207,17 +212,6 @@ namespace sistemaCorporativo.FORMS.principalScreen
 
                 MessageBox.Show(ex.Message);
             }
-        	
-        }
-
-        private void flyoutAgente_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-        }
-
-        private void DenunciaAnonMenuItem_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            CadDenunciaAnon cadDenunciaAnon = new CadDenunciaAnon();
-            cadDenunciaAnon.ShowDialog();
         	
         }
 
@@ -259,7 +253,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
             rProfile.Read();
 
             name = Convert.ToString(reader[1].ToString());
-            nivel = Convert.ToString(rProfile[0].ToString());
+            nivel = Convert.ToInt32(rProfile[0]);
             casosResolvidos = Convert.ToInt32(rProfile[1].ToString());
 
             string SQL_SEARCH_CARGO = "select a.nome, a.id_cargo, c.nome_cargo from CARGO c inner join agente a on c.ID_CARGO = a.ID_CARGO and a.ID_AGENTE ='" + idAgente + "'";
@@ -276,6 +270,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
 
         private void FlyoutAgente_Loaded(object sender, RoutedEventArgs e)
         {
+            //Carregar Informações do Usuario
             lblNomeAgente.Content = name.ToString();
             lblNivel.Content = nivel.ToString();
             lblCargo.Content = cargo.ToString();

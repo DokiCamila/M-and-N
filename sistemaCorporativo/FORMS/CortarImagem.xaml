@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <!-- Imagem -->
-        <Image RenderTransformOrigin="0.722,0.713" x:Name="myProfilePic" Stretch="Fill" Margin="10,5,165,0" />
+        <Image RenderTransformOrigin="0.722,0.713" x:Name="myProfilePic" Margin="5,5,170,0" Stretch="Fill" />
 
         <!-- Painel -->
         <StackPanel VerticalAlignment="Stretch" Height="Auto" Background="{x:Null}" Margin="633,0,17,0" RenderTransformOrigin="0.5,0.5">

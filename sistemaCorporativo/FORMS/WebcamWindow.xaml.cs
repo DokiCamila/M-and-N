@@ -35,9 +35,14 @@ namespace sistemaCorporativo.FORMS
     /// </summary>
     public partial class WebcamWindow : MetroWindow
     {
-        public WebcamWindow()
+
+        //Istanciar com informações do agente
+        CadAgente agente;
+        public WebcamWindow(CadAgente agenteinfo)
         {
             InitializeComponent();
+            agente = agenteinfo;
+      
             
         }
         //Criar atributos com informações e Captura de frame
@@ -47,8 +52,22 @@ namespace sistemaCorporativo.FORMS
         private Boolean inverse = false;
         //Criar variável para foto tirada
         private Boolean photoShot = false;
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            //Listar Dispositivos
+            webcam = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            foreach (FilterInfo VideoCaptureDevice in webcam)
+            {
+                cmbDevices.Items.Add(VideoCaptureDevice.Name);
+            }
+            cmbDevices.SelectedIndex = 0;
+            cam = new VideoCaptureDevice();
+
+        }
         
-        private async void btnTirarFoto_Click(object sender, RoutedEventArgs e)
+        private void btnTirarFoto_Click(object sender, RoutedEventArgs e)
         {
             if (cam.IsRunning)
             {
@@ -65,10 +84,15 @@ namespace sistemaCorporativo.FORMS
 
         private void btnComeçar_Click(object sender, RoutedEventArgs e)
         {
-            //Iniciar a camera e mostrar no picture Box[form control] por meio do evento
-            cam = new VideoCaptureDevice(webcam[cmbDevices.SelectedIndex].MonikerString);
-            cam.NewFrame += new NewFrameEventHandler(cam_NewFrame);
-            cam.Start();
+            if (photoShot == false)
+            {
+                //Iniciar a camera e mostrar no picture Box[form control] por meio do evento
+                cam = new VideoCaptureDevice(webcam[cmbDevices.SelectedIndex].MonikerString);
+                cam.NewFrame += new NewFrameEventHandler(cam_NewFrame);
+                cam.Start();
+                photoShot = false;
+            }
+                  
         }
         void cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
@@ -78,37 +102,24 @@ namespace sistemaCorporativo.FORMS
 
         } 
         
-        private async void btnPronto_Click(object sender, RoutedEventArgs e)
+        private void btnPronto_Click(object sender, RoutedEventArgs e)
         {
             if (photoShot == true)
             {
-                //Capturar frame que parar e usar no source do cadagente
-               
-                
-                System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-                saveFileDialog.InitialDirectory = "c:\fotos";
-                saveFileDialog.FileName = "foto";
-                saveFileDialog.Filter = "Images|*.png;*.bmp;*.jpg";
-                ImageFormat format = ImageFormat.Png;
+                //Converter Bitmap To BitmapImage
+                System.Drawing.Bitmap pp = new System.Drawing.Bitmap(pbCamera.Image);
+                MemoryStream ms = new MemoryStream();
+                pp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                BitmapImage ppnew = new BitmapImage();
+                ppnew.BeginInit();
+                ms.Seek(0, SeekOrigin.Begin);
+                ppnew.StreamSource = ms;
+                ppnew.EndInit();
 
-                if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    string ext = System.IO.Path.GetExtension(saveFileDialog.FileName);
-                    switch (ext)
-                    {
-                        case ".jpg":
-                            format = ImageFormat.Jpeg;
-                            break;
-                        case ".bmp":
-                            format = ImageFormat.Bmp;
-                            break;
-                    }
-                    pbCamera.Image.Save(saveFileDialog.FileName, format);
-                    photoShot = false;
-                    inverse = false;
-                    this.Close();
-                
-                }
+                //Abrir Cropping
+                CortarImagem newCropWindow = new CortarImagem(agente, ppnew);
+                newCropWindow.ShowDialog();
+                this.Close();
                
             }
             else
@@ -118,32 +129,16 @@ namespace sistemaCorporativo.FORMS
             
         }
 
-        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            //Listar Dispositivos
-            webcam = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            foreach (FilterInfo VideoCaptureDevice in webcam)
-            {
-                cmbDevices.Items.Add(VideoCaptureDevice.Name);
-            }
-            cmbDevices.SelectedIndex = 0;
-            cam = new VideoCaptureDevice();
-          
-      
-            
-
-
-        }
-
         private void btnParar_Click(object sender, RoutedEventArgs e)
         {
             //Parar camera se estiver rodando
             if (cam.IsRunning)
             {
-                cam.Stop();
-                pbCamera.Image = null;
-                inverse = false;
+                cam.Stop();   
             }
+            pbCamera.Image = null;
+            inverse = false;
+            photoShot = false;
             
         }
 
@@ -164,27 +159,31 @@ namespace sistemaCorporativo.FORMS
 
         private void btnMirror_Click(object sender, RoutedEventArgs e)
         {
-            if (cam.IsRunning)
+            if (photoShot == false)
             {
-                //Checar se esta o inverso é verdadeiro para espelhar
-                if (inverse == true)
+                if (cam.IsRunning)
                 {
-                    cam.Stop();
-                    btnComeçar_Click(sender, e);
+                    //Checar se o inverso é verdadeiro para espelhar
+                    if (inverse == true)
+                    {
+                        cam.Stop();
+                        btnComeçar_Click(sender, e);
+                    }
+                    else
+                    {
+                        cam.Stop();
+                        cam = new VideoCaptureDevice(webcam[cmbDevices.SelectedIndex].MonikerString);
+                        cam.NewFrame += new NewFrameEventHandler(cam_NewFrameMirror);
+                        cam.Start();
+                        inverse = true;
+                       
+                    }
                 }
-                else
-                {
-                    cam.Stop();
-                    cam = new VideoCaptureDevice(webcam[cmbDevices.SelectedIndex].MonikerString);
-                    cam.NewFrame += new NewFrameEventHandler(cam_NewFrameMirrortwo);
-                    cam.Start();
-                    inverse = true;
-                } 
             }
-           
+            
         }
 
-        private void cam_NewFrameMirrortwo(object sender, NewFrameEventArgs eventArgs)
+        private void cam_NewFrameMirror(object sender, NewFrameEventArgs eventArgs)
         {
             //Evento para espelhar espelhar
             try

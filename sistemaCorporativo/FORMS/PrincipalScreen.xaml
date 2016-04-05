@@ -166,13 +166,13 @@
                     </Controls:Tile.Background>
                     <Image Source="/sistemaCorporativo;component/IMAGES/Finger_Print_tools_FLAT.png" Margin="146,27,10,0"  Height="280.001" Width="250.5"/>
                 </Controls:Tile>
-                <Controls:Tile Margin="242,243,1116,175" Height="Auto" Width="Auto" Click="Tile_Click_2" Title="Cadastrar Ocorrência">
+                <Controls:Tile Margin="242,243,1116,175" Height="Auto" Width="Auto" Click="TileOcorrencia_Click" Title="Cadastrar Ocorrência">
                     <Controls:Tile.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                     </Controls:Tile.Background>
                     <Image Source="/sistemaCorporativo;component/IMAGES/Ocorrencia_FLAT.png" Margin="168,2,90,0"  Height="149.999" Width="270.5"/>
                 </Controls:Tile>
-                <Controls:Tile Margin="242.5,344.034,1237.5,74.964" Height="Auto" Width="Auto" Click="Tile_Click_3" Title="" ToolTip="Cadastrar Denuncia">
+                <Controls:Tile Margin="242.5,344.034,1237.5,74.964" Height="Auto" Width="Auto" Click="TileDenuncia_Click" Title="" ToolTip="Cadastrar Denuncia">
                     <Controls:Tile.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                     </Controls:Tile.Background>
@@ -184,13 +184,13 @@
                     </Controls:Tile.Background>
                     <Image Source="/sistemaCorporativo;component/IMAGES/Denuncia_Anonima_FLAT.png" Margin="85,19,10,0"  Height="131" Width="250"/>
                 </Controls:Tile>
-                <Controls:Tile Margin="242,51.034,1116.5,275.965" Height="Auto" Width="Auto" Click="Tile_Click_1" Title="Cadastrar Viatura">
+                <Controls:Tile Margin="242,51.034,1116.5,275.965" Height="Auto" Width="Auto" Click="TileViatura_Click_" Title="Cadastrar Viatura">
                     <Controls:Tile.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                     </Controls:Tile.Background>
                     <Image Source="/sistemaCorporativo;component/IMAGES/Viatura_FLAT.png" Margin="118,53,10,0"  Height="229" Width="240" Stretch="Fill"/>
                 </Controls:Tile>
-                <Controls:Tile Margin="27,51.036,1359,74.964" Height="Auto" Width="Auto" Click="Tile_Click" Title="Cadastrar Agente" >
+                <Controls:Tile Margin="27,51.036,1359,74.964" Height="Auto" Width="Auto" Click="TileAgente_Click" Title="Cadastrar Agente" >
                     <Controls:Tile.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                     </Controls:Tile.Background>
@@ -212,7 +212,7 @@
                     <MenuItem Header="Denuncia Anônima" Click="DenunciaAnonMenuItem_Click" />
                     <MenuItem Header="Ocorrência" Click="OcorrenciaMenuItem_Click"/>
                 </MenuItem>
-                <MenuItem Header="Departamento" Click="MenuItem_Click" >
+                <MenuItem Header="Departamento" >
                     <MenuItem Header="Agente" Click="AgenteMenuItem_Click"/>
                     <MenuItem Header="Viatura" Click="ViaturaMenuItem_Click"/>
                 </MenuItem>

@@ -140,10 +140,9 @@ namespace sistemaCorporativo.FORMS
 
         private void btnFinalizar_Click(object sender, RoutedEventArgs e)
         {
-            
+            agente.FingerInserido = true;
+            agente.alterPhoto = true;
             agente.imgFoto.Source = imgCrop.Source;
-            
-            
             this.Close();
         }
 
