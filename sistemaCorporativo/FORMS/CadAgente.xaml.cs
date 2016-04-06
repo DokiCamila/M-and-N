@@ -43,8 +43,9 @@ namespace sistemaCorporativo.FORMS.cadAgente
         FrameworkElement _felCur = null;
         System.Windows.Media.Brush _brOriginal;
 
-        //Bitmap para Foto Perfil
+        //Bitmap para Foto Perfil (LoadByFolder)
         BitmapImage FotoPerfil;
+
 
 
         public CadAgente()
@@ -99,6 +100,9 @@ namespace sistemaCorporativo.FORMS.cadAgente
         public Boolean alterPhoto = false;
         //Variável id para gerar Login's
         public string idAgente;
+        //Cropped Bitmap para a foto do Agente
+        CroppedBitmap fotoPerfil = new CroppedBitmap();
+
 
  
         private void rdbArmNao_Checked(object sender, RoutedEventArgs e)
@@ -358,27 +362,39 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                             if (id == null)
                                                             {
                                                                 //C-A-D-A-S-T-R-A-R
+                                                                //--FotoPerfil
                                                                 //Checar se foi upado uma Foto
                                                                 if (fotoInserida == true)
                                                                 {
-                                                                    //--FOTO PERFIL
-                                                                    //Criar a pasta para armazenar fotos do perfil
-                                                                    //Pegar o folder da aplicação
-                                                                    var applicationPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                                                                    var dir = new System.IO.DirectoryInfo(System.IO.Path.Combine(applicationPath, "ProfilePicture"));
-                                                                    if (!dir.Exists)
-                                                                        dir.Create();
-                                                                    //Copiar para o diretório do sistema
-                                                                    namefoto = System.IO.Path.GetFileName(imagepath);
-                                                                    destinationPathFoto = GetDestinationPath(namefoto, "ProfilePicture");
-                                                                  
-                                                                    File.Copy(imagepath, destinationPathFoto, true);
+                                                                    fotoPerfil = imgFoto.Source as CroppedBitmap;
+                                                                    //Criar Diretório onde serão armazenadas as fotos de perfis
+                                                                    string subPath = "ImagesData";
+                                                                    string path = System.IO.Path.Combine(subPath, "ProfilePictures");
+                                                                    bool exists = System.IO.Directory.Exists(path);
 
+                                                                    if (!exists)
+                                                                        System.IO.Directory.CreateDirectory(path);
+
+                                                                    //Nome
+                                                                    string fileName = (id.ToString()+".png");
+                                                                    //Combinar
+                                                                    path = System.IO.Path.Combine(path, fileName);
+
+                                                                    using (System.IO.FileStream stream = System.IO.File.Create(path))
+                                                                    {
+                                                                        //Guardando o valor do image control no Bitmap FotoPerfil        
+                                                                        PngBitmapEncoder encoder = new PngBitmapEncoder();
+                                                                        encoder.Frames.Add(BitmapFrame.Create(fotoPerfil));
+                                                                        encoder.Save(stream);
+                                                                    }
+
+                                                                    destinationPathFoto = ("pack://application:,,,/ImagesData/ProfilePictures/"+fileName);
                                                                 }
 
                                                                 //--IMPRESSÃODIGITAL
                                                                 //Criar a pasta para armazenar a impressão
                                                                 //Pegar o folder da aplicação
+                                                                ///Obs O IF DO FINGERPRINT INSERIDO Ñ ESTÁ AQUI POR QUE ELE JA PASSOU NO PENULTIMO IF
                                                                 var applicationPathF = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
                                                                 var dirf = new System.IO.DirectoryInfo(System.IO.Path.Combine(applicationPathF, "FingerPrints"));
                                                                 if (!dirf.Exists)
@@ -485,22 +501,35 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                             }
                                                             else
                                                             {
+                                                                //A-T-U-A-L-I-Z-A-R
+                                                                //--FotoPerfil
                                                                 //Checar Foto (alteração)
                                                                 if (alterPhoto == true)
                                                                 {
-                                                                    //--FOTO PERFIL
-                                                                    //Criar a pasta para armazenar fotos do perfil
-                                                                    //Pegar o folder da aplicação
-                                                                    var applicationPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                                                                    var dir = new System.IO.DirectoryInfo(System.IO.Path.Combine(applicationPath, "ProfilePicture"));
-                                                                    if (!dir.Exists)
-                                                                        dir.Create();
-                                                                    //Copiar para o diretório do sistema
-                                                                    imagepath = imgFoto.Source.ToString();
-                                                                    namefoto = System.IO.Path.GetFileName(imagepath);
-                                                                    destinationPathFoto = GetDestinationPath(namefoto, "ProfilePicture");
-                                                                    File.Copy(imagepath, destinationPathFoto, true);
+                                                            
+                                                                    fotoPerfil = imgFoto.Source as CroppedBitmap;
+                                                                    //Criar Diretório onde serão armazenadas as fotos de perfis
+                                                                    string subPath = "ImagesData";
+                                                                    string path = System.IO.Path.Combine(subPath, "ProfilePictures");
+                                                                    bool exists = System.IO.Directory.Exists(path);
 
+                                                                    if (!exists)
+                                                                        System.IO.Directory.CreateDirectory(path);
+
+                                                                    //Nome
+                                                                    string fileName = (id.ToString()+".png");
+                                                                    //Combinar
+                                                                    path = System.IO.Path.Combine(path, fileName);
+
+                                                                    using (System.IO.FileStream stream = System.IO.File.Create(path))
+                                                                    {
+                                                                        //Guardando o valor do image control no Bitmap FotoPerfil        
+                                                                        PngBitmapEncoder encoder = new PngBitmapEncoder();
+                                                                        encoder.Frames.Add(BitmapFrame.Create(fotoPerfil));
+                                                                        encoder.Save(stream);
+                                                                    }
+
+                                                                    destinationPathFoto = ("pack://application:,,,/ImagesData/ProfilePictures/" + fileName);
                                                                 }
 
                                                                 //Checar digital (alteração)
@@ -520,7 +549,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
                                                                 }
 
-                                                                //A-T-U-A-L-I-Z-A-R
+                                                                
                                                                 //Checar se foi upado uma Foto
                                                                 SQL_UPDATE = "update agente set NOME = :nome, SEXO = :sexo, DATA_NASCIMENTO = :data_nascimento, RG = :rg, CPF = :cpf, TIPO_SANGUINEO = :tipo_sanguineo, ETNIA = :etnia, ESTADO_CIVIL = :estado_civil, CEP = :cep, LOGRADOURO = :logradouro, NUMERO = :numero, COMPLEMENTO = :complemento, BAIRRO = :bairro, CIDADE = :cidade, UF = :uf, FOTOAGENTE = :fotoagente, IMPRESSAOAGENTE = :impressaoagente, ID_CARGO = :cargo where id_Agente=" + id;
 
@@ -814,6 +843,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                     
                     //Padrão do checkPhoto
                     fotoInserida = false;
+                    alterPhoto = false;
 
                     //Coletando valores para atualização
 

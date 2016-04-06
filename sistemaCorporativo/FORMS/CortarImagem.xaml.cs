@@ -27,6 +27,7 @@ namespace sistemaCorporativo.FORMS
         FrameworkElement _felCur = null;
         System.Windows.Media.Brush _brOriginal;
 
+
         //Instanciar com informações do Form do Agente
         CadAgente agente;
         public CortarImagem(CadAgente agenteinfo, BitmapImage Shot)
@@ -140,7 +141,7 @@ namespace sistemaCorporativo.FORMS
 
         private void btnFinalizar_Click(object sender, RoutedEventArgs e)
         {
-            agente.FingerInserido = true;
+            agente.fotoInserida = true;
             agente.alterPhoto = true;
             agente.imgFoto.Source = imgCrop.Source;
             this.Close();
