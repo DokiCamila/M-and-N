@@ -23,6 +23,7 @@ using MahApps.Metro.Converters;
 using MahApps.Metro;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
+using sistemaCorporativo.UTIL.databaseAdress;
 
 
 
@@ -41,12 +42,6 @@ namespace sistemaCorporativo.FORMS.principalScreen
             user = usuario.ToString();
         }
 
-        //Criar string com o endereço do banco
-        private string oradb = "Data Source=(DESCRIPTION="
-               + "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))"
-               + "(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=orcl.itb.com)));"
-               + "User Id=matheus_23177;Password=123456;";
-
         //Strings para informações do usuario (FLYOUT)
         int casosResolvidos;
         string cargo;
@@ -54,6 +49,8 @@ namespace sistemaCorporativo.FORMS.principalScreen
         string name;
         int nivel;
         BitmapImage profilePicture;
+        //Endereço database
+        databaseAddress db = new databaseAddress();
 
         
         
@@ -231,7 +228,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
 
         private void PrincipalScreen1_Loaded(object sender, RoutedEventArgs e)
         {
-            OracleConnection Oracon = new OracleConnection(oradb);
+            OracleConnection Oracon = new OracleConnection(db.oradb);
 
             //String para buscar informações do usuario
             string SQL_SEARCH = "select id_Agente from login_Agente where nome_User = '" + user + "'";

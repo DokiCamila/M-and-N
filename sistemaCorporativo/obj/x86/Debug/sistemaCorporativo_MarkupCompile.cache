@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Matheus\Documents\Matheus\WPF\Projects\sistemaCorporativo v5.0.4\sistemaCorporativo\obj\x86\Debug\
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\x86\Debug\
 sistemaCorporativo
 none
 false
 DEBUG;TRACE
-C:\Users\Matheus\Documents\Matheus\WPF\Projects\sistemaCorporativo v5.0.4\sistemaCorporativo\App.xaml
-12-1155488229
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\App.xaml
+14-1675569689
 
-18-1018051829
-262027630955
-FORMS\CadAgente.xaml;FORMS\CadDenuncia.xaml;FORMS\CadDenunciaAnon.xaml;FORMS\CadInvestigacao.xaml;FORMS\CadViatura.xaml;FORMS\gerarLoginWindow.xaml;FORMS\LoginScreen.xaml;FORMS\LogoffSplash.xaml;FORMS\PrincipalScreen.xaml;FORMS\SplashScreen.xaml;FORMS\WebcamWindow.xaml;Resources\Icons.xaml;
+23-779579057
+261846257381
+FORMS\CadAgente.xaml;FORMS\CadDenuncia.xaml;FORMS\CadDenunciaAnon.xaml;FORMS\CadFingerPrints.xaml;FORMS\CadInvestigacao.xaml;FORMS\CadViatura.xaml;FORMS\CortarImagem.xaml;FORMS\gerarLoginWindow.xaml;FORMS\LoginScreen.xaml;FORMS\LogoffSplash.xaml;FORMS\PrincipalScreen.xaml;FORMS\SplashScreen.xaml;FORMS\WebcamWindow.xaml;Resources\Icons.xaml;
 
 False
 

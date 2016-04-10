@@ -17,6 +17,7 @@ using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.Behaviours;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
+using sistemaCorporativo.UTIL.databaseAdress;
 using sistemaCorporativo.TO.Agente;
 using System.Data;
 using System.IO;
@@ -52,11 +53,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
         {
             InitializeComponent();
         }
-        //Criar string com o endereço do banco
-        private static string oradb = "Data Source=(DESCRIPTION="
-             + "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))"
-             + "(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=orcl.itb.com)));"
-             + "User Id=matheus_23177;Password=123456;";
+       
   
         //Criar string com o comando para inserir
         private string SQL_INSERT = "insert into Agente(ID_AGENTE,NOME,SEXO,DATA_NASCIMENTO,RG,"
@@ -65,7 +62,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                      +":rg,:cpf,:tipo_sanguineo,:etnia,:estado_civil,:cep,:logradouro,:numero,:complemento,"
                      +":bairro,:cidade,:uf,:fotoagente,:impressaoagente, :cargo, '1','0')";
         //Criar string com o comando para listar
-        private string SQL_SELECT_ALL = "select id_Agente, nome, sexo, data_Nascimento,rg, cpf,tipo_Sanguineo, etnia, estado_Civil, cep, logradouro, numero, complemento, bairro, cidade, uf, fotoAgente, ImpressaoAgente from agente where status = 1 and administrador = 0";
+        private string SQL_SELECT_ALL = "select id_Agente, nome, sexo, data_Nascimento,rg, cpf,tipo_Sanguineo, etnia, estado_Civil, cep, logradouro, numero, complemento, bairro, cidade, uf, fotoAgente from agente where status = 1 and administrador = 0";
         //Criar Variável para edições(atualizações) e exclusões;
         public string id;
         //Criar string (sem o comando) para deletar
@@ -101,7 +98,9 @@ namespace sistemaCorporativo.FORMS.cadAgente
         //Variável id para gerar Login's
         public string idAgente;
         //Cropped Bitmap para a foto do Agente
-        CroppedBitmap fotoPerfil = new CroppedBitmap();
+        CroppedBitmap fotoPerfil = new CroppedBitmap(); 
+        //endereço banco
+        databaseAddress db = new databaseAddress();
 
 
  
@@ -146,7 +145,8 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            OracleConnection Oracon = new OracleConnection(oradb);
+            
+            OracleConnection Oracon = new OracleConnection(db.oradb);
             try
             {
                 //abrir conexao com o banco de dados
@@ -176,7 +176,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                 dgvConteudo.Columns[14].Header = "Cidade";
                 dgvConteudo.Columns[15].Header = "UF";
                 dgvConteudo.Columns[16].Header = "Foto Agente";
-                dgvConteudo.Columns[17].Header = "Impressão Digital";
+                
 
 
 
@@ -225,31 +225,12 @@ namespace sistemaCorporativo.FORMS.cadAgente
         {
             try
             {
+				
+                CadFingerPrints cadFinger = new CadFingerPrints();
+				cadFinger.Show();
                 
-                String caminhoImpressao;
-                Microsoft.Win32.OpenFileDialog op = new Microsoft.Win32.OpenFileDialog();
-                op.Title = "Selecione uma impressão digital!";
-                op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-                  "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-                  "Portable Network Graphic (*.png)|*.png";
-                if (op.ShowDialog() == true)
-                {
-                    //Receber Imagem
-                    imgDigital.Source = new BitmapImage(new Uri(op.FileName));
-
-                    //Coletar informações da imagem
-                    caminhoImpressao = op.FileName.ToString();
-                    fingerpath = caminhoImpressao.ToString();
-                    var imageFinger = new System.IO.FileInfo(fingerpath);
-                    FingerInserido = true;
-                    //Houve alteração na digital
-                    if (id != null)
-                    {
-                        alterFinger = true;
-                    }
-
-                }
-
+                
+                //alterFinger = true;
 
             }
             catch (Exception ex)
@@ -387,8 +368,14 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                         encoder.Frames.Add(BitmapFrame.Create(fotoPerfil));
                                                                         encoder.Save(stream);
                                                                     }
+                                                                    //Pegar o path Bin
+                                                                    string pathToDataBase;
+                                                                    pathToDataBase = System.IO.Path.GetDirectoryName(
+                                                                    System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
 
-                                                                    destinationPathFoto = ("pack://application:,,,/ImagesData/ProfilePictures/"+fileName);
+                                                                    //GO TO THE DATABASE
+                                                                    destinationPathFoto = (pathToDataBase + @"\" + path);
+                                                                  
                                                                 }
 
                                                                 //--IMPRESSÃODIGITAL
@@ -435,7 +422,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                 objAgente.setimpressaodigital(destinationPathFinger);
 
                                                                 //Criando Conexão Com o banco de dados
-                                                                OracleConnection Oracon = new OracleConnection(oradb);
+                                                                OracleConnection Oracon = new OracleConnection(db.oradb);
 
                                                                 //Ações 
                                                                 try
@@ -528,8 +515,14 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                         encoder.Frames.Add(BitmapFrame.Create(fotoPerfil));
                                                                         encoder.Save(stream);
                                                                     }
-
-                                                                    destinationPathFoto = ("pack://application:,,,/ImagesData/ProfilePictures/" + fileName);
+                                                                    
+                                                                    //Pegar o path Bin
+                                                                    string pathToDataBase;
+                                                                    pathToDataBase = System.IO.Path.GetDirectoryName(
+                                                                    System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+       
+                                                                    //GO TO THE DATABASE
+                                                                    destinationPathFoto = (pathToDataBase+@"\"+path);
                                                                 }
 
                                                                 //Checar digital (alteração)
@@ -584,7 +577,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                 objAgente.setimpressaodigital(destinationPathFinger.ToString());
 
                                                                 //Criando Conexão Com o banco de dados
-                                                                OracleConnection Oracon = new OracleConnection(oradb);
+                                                                OracleConnection Oracon = new OracleConnection(db.oradb);
 
                                                                 //Ações 
                                                                 try
@@ -792,7 +785,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
                 if (result == MessageDialogResult.Affirmative)
                 {
-                    OracleConnection Oracon = new OracleConnection(oradb);
+                    OracleConnection Oracon = new OracleConnection(db.oradb);
                     try
                     {
                         //Abrir a conexão com o banco de dados
@@ -852,7 +845,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                     id.ToString();
 
                     string SQL_SELECT_THIS = "select * from agente where id_Agente='"+id+"'";
-                    OracleConnection Oracon = new OracleConnection(oradb);
+                    OracleConnection Oracon = new OracleConnection(db.oradb);
                     Oracon.Open();
                     OracleCommand selectall = new OracleCommand(SQL_SELECT_THIS, Oracon);
                     OracleDataReader read = selectall.ExecuteReader();
@@ -876,7 +869,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                     cmbEtnia.Text = Convert.ToString(read[7].ToString());
                     cmbEstadoCivil.Text = Convert.ToString(read[8].ToString());
 
-                    string cargo = Convert.ToString(read[18].ToString());
+                    string cargo = Convert.ToString(read[17].ToString());
                     switch (cargo)
                     {
                         case "2" :
@@ -892,7 +885,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                             cmbCargo.Text = "Biologo Forense";
                             break;
                         default:
-                            await this.ShowMessageAsync("Aviso", "Cargo Inválido!");
+                             await this.ShowMessageAsync("Aviso", "Cargo Inválido!");
                             break;
                     }
 
@@ -905,7 +898,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                     cmbUf.Text = Convert.ToString(read[15].ToString());
 
                     fotoAgentesource = Convert.ToString(read[16].ToString());
-                    digitalsource = Convert.ToString(read[17].ToString());
+                   
                     Oracon.Close();
 
                     if (fotoAgentesource != "")
@@ -917,10 +910,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
                     if (digitalsource != "")
                     {
-                        ImageSource fingerPrint = new BitmapImage(new Uri(digitalsource));
-                        imgDigital.Source = fingerPrint;
-                        destinationPathFinger = fingerPrint.ToString();
-                        FingerInserido = true;
+                        
                     }
 
                     gConsultar.IsSelected = false;

@@ -21,6 +21,7 @@ using System.Threading;
 using MahApps.Metro;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
+using sistemaCorporativo.UTIL.databaseAdress;
 
 
 
@@ -40,10 +41,7 @@ namespace sistemaCorporativo
 
 
         //Criar string com o endereço do banco
-        private string oradb = "Data Source=(DESCRIPTION="
-               + "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))"
-               + "(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=orcl.itb.com)));"
-               + "User Id=matheus_23177;Password=123456;";
+        databaseAddress db = new databaseAddress();
         //Criar strings para usuario e senha
 
         Boolean resultado = false;
@@ -55,7 +53,7 @@ namespace sistemaCorporativo
         private void btnAcessar_Click(object sender, RoutedEventArgs e)
         {
 
-            OracleConnection Oracon = new OracleConnection(oradb);
+            OracleConnection Oracon = new OracleConnection(db.oradb);
             Oracon.Open();
 
             String senhaUser = txtSenha.Password;

@@ -18,6 +18,7 @@ using sistemaCorporativo.TO.Viatura;
 using System.Windows.Forms;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
+using sistemaCorporativo.UTIL.databaseAdress;
 using System.Data;
 
 
@@ -37,11 +38,6 @@ namespace sistemaCorporativo.FORMS
        
         //Criar Variável para edições(atualizações) e exclusões;
         public string id;
-        //Criar string com o endereço do banco
-        private string oradb = "Data Source=(DESCRIPTION="
-               + "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))"
-               + "(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=orcl.itb.com)));"
-               + "User Id=matheus_23177;Password=123456;";
         //Criar string com o comando para listar
         private string SQL_SELECT_ALL = "select * from viatura where status = 1";
         //Criar string com o comando para inserir
@@ -50,12 +46,14 @@ namespace sistemaCorporativo.FORMS
         private string SQL_DELETE;
         //Criar string (sem o comando) para atualizar
         private string SQL_UPDATE;
+        //endereço
+        databaseAddress db = new databaseAddress();
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
 
            
-            OracleConnection Oracon = new OracleConnection(oradb);
+            OracleConnection Oracon = new OracleConnection(db.oradb);
             try
             {
                 //abrir conexao com o banco de dados
@@ -127,7 +125,7 @@ namespace sistemaCorporativo.FORMS
                             objViatura.setPlaca(txtPlaca.Text);
                             objViatura.setChassi(txtChassi.Text);
 
-                            OracleConnection Oracon = new OracleConnection(oradb);
+                            OracleConnection Oracon = new OracleConnection(db.oradb);
 
                             //Ações 
                             try
@@ -165,7 +163,7 @@ namespace sistemaCorporativo.FORMS
                             objViatura.setPlaca(txtPlaca.Text);
                             objViatura.setChassi(txtChassi.Text);
 
-                            OracleConnection Oracon = new OracleConnection(oradb);
+                            OracleConnection Oracon = new OracleConnection(db.oradb);
 
                             //Ações 
                             try
@@ -237,7 +235,7 @@ namespace sistemaCorporativo.FORMS
 
                 if (result == MessageDialogResult.Affirmative)
                 {
-                    OracleConnection Oracon = new OracleConnection(oradb);
+                    OracleConnection Oracon = new OracleConnection(db.oradb);
                     try
                     {
 

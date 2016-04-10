@@ -5,7 +5,8 @@
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         Title="Camera" Height="508.33" Width="373.17"
-        ShowCloseButton="False" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded" WindowStyle="ToolWindow">
+        ShowCloseButton="False" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded" WindowStyle="ToolWindow"
+        BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" >
 
     <Grid>
         <Grid.RowDefinitions>

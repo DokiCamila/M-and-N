@@ -164,9 +164,10 @@
     <Compile Include="TO\Agente.cs" />
     <Compile Include="UTIL\checkPassword.cs" />
     <Compile Include="TO\Viatura.cs" />
-    <Compile Include="UTIL\CroppingAdorner.cs" />
+    <Compile Include="UTIL\croppingAdorner.cs" />
+    <Compile Include="UTIL\databaseAddress.cs" />
     <Compile Include="UTIL\nameAndLastName.cs" />
-    <Compile Include="UTIL\PuncturedRect.cs" />
+    <Compile Include="UTIL\puncturedRect.cs" />
     <Page Include="FORMS\CadAgente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -284,6 +285,7 @@
     </None>
     <AppDesigner Include="Properties\" />
     <Resource Include="IMAGES\Assinatura.png" />
+    <Resource Include="IMAGES\Close.png" />
     <Resource Include="IMAGES\Denuncia.png" />
     <Resource Include="IMAGES\Denuncia_Anonima.png" />
     <Resource Include="IMAGES\Denuncia_Normal.png" />
@@ -291,8 +293,11 @@
     <Resource Include="IMAGES\Face.png" />
     <Resource Include="IMAGES\Finger_Print.png" />
     <Resource Include="IMAGES\Finger_Print_tools.png" />
+    <Resource Include="IMAGES\Folder-OpenAvg.png" />
     <Resource Include="IMAGES\fundo flat.png" />
     <Resource Include="IMAGES\Icon_Login FLAT DESIGN.png" />
+    <Resource Include="IMAGES\impressao Digital Recurso.png" />
+    <Resource Include="IMAGES\nothing.png" />
     <Resource Include="IMAGES\Ocorrencia.png" />
     <Resource Include="IMAGES\Pesquisa_Avancada.png" />
     <Resource Include="IMAGES\reconhecimento_Facial.png" />

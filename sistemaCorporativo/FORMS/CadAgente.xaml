@@ -345,7 +345,7 @@
             </TabItem>
             <TabItem x:Name="gCadastrar" Header="Cadastrar" TabIndex="34">
                 <Grid Margin="0,0,0,-4.145">
-                    <Grid Height="588" VerticalAlignment="Top" Margin="-10,0,10,-6.855">
+                    <Grid Height="588" VerticalAlignment="Top" Margin="-10,0,10,-7.328">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0*"/>
                             <ColumnDefinition/>
@@ -461,9 +461,8 @@
                         <Button x:Name="btnCarregar" Style="{DynamicResource SquareButtonStyle}" Content="Carregar" HorizontalAlignment="Left" Margin="636,94,0,0" VerticalAlignment="Top" Width="75" Height="28" Grid.Row="2" Click="btnCarregar_Click" Grid.RowSpan="2" TabIndex="26" Grid.Column="1"/>
                         <Button x:Name="btnExcluir" Style="{DynamicResource SquareButtonStyle}" Content="Excluir" HorizontalAlignment="Left" Margin="725,93,0,0" VerticalAlignment="Top" Width="75" Height="28" Grid.Row="2" Click="btnExcluir_Click" Grid.RowSpan="2" TabIndex="27" Grid.Column="1"/>
                         <Label Content="Impressão Digital" FontSize="20" FontFamily="Segoe WP Light" Margin="636,20,0,0" HorizontalAlignment="Left" Width="153" Height="37" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1"/>
-                        <Image x:Name="imgDigital" HorizontalAlignment="Left" Height="136" Margin="663,57,0,0" VerticalAlignment="Top" Width="110" Source="/sistemaCorporativo;component/IMAGES/Finger_Print.png" Stretch="Fill" Grid.RowSpan="2" Grid.Row="3" Grid.Column="1"/>
-                        <Button x:Name="btnCarregarDigital" Style="{DynamicResource SquareButtonStyle}" Content="Carregar" HorizontalAlignment="Left" Margin="636,88,0,0" VerticalAlignment="Top" Width="75" Height="28" Grid.Row="4" Click="btnCarregarDigital_Click" TabIndex="28" Grid.Column="1"/>
-                        <Button x:Name="btnExcluirDigital" Style="{DynamicResource SquareButtonStyle}" Content="Excluir" HorizontalAlignment="Left" Margin="725,88,0,0" VerticalAlignment="Top" Width="75" Height="28" Grid.Row="4" Click="btnExcluirDigital_Click" TabIndex="29" Grid.Column="1"/>
+                        <Image x:Name="imgDigital" HorizontalAlignment="Left" Height="136" Margin="663,57,0,0" VerticalAlignment="Top" Width="110" Source="/sistemaCorporativo;component/IMAGES/impressao Digital Recurso.png" Stretch="Fill" Grid.RowSpan="2" Grid.Row="3" Grid.Column="1"/>
+                        <Button x:Name="btnCarregarDigital" Style="{DynamicResource SquareButtonStyle}" Content="Inserir" HorizontalAlignment="Left" Margin="681,88,0,0" VerticalAlignment="Top" Width="75" Height="28" Grid.Row="4" Click="btnCarregarDigital_Click" TabIndex="28" Grid.Column="1"/>
                         <Button x:Name="btnCadastrar" Style="{DynamicResource SquareButtonStyle}" Content="Cadastrar" HorizontalAlignment="Left" Margin="177,161,0,0" VerticalAlignment="Top" Width="110" Height="42" Background="#FF35A3CD" Grid.Row="4" Click="btnCadastrar_Click" TabIndex="30" Grid.Column="1"/>
                         <Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}" Content="Cancelar" HorizontalAlignment="Left" Margin="302,161,0,0" VerticalAlignment="Top" Width="107" Height="42" Click="btnCancelar_Click" Grid.Row="4" TabIndex="31" Grid.Column="1"/>
                         <ComboBox x:Name="cmbCargo" HorizontalAlignment="Left" Margin="18,26,0,0" VerticalAlignment="Top" Width="121" Height="26" Grid.ColumnSpan="2" Grid.Row="2" TabIndex="10">

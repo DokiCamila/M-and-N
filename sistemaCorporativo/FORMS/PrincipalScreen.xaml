@@ -6,7 +6,7 @@
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="PrincipalScreen1" x:Class="sistemaCorporativo.FORMS.principalScreen.PrincipalScreen"
         Title="D.P.I.C.S.P Departamento Policial de Investigação Criminal de São Paulo" Height="729" Width="1361"
-
+		TextBlock.TextAlignment="Center"
 		BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
 		WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="PrincipalScreen1_Loaded"
