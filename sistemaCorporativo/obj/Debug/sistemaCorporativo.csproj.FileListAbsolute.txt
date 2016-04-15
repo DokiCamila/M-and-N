@@ -216,8 +216,7 @@ C:\Users\Matheus\Documents\Matheus\Git\sppdi\sistemaCorporativo\obj\Debug\sistem
 C:\Users\Matheus\Documents\Matheus\Git\sppdi\sistemaCorporativo\obj\Debug\sistemaCorporativo.csproj.GenerateResource.Cache
 C:\Users\Matheus\Documents\Matheus\Git\sppdi\sistemaCorporativo\obj\Debug\sistemaCorporativo.exe
 C:\Users\Matheus\Documents\Matheus\Git\sppdi\sistemaCorporativo\obj\Debug\sistemaCorporativo.pdb
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\sistemaCorporativo.exe.config
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.g.resources
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadAgente.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadDenuncia.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadDenunciaAnon.baml
@@ -249,9 +248,7 @@ C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\F
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\Resources\Icons.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\App.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo_MarkupCompile.cache
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.g.resources
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.Properties.Resources.resources
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.csproj.GenerateResource.Cache
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\sistemaCorporativo.exe.config
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\IMAGES\Dark_Wallpaper.png
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\IMAGES\Light_Wallpaper.png
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\IMAGES\SplashScreenBackground5.png
@@ -292,8 +289,11 @@ C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\f
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.csprojResolveAssemblyReference.cache
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.Properties.Resources.resources
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.csproj.GenerateResource.Cache
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.exe
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.pdb
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.csprojResolveAssemblyReference.cache

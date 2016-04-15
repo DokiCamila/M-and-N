@@ -25,7 +25,7 @@
             </MenuItem>
         </Menu>
 
-        <Button x:Name="btnRemoverDoc" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Margin="404,221,0,0" VerticalAlignment="Top" Width="35" Height="32" Grid.Row="2" Click="btnRemoverDoc_Click" ToolTip="Remover">
+        <Button x:Name="btnRemoverDoc" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Margin="404,219,0,0" VerticalAlignment="Top" Width="35" Height="32" Grid.Row="2" Click="btnRemoverDoc_Click" ToolTip="Remover">
             <Image Height="14" Width="15" Source="/sistemaCorporativo;component/IMAGES/Close.png"/>
         </Button>
         <Rectangle Height="155.521" Margin="465.937,30.855,0,0" Stroke="#FFB0B0B0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="663.151" Grid.Row="1"/>
@@ -39,7 +39,7 @@
         <Path Data="M557.71443,47.167 L557.71443,188" HorizontalAlignment="Left" Height="32.873" Margin="791.857,185.815,0,0" Stretch="Fill" Stroke="#FFB0B0B0" VerticalAlignment="Top" Width="1" Grid.Row="1"/>
         <Path Data="M557.71443,47.167 L557.71443,188" HorizontalAlignment="Left" Height="32.873" Margin="925.792,185.815,0,0" Stretch="Fill" Stroke="#FFB0B0B0" VerticalAlignment="Top" Width="1" Grid.Row="1"/>
         <Rectangle Height="32.503" Margin="465.937,53.271,0,0" Stroke="#FFB0B0B0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="663.151" Grid.RowSpan="2"/>
-        <Image x:Name="imgPolD" HorizontalAlignment="Left" Height="153.519" Margin="466.889,31.858,0,0" VerticalAlignment="Top" Width="126.23" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Grid.Row="1" Stretch="Fill"/>
+        <Image x:Name="imgPolD" HorizontalAlignment="Left" Height="154" Margin="467,32,0,0" VerticalAlignment="Top" Width="126" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Grid.Row="1" Stretch="Fill"/>
         <Image x:Name="imgIndD" HorizontalAlignment="Left" Height="153.519" Margin="594.119,31.858,0,0" VerticalAlignment="Top" Width="131.136" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" Grid.Row="1"/>
         <Image x:Name="imgMedD" HorizontalAlignment="Left" Height="153.519" Margin="726.255,31.858,0,0" VerticalAlignment="Top" Width="131.54" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" Grid.Row="1"/>
         <Image x:Name="imgAnuD" HorizontalAlignment="Left" Height="153.519" Margin="858.795,31.858,0,0" VerticalAlignment="Top" Width="134.651" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" Grid.Row="1"/>
@@ -107,14 +107,14 @@
         <Button x:Name="btnAvancar" Style="{DynamicResource SquareButtonStyle}" Content="Avançar" HorizontalAlignment="Left" Margin="1031.114,253.619,0,0" VerticalAlignment="Top" Width="97" Height="33" Background="#FF35A3CD" RenderTransformOrigin="0.459,-0.293" TabIndex="6" Grid.Row="2" IsEnabled="False"/>
         <Button x:Name="btnLimpar" Style="{DynamicResource SquareButtonStyle}" Content="Limpar tudo" HorizontalAlignment="Left" Margin="849,256,0,0" VerticalAlignment="Top" Width="86" Height="31" Grid.Row="2"/>
 
-        <Button x:Name="btnInserir" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="404,253,0,0" VerticalAlignment="Top" Width="79" Height="32" Grid.Row="2" Click="btnInserir_Click" ToolTip="Inserir [enter]" Content="Inserir"/>
+        <Button x:Name="btnInserir" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="404,256,0,0" VerticalAlignment="Top" Width="79" Height="32" Grid.Row="2" Click="btnInserir_Click" ToolTip="Inserir [enter]" Content="Inserir"/>
         <Button x:Name="btnClassificar" Style="{DynamicResource SquareButtonStyle}" Content="Classificar" HorizontalAlignment="Left" Margin="940,256,0,0" VerticalAlignment="Top" Width="86" Height="31" Grid.Row="2" Click="btnClassificar_Click"/>
-        <Grid x:Name="cnvDocumento" HorizontalAlignment="Left" Height="543" Margin="10,1,0,0" Grid.Row="1" VerticalAlignment="Top" Width="389" Grid.RowSpan="2">
-            <Image x:Name="imgDocumento" Margin="0,1,0,-1" HorizontalAlignment="Left" Height="543" VerticalAlignment="Top" Width="389" Source="/sistemaCorporativo;component/IMAGES/nothing.png"/>
-            <Canvas x:Name="BackPanel" Margin="0,1,0,-1">
+        <Canvas x:Name="cnvDocumento" HorizontalAlignment="Left" Height="543" Margin="10,1,0,0" Grid.Row="1" VerticalAlignment="Top" Width="389" Grid.RowSpan="2">
+            <Image x:Name="imgDocumento" HorizontalAlignment="Left" Height="543" VerticalAlignment="Top" Width="389" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill"/>
+            <Canvas x:Name="BackPanel" Height="543" Width="389">
                 <Rectangle x:Name="selectionRectangle" Stroke="Red" Fill="Transparent" Visibility="Collapsed" StrokeThickness="2" />
             </Canvas>
-        </Grid>
+        </Canvas>
 
     </Grid>
 </Controls:MetroWindow>
