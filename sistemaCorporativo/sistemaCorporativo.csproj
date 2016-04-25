@@ -149,6 +149,9 @@
     <Compile Include="FORMS\CadInvestigacao.xaml.cs">
       <DependentUpon>CadInvestigacao.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FORMS\ClassificarFingersPrints.xaml.cs">
+      <DependentUpon>ClassificarFingersPrints.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FORMS\CortarImagem.xaml.cs">
       <DependentUpon>CortarImagem.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,12 @@
     <Compile Include="FORMS\LogoffSplash.xaml.cs">
       <DependentUpon>LogoffSplash.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FORMS\UcImageCropper.xaml.cs">
+      <DependentUpon>UcImageCropper.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FORMS\visualizarImpressoesDigitais.xaml.cs">
+      <DependentUpon>visualizarImpressoesDigitais.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FORMS\WebcamWindow.xaml.cs">
       <DependentUpon>WebcamWindow.xaml</DependentUpon>
     </Compile>
@@ -166,8 +175,10 @@
     <Compile Include="TO\Viatura.cs" />
     <Compile Include="UTIL\croppingAdorner.cs" />
     <Compile Include="UTIL\databaseAddress.cs" />
+    <Compile Include="UTIL\dragCanvas.cs" />
     <Compile Include="UTIL\nameAndLastName.cs" />
     <Compile Include="UTIL\puncturedRect.cs" />
+    <Compile Include="UTIL\SelectionCanvas.cs" />
     <Page Include="FORMS\CadAgente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -189,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FORMS\CadViatura.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FORMS\ClassificarFingersPrints.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -227,6 +242,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FORMS\SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FORMS\UcImageCropper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FORMS\visualizarImpressoesDigitais.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -378,6 +401,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IMAGES\escudo nivel 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMAGES\impressao Digital Recurso Checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMAGES\last transparentfingerprint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMAGES\impressao Digital Recurso Add transp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMAGES\impressao Digital Recurso Checked transp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />

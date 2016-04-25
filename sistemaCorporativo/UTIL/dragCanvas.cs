@@ -16,6 +16,7 @@ namespace WPF.JoshSmith.Controls
 	/// </summary>
 	public class DragCanvas : Canvas
 	{
+		#region Data
 
 		// Stores a reference to the UIElement currently being dragged by the user.
 		private UIElement elementBeingDragged;
@@ -32,7 +33,11 @@ namespace WPF.JoshSmith.Controls
 		// True if a drag operation is underway, else false.
 		private bool isDragInProgress;
 
+		#endregion // Data
 
+		#region Attached Properties
+
+			#region CanBeDragged
 
 		public static readonly DependencyProperty CanBeDraggedProperty;
 
@@ -50,9 +55,18 @@ namespace WPF.JoshSmith.Controls
 				uiElement.SetValue( CanBeDraggedProperty, value );
 		}
 
+			#endregion // CanBeDragged
+
+		#endregion // Attached Properties
+
+		#region Dependency Properties
+
 		public static readonly DependencyProperty AllowDraggingProperty;
 		public static readonly DependencyProperty AllowDragOutOfViewProperty;
 
+		#endregion // Dependency Properties
+
+		#region Static Constructor
 
 		static DragCanvas()
 		{
@@ -75,6 +89,9 @@ namespace WPF.JoshSmith.Controls
 				new UIPropertyMetadata( true ) );
 		}
 
+		#endregion // Static Constructor
+
+		#region Constructor
 
 		/// <summary>
 		/// Initializes a new instance of DragCanvas.  UIElements in
@@ -84,6 +101,11 @@ namespace WPF.JoshSmith.Controls
 		{
 		}
 
+		#endregion // Constructor
+
+		#region Interface
+
+			#region AllowDragging
 
 		/// <summary>
 		/// Gets/sets whether elements in the DragCanvas should be draggable by the user.
@@ -95,6 +117,9 @@ namespace WPF.JoshSmith.Controls
 			set { base.SetValue( AllowDraggingProperty, value ); }
 		}
 
+			#endregion // AllowDragging
+
+			#region AllowDragOutOfView
 
 		/// <summary>
 		/// Gets/sets whether the user should be able to drag elements in the DragCanvas out of
@@ -105,8 +130,10 @@ namespace WPF.JoshSmith.Controls
 			get { return (bool)GetValue( AllowDragOutOfViewProperty ); }
 			set { SetValue( AllowDragOutOfViewProperty, value ); }
 		}
-	
 
+			#endregion // AllowDragOutOfView			
+
+			#region BringToFront / SendToBack
 
 		/// <summary>
 		/// Assigns the element a z-index which will ensure that 
@@ -138,6 +165,9 @@ namespace WPF.JoshSmith.Controls
 			this.UpdateZOrder( element, false );
 		}
 
+			#endregion // BringToFront / SendToBack
+
+			#region ElementBeingDragged
 
 		/// <summary>
 		/// Returns the UIElement currently being dragged, or null.
@@ -175,6 +205,9 @@ namespace WPF.JoshSmith.Controls
 			}
 }
 
+			#endregion // ElementBeingDragged
+
+			#region FindCanvasChild
 
 		/// <summary>
 		/// Walks up the visual tree starting with the specified DependencyObject, 
@@ -205,6 +238,14 @@ namespace WPF.JoshSmith.Controls
 			}
 			return depObj as UIElement;
 		}
+
+			#endregion // FindCanvasChild
+
+		#endregion // Interface
+
+		#region Overrides
+
+			#region OnPreviewMouseLeftButtonDown
 
 		protected override void OnPreviewMouseLeftButtonDown( MouseButtonEventArgs e )
 		{
@@ -239,6 +280,10 @@ namespace WPF.JoshSmith.Controls
 			this.isDragInProgress = true;
 		}
 
+			#endregion // OnPreviewMouseLeftButtonDown
+
+			#region OnPreviewMouseMove
+
 		protected override void OnPreviewMouseMove( MouseEventArgs e )
 		{
 			base.OnPreviewMouseMove( e );
@@ -253,6 +298,8 @@ namespace WPF.JoshSmith.Controls
 			// These values will store the new offsets of the drag element.
 			double newHorizontalOffset, newVerticalOffset;
 
+			#region Calculate Offsets
+
 			// Determine the horizontal offset.
 			if( this.modifyLeftOffset )
 				newHorizontalOffset = this.origHorizOffset + (cursorLocation.X - this.origCursorLocation.X);
@@ -265,9 +312,11 @@ namespace WPF.JoshSmith.Controls
 			else
 				newVerticalOffset = this.origVertOffset - (cursorLocation.Y - this.origCursorLocation.Y);
 
+			#endregion // Calculate Offsets
 
 			if( ! this.AllowDragOutOfView )
 			{
+				#region Verify Drag Element Location
 
 				// Get the bounding rect of the drag element.
 				Rect elemRect = this.CalculateDragElementRect( newHorizontalOffset, newVerticalOffset );
@@ -293,9 +342,10 @@ namespace WPF.JoshSmith.Controls
 				else if( bottomAlign )
 					newVerticalOffset = modifyTopOffset ? this.ActualHeight - elemRect.Height : 0;
 
+				#endregion // Verify Drag Element Location
 			}
 
-		
+			#region Move Drag Element
 
 			if( this.modifyLeftOffset )
 				Canvas.SetLeft( this.ElementBeingDragged, newHorizontalOffset );
@@ -307,9 +357,12 @@ namespace WPF.JoshSmith.Controls
 			else
 				Canvas.SetBottom( this.ElementBeingDragged, newVerticalOffset );
 
+			#endregion // Move Drag Element
 		}
 
+			#endregion // OnPreviewMouseMove
 
+			#region OnHostPreviewMouseUp
 
 		protected override void OnPreviewMouseUp( MouseButtonEventArgs e )
 		{
@@ -320,6 +373,13 @@ namespace WPF.JoshSmith.Controls
 			this.ElementBeingDragged = null;
 		}
 
+			#endregion // OnHostPreviewMouseUp
+
+		#endregion // Host Event Handlers
+
+		#region Private Helpers
+
+			#region CalculateDragElementRect
 
 		/// <summary>
 		/// Returns a Rect which describes the bounds of the element being dragged.
@@ -348,6 +408,9 @@ namespace WPF.JoshSmith.Controls
 			return new Rect( elemLoc, elemSize );
 		}
 
+			#endregion // CalculateDragElementRect
+
+			#region ResolveOffset
 
 		/// <summary>
 		/// Determines one component of a UIElement's location 
@@ -397,6 +460,10 @@ namespace WPF.JoshSmith.Controls
 			return result;
 		}
 
+			#endregion // ResolveOffset
+
+			#region UpdateZOrder
+
 		/// <summary>
 		/// Helper method used by the BringToFront and SendToBack methods.
 		/// </summary>
@@ -408,12 +475,17 @@ namespace WPF.JoshSmith.Controls
 		/// </param>
 		private void UpdateZOrder( UIElement element, bool bringToFront )
 		{
+			#region Safety Check
 
 			if( element == null )
 				throw new ArgumentNullException( "element" );
 
 			if( !base.Children.Contains( element ) )
 				throw new ArgumentException( "Must be a child element of the Canvas.", "element" );
+
+			#endregion // Safety Check
+
+			#region Calculate Z-Indici And Offset
 
 			// Determine the Z-Index for the target UIElement.
 			int elementNewZIndex = -1;
@@ -434,6 +506,10 @@ namespace WPF.JoshSmith.Controls
 
 			int elementCurrentZIndex = Canvas.GetZIndex( element );
 
+			#endregion // Calculate Z-Indici And Offset
+
+			#region Update Z-Indici
+
 			// Update the Z-Index of every UIElement in the Canvas.
 			foreach( UIElement childElement in base.Children )
 			{
@@ -452,6 +528,12 @@ namespace WPF.JoshSmith.Controls
 					}
 				}
 			}
+
+			#endregion // Update Z-Indici
 		}
+
+			#endregion // UpdateZOrder
+
+		#endregion // Private Helpers
 	}
 }

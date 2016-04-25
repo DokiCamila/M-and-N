@@ -38,5 +38,14 @@
         </GuideModel>
       </GuideModels>
     </ProjectItemGuide>
+    <ProjectItemGuide TargetFile="FORMS\CadAgente.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Left" Position="729" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
   </ProjectItemGuides>
 </ProjectGuidesConfiguration>

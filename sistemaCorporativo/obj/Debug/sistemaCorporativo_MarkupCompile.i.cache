@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\App.xaml
-14-1675569689
+17421973956
 
-28681079260
+331924032604
 26289249523
-FORMS\CadAgente.xaml;FORMS\CadDenuncia.xaml;FORMS\CadDenunciaAnon.xaml;FORMS\CadFingerPrints.xaml;FORMS\CadInvestigacao.xaml;FORMS\CadViatura.xaml;FORMS\CortarImagem.xaml;FORMS\gerarLoginWindow.xaml;FORMS\LoginScreen.xaml;FORMS\LogoffSplash.xaml;FORMS\PrincipalScreen.xaml;FORMS\SplashScreen.xaml;FORMS\WebcamWindow.xaml;Resources\Icons.xaml;
+FORMS\CadAgente.xaml;FORMS\CadDenuncia.xaml;FORMS\CadDenunciaAnon.xaml;FORMS\CadFingerPrints.xaml;FORMS\CadInvestigacao.xaml;FORMS\CadViatura.xaml;FORMS\ClassificarFingersPrints.xaml;FORMS\CortarImagem.xaml;FORMS\gerarLoginWindow.xaml;FORMS\LoginScreen.xaml;FORMS\LogoffSplash.xaml;FORMS\PrincipalScreen.xaml;FORMS\SplashScreen.xaml;FORMS\UcImageCropper.xaml;FORMS\visualizarImpressoesDigitais.xaml;FORMS\WebcamWindow.xaml;Resources\Icons.xaml;
 
 False
 

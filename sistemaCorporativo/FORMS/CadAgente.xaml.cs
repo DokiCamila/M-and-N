@@ -40,9 +40,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
     public partial class CadAgente : MetroWindow
     {
         //Ferramenta para cropping
-        CroppingAdorner _clp;
-        FrameworkElement _felCur = null;
-        System.Windows.Media.Brush _brOriginal;
+       
 
         //Bitmap para Foto Perfil (LoadByFolder)
         BitmapImage FotoPerfil;
@@ -58,28 +56,29 @@ namespace sistemaCorporativo.FORMS.cadAgente
         //Criar string com o comando para inserir
         private string SQL_INSERT = "insert into Agente(ID_AGENTE,NOME,SEXO,DATA_NASCIMENTO,RG,"
                      +"CPF,TIPO_SANGUINEO,ETNIA,ESTADO_CIVIL,CEP,LOGRADOURO,NUMERO,COMPLEMENTO,BAIRRO,"
-                     + "CIDADE,UF,FOTOAGENTE,IMPRESSAOAGENTE, ID_CARGO,  STATUS, ADMINISTRADOR) values (seq_agente.NEXTVAL,:nome,:sexo,:data_nascimento,"
+                     + "CIDADE,UF,FOTOAGENTE, ID_CARGO,  STATUS, ADMINISTRADOR) values (seq_agente.NEXTVAL,:nome,:sexo,:data_nascimento,"
                      +":rg,:cpf,:tipo_sanguineo,:etnia,:estado_civil,:cep,:logradouro,:numero,:complemento,"
-                     +":bairro,:cidade,:uf,:fotoagente,:impressaoagente, :cargo, '1','0')";
+                     +":bairro,:cidade,:uf,:fotoagente,:cargo, '1','0')";
         //Criar string com o comando para listar
         private string SQL_SELECT_ALL = "select id_Agente, nome, sexo, data_Nascimento,rg, cpf,tipo_Sanguineo, etnia, estado_Civil, cep, logradouro, numero, complemento, bairro, cidade, uf, fotoAgente from agente where status = 1 and administrador = 0";
+        //Criar string para o comando de inserir impressões digitais
+        private string SQL_INSERT_FINGER = "insert into ID(id_IdDact,id_Agente,pol_D,ind_D,med_D,anu_D,min_D,pol_E,ind_E,med_E,anu_E,min_E,ficha_Dact,status)" 
+                                          +"values(seq_Id.NEXTVAL,:id,:polD,:indD,:medD,:anuD,:minD,:polE,:indE,:medE,:anuE,:minE,:fichaDact, 1)";
+        //TAKE THE LAST REGISTRY ON DB
+        private string SQL_TAKELAST = "SELECT * FROM AGENTE WHERE id_agente = ( SELECT MAX(id_agente) FROM agente ) and status = 1";
         //Criar Variável para edições(atualizações) e exclusões;
         public string id;
         //Criar string (sem o comando) para deletar
         private string SQL_DELETE;
         private string SQL_UPDATE_LOGIN;
+        private string SQL_UPDATE_TODEL_ID;
         //Criar string (sem o comando) para atualizar
         private string SQL_UPDATE;
+        //Criar string (sem o comando) para atualizar as impressões 
+        private string SQL_UPDATE_FINGER;
         //Criar obj com variaveis da classe PhotoAndFinger
-        //Criar string para a foto e a impressão
+        //Criar string para a foto
         private string destinationPathFoto;
-        private string destinationPathFinger;
-        //Criar string para name foto e finger
-        private string namefoto;
-        private string namefinger;
-        //Criar string para patch da Foto e da finger 
-        private string fingerpath;
-        private string imagepath;
         //Criar boolean para checar se foi upado uma finger
         public Boolean FingerInserido = false;
         public Boolean fotoInserida = false;
@@ -95,12 +94,36 @@ namespace sistemaCorporativo.FORMS.cadAgente
         //Boolean para checar se a impressao e a foto foi alterada na atualização
         public Boolean alterFinger = false;
         public Boolean alterPhoto = false;
-        //Variável id para gerar Login's
+        //Variável id para gerar Logins (UNÍCA)
         public string idAgente;
         //Cropped Bitmap para a foto do Agente
         CroppedBitmap fotoPerfil = new CroppedBitmap(); 
         //endereço banco
         databaseAddress db = new databaseAddress();
+
+        //FINGERPRINTS
+        //Imagem da ID 
+        public BitmapImage polD, polE;
+        public BitmapImage IndD, IndE;
+        public BitmapImage MedD, MedE;
+        public BitmapImage AnuD, AnuE;
+        public BitmapImage MinD, MinE;
+        //Path das imagens
+        public string pathPolD, pathPolE;
+        public string pathIndD, pathIndE;
+        public string pathMedD, pathMedE;
+        public string pathAnuD, pathAnuE;
+        public string pathMinD, pathMinE;
+
+        //Grupo da ID
+        public string grupoPolD, grupoPolE;
+        public string grupoIndD, grupoIndE;
+        public string grupoMedD, grupoMedE;
+        public string grupoAnuD, grupoAnuE;
+        public string grupoMinD, grupoMinE;
+        public string IdentificacaoDac;
+
+       
 
 
  
@@ -196,12 +219,9 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
             //Variaveis de Foto e Digital nao podem ser nulas
             destinationPathFoto = "pack://application:,,,/IMAGES/User_Profile.png";
-            destinationPathFinger = "pack://application:,,,/IMAGES/Finger_Print.png";
+
             // Variaveis para o padrão
-            namefoto = "";
-            namefinger = "";
-            fingerpath = "";
-            imagepath = "";
+            
             FingerInserido = false;
             fotoInserida = false;
             Armamento = false;
@@ -219,6 +239,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
             cnvPhoto.IsEnabled = true;
             cnvPhoto.Visibility = Visibility.Visible;
 
+
         }
 
         public void btnCarregarDigital_Click(object sender, RoutedEventArgs e)
@@ -226,8 +247,8 @@ namespace sistemaCorporativo.FORMS.cadAgente
             try
             {
 				
-                CadFingerPrints cadFinger = new CadFingerPrints();
-				cadFinger.Show();
+                CadFingerPrints cadFinger = new CadFingerPrints(this);
+				cadFinger.ShowDialog();
                 
                 
                 //alterFinger = true;
@@ -246,7 +267,11 @@ namespace sistemaCorporativo.FORMS.cadAgente
             imgFoto.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/User_Profile.png"));
             destinationPathFoto = "pack://application:,,,/IMAGES/User_Profile.png";
             fotoInserida = false;
-           
+            //Caso exclua uma foto de um agente que ja esta no banco de dados
+            if (id != null)
+            {
+                alterPhoto = true;
+            }
           
         }
 
@@ -254,7 +279,6 @@ namespace sistemaCorporativo.FORMS.cadAgente
         {
             //Voltar ao padrão da digital
             imgDigital.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/Finger_Print.png"));
-            destinationPathFinger = "pack://application:,,,/IMAGES/Finger_Print.png";
             FingerInserido = false;
 
         }
@@ -333,6 +357,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                     }
                                                     else
                                                     {
+
                                                         //Checar se a impressão foi inserida (OBRIGATORIO)
                                                         if (FingerInserido == false)
                                                         {
@@ -342,7 +367,10 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                         {
                                                             if (id == null)
                                                             {
+                                                                #region C-A-D-A-S-T-R-A-R
                                                                 //C-A-D-A-S-T-R-A-R
+
+                                                                #region CADASTRAR FOTO
                                                                 //--FotoPerfil
                                                                 //Checar se foi upado uma Foto
                                                                 if (fotoInserida == true)
@@ -375,21 +403,9 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
                                                                     //GO TO THE DATABASE
                                                                     destinationPathFoto = (pathToDataBase + @"\" + path);
-                                                                  
-                                                                }
 
-                                                                //--IMPRESSÃODIGITAL
-                                                                //Criar a pasta para armazenar a impressão
-                                                                //Pegar o folder da aplicação
-                                                                ///Obs O IF DO FINGERPRINT INSERIDO Ñ ESTÁ AQUI POR QUE ELE JA PASSOU NO PENULTIMO IF
-                                                                var applicationPathF = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                                                                var dirf = new System.IO.DirectoryInfo(System.IO.Path.Combine(applicationPathF, "FingerPrints"));
-                                                                if (!dirf.Exists)
-                                                                    dirf.Create();
-                                                                //Copiar para o diretório do sistema
-                                                                namefinger = System.IO.Path.GetFileName(fingerpath);
-                                                                destinationPathFinger = GetDestinationPath(namefinger, "FingerPrints");
-                                                                File.Copy(fingerpath, destinationPathFinger, true);
+                                                                }
+                                                                #endregion
 
                                                                 //Acessar a classe TO 
                                                                 Agente objAgente = new Agente();
@@ -419,7 +435,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                 objAgente.setCidade(txtCidade.Text);
                                                                 objAgente.setuf(cmbUf.Text);
                                                                 objAgente.setFoto(destinationPathFoto);
-                                                                objAgente.setimpressaodigital(destinationPathFinger);
+                                                            
 
                                                                 //Criando Conexão Com o banco de dados
                                                                 OracleConnection Oracon = new OracleConnection(db.oradb);
@@ -445,8 +461,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                     insertCommand.Parameters.Add("bairro", objAgente.getBairro());
                                                                     insertCommand.Parameters.Add("cidade", objAgente.getCidade());
                                                                     insertCommand.Parameters.Add("uf", objAgente.getuf());
-                                                                    insertCommand.Parameters.Add("fotoagente", objAgente.getFoto());
-                                                                    insertCommand.Parameters.Add("impressaoagente", objAgente.getimpressaDigital());
+                                                                    insertCommand.Parameters.Add("fotoagente", objAgente.getFoto()); 
 
                                                                     string cargo = cmbCargo.Text;
                                                                     switch (cargo)
@@ -467,10 +482,133 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                             await this.ShowMessageAsync("Aviso", "Cargo Inválido!");   
                                                                             break;
                                                                     }
-                                                                    
+                                                                    insertCommand.ExecuteNonQuery();
+
                                                                     //ESSE CAMPO ABAIXO NÃO É OBRIGATÓRIO POIS SERÁ PREENCHIDO AUTOMATICAMENTE
                                                                     //insertCommand.Parameters.Add("status", objAgente.getStatus());
-                                                                    insertCommand.ExecuteNonQuery();
+
+                                                                    //Executando código para pegar o ID do ultimo registro no banco de dados
+
+                                                                    OracleCommand cmdTakeLast = new OracleCommand(SQL_TAKELAST, Oracon);
+                                                                    OracleDataReader tl = cmdTakeLast.ExecuteReader();
+                                                                    tl.Read();
+
+                                                                    int lastId = Convert.ToInt32(tl[0].ToString());
+
+                                                                    #region CADASTRAR IMPRESSÃO
+                                                                    //Criar Diretório onde serão armazenadas as impressões Digitals
+                                                                    string subPathFinger = "ImagesData";
+                                                                    string pathfinger = System.IO.Path.Combine(subPathFinger, "FingerPrints");
+                                                                    bool fingerexists = System.IO.Directory.Exists(pathfinger);
+
+                                                                    if (!fingerexists)
+                                                                        System.IO.Directory.CreateDirectory(pathfinger);
+
+                                                                    //Pegar o path Bin
+                                                                    string fingerpathToDataBase;
+                                                                    fingerpathToDataBase = System.IO.Path.GetDirectoryName(
+                                                                    System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+                                                                    //LOOP PARA SALVAR AS IMPRESSÕES DIGITAIS  
+                                                                    for (int dedo = 1; dedo <= 10; dedo++)
+                                                                    {
+                                                                        //Nome
+                                                                        string fileName = (lastId.ToString() + "-" + dedo.ToString() + ".png");
+                                                                        //Caminho
+                                                                        pathfinger = null;                                                                
+                                                                        pathfinger = System.IO.Path.Combine(subPathFinger, "FingerPrints");
+                                                                        pathfinger = System.IO.Path.Combine(pathfinger, fileName);
+
+                                                                        /*//Delete the current finger 
+                                                                        if (File.Exists(pathfinger))
+                                                                        {
+                                                                            File.Delete(pathfinger);
+                                                                        }*/
+
+                                                                        switch (dedo)
+                                                                        {
+                                                                            case 1:      
+                                                                                saveFinger(pathfinger, polD);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathPolD = (fingerpathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                            case 2:
+                                                                                saveFinger(pathfinger, IndD);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathIndD = (fingerpathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                            case 3:
+                                                                                saveFinger(pathfinger, MedD);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathMedD = (fingerpathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                            case 4:
+                                                                                saveFinger(pathfinger, AnuD);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathAnuD = (fingerpathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                            case 5:
+                                                                                saveFinger(pathfinger, MinD);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathMinD = (fingerpathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                            case 6:
+                                                                                saveFinger(pathfinger, polE);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathPolE = (fingerpathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                            case 7:
+                                                                                saveFinger(pathfinger, IndE);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathIndE = (fingerpathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                            case 8:
+                                                                                saveFinger(pathfinger, MedE);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathMedE = (fingerpathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                            case 9:
+                                                                                saveFinger(pathfinger, AnuE);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathAnuE = (fingerpathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                            case 10:
+                                                                                saveFinger(pathfinger, MinE);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathMinE = (fingerpathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                        }
+
+                                                                    }
+
+                                                                    #endregion
+
+                                                                    #region CADASTRANDO IMPRESSÃO
+                                                                    //EXECUTANDO CÓDIGO PARA INSERIR AS IMPRESSÕES
+                                                                    OracleCommand insertFingerCommand = new OracleCommand(SQL_INSERT_FINGER, Oracon);
+                                                                    insertFingerCommand.Parameters.Add(":id", lastId);
+                                                                    insertFingerCommand.Parameters.Add(":polD", pathPolD);
+                                                                    insertFingerCommand.Parameters.Add(":indD", pathIndD);
+                                                                    insertFingerCommand.Parameters.Add(":medD", pathMedD);
+                                                                    insertFingerCommand.Parameters.Add(":anuD", pathAnuD);
+                                                                    insertFingerCommand.Parameters.Add(":minD", pathMinD);
+                                                                    insertFingerCommand.Parameters.Add(":polE", pathPolE);
+                                                                    insertFingerCommand.Parameters.Add(":indE", pathIndE);
+                                                                    insertFingerCommand.Parameters.Add(":medE", pathMedE);
+                                                                    insertFingerCommand.Parameters.Add(":anuE", pathAnuE);
+                                                                    insertFingerCommand.Parameters.Add(":minE", pathMinE);
+                                                                    insertFingerCommand.Parameters.Add(":fichaDact", IdentificacaoDac);
+                                                                    insertFingerCommand.ExecuteNonQuery();
+                                                                    #endregion
 
 
                                                                     //Fechar conexão com o banco de dados
@@ -485,14 +623,18 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                     System.Windows.MessageBox.Show(orclEx.Message);
                                                                 }
 
+                                                                #endregion
+
                                                             }
                                                             else
                                                             {
+                                                                #region A-T-U-A-L-I-Z-A-R
                                                                 //A-T-U-A-L-I-Z-A-R
                                                                 //--FotoPerfil
                                                                 //Checar Foto (alteração)
                                                                 if (alterPhoto == true)
                                                                 {
+                                                                   
                                                             
                                                                     fotoPerfil = imgFoto.Source as CroppedBitmap;
                                                                     //Criar Diretório onde serão armazenadas as fotos de perfis
@@ -503,10 +645,17 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                     if (!exists)
                                                                         System.IO.Directory.CreateDirectory(path);
 
+
                                                                     //Nome
                                                                     string fileName = (id.ToString()+".png");
                                                                     //Combinar
                                                                     path = System.IO.Path.Combine(path, fileName);
+
+                                                                    //Delete the current profile picture
+                                                                    if (File.Exists(path))
+                                                                    {
+                                                                        File.Delete(path);
+                                                                    } 
 
                                                                     using (System.IO.FileStream stream = System.IO.File.Create(path))
                                                                     {
@@ -528,23 +677,130 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                 //Checar digital (alteração)
                                                                 if (alterFinger == true)
                                                                 {
-                                                                    //--IMPRESSÃODIGITAL
-                                                                    //Criar a pasta para armazenar a impressão
-                                                                    //Pegar o folder da aplicação
-                                                                    var applicationPathF = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                                                                    var dirf = new System.IO.DirectoryInfo(System.IO.Path.Combine(applicationPathF, "FingerPrints"));
-                                                                    if (!dirf.Exists)
-                                                                        dirf.Create();
-                                                                    //Copiar para o diretório do sistema
-                                                                    namefinger = System.IO.Path.GetFileName(fingerpath);
-                                                                    destinationPathFinger = GetDestinationPath(namefinger, "FingerPrints");
-                                                                    File.Copy(fingerpath, destinationPathFinger, true);
+                                                                    #region ATUALIZAR IMPRESSÃO DIGITAL
+                                                                    //Criar Diretório onde serão armazenadas as impressões Digitals
+                                                                    string subPath = "ImagesData";
+                                                                    string pathfinger = System.IO.Path.Combine(subPath, "FingerPrints");
+                                                                    bool exists = System.IO.Directory.Exists(pathfinger);
+
+                                                                    if (!exists)
+                                                                        System.IO.Directory.CreateDirectory(pathfinger);
+
+                                                                    //Pegar o path Bin
+                                                                    string pathToDataBase;
+                                                                    pathToDataBase = System.IO.Path.GetDirectoryName(
+                                                                    System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+                                                                    //LOOP PARA SALVAR AS IMPRESSÕES DIGITAIS  
+                                                                    for (int dedo = 1; dedo <= 10; dedo++)
+                                                                    {
+                                                                        //Nome
+                                                                        string fileName = (id.ToString() +"-"+ dedo.ToString() + ".png");
+
+                                                                        pathfinger = null;
+                                                                        pathfinger = System.IO.Path.Combine(subPath, "FingerPrints");
+                                                                        pathfinger = System.IO.Path.Combine(pathfinger, fileName);
+                     
+                                                                        //Delete the current finger 
+                                                                        if (File.Exists(pathfinger))
+                                                                        {
+                                                                            File.Delete(pathfinger);
+                                                                        }
+
+                                                                        switch (dedo)
+                                                                        {
+                                                                           case 1:
+                                                                                saveFinger(pathfinger, polD);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathPolD = (pathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                           case 2:
+                                                                                saveFinger(pathfinger, IndD);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathIndD = (pathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                           case 3:
+                                                                                saveFinger(pathfinger, MedD);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathMedD = (pathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                           case 4:
+                                                                                saveFinger(pathfinger, AnuD);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathAnuD = (pathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                           case 5:
+                                                                                saveFinger(pathfinger, MinD);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathMinD = (pathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                           case 6:
+                                                                                saveFinger(pathfinger, polE);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathPolE = (pathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                           case 7:
+                                                                                saveFinger(pathfinger, IndE);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathIndE = (pathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                           case 8:
+                                                                                saveFinger(pathfinger, MedE);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathMedE = (pathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                           case 9:
+                                                                                saveFinger(pathfinger, AnuE);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathAnuE = (pathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                           case 10:
+                                                                                saveFinger(pathfinger, MinE);
+
+                                                                                //GO TO THE DATABASE
+                                                                                pathMinE = (pathToDataBase + @"\" + pathfinger);
+                                                                                break;
+                                                                        }
+
+                                                                    }
 
                                                                 }
+                                                                    #endregion
 
-                                                                
                                                                 //Checar se foi upado uma Foto
                                                                 SQL_UPDATE = "update agente set NOME = :nome, SEXO = :sexo, DATA_NASCIMENTO = :data_nascimento, RG = :rg, CPF = :cpf, TIPO_SANGUINEO = :tipo_sanguineo, ETNIA = :etnia, ESTADO_CIVIL = :estado_civil, CEP = :cep, LOGRADOURO = :logradouro, NUMERO = :numero, COMPLEMENTO = :complemento, BAIRRO = :bairro, CIDADE = :cidade, UF = :uf, FOTOAGENTE = :fotoagente, IMPRESSAOAGENTE = :impressaoagente, ID_CARGO = :cargo where id_Agente=" + id;
+
+                                                                SQL_UPDATE_FINGER = "UPDATE ID set pol_D = :polD, ind_D = :indD, med_D = :medD, anu_D = :anuD, min_D = : minD, pol_E = :polE, ind_E = :indE, med_E = :medE, anu_E = :anuE, min_E = :minE, ficha_Dact = :fichaDact where id_Agente = '" + id + "'";
+                                                                OracleConnection Oracon = new OracleConnection(db.oradb);
+
+                                                                //Abrir conexão com o banco de dados e inserir dados digitados
+                                                                Oracon.Open();
+
+                                                                #region ATUALIZANDO IMPRESSÃO
+                                                                //EXECUTANDO CÓDIGO PARA INSERIR AS IMPRESSÕES
+                                                                OracleCommand updateFingerCommand = new OracleCommand(SQL_UPDATE_FINGER, Oracon);
+                                                                updateFingerCommand.Parameters.Add(":polD", pathPolD);
+                                                                updateFingerCommand.Parameters.Add(":indD", pathIndD);
+                                                                updateFingerCommand.Parameters.Add(":medD", pathMedD);
+                                                                updateFingerCommand.Parameters.Add(":anuD", pathAnuD);
+                                                                updateFingerCommand.Parameters.Add(":minD", pathMinD);
+                                                                updateFingerCommand.Parameters.Add(":polE", pathPolE);
+                                                                updateFingerCommand.Parameters.Add(":indE", pathIndE);
+                                                                updateFingerCommand.Parameters.Add(":medE", pathMedE);
+                                                                updateFingerCommand.Parameters.Add(":anuE", pathAnuE);
+                                                                updateFingerCommand.Parameters.Add(":minE", pathMinE);
+                                                                updateFingerCommand.Parameters.Add(":fichaDact", IdentificacaoDac);
+                                                                updateFingerCommand.ExecuteNonQuery();
+                                                                #endregion
+
 
                                                                 //Acessar a classe TO 
                                                                 Agente objAgente = new Agente();
@@ -574,16 +830,12 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                 objAgente.setCidade(txtCidade.Text);
                                                                 objAgente.setuf(cmbUf.Text);
                                                                 objAgente.setFoto(destinationPathFoto.ToString());
-                                                                objAgente.setimpressaodigital(destinationPathFinger.ToString());
-
-                                                                //Criando Conexão Com o banco de dados
-                                                                OracleConnection Oracon = new OracleConnection(db.oradb);
 
                                                                 //Ações 
                                                                 try
                                                                 {
-                                                                    //Abrir conexão com o banco de dados e inserir dados digitados
-                                                                    Oracon.Open();
+                                                                    //ATUALIZANDO AGENTE
+
                                                                     OracleCommand insertCommand = new OracleCommand(SQL_UPDATE, Oracon);
                                                                     insertCommand.Parameters.Add("nome", objAgente.getNome());
                                                                     insertCommand.Parameters.Add("sexo", objAgente.getSexo());
@@ -601,7 +853,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                     insertCommand.Parameters.Add("cidade", objAgente.getCidade());
                                                                     insertCommand.Parameters.Add("uf", objAgente.getuf());
                                                                     insertCommand.Parameters.Add("fotoagente", objAgente.getFoto());
-                                                                    insertCommand.Parameters.Add("impressaoagente", objAgente.getimpressaDigital());
+                                                                  
 
                                                                     string cargo = cmbCargo.Text;
                                                                     switch (cargo)
@@ -622,6 +874,8 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                             await this.ShowMessageAsync("Aviso", "Cargo Inválido!");
                                                                             break;
                                                                     }
+
+                                                                    //ATUALIZANDO IMPRESSÕES AGENTE;
                                                                     
                                                                     
 
@@ -641,6 +895,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                 {
                                                                     System.Windows.MessageBox.Show(orclEx.Message);
                                                                 }
+                                                                #endregion
                                                             }
 
                                                         }
@@ -673,6 +928,15 @@ namespace sistemaCorporativo.FORMS.cadAgente
            
         }
 
+        private void saveFinger(string path, BitmapImage image)
+         {
+             System.IO.FileStream stream = System.IO.File.Create(path);
+                                                                    
+             //Guardando o valor do image control no Bitmap FotoPerfil        
+             PngBitmapEncoder encoder = new PngBitmapEncoder();
+             encoder.Frames.Add(BitmapFrame.Create(image));
+             encoder.Save(stream);
+        }
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -755,7 +1019,6 @@ namespace sistemaCorporativo.FORMS.cadAgente
             destinationPathFoto = "pack://application:,,,/IMAGES/User_Profile.png";
             fotoInserida = false;
             imgDigital.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/Finger_Print.png"));
-            destinationPathFinger = "pack://application:,,,/IMAGES/Finger_Print.png";
             FingerInserido = false;
 
             txtRegistro.Text = "";
@@ -797,14 +1060,20 @@ namespace sistemaCorporativo.FORMS.cadAgente
                         id = (dgvConteudo.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
                         id.ToString();
 
+
                         //executando comando usando o ID como base para "apagar" um item
                         SQL_DELETE = "update agente set status = 0 where ID_AGENTE=" + id;
+                        //"apagando" o Login do agente
                         SQL_UPDATE_LOGIN = "update login_Agente set status = 0 where ID_AGENTE ="+id;
+                        //"apagando" as impressões digitais do agente
+                        SQL_UPDATE_TODEL_ID = "update id set status = 0 where ID_AGENTE =" + id;
 
                         OracleCommand deleteCommand = new OracleCommand(SQL_DELETE, Oracon);
                         OracleCommand updateLogin = new OracleCommand(SQL_UPDATE_LOGIN, Oracon);
+                        OracleCommand updateId = new OracleCommand(SQL_UPDATE_TODEL_ID, Oracon);
                         deleteCommand.ExecuteNonQuery();
                         updateLogin.ExecuteNonQuery();
+                        updateId.ExecuteNonQuery();
 
                         //Fechar conexão com o banco de dados
                         Oracon.Close();

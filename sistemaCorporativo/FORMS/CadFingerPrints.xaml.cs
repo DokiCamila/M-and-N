@@ -14,6 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Behaviours;
 using MahApps.Metro.Controls.Dialogs;
+using System.IO;
+using sistemaCorporativo.FORMS.cadAgente;
+using System.Windows.Media.Animation;
 
 
 
@@ -25,24 +28,47 @@ namespace sistemaCorporativo.FORMS
     public partial class CadFingerPrints : MetroWindow
     {
         
-        
-        //Boolean Nothing
-        Boolean nothing = true;
-        
         //Dedos da mão
-        private int dedos = 0;
+        public int dedos = 0;
+        Boolean documento = false;
 
-        private bool isDragging = false;
-        private Point anchorPoint = new Point();
-
-        public CadFingerPrints()
+        //Instanciar
+        CadAgente cad;
+        public CadFingerPrints(CadAgente info)
         {
             InitializeComponent();
-
-            cnvDocumento.MouseLeftButtonDown += new MouseButtonEventHandler(imgDocumento_MouseLeftButtonDown);
-            cnvDocumento.MouseMove += new MouseEventHandler(imgDocumento_MouseMove);
-            cnvDocumento.MouseLeftButtonUp += new MouseButtonEventHandler(imgDocumento_MouseLeftButtonUp);
+            cad = info;
         }
+
+        //Imagem da ID (same as the CadAgente)
+        public BitmapSource polD, polE;
+        public BitmapSource IndD, IndE;
+        public BitmapSource MedD, MedE;
+        public BitmapSource AnuD, AnuE;
+        public BitmapSource MinD, MinE;
+
+        //Grupo da ID (same as the CadAgente)
+        public string grupoPolD, grupoPolE;
+        public string grupoIndD, grupoIndE;
+        public string grupoMedD, grupoMedE;
+        public string grupoAnuD, grupoAnuE;
+        public string grupoMinD, grupoMinE;
+        public string ID;
+
+        //Boolean que checa se foi selecionado alguma ID para inserir
+        Boolean Passed;
+
+        //Booleans para checar se existe impressao no controle Imagem
+        public Boolean hasimage1 = false;
+        public Boolean hasimage2 = false;
+        public Boolean hasimage3 = false;
+        public Boolean hasimage4 = false;
+        public Boolean hasimage5 = false;
+        public Boolean hasimage6 = false;
+        public Boolean hasimage7 = false;
+        public Boolean hasimage8 = false;
+        public Boolean hasimage9 = false;
+        public Boolean hasimage10 = false;
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -61,6 +87,14 @@ namespace sistemaCorporativo.FORMS
             rdbMedE.IsChecked = false;
             rdbAnuE.IsChecked = false;
             rdbMinE.IsChecked = false;
+            if (hasimage1)
+            {
+                btnClassificar.IsEnabled = true;
+            }
+            else
+            {
+                btnClassificar.IsEnabled = false;
+            }
         }
 
         private void rdbIndD_Checked(object sender, RoutedEventArgs e)
@@ -75,6 +109,14 @@ namespace sistemaCorporativo.FORMS
             rdbMedE.IsChecked = false;
             rdbAnuE.IsChecked = false;
             rdbMinE.IsChecked = false;
+            if (hasimage2)
+            {
+                btnClassificar.IsEnabled = true;
+            }
+            else
+            {
+                btnClassificar.IsEnabled = false;
+            }
         }
 
         private void rdbMedD_Checked(object sender, RoutedEventArgs e)
@@ -89,6 +131,14 @@ namespace sistemaCorporativo.FORMS
             rdbMedE.IsChecked = false;
             rdbAnuE.IsChecked = false;
             rdbMinE.IsChecked = false;
+            if (hasimage3)
+            {
+                btnClassificar.IsEnabled = true;
+            }
+            else
+            {
+                btnClassificar.IsEnabled = false;
+            }
         }
 
         private void rdbAnuD_Checked(object sender, RoutedEventArgs e)
@@ -103,6 +153,14 @@ namespace sistemaCorporativo.FORMS
             rdbMedE.IsChecked = false;
             rdbAnuE.IsChecked = false;
             rdbMinE.IsChecked = false;
+            if (hasimage4)
+            {
+                btnClassificar.IsEnabled = true;
+            }
+            else
+            {
+                btnClassificar.IsEnabled = false;
+            }
         }
 
         private void rdbMinD_Checked(object sender, RoutedEventArgs e)
@@ -117,6 +175,14 @@ namespace sistemaCorporativo.FORMS
             rdbMedE.IsChecked = false;
             rdbAnuE.IsChecked = false;
             rdbMinE.IsChecked = false;
+            if (hasimage5)
+            {
+                btnClassificar.IsEnabled = true;
+            }
+            else
+            {
+                btnClassificar.IsEnabled = false;
+            }
         }
 
         private void rdbPolE_Checked(object sender, RoutedEventArgs e)
@@ -131,6 +197,14 @@ namespace sistemaCorporativo.FORMS
             rdbMedE.IsChecked = false;
             rdbAnuE.IsChecked = false;
             rdbMinE.IsChecked = false;
+            if (hasimage6)
+            {
+                btnClassificar.IsEnabled = true;
+            }
+            else
+            {
+                btnClassificar.IsEnabled = false;
+            }
         }
 
         private void rdbIndE_Checked(object sender, RoutedEventArgs e)
@@ -145,6 +219,14 @@ namespace sistemaCorporativo.FORMS
             rdbMedE.IsChecked = false;
             rdbAnuE.IsChecked = false;
             rdbMinE.IsChecked = false;
+            if (hasimage7)
+            {
+                btnClassificar.IsEnabled = true;
+            }
+            else
+            {
+                btnClassificar.IsEnabled = false;
+            }
         }
 
         private void rdbMedE_Checked(object sender, RoutedEventArgs e)
@@ -159,6 +241,14 @@ namespace sistemaCorporativo.FORMS
             rdbPolD.IsChecked = false;
             rdbAnuE.IsChecked = false;
             rdbMinE.IsChecked = false;
+            if (hasimage8)
+            {
+                btnClassificar.IsEnabled = true;
+            }
+            else
+            {
+                btnClassificar.IsEnabled = false;
+            }
         }
 
         private void rdbAnuE_Checked(object sender, RoutedEventArgs e)
@@ -173,6 +263,14 @@ namespace sistemaCorporativo.FORMS
             rdbMedE.IsChecked = false;
             rdbPolD.IsChecked = false;
             rdbMinE.IsChecked = false;
+            if (hasimage9)
+            {
+                btnClassificar.IsEnabled = true;
+            }
+            else
+            {
+                btnClassificar.IsEnabled = false;
+            }
         }
 
         private void rdbMinE_Checked(object sender, RoutedEventArgs e)
@@ -187,161 +285,179 @@ namespace sistemaCorporativo.FORMS
             rdbMedE.IsChecked = false;
             rdbAnuE.IsChecked = false;
             rdbPolD.IsChecked = false;
+            if (hasimage10)
+            {
+                btnClassificar.IsEnabled = true;
+            }
+            else
+            {
+                btnClassificar.IsEnabled = false;
+            }
         }
 
 
         private void itmAbrirDoc_Click(object sender, RoutedEventArgs e)
         {
-                Microsoft.Win32.OpenFileDialog op = new Microsoft.Win32.OpenFileDialog();
-                op.Title = "Selecione uma impressão digital!";
-                op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-                  "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-                  "Portable Network Graphic (*.png)|*.png";
-                if (op.ShowDialog() == true)
-                {
-                    //Receber Documento
-                    imgDocumento.Source = new BitmapImage(new Uri(op.FileName));
-                    cnvDocumento.Cursor = Cursors.Cross;
-                    nothing = false;
-
-                }
-        }
-
-        private void btnRemoverDoc_Click(object sender, RoutedEventArgs e)
-        {
-            imgDocumento.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/nothing.png"));
-            cnvDocumento.Cursor = Cursors.Arrow;
-            nothing = true;
-        }
-
-        private void imgDocumento_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (nothing == false)
+            System.Windows.Forms.OpenFileDialog ofd = new System.Windows.Forms.OpenFileDialog();
+            ofd.Filter = "Images|*.png;*.jpg;*.jpeg;*.bmp;*.gif";
+            List<string> allowableFileTypes = new List<string>();
+            allowableFileTypes.AddRange(new string[] { ".png", ".jpg", ".jpeg", ".bmp", ".gif" });
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (isDragging == false)
+                if (!ofd.FileName.Equals(String.Empty))
                 {
-                    anchorPoint.X = e.GetPosition(BackPanel).X;
-                    anchorPoint.Y = e.GetPosition(BackPanel).Y;
-                    isDragging = true;
+                    FileInfo f = new FileInfo(ofd.FileName);
+                    if (allowableFileTypes.Contains(f.Extension.ToLower()))
+                    {
+                        this.UcImageCropper.ImageUrl = f.FullName;
+                        documento = true;
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tipo de arquivo inválido");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Você precisa selecionar uma foto do documento para continuar");
                 }
             }
-            
         }
 
-        private void imgDocumento_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isDragging)
-            {
-                double x = e.GetPosition(BackPanel).X;
-                double y = e.GetPosition(BackPanel).Y;
-                selectionRectangle.SetValue(Canvas.LeftProperty, Math.Min(x, anchorPoint.X));
-                selectionRectangle.SetValue(Canvas.TopProperty, Math.Min(y, anchorPoint.Y));
-                selectionRectangle.Width = Math.Abs(x - anchorPoint.X);
-                selectionRectangle.Height = Math.Abs(y - anchorPoint.Y);
-
-                if (selectionRectangle.Visibility != Visibility.Visible)
-                    selectionRectangle.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void imgDocumento_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (isDragging)
-            {
-                isDragging = false;
-                if (selectionRectangle.Width > 0)
-                {
-                   //Botao Liberado
-                }
-                if (selectionRectangle.Visibility != Visibility.Visible)
-                    selectionRectangle.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void RestRect()
-        {
-            selectionRectangle.Visibility = Visibility.Collapsed;
-            isDragging = false;
-        }
 
         private async void btnInserir_Click(object sender, RoutedEventArgs e)
         {
-            if (imgDocumento.Source != null && selectionRectangle.Visibility == Visibility.Visible)
+            
+            if (documento)
             {
-                switch (dedos)
-                {
-                    case 1:
-                        inserirImpressao(imgPolD);
-                        rdbIndD.IsChecked = true;
-                        break;
-                    case 2:
-                        inserirImpressao(imgIndD);
-                        rdbMedD.IsChecked = true;
-                        break;
-                    case 3:
-                        inserirImpressao(imgMedD);
-                        rdbAnuD.IsChecked = true;
-                        break;
-                    case 4:
-                        inserirImpressao(imgAnuD);
-                        rdbMinD.IsChecked = true;
-                        break;
-                    case 5:
-                        inserirImpressao(imgMinD);
-                        rdbPolE.IsChecked = true;
-                        break;
-                    case 6:
-                        inserirImpressao(imgPolE);
-                        rdbIndE.IsChecked = true;
-                        break;
-                    case 7:
-                        inserirImpressao(imgIndE);
-                        rdbMedE.IsChecked = true;
-                        break;
-                    case 8:
-                        inserirImpressao(imgMedE);
-                        rdbAnuE.IsChecked = true;
-                        break;
-                    case 9:
-                        inserirImpressao(imgAnuE);
-                        rdbMinE.IsChecked = true;
-                        break;
-                    case 10:
-                        inserirImpressao(imgMinE);
-                        break;
-                    default:
-                        await this.ShowMessageAsync("Aviso", "Selecione um dedo!");
-                        break;
-                }
-                RestRect();
-
+                        switch (dedos)
+                        {
+                            case 1:
+                                inserirImpressao(imgPolD, polD);
+                                if (Passed == true)
+	                               {
+                                      hasimage1 = true;
+		                              rdbIndD.IsChecked = true;
+	                               }
+                                
+                                break;
+                            case 2:
+                                inserirImpressao(imgIndD, IndD);
+                                if (Passed == true)
+	                               {
+                                      hasimage2 = true;
+		                              rdbMedD.IsChecked = true;
+	                               }
+                                break;
+                            case 3:
+                                inserirImpressao(imgMedD, MedD);
+                                if (Passed == true)
+	                               {
+                                      hasimage3 = true;
+		                              rdbAnuD.IsChecked = true;
+	                               }
+                               
+                                break;
+                            case 4:
+                                inserirImpressao(imgAnuD, AnuD);
+                                if (Passed == true)
+	                               {
+                                      hasimage4 = true;
+		                              rdbMinD.IsChecked = true;
+	                               }
+                                
+                                break;
+                            case 5:
+                                inserirImpressao(imgMinD, MinD);
+                                if (Passed == true)
+	                               {
+                                      hasimage5 = true;
+		                              rdbPolE.IsChecked = true;
+	                               }
+                                
+                                break;
+                            case 6:
+                                inserirImpressao(imgPolE, polE);
+                                if (Passed == true)
+	                               {
+                                      hasimage6 = true;
+		                              rdbIndE.IsChecked = true;
+	                               }
+                                
+                                break;
+                            case 7:
+                                inserirImpressao(imgIndE, IndE);
+                                if (Passed == true)
+	                               {
+                                      hasimage7 = true;
+		                              rdbMedE.IsChecked = true;
+	                               }                           
+                                break;
+                            case 8:
+                                inserirImpressao(imgMedE, MedE);
+                                if (Passed == true)
+	                               {
+                                      hasimage8 = true;
+		                              rdbAnuE.IsChecked = true;
+	                               } 
+                               
+                                break;
+                            case 9:
+                                inserirImpressao(imgAnuE, AnuE);
+                                if (Passed == true)
+	                               {
+                                      hasimage9 = true;
+		                              rdbMinE.IsChecked = true;
+	                               } 
+                                
+                                break;
+                            case 10:
+                                inserirImpressao(imgMinE, MinE);
+                                if (Passed == true)
+	                               {
+                                      hasimage10 = true;
+		                              rdbPolD.IsChecked = true;
+	                               } 
+                                
+                                break;
+                            default:
+                                await this.ShowMessageAsync("Aviso", "Selecione um dedo!");
+                                break;
+                        }
             }
             else
             {
-                await this.ShowMessageAsync("Aviso", "Abra um documento e selecione uma impressão para inserir");
+                await this.ShowMessageAsync("Aviso", "Abra um documento e selecione uma impressão para inserir!");
             }
             
         }
 
-        private void inserirImpressao(Image impressao) 
+        private async void inserirImpressao(Image impressao, BitmapSource insertinto) 
         {
-            if (imgDocumento.Source != null)
-           {
-               var imagePosition = imgDocumento.TransformToAncestor(imgDocumento).Transform(new Point(0, 0));
-               Rect rect1 = new Rect(Canvas.GetLeft(selectionRectangle), Canvas.GetTop(selectionRectangle), selectionRectangle.Width, selectionRectangle.Height);
-               System.Windows.Int32Rect rcFrom = new System.Windows.Int32Rect();
-               rcFrom.X = (int)((rect1.X) * (imgDocumento.Source.Width) / (imgDocumento.Width));
-               rcFrom.Y = (int)((rect1.Y) * (imgDocumento.Source.Height) / (imgDocumento.Height));
-               rcFrom.Width = (int)((rect1.Width) * (imgDocumento.Source.Width) / (imgDocumento.Width));
-               rcFrom.Height = (int)((rect1.Height) * (imgDocumento.Source.Height) / (imgDocumento.Height));
-               BitmapSource bs = new CroppedBitmap(imgDocumento.Source as BitmapSource, rcFrom);
-               impressao.Source = bs; 
-            }
+
+                this.UcImageCropper.SaveCroppedImage();
+                if (this.UcImageCropper.bmpPopup != null)
+                {
+                    impressao.Source = this.UcImageCropper.bmpPopup;
+                    insertinto = this.UcImageCropper.bmpPopup;
+                    this.UcImageCropper.bmpPopup = null;
+                    this.UcImageCropper.createSelectionCanvas();
+                    Passed = true;
+                }
+                else
+                {
+                    Passed = false;
+                    await this.ShowMessageAsync("Aviso", "Selecione uma impressão digital no documento para continuar!");
+
+                }
+                           
         }
 
         private void btnClassificar_Click(object sender, RoutedEventArgs e)
         {
-
+            ClassificarFingersPrints classFingers = new ClassificarFingersPrints(this);
+            classFingers.ShowDialog();
         }
 
         private void MetroWindow_KeyUp(object sender, KeyEventArgs e)
@@ -349,12 +465,95 @@ namespace sistemaCorporativo.FORMS
             if (e.Key == Key.Enter)
             {
                 btnInserir_Click(sender, e);
-                RestRect();
             }
         }
         private void itmSair_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnFinalizar_Click(object sender, RoutedEventArgs e)
+        {
+            //receives the source
+            polD = imgPolD.Source as BitmapSource;
+            polE = imgPolE.Source as BitmapSource;
+            IndD = imgIndD.Source as BitmapSource;
+            IndE = imgIndE.Source as BitmapSource;
+            MedD = imgMedD.Source as BitmapSource;
+            MedE = imgMedE.Source as BitmapSource;
+            AnuD = imgAnuD.Source as BitmapSource;
+            AnuE = imgAnuE.Source as BitmapSource;
+            MinD = imgMinD.Source as BitmapSource;
+            MinE = imgMinE.Source as BitmapSource;
+
+            //Update imagens para criação da ID
+            cad.polD = polD as BitmapImage;
+            cad.polE = polE as BitmapImage;
+            cad.IndD = IndD as BitmapImage;
+            cad.IndE = IndE as BitmapImage;
+            cad.MedD = MedD as BitmapImage;
+            cad.MedE = MedE as BitmapImage;
+            cad.AnuD = AnuD as BitmapImage;
+            cad.AnuE = AnuE as BitmapImage;
+            cad.MinD = MinD as BitmapImage;
+            cad.MinE = MinE as BitmapImage;
+
+            //Update Informações do grupo das impressões da ID
+            cad.grupoPolD = grupoPolD;
+            cad.grupoPolE = grupoPolE;
+            cad.grupoIndD = grupoIndD;
+            cad.grupoIndE = grupoIndE;
+            cad.grupoMedD = grupoMedD;
+            cad.grupoMedE = grupoMedE;
+            cad.grupoAnuD = grupoAnuD;
+            cad.grupoAnuE = grupoAnuE;
+            cad.grupoMinD = grupoMinD;
+            cad.grupoMinE = grupoMinE;
+
+            //Take the ID, checking the text into the string
+            if (grupoPolD == "Presinha Interna" || grupoPolD == "Presinha Externa")
+            {
+                if (grupoPolE == "Presilha Interna" || grupoPolE == "Presilha Externa")
+                {
+                    
+                    ID = (grupoPolD.Substring(9, 1) + grupoIndD.Substring(0, 1) + grupoMedD.Substring(0, 1) + grupoAnuD.Substring(0, 1) + grupoMinD.Substring(0, 1) + "/" + grupoPolE.Substring(9, 1) + grupoIndE.Substring(0, 1) + grupoMedE.Substring(0, 1) + grupoAnuE.Substring(0, 1) + grupoMinE.Substring(0, 1));
+                }
+                else
+                {
+                    
+                    ID = (grupoPolD.Substring(9, 1)+ grupoIndD.Substring(0, 1) + grupoMedD.Substring(0, 1) + grupoAnuD.Substring(0, 1) + grupoMinD.Substring(0, 1) + "/" + grupoPolE.Substring(0, 1) + grupoIndE.Substring(0, 1) + grupoMedE.Substring(0, 1) + grupoAnuE.Substring(0, 1) + grupoMinE.Substring(0, 1));
+                }
+                
+            }
+            else
+            {
+                if (grupoPolE == "Presilha Interna" || grupoPolE == "Presilha Externa")
+                {
+                    grupoPolE.ToUpper();
+                    ID = (grupoPolD.Substring(0, 1) + grupoIndD.Substring(0, 1) + grupoMedD.Substring(0, 1) + grupoAnuD.Substring(0, 1) + grupoMinD.Substring(0, 1) + "/" + grupoPolE.Substring(9, 1).ToUpper() + grupoIndE.Substring(0, 1) + grupoMedE.Substring(0, 1) + grupoAnuE.Substring(0, 1) + grupoMinE.Substring(0, 1));
+                }
+                else
+                {
+                    ID = (grupoPolD.Substring(0, 1) + grupoIndD.Substring(0, 1) + grupoMedD.Substring(0, 1) + grupoAnuD.Substring(0, 1) + grupoMinD.Substring(0, 1) + "/" + grupoPolE.Substring(0, 1) + grupoIndE.Substring(0, 1) + grupoMedE.Substring(0, 1) + grupoAnuE.Substring(0, 1) + grupoMinE.Substring(0, 1));  
+                }
+                
+            }
+             
+             cad.IdentificacaoDac = ID;
+             cad.lblId.Content = cad.IdentificacaoDac;
+             cad.FingerInserido = true;
+
+             if (cad.id != null)
+             {
+                 cad.alterFinger = true;
+             }
+
+            //Close Window
+            this.Close();
+            cad.imgDigitalFront.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/impressao Digital Recurso Checked transp.png"));
+            Storyboard fingerAnimation = cad.FindResource("RotationImageFingerPrint") as Storyboard;
+            fingerAnimation.Begin();  
+
         }
    
     }

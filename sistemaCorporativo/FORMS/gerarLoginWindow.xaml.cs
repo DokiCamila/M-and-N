@@ -17,7 +17,7 @@ using MahApps.Metro.Actions;
 using MahApps.Metro.Behaviours;
 using sistemaCorporativo.FORMS.cadAgente;
 using sistemaCorporativo.UTIL.checkPassword;
-
+using sistemaCorporativo.UTIL.databaseAdress;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
 using System.Data;
@@ -43,24 +43,24 @@ namespace sistemaCorporativo.FORMS
         int placar;
         checkPassword.ForcaDaSenha strong;
 
-        ///<Variável para selecionar o ultimstirno registro da tabela>
+        ///<Variável para selecionar o ultimo registro da tabela>
         //private string SELECT_LAST = "select id_Agente, nome from AGENTE where rownum =1 and status = 1 order by id_Agente desc";
         //Variável para Ler a linha relacionada ao id
         private string SQL_READ_AGENTE = "select * from AGENTE where id_Agente = :id";
         //Variável para criar o login
-        private string SQL_INSERT_LOGIN = "insert into login_agente (id_LoginAgente, id_Agente, nome_User, senha_User, nivel_Acesso, id_Cargo, status) values (seq_LoginAgente.NEXTVAL, :idAgente, :nomeUser, :senhaUser, :nivelAcesso, :idCargo, :status)";
+        private string SQL_INSERT_LOGIN = "insert into login_agente (id_LoginAgente, id_Agente, nome_User, senha_User, nivel_Acesso, status) values (seq_LoginAgente.NEXTVAL, :idAgente, :nomeUser, :senhaUser, :nivelAcesso, 1)";
          //Variável para criar o perfil
         private string SQL_INSERT_PROFILE = "insert into perfil_agente (id_PerfilAgente, id_Agente, nivel_Agente, casos_Resolvidos) values(seq_PerfilAgente.NEXTVAL, :idAgente, 1, 0)";
         //String para checar se o login ja existe
-        private string SQL_CHECK_LOGIN = "SELECT count(f.ID_AGENTE) as total FROM LOGIN_AGENTE f where f.ID_AGENTE = :id";
+        private string SQL_CHECK_LOGIN = "SELECT count(l.ID_AGENTE) as total FROM LOGIN_AGENTE l where l.ID_AGENTE = :id and status = 1";
         //Variável que receberá o nome do agente 
         private string nomeAgente;
+        //Variável que receberá o cargo do agente 
+        private string cargoAgente;
+
 
         //String com o endereço do banco
-        private static string oradb = "Data Source=(DESCRIPTION="
-             + "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))"
-             + "(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=orcl.itb.com)));"
-             + "User Id=matheus_23177;Password=123456;";
+        databaseAddress db = new databaseAddress();
 
         //string NOME DE USUÁRIO
         private string nomeUser;
@@ -76,8 +76,10 @@ namespace sistemaCorporativo.FORMS
                 if (forcaSenha == "Aceitável" || forcaSenha == "Forte" || forcaSenha == "Segura")
                 {
 
+                    //Updating nomeUser
+                    nomeUser = txtUsuario.Text;
 
-                    OracleConnection Oracon = new OracleConnection(oradb);
+                    OracleConnection Oracon = new OracleConnection(db.oradb);
                     Oracon.Open();
 
                     OracleCommand check = new OracleCommand(SQL_CHECK_LOGIN, Oracon);
@@ -98,13 +100,29 @@ namespace sistemaCorporativo.FORMS
                     {
                         Oracon.Open();
 
+                        
                         OracleCommand insert = new OracleCommand(SQL_INSERT_LOGIN, Oracon);
                         insert.Parameters.Add("idAgente", id);
                         insert.Parameters.Add("nomeUser", nomeUser);
                         insert.Parameters.Add("senhaUser", txtSenha.Password);
-                        insert.Parameters.Add("nivelAcesso", "1");
-                        insert.Parameters.Add("idCargo", "2");
-                        insert.Parameters.Add("status", "1 ");
+
+                        //Set the Acess Level
+                        switch (cargoAgente)
+                        {
+                            case "2":
+                                insert.Parameters.Add("nivelAcesso", "1");
+                                break;
+                            case "3":
+                                insert.Parameters.Add("nivelAcesso", "1");
+                                break;
+                            case "4":
+                                insert.Parameters.Add("nivelAcesso", "1");
+                                break;
+                            case "5":
+                                insert.Parameters.Add("nivelAcesso", "1");
+                                break;
+                        }
+ 
                         insert.ExecuteNonQuery();
 
                         OracleCommand profile = new OracleCommand(SQL_INSERT_PROFILE, Oracon);
@@ -151,7 +169,7 @@ namespace sistemaCorporativo.FORMS
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            OracleConnection Oracon = new OracleConnection(oradb);
+            OracleConnection Oracon = new OracleConnection(db.oradb);
             Oracon.Open();
 
             OracleCommand select = new OracleCommand(SQL_READ_AGENTE, Oracon);
@@ -161,13 +179,21 @@ namespace sistemaCorporativo.FORMS
             read.Read();
 
             nomeAgente = Convert.ToString(read[1].ToString());
-            nomeAgente.ToLower();
+           
             nomeUser = nomeAgente.Substring(0, nomeAgente.IndexOf(" ")) + "_" + id;
+
+            //Buscar id do cargo e nome do cargo, pelo id do agente
+            string SQL_SEARCH_CARGO = "select a.nome, a.id_cargo, c.nome_cargo from CARGO c inner join agente a on c.ID_CARGO = a.ID_CARGO and a.ID_AGENTE ='" + id + "' and a.status = 1";
+            OracleCommand cmdCargo = new OracleCommand(SQL_SEARCH_CARGO, Oracon);
+            OracleDataReader rCargo = cmdCargo.ExecuteReader();
+            rCargo.Read();
+
+            cargoAgente = Convert.ToString(rCargo[1].ToString());
             Oracon.Close();
 
             string usuario = nomeUser;
+            usuario = usuario.ToLower();
             txtUsuario.Text = usuario;
-            txtUsuario.Text.ToLower();
             txtUsuario.IsReadOnly = true;
         }
 

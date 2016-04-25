@@ -26,7 +26,6 @@ namespace sistemaCorporativo.TO.Agente
         private string cidade;
         private string uf;
         private string foto;
-        private string impressaoDigital;
         private string registro;
         private string tipo;
         private string marca;
@@ -187,15 +186,6 @@ namespace sistemaCorporativo.TO.Agente
         public void setFoto(string foto)
         {
             this.foto = foto;
-        }
-
-        public string getimpressaDigital()
-        {
-            return this.impressaoDigital;
-        }
-        public void setimpressaodigital(string impressaoDigital)
-        {
-            this.impressaoDigital = impressaoDigital;
         }
 
         public string getRegistro()
