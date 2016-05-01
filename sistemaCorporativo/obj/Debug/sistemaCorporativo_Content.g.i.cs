@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/impressao%20digital%20recurso%20checked%20transp.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/impressao%20digital%20recurso%20view%20clicked.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/impressao%20digital%20recurso%20view%20over.png")]
 
 

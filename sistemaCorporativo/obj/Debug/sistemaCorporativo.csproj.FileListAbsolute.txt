@@ -387,6 +387,6 @@ C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\F
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.g.resources
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.Properties.Resources.resources
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.csproj.GenerateResource.Cache
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\individualDactiloscopica.g.cs
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\individualDactiloscopica.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.csprojResolveAssemblyReference.cache
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\visualizarImpressoesDigitais.baml
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\visualizarImpressoesDigitais.g.cs

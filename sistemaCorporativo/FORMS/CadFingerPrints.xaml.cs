@@ -511,7 +511,7 @@ namespace sistemaCorporativo.FORMS
             cad.grupoMinE = grupoMinE;
 
             //Take the ID, checking the text into the string
-            if (grupoPolD == "Presinha Interna" || grupoPolD == "Presinha Externa")
+            if (grupoPolD == "Presilha Interna" || grupoPolD == "Presilha Externa")
             {
                 if (grupoPolE == "Presilha Interna" || grupoPolE == "Presilha Externa")
                 {
@@ -543,6 +543,9 @@ namespace sistemaCorporativo.FORMS
              cad.lblId.Content = cad.IdentificacaoDac;
              cad.FingerInserido = true;
 
+            //Retornando valor ao padrão para não bugar os eventos do Image control
+             cad.editMode = false;
+
              if (cad.id != null)
              {
                  cad.alterFinger = true;
@@ -552,7 +555,7 @@ namespace sistemaCorporativo.FORMS
             this.Close();
             cad.imgDigitalFront.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/impressao Digital Recurso Checked transp.png"));
             Storyboard fingerAnimation = cad.FindResource("RotationImageFingerPrint") as Storyboard;
-            fingerAnimation.Begin();  
+            fingerAnimation.Begin();
 
         }
    

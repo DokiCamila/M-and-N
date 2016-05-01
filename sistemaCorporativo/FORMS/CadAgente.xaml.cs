@@ -32,6 +32,7 @@ using System.Drawing;
 using sistemaCorporativo.UTIL.Adorners;
 
 
+
 namespace sistemaCorporativo.FORMS.cadAgente
 {
     /// <summary>
@@ -51,8 +52,9 @@ namespace sistemaCorporativo.FORMS.cadAgente
         {
             InitializeComponent();
         }
-       
-  
+
+
+        #region SQL SCRIPTS
         //Criar string com o comando para inserir
         private string SQL_INSERT = "insert into Agente(ID_AGENTE,NOME,SEXO,DATA_NASCIMENTO,RG,"
                      +"CPF,TIPO_SANGUINEO,ETNIA,ESTADO_CIVIL,CEP,LOGRADOURO,NUMERO,COMPLEMENTO,BAIRRO,"
@@ -76,6 +78,11 @@ namespace sistemaCorporativo.FORMS.cadAgente
         private string SQL_UPDATE;
         //Criar string (sem o comando) para atualizar as impressões 
         private string SQL_UPDATE_FINGER;
+        //Take the Ficha Dactiloscópica
+        private string SQL_TAKE_FICHADACT; 
+
+        #endregion
+
         //Criar obj com variaveis da classe PhotoAndFinger
         //Criar string para a foto
         private string destinationPathFoto;
@@ -100,7 +107,14 @@ namespace sistemaCorporativo.FORMS.cadAgente
         CroppedBitmap fotoPerfil = new CroppedBitmap(); 
         //endereço banco
         databaseAddress db = new databaseAddress();
+        //Boolean para o editMode
+        public Boolean editMode = false;
 
+        //Boolean não muito usado para definir se foi clicado na imagem da impressão (TELA CAD AGENTE)
+        private Boolean clickOn = false;
+       
+
+        #region Impressões Digitais
         //FINGERPRINTS
         //Imagem da ID 
         public BitmapImage polD, polE;
@@ -122,11 +136,9 @@ namespace sistemaCorporativo.FORMS.cadAgente
         public string grupoAnuD, grupoAnuE;
         public string grupoMinD, grupoMinE;
         public string IdentificacaoDac;
+        #endregion
 
-       
 
-
- 
         private void rdbArmNao_Checked(object sender, RoutedEventArgs e)
         {
             try
@@ -249,7 +261,6 @@ namespace sistemaCorporativo.FORMS.cadAgente
 				
                 CadFingerPrints cadFinger = new CadFingerPrints(this);
 				cadFinger.ShowDialog();
-                
                 
                 //alterFinger = true;
 
@@ -776,7 +787,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                     #endregion
 
                                                                 //Checar se foi upado uma Foto
-                                                                SQL_UPDATE = "update agente set NOME = :nome, SEXO = :sexo, DATA_NASCIMENTO = :data_nascimento, RG = :rg, CPF = :cpf, TIPO_SANGUINEO = :tipo_sanguineo, ETNIA = :etnia, ESTADO_CIVIL = :estado_civil, CEP = :cep, LOGRADOURO = :logradouro, NUMERO = :numero, COMPLEMENTO = :complemento, BAIRRO = :bairro, CIDADE = :cidade, UF = :uf, FOTOAGENTE = :fotoagente, IMPRESSAOAGENTE = :impressaoagente, ID_CARGO = :cargo where id_Agente=" + id;
+                                                                SQL_UPDATE = "update agente set NOME = :nome, SEXO = :sexo, DATA_NASCIMENTO = :data_nascimento, RG = :rg, CPF = :cpf, TIPO_SANGUINEO = :tipo_sanguineo, ETNIA = :etnia, ESTADO_CIVIL = :estado_civil, CEP = :cep, LOGRADOURO = :logradouro, NUMERO = :numero, COMPLEMENTO = :complemento, BAIRRO = :bairro, CIDADE = :cidade, UF = :uf, FOTOAGENTE = :fotoagente, ID_CARGO = :cargo where id_Agente=" + id;
 
                                                                 SQL_UPDATE_FINGER = "UPDATE ID set pol_D = :polD, ind_D = :indD, med_D = :medD, anu_D = :anuD, min_D = : minD, pol_E = :polE, ind_E = :indE, med_E = :medE, anu_E = :anuE, min_E = :minE, ficha_Dact = :fichaDact where id_Agente = '" + id + "'";
                                                                 OracleConnection Oracon = new OracleConnection(db.oradb);
@@ -1018,7 +1029,6 @@ namespace sistemaCorporativo.FORMS.cadAgente
             imgFoto.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/User_Profile.png"));
             destinationPathFoto = "pack://application:,,,/IMAGES/User_Profile.png";
             fotoInserida = false;
-            imgDigital.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/Finger_Print.png"));
             FingerInserido = false;
 
             txtRegistro.Text = "";
@@ -1028,6 +1038,17 @@ namespace sistemaCorporativo.FORMS.cadAgente
             txtNumSerie.Text = "";
             txtDataExpedicao.Text = "";
             id = "";
+
+            if (editMode == true)
+            {
+                imgDigitalFront.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/impressao Digital Recurso Add transp.png"));
+                Storyboard fingerAnimation = FindResource("RotationImageFingerPrint") as Storyboard;
+                fingerAnimation.Begin();
+                lblId.Content = "Sem I.D.";
+                editMode = false;
+            }
+
+            
 
 
 
@@ -1167,6 +1188,12 @@ namespace sistemaCorporativo.FORMS.cadAgente
                     cmbUf.Text = Convert.ToString(read[15].ToString());
 
                     fotoAgentesource = Convert.ToString(read[16].ToString());
+
+                    SQL_TAKE_FICHADACT = "select * from ID where id_Agente ='" + id + "'";
+                    OracleCommand takefichadact = new OracleCommand(SQL_TAKE_FICHADACT, Oracon);
+                    OracleDataReader fichaNow = takefichadact.ExecuteReader();
+                    fichaNow.Read();
+                    lblId.Content = Convert.ToString(fichaNow[12].ToString());
                    
                     Oracon.Close();
 
@@ -1184,6 +1211,15 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
                     gConsultar.IsSelected = false;
                     gCadastrar.IsSelected = true;
+                    editMode = true;
+
+                    imgDigitalFront.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/impressao Digital Recurso View Over.png"));
+                    Storyboard fingerAnimation = FindResource("RotationImageFingerPrint") as Storyboard;
+                    fingerAnimation.Begin();
+
+
+                    
+   
 
                 }
                 catch (Exception ex)
@@ -1194,7 +1230,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
             }
             else
             {
-                await this.ShowMessageAsync("Aviso", "Selecione um agente para excluir!");
+                await this.ShowMessageAsync("Aviso", "Selecione um agente para editar!");
             }
         }
 
@@ -1223,7 +1259,8 @@ namespace sistemaCorporativo.FORMS.cadAgente
             }
             else
             {
-                await this.ShowMessageAsync("Aviso", "Selecione um agente para gerar login!"); }
+                await this.ShowMessageAsync("Aviso", "Selecione um agente para gerar login!"); 
+            }
             
         }
 
@@ -1238,6 +1275,38 @@ namespace sistemaCorporativo.FORMS.cadAgente
             }
         }
 
+        #region Eventos Image control Finger
+        private void imgDigitalFront_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (editMode)
+            {
+                imgDigitalFront.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/impressao Digital Recurso View Clicked.png"));
+                clickOn = true;
+            }
+            
+        }
+
+        private void imgDigitalFront_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (editMode)
+            {
+                imgDigitalFront.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/impressao Digital Recurso View Over.png"));
+                if (clickOn)
+                {
+                    MostrarFingerPrintsID individualDactiloscopica = new MostrarFingerPrintsID(this);
+                    individualDactiloscopica.ShowDialog();
+                }
+            }
+        }
+
+        private void imgDigitalFront_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (editMode)
+            {
+                imgDigitalFront.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/impressao Digital Recurso View Over.png"));
+            }
+        }
+        #endregion
     }
 
 }  

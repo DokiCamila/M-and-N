@@ -1,0 +1,421 @@
+﻿<Controls:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+        xmlns:Adorners="clr-namespace:sistemaCorporativo.UTIL.Adorners" x:Name="windowMostrarFingerprints" x:Class="sistemaCorporativo.FORMS.MostrarFingerPrintsID"
+        Title="Individual Dactiloscópica" Height="706.701" Width="1127.813" ResizeMode="NoResize" ShowInTaskbar="False"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="0,1" WindowStartupLocation="CenterScreen" Loaded="windowMostrarFingerprints_Loaded" >
+    <Controls:MetroWindow.Resources>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Path x:Name="clickMidL" Cursor="Hand" Data="M172.33333,513.83302 L173.66752,507.50031 174.83414,503.33383 176.33498,499.8344 178.6696,498.16818 182.00381,498.00119 184.17127,498.50116 186.67177,500.83434 187.83847,503.00086 188.17225,507.3339 188.17225,511.83361 187.67177,516.33331 187.50505,519.49976 186.83817,522.33291 185.00426,524.99974 182.33675,526.16636 179.16908,526.99933 174.33423,526.99933 171.33328,526.3327 171.1669,522.66627 z" ForceCursor="True"  Stretch="Fill"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Path x:Name="clickAnuL" Cursor="Hand" Data="M206,490.83333 L208.33333,484.33368 209.3338,479.83424 211.0012,475.16831 212.16815,472.16816 214.50159,469.00129 217.33545,466.66805 220.50313,466.16774 223.17037,467.16741 225.17042,468.00072 226.83706,470.00069 228.00428,472.50065 228.33767,476.00059 227.6712,479.83386 227.0044,483.83379 225.83749,489.3337 224.50387,494.83361 223.50366,496.33394 222.50346,497.8343 220.50304,498.5013 217.16901,498.33464 214.00168,498.16797 211.33445,497.5013 209.00063,496.16794&#xA;206.3334,493.6679 z" RenderTransformOrigin="0.381,0.479" Stretch="Fill"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle3" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Path x:Name="clickMedL" Cursor="Hand" Data="M241.66667,484.83333 L244.49967,477.83368 246.66633,472.83425 248.99916,466.6684 251.16568,462.66829 254.16503,460.5014 256.66438,459.83477 259.66357,460.33508 261.99617,460.6684 264.32912,462.66828 265.82923,465.66811 266.49613,468.16797 266.49613,468.83459 266.82941,471.33445 266.49645,475.33422 265.16329,480.16728 263.49684,485.66696 261.83039,490.16631 260.33058,492.83244 258.66413,494.66596 254.8313,494.33231 250.66517,492.99909 247.83221,491.99917 244.4993,491.33256&#xA;241.66634,489.49937 240.83277,487.33288 z"  Stretch="Fill"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle4" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Path x:Name="clickIndL" Cursor="Hand" Data="M275,509 L276.83333,502.83333 278.33396,498.33393 280.33486,494.3346 281.16883,491.00196 282.83565,487.33568 285.0034,484.83634 288.17113,483.00359 291.33843,483.00359 294.67322,484.17011 296.67352,486.33647 298.17364,489.66934 298.50674,492.169 298.67346,496.33509 298.17299,498.16817 297.33943,501.50104 296.83929,505.00055 295.5056,509.33329 293.50505,513.16647 291.83793,515.33248 288.83711,515.33248 285.83629,515.16615 282.83547,514.33292 279.50123,513.1664&#xA;277.50068,511.83324 275.66685,510.16679 z"  Stretch="Fill"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle5" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Path x:Name="clickPolL" Data="M305.33333,602.5 L308.33368,598.66667 312.16777,595.16607 316.33439,591.49861 320.50177,588.33153 324.33546,586.83172 327.33612,585.83198 330.00346,585.66563 333.3372,585.832 335.50449,586.49872 337.17138,588.49888 338.00449,590.99908 337.00436,592.99924 334.00398,594.83272 331.17029,596.16616 327.50315,599.83312 325.16953,603.16672 323.50265,606.1666 321.83577,609.83313 318.83539,613.167 314.33482,615.33343 308.66743,613.83368 306.3338,610.8335 304.50024,605.33317&#xA; z" Stretch="Fill"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle6" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Path x:Name="clickPolR" Cursor="" Data="M305.33333,602.5 L308.33368,598.66667 312.16777,595.16607 316.33439,591.49861 320.50177,588.33153 324.33546,586.83172 327.33612,585.83198 330.00346,585.66563 333.3372,585.832 335.50449,586.49872 337.17138,588.49888 338.00449,590.99908 337.00436,592.99924 334.00398,594.83272 331.17029,596.16616 327.50315,599.83312 325.16953,603.16672 323.50265,606.1666 321.83577,609.83313 318.83539,613.167 314.33482,615.33343 308.66743,613.83368 306.3338,610.8335 304.50024,605.33317&#xA; z" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle7" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Path x:Name="clickIndR" Cursor="" Data="M275,509 L276.83333,502.83333 278.33396,498.33393 280.33486,494.3346 281.16883,491.00196 282.83565,487.33568 285.0034,484.83634 288.17113,483.00359 291.33843,483.00359 294.67322,484.17011 296.67352,486.33647 298.17364,489.66934 298.50674,492.169 298.67346,496.33509 298.17299,498.16817 297.33943,501.50104 296.83929,505.00055 295.5056,509.33329 293.50505,513.16647 291.83793,515.33248 288.83711,515.33248 285.83629,515.16615 282.83547,514.33292 279.50123,513.1664&#xA;277.50068,511.83324 275.66685,510.16679 z" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle8" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Path x:Name="clickMedR" Cursor="" Data="M241.66667,484.83333 L244.49967,477.83368 246.66633,472.83425 248.99916,466.6684 251.16568,462.66829 254.16503,460.5014 256.66438,459.83477 259.66357,460.33508 261.99617,460.6684 264.32912,462.66828 265.82923,465.66811 266.49613,468.16797 266.49613,468.83459 266.82941,471.33445 266.49645,475.33422 265.16329,480.16728 263.49684,485.66696 261.83039,490.16631 260.33058,492.83244 258.66413,494.66596 254.8313,494.33231 250.66517,492.99909 247.83221,491.99917 244.4993,491.33256&#xA;241.66634,489.49937 240.83277,487.33288 z"  RenderTransformOrigin="0.5,0.5" Stretch="Fill">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle9" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Path x:Name="clickAnuR" Cursor="" Data="M206,490.83333 L208.33333,484.33368 209.3338,479.83424 211.0012,475.16831 212.16815,472.16816 214.50159,469.00129 217.33545,466.66805 220.50313,466.16774 223.17037,467.16741 225.17042,468.00072 226.83706,470.00069 228.00428,472.50065 228.33767,476.00059 227.6712,479.83386 227.0044,483.83379 225.83749,489.3337 224.50387,494.83361 223.50366,496.33394 222.50346,497.8343 220.50304,498.5013 217.16901,498.33464 214.00168,498.16797 211.33445,497.5013 209.00063,496.16794&#xA;206.3334,493.6679 z" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle10" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Path x:Name="clickMidR" Cursor="Hand" Data="M172.33333,513.83302 L173.66752,507.50031 174.83414,503.33383 176.33498,499.8344 178.6696,498.16818 182.00381,498.00119 184.17127,498.50116 186.67177,500.83434 187.83847,503.00086 188.17225,507.3339 188.17225,511.83361 187.67177,516.33331 187.50505,519.49976 186.83817,522.33291 185.00426,524.99974 182.33675,526.16636 179.16908,526.99933 174.33423,526.99933 171.33328,526.3327 171.1669,522.66627 z"  RenderTransformOrigin="0.5,0.5" Stretch="Fill">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Key="selectionR1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeThickness)" Storyboard.TargetName="selectionR1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="selectionR2">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeThickness)" Storyboard.TargetName="selectionR2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="selectionR3">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeThickness)" Storyboard.TargetName="selectionR3">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="selectionR4">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeThickness)" Storyboard.TargetName="selectionR4">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="selectionR5">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeThickness)" Storyboard.TargetName="selectionR5">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="selectionL6">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeThickness)" Storyboard.TargetName="selectionL6">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="selectionL7">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeThickness)" Storyboard.TargetName="selectionL7">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="selectionL8">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeThickness)" Storyboard.TargetName="selectionL8">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="selectionL9">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeThickness)" Storyboard.TargetName="selectionL9">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="selectionL10">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeThickness)" Storyboard.TargetName="selectionL10">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="6"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Controls:MetroWindow.Resources>
+
+    <Grid>
+
+
+
+        <Image x:Name="imgR1" HorizontalAlignment="Left" Height="157" Margin="52,28,0,0" VerticalAlignment="Top" Width="119" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" MouseLeftButtonDown="imgR1_MouseLeftButtonDown"/>
+        <Image x:Name="imgR2" HorizontalAlignment="Left" Height="157" Margin="171,28,0,0" VerticalAlignment="Top" Width="119" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" MouseLeftButtonDown="imgR2_MouseLeftButtonDown"/>
+        <Image x:Name="imgR3" HorizontalAlignment="Left" Height="157" Margin="290,28,0,0" VerticalAlignment="Top" Width="118" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" MouseLeftButtonDown="imgR3_MouseLeftButtonDown"/>
+        <Image x:Name="imgR4" HorizontalAlignment="Left" Height="157" Margin="408,28,0,0" VerticalAlignment="Top" Width="119" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" MouseLeftButtonDown="imgR4_MouseLeftButtonDown"/>
+        <Image x:Name="imgL6" HorizontalAlignment="Left" Height="157" Margin="52,185,0,0" VerticalAlignment="Top" Width="119" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" MouseLeftButtonDown="imgL6_MouseLeftButtonDown"/>
+        <Image x:Name="imgL7" HorizontalAlignment="Left" Height="157" Margin="171,185,0,0" VerticalAlignment="Top" Width="119" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" MouseLeftButtonDown="imgL7_MouseLeftButtonDown"/>
+        <Image x:Name="imgL8" HorizontalAlignment="Left" Height="157" Margin="290,185,0,0" VerticalAlignment="Top" Width="118" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" MouseLeftButtonDown="imgL8_MouseLeftButtonDown"/>
+        <Image x:Name="imgL9" HorizontalAlignment="Left" Height="157" Margin="408,185,0,0" VerticalAlignment="Top" Width="119" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" MouseLeftButtonDown="imgL9_MouseLeftButtonDown"/>
+        <Image x:Name="imgFingerPrint" HorizontalAlignment="Left" Height="452" Margin="719,28,0,0" VerticalAlignment="Top" Width="380" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill"/>
+        <Label x:Name="label" Content="R1" HorizontalAlignment="Left" Margin="52,28,0,0" VerticalAlignment="Top" Width="119" HorizontalContentAlignment="Center" Height="24">
+            <Label.Background>
+                <SolidColorBrush Color="#FF1B1B1B" Opacity="0.555"/>
+            </Label.Background>
+        </Label>
+        <Label x:Name="label1" Content="R2" HorizontalAlignment="Left" Margin="171,28,0,0" VerticalAlignment="Top" Width="119" HorizontalContentAlignment="Center" Height="24">
+            <Label.Background>
+                <SolidColorBrush Color="#FF1B1B1B" Opacity="0.555"/>
+            </Label.Background>
+        </Label>
+        <Label x:Name="label2" Content="R3" HorizontalAlignment="Left" Margin="290,28,0,0" VerticalAlignment="Top" Width="118" HorizontalContentAlignment="Center" Height="24">
+            <Label.Background>
+                <SolidColorBrush Color="#FF1B1B1B" Opacity="0.555"/>
+            </Label.Background>
+        </Label>
+        <Label x:Name="label3" Content="R4" HorizontalAlignment="Left" Margin="408,28,0,0" VerticalAlignment="Top" Width="119" HorizontalContentAlignment="Center" Height="24">
+            <Label.Background>
+                <SolidColorBrush Color="#FF1B1B1B" Opacity="0.555"/>
+            </Label.Background>
+        </Label>
+        <Label x:Name="label4" Content="L6" HorizontalAlignment="Left" Margin="52,185,0,0" VerticalAlignment="Top" Width="119" HorizontalContentAlignment="Center" Cursor="" Height="24">
+            <Label.Background>
+                <SolidColorBrush Color="#FF1B1B1B" Opacity="0.555"/>
+            </Label.Background>
+        </Label>
+        <Label x:Name="label5" Content="L7" HorizontalAlignment="Left" Margin="171,185,0,0" VerticalAlignment="Top" Width="119" HorizontalContentAlignment="Center" Height="24">
+            <Label.Background>
+                <SolidColorBrush Color="#FF1B1B1B" Opacity="0.555"/>
+            </Label.Background>
+        </Label>
+        <Label x:Name="label6" Content="L8" HorizontalAlignment="Left" Margin="290,185,0,0" VerticalAlignment="Top" Width="118" HorizontalContentAlignment="Center" Height="24">
+            <Label.Background>
+                <SolidColorBrush Color="#FF1B1B1B" Opacity="0.555"/>
+            </Label.Background>
+        </Label>
+        <Label x:Name="label7" Content="L9" HorizontalAlignment="Left" Margin="408,185,0,0" VerticalAlignment="Top" Width="119" HorizontalContentAlignment="Center" Height="24">
+            <Label.Background>
+                <SolidColorBrush Color="#FF1B1B1B" Opacity="0.555"/>
+            </Label.Background>
+        </Label>
+        <Image x:Name="imgR5" HorizontalAlignment="Left" Height="157" Margin="527,28,0,0" VerticalAlignment="Top" Width="119" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" MouseLeftButtonDown="imgR5_MouseLeftButtonDown"/>
+        <Label x:Name="label8" Content="R5" HorizontalAlignment="Left" Margin="527,28,0,0" VerticalAlignment="Top" Width="119" HorizontalContentAlignment="Center" Height="24">
+            <Label.Background>
+                <SolidColorBrush Color="#FF1B1B1B" Opacity="0.555"/>
+            </Label.Background>
+        </Label>
+        <Image x:Name="imgL10" HorizontalAlignment="Left" Height="157" Margin="527,185,0,0" VerticalAlignment="Top" Width="119" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill" MouseLeftButtonDown="imgL10_MouseLeftButtonDown"/>
+        <Label x:Name="label9" Content="L10" HorizontalAlignment="Left" Margin="527,185,0,0" VerticalAlignment="Top" Width="119" HorizontalContentAlignment="Center" Height="24">
+            <Label.Background>
+                <SolidColorBrush Color="#FF1B1B1B" Opacity="0.555"/>
+            </Label.Background>
+        </Label>
+        <Path Data="M695.50746,23.746269 L695.50746,791.90325" Fill="#FF858585" HorizontalAlignment="Left" Height="633.254" Margin="698.492,23.746,0,0" Stretch="Fill" Stroke="#FFB6B5B5" VerticalAlignment="Top" Width="1"/>
+        <Path Data="M192.83333,528.66667" HorizontalAlignment="Left" Height="0" Margin="192.833,97.167,0,0" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
+        <Path Data="M178.83333,502.83333" HorizontalAlignment="Left" Height="0" Margin="178.833,71.333,0,0" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
+        <Image x:Name="imgLeftHand" HorizontalAlignment="Left" Height="328" Margin="103,350,0,-2" VerticalAlignment="Top" Width="189" Source="/sistemaCorporativo;component/IMAGES/handWithoutSelection.png" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="0.997" ScaleX="-1.003"/>
+                    <SkewTransform AngleY="-1.148" AngleX="0"/>
+                    <RotateTransform Angle="12.166"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="imgRightHand" HorizontalAlignment="Left" Height="328" Margin="355,350,0,-2" VerticalAlignment="Top" Width="189" Source="/sistemaCorporativo;component/IMAGES/handWithoutSelectionR.png" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="0.997" ScaleX="-1.003"/>
+                    <SkewTransform AngleY="1.148" AngleX="0"/>
+                    <RotateTransform Angle="-12.166"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Path Data="M17.895522,434.19403 L681.57415,434.19403" Fill="#FF858585" HorizontalAlignment="Left" Height="1" Margin="22.563,356,0,0" Stretch="Fill" Stroke="#FFB6B5B5" VerticalAlignment="Top" Width="658.104"/>
+        <Label x:Name="label10" Content="Mãos" HorizontalAlignment="Left" Margin="284,362,0,0" VerticalAlignment="Top" Width="79" Height="26" HorizontalContentAlignment="Center"/>
+        <Label x:Name="label11" Content="Ficha Dactloscópica:" HorizontalAlignment="Left" Margin="720,595,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label x:Name="lblFichaDact" Content="" HorizontalAlignment="Left" Margin="830,595,0,0" VerticalAlignment="Top" Width="178" Height="26"/>
+        <Rectangle x:Name="selectionR1" HorizontalAlignment="Left" Height="157" Margin="52,28,0,0" Stroke="#FF339915" StrokeThickness="0" VerticalAlignment="Top" Width="119" Visibility="Hidden"/>
+        <Rectangle x:Name="selectionR2" HorizontalAlignment="Left" Height="157" Margin="171,28,0,0" Stroke="#FF339915" StrokeThickness="0" VerticalAlignment="Top" Width="119" Visibility="Hidden"/>
+        <Rectangle x:Name="selectionR3" HorizontalAlignment="Left" Height="157" Margin="290,28,0,0" Stroke="#FF339915" StrokeThickness="0" VerticalAlignment="Top" Width="119" Visibility="Hidden"/>
+        <Rectangle x:Name="selectionR4" HorizontalAlignment="Left" Height="157" Margin="408,28,0,0" Stroke="#FF339915" StrokeThickness="0" VerticalAlignment="Top" Width="119" Visibility="Hidden"/>
+        <Rectangle x:Name="selectionR5" HorizontalAlignment="Left" Height="157" Margin="527,28,0,0" Stroke="#FF339915" StrokeThickness="0" VerticalAlignment="Top" Width="119" Visibility="Hidden"/>
+        <Rectangle x:Name="selectionL10" HorizontalAlignment="Left" Height="157" Margin="527,185,0,0" Stroke="#FF339915" StrokeThickness="0" VerticalAlignment="Top" Width="119" Visibility="Hidden"/>
+        <Rectangle x:Name="selectionL9" HorizontalAlignment="Left" Height="157" Margin="409,185,0,0" Stroke="#FF339915" StrokeThickness="0" VerticalAlignment="Top" Width="119" Visibility="Hidden"/>
+        <Rectangle x:Name="selectionL8" HorizontalAlignment="Left" Height="157" Margin="290,185,0,0" Stroke="#FF339915" StrokeThickness="0" VerticalAlignment="Top" Width="119" Visibility="Hidden"/>
+        <Rectangle x:Name="selectionL7" HorizontalAlignment="Left" Height="157" Margin="171,185,0,0" Stroke="#FF339915" StrokeThickness="0" VerticalAlignment="Top" Width="119" Visibility="Hidden"/>
+        <Rectangle x:Name="selectionL6" HorizontalAlignment="Left" Height="157" Margin="52,185,0,0" Stroke="#FF339915" StrokeThickness="0" VerticalAlignment="Top" Width="119" Visibility="Hidden"/>
+        <Label x:Name="label11_Copy" Content="Classificação:" HorizontalAlignment="Left" Margin="720,569,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label x:Name="lblClassificacao" Content="" HorizontalAlignment="Left" Margin="792,569,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label x:Name="label11_Copy1" Content="Mão:" HorizontalAlignment="Left" Margin="720,543,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label x:Name="lblMao" Content="" HorizontalAlignment="Left" Margin="750,543,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label Content="Dedo:" HorizontalAlignment="Left" Margin="720,517,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label x:Name="lblDedo" Content="" HorizontalAlignment="Left" Margin="755,517,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label Content="Nome:" HorizontalAlignment="Left" Margin="720,491,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label x:Name="lblNome" Content="" HorizontalAlignment="Left" Margin="760,491,0,0" VerticalAlignment="Top" Width="339" Height="26"/>
+
+
+    </Grid>
+</Controls:MetroWindow>

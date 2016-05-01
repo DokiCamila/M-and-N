@@ -518,7 +518,7 @@
                             </Grid>
                         </Canvas>
                         <Label x:Name="lblId" Grid.ColumnSpan="2" Content="Sem I.D." HorizontalAlignment="Left" Margin="619,83,0,0" Grid.Row="4" VerticalAlignment="Top" Width="195" HorizontalContentAlignment="Center" Foreground="#FFD1D1D1"/>
-                        <Image x:Name="imgDigitalFront" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="136" Margin="663,57,0,0" Grid.Row="3" Grid.RowSpan="2" VerticalAlignment="Top" Width="110" Source="/sistemaCorporativo;component/IMAGES/impressao Digital Recurso Add transp.png" RenderTransformOrigin="1,0.5" Stretch="Fill">
+                        <Image x:Name="imgDigitalFront" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="136" Margin="663,57,0,0" Grid.Row="3" Grid.RowSpan="2" VerticalAlignment="Top" Width="110" Source="/sistemaCorporativo;component/IMAGES/impressao Digital Recurso Add transp.png" RenderTransformOrigin="1,0.5" Stretch="Fill" MouseLeftButtonDown="imgDigitalFront_MouseLeftButtonDown" MouseLeftButtonUp="imgDigitalFront_MouseLeftButtonUp" MouseLeave="imgDigitalFront_MouseLeave" >
                             <Image.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -527,6 +527,7 @@
                                     <TranslateTransform/>
                                 </TransformGroup>
                             </Image.RenderTransform>
+                            
                         </Image>
                     </Grid>
                 </Grid>

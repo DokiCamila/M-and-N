@@ -111,8 +111,8 @@
         <Button x:Name="btnInserir" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="404,256,0,0" VerticalAlignment="Top" Width="79" Height="32" Grid.Row="2" Click="btnInserir_Click" ToolTip="Inserir [enter]" Content="Inserir" Grid.Column="1"/>
         <Button x:Name="btnClassificar" Style="{DynamicResource SquareButtonStyle}" Content="Classificar" HorizontalAlignment="Left" Margin="931,256,0,0" VerticalAlignment="Top" Width="86" Height="31" Grid.Row="2" Click="btnClassificar_Click" Grid.Column="1" IsEnabled="False"/>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" PanningMode="VerticalOnly" Margin="1,1,750,28" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1">
-            <Grid HorizontalAlignment="Left" Height="2500" VerticalAlignment="Top" Width="2000" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                <local:UcImageCropper x:Name="UcImageCropper" Margin="0" Height="2500" Width="2000"/>
+            <Grid HorizontalAlignment="Left" Height="3000" VerticalAlignment="Top" Width="3500" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                <local:UcImageCropper x:Name="UcImageCropper" Margin="0" Height="3000" Width="3500"/>
             </Grid>
         </ScrollViewer>
         <Label Content="status:" Grid.Column="1" HorizontalAlignment="Left" Margin="540,262,0,0" Grid.Row="2" VerticalAlignment="Top" Width="43" Foreground="#FFBDBDBD"/>

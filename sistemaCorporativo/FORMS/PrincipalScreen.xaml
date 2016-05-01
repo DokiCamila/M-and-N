@@ -103,7 +103,7 @@
             <Button x:Name="btnPerfil" Click="btnPerfil_Click">
                 <StackPanel Orientation="Horizontal">
 
-                   <Rectangle Width="20"
+                    <Rectangle Width="20"
                    Height="20"
                    Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                         <Rectangle.OpacityMask>
@@ -227,14 +227,19 @@
                 <MenuItem Header="Sobre"/>
             </MenuItem>
         </Menu>
+        
     </Grid>
 
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl x:Name="FlyoutPrincipal">
-            <Controls:Flyout x:Name="flyoutAgente" Width="304.5" Grid.RowSpan="2" AllowDrop="False" AllowFocusElement="True" IsPinned="False" AnimateOnPositionChange="True" Theme="Adapt" Loaded="FlyoutAgente_Loaded">
+            <Controls:Flyout x:Name="flyoutAgente" Width="304" Grid.RowSpan="2" AllowDrop="False" AllowFocusElement="True" IsPinned="False" AnimateOnPositionChange="True" Theme="Adapt" Loaded="FlyoutAgente_Loaded">
                 <Canvas>
-                    <Image Height="157" Canvas.Left="68" Width="168.667" Source="/sistemaCorporativo;component/IMAGES/User_Login adapt.png"/>
-                    <Label x:Name="lblNomeAgente" Content="" Canvas.Left="60.1" Canvas.Top="162" Width="171.167" FontFamily="Segoe WP Light" FontSize="21.333" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                    <Image Margin="0,0,0,0" x:Name="agenteProfilePicture" Height="197" Canvas.Left="54" Width="193" Source="/sistemaCorporativo;component/IMAGES/User_Profile.png" Canvas.Top="-19" Stretch="Fill">
+                        <Image.Clip>
+                            <EllipseGeometry Center="97,89" RadiusX="90" RadiusY="83"/>
+                        </Image.Clip>
+                    </Image>
+                    <Label x:Name="lblNomeAgente" Content="Admin" Canvas.Top="162" Width="294" FontFamily="Segoe WP Light" FontSize="21.333" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
                     <Label Content="Nível:" Canvas.Left="10" Canvas.Top="234.22" FontFamily="Segoe WP SemiLight" FontSize="14"/>
                     <Label x:Name="lblNivel" Content="" Canvas.Left="47" Canvas.Top="234.22" FontFamily="Segoe WP SemiLight" FontSize="14"/>
                     <Image x:Name="imgBrooch" HorizontalAlignment="Left" Height="54" VerticalAlignment="Top" Width="101" Source="/sistemaCorporativo;component/IMAGES/escudo nivel 1.png" Stretch="Fill" Canvas.Left="193" Canvas.Top="216"/>

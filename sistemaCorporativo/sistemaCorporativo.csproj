@@ -14,6 +14,21 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <ExpressionBlendVersion>12.0.41002.1</ExpressionBlendVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -161,11 +176,11 @@
     <Compile Include="FORMS\LogoffSplash.xaml.cs">
       <DependentUpon>LogoffSplash.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FORMS\individualDactiloscopica.xaml.cs">
+      <DependentUpon>individualDactiloscopica.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FORMS\UcImageCropper.xaml.cs">
       <DependentUpon>UcImageCropper.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FORMS\visualizarImpressoesDigitais.xaml.cs">
-      <DependentUpon>visualizarImpressoesDigitais.xaml</DependentUpon>
     </Compile>
     <Compile Include="FORMS\WebcamWindow.xaml.cs">
       <DependentUpon>WebcamWindow.xaml</DependentUpon>
@@ -237,6 +252,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="FORMS\individualDactiloscopica.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FORMS\PrincipalScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -246,10 +265,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FORMS\UcImageCropper.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="FORMS\visualizarImpressoesDigitais.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -413,6 +428,41 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IMAGES\impressao Digital Recurso Checked transp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMAGES\handAnu.png" />
+    <Resource Include="IMAGES\handAnuR.png" />
+    <Resource Include="IMAGES\handInd.png" />
+    <Resource Include="IMAGES\handIndR.png" />
+    <Resource Include="IMAGES\handMed.png" />
+    <Resource Include="IMAGES\handMedR.png" />
+    <Resource Include="IMAGES\handMid.png" />
+    <Resource Include="IMAGES\handMidR.png" />
+    <Resource Include="IMAGES\handPol.png" />
+    <Resource Include="IMAGES\handPolR.png" />
+    <Resource Include="IMAGES\handWithoutSelection.png" />
+    <Resource Include="IMAGES\handWithoutSelectionR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMAGES\impressao Digital Recurso View Clicked.png" />
+    <Resource Include="IMAGES\impressao Digital Recurso View Over.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />

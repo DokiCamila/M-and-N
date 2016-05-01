@@ -48,7 +48,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
         string idAgente;
         string name;
         int nivel;
-        BitmapImage profilePicture;
+        string ProfilePic;
         //Endereço database
         databaseAddress db = new databaseAddress();
 
@@ -260,6 +260,15 @@ namespace sistemaCorporativo.FORMS.principalScreen
 
             cargo = Convert.ToString(rCargo[2].ToString());
 
+            //Take the profile Pic
+            string SQL_TAKEPIC = "select fotoAgente from Agente where id_Agente ='"+idAgente+"'";
+
+            OracleCommand takePic = new OracleCommand(SQL_TAKEPIC, Oracon);
+            OracleDataReader takePicNow = takePic.ExecuteReader();
+            takePicNow.Read();
+
+            ProfilePic = Convert.ToString(takePicNow[0].ToString());
+
             Oracon.Close();
 
             name = nameAndLastName.FormataNome(name);       
@@ -272,6 +281,10 @@ namespace sistemaCorporativo.FORMS.principalScreen
             lblNivel.Content = nivel.ToString();
             lblCargo.Content = cargo.ToString();
             lblCasosResolvidos.Content = casosResolvidos.ToString();
+            agenteProfilePicture.Source = new BitmapImage(new Uri(ProfilePic));
+
+
+            
         }	  
     }
 }
