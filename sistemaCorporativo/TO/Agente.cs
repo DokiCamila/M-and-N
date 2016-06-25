@@ -33,6 +33,7 @@ namespace sistemaCorporativo.TO.Agente
         private string numeroSerie;
         private string dataExpedicao;
 
+
         //métodos getters e setters
 
         public string getNome()

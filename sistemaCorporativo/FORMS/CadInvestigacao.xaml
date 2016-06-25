@@ -8,6 +8,7 @@
         x:Class="sistemaCorporativo.FORMS.CadOcorrencia"
         Title="Cadastro Investigação" Height="493" Width="752.232"
         BorderBrush="{DynamicResource AccentColorBrush}"
+        WindowTransitionsEnabled="False"
         BorderThickness="1" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
     <Controls:MetroWindow.Resources>
         <Style x:Key="MaskedTextBoxStyle1" TargetType="{x:Type Custom:MaskedTextBox}">

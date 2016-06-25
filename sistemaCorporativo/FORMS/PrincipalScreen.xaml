@@ -5,12 +5,13 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="PrincipalScreen1" x:Class="sistemaCorporativo.FORMS.principalScreen.PrincipalScreen"
-        Title="D.P.I.C.S.P Departamento Policial de Investigação Criminal de São Paulo" Height="729" Width="1361"
+        Title="D.P.I.C.S.P Departamento Policial de Investigação Criminal de São Paulo" Height="729" Width="1363"
 		TextBlock.TextAlignment="Center"
+        IgnoreTaskbarOnMaximize="True"
 		BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
-		WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="PrincipalScreen1_Loaded"
-	    >
+		WindowStartupLocation="CenterOwner" Loaded="PrincipalScreen1_Loaded"  WindowState="Maximized" 
+		>
     <Controls:MetroWindow.Resources>
         <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
             <Setter Property="Template">
@@ -97,7 +98,22 @@
             </Setter>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
+        <Storyboard x:Key="dockbarAnimation">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grdDockbar">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0.027"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="grdDockbar">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="22.375"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Controls:MetroWindow.Resources>
+	<Controls:MetroWindow.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<BeginStoryboard Storyboard="{StaticResource dockbarAnimation}"/>
+		</EventTrigger>
+	</Controls:MetroWindow.Triggers>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button x:Name="btnPerfil" Click="btnPerfil_Click">
@@ -126,7 +142,25 @@
             <RowDefinition Height="221*"/>
             <RowDefinition Height="23*"/>
         </Grid.RowDefinitions>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Grid.RowSpan="2" Height="Auto" MaxHeight="{Binding ElementName=grdPrincipal, Path=ActualHeight}">
+		<Grid x:Name="grdDockbar" Margin="0,16.982,0,0" Grid.Row="1" RenderTransformOrigin="0.5,0.5">
+			<Grid.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Grid.RenderTransform>
+			<Grid.Background>
+				<SolidColorBrush Color="Black" Opacity="0.52"/>
+			</Grid.Background>
+			<TextBlock HorizontalAlignment="Left" Height="20" Margin="65,16.625,0,0" TextWrapping="Wrap" Text="Banco de dados:" VerticalAlignment="Top" Width="90" Foreground="White" TextAlignment="Left"/>
+            <TextBlock x:Name="txbDatabase" HorizontalAlignment="Left" Height="20" Margin="160,16.625,0,0" TextWrapping="Wrap" Text="Local" VerticalAlignment="Top" Width="36.667" Foreground="White" TextAlignment="Left"/>
+            <Path Data="M316.25,646.75 L316.25,692.54369" Fill="Black" HorizontalAlignment="Left" Height="34.319" Margin="294,7.538,0,0" Stretch="Fill" VerticalAlignment="Top" Width="5.75" Stroke="#FF8B8B8B"/>
+            <TextBlock x:Name="txbDataHora" HorizontalAlignment="Left" Height="20" Margin="334.291,16.625,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="422" Foreground="White" TextAlignment="Left"/>
+        
+	    </Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Grid.RowSpan="2" Height="Auto" MaxHeight="{Binding ActualHeight, ElementName=grdPrincipal}">
             <Grid x:Name="grdPrincipal1" HorizontalAlignment="Left" Height="514" Margin="65,145,-310,0" VerticalAlignment="Top" Width="1596" Grid.RowSpan="2">
 
                 <Label Content="Software" HorizontalAlignment="Left" Margin="883.5,2.017,0,0" VerticalAlignment="Top" FontFamily="Segoe WP Light" FontSize="29.333"/>
@@ -142,55 +176,35 @@
 
                 <Label Content="Cadastro" HorizontalAlignment="Left" Margin="27,2.017,0,0" VerticalAlignment="Top" FontFamily="Segoe WP Light" FontSize="29.333"/>
 
-                <Controls:Tile Margin="687,344.034,792.5,74.964" Height="Auto" Width="Auto" TiltFactor="2" ToolTip="Comparar Assinatura">
-                    <Controls:Tile.Background>
-                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
-                    </Controls:Tile.Background>
-                    <Image Source="/sistemaCorporativo;component/IMAGES/Assinatura_FLAT.png" Margin="67,21,10,0"  Width="115.5" Height="140.002"/>
-                </Controls:Tile>
-                <Controls:Tile Margin="566,344.034,914,74.966" Height="Auto" Width="Auto" TiltFactor="2" Title="" ToolTip="Analisar DNA">
-                    <Controls:Tile.Background>
-                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
-                    </Controls:Tile.Background>
-                    <Image Source="/sistemaCorporativo;component/IMAGES/dna_FLAT.png" Margin="84,18,10,0"  Height="120" Width="150"/>
-                </Controls:Tile>
-                <Controls:Tile Margin="566,243.035,792.5,174.966" Height="Auto" Width="Auto" TiltFactor="2" Title="Reconhecimento Facial">
-                    <Controls:Tile.Background>
-                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
-                    </Controls:Tile.Background>
-                    <Image Source="/sistemaCorporativo;component/IMAGES/Reconhecimento_Facial_FLAT.png" Margin="69,16,10,0"  Height="120.999" Width="237.5"/>
-                </Controls:Tile>
+                
+                
+                
+
                 <Controls:Tile Margin="566,51.034,792.5,275.965" Height="Auto" Width="Auto" TiltFactor="2" Title="Comparar Impressão Digital">
                     <Controls:Tile.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                     </Controls:Tile.Background>
                     <Image Source="/sistemaCorporativo;component/IMAGES/Finger_Print_tools_FLAT.png" Margin="146,27,10,0"  Height="280.001" Width="250.5"/>
                 </Controls:Tile>
-                <Controls:Tile Margin="242,243,1116,175" Height="Auto" Width="Auto" Click="TileOcorrencia_Click" Title="Cadastrar Ocorrência">
+                <Controls:Tile x:Name="tileInvestigacao" Margin="242,243,1116,175" Height="Auto" Width="Auto" Click="TileInvestigacao_Click" Title="Gerênciar Investigações">
                     <Controls:Tile.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                     </Controls:Tile.Background>
                     <Image Source="/sistemaCorporativo;component/IMAGES/Ocorrencia_FLAT.png" Margin="168,2,90,0"  Height="149.999" Width="270.5"/>
                 </Controls:Tile>
-                <Controls:Tile Margin="242.5,344.034,1237.5,74.964" Height="Auto" Width="Auto" Click="TileDenuncia_Click" Title="" ToolTip="Cadastrar Denuncia">
+                <Controls:Tile x:Name="tileDenuncia" Margin="242.5,344.034,1237.5,74.964" Height="Auto" Width="Auto" Click="TileDenuncia_Click" Title="" ToolTip="Registrar Denuncia">
                     <Controls:Tile.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                     </Controls:Tile.Background>
                     <Image Source="/sistemaCorporativo;component/IMAGES/Denuncia_Normal_FLAT.png" Margin="73,12,10,0"  Height="121" Width="250"/>
                 </Controls:Tile>
-                <Controls:Tile Margin="363.5,344.034,1116.5,74.966" Height="Auto" Width="Auto" Click="Tile_Click_4" ToolTip="Cadastrar Denuncia Anônima">
-                    <Controls:Tile.Background>
-                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
-                    </Controls:Tile.Background>
-                    <Image Source="/sistemaCorporativo;component/IMAGES/Denuncia_Anonima_FLAT.png" Margin="85,19,10,0"  Height="131" Width="250"/>
-                </Controls:Tile>
-                <Controls:Tile Margin="242,51.034,1116.5,275.965" Height="Auto" Width="Auto" Click="TileViatura_Click_" Title="Cadastrar Viatura">
+                <Controls:Tile x:Name="tileViatura" Margin="242,51.034,1116.5,275.965" Height="Auto" Width="Auto" Click="TileViatura_Click_" Title="Cadastrar Viatura">
                     <Controls:Tile.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                     </Controls:Tile.Background>
                     <Image Source="/sistemaCorporativo;component/IMAGES/Viatura_FLAT.png" Margin="118,53,10,0"  Height="229" Width="240" Stretch="Fill"/>
                 </Controls:Tile>
-                <Controls:Tile Margin="27,51.036,1359,74.964" Height="Auto" Width="Auto" Click="TileAgente_Click" Title="Cadastrar Agente" >
+                <Controls:Tile x:Name="tileAgente" Margin="27,51.036,1359,74.964" Height="Auto" Width="Auto" Click="TileAgente_Click" Title="Cadastrar Agente" >
                     <Controls:Tile.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                     </Controls:Tile.Background>
@@ -209,10 +223,9 @@
             <MenuItem Header="Cadastrar" Width="72.937">
                 <MenuItem Header="Investigação">
                     <MenuItem Header="Denuncia" Click="DenunciaMenuItem_Click" />
-                    <MenuItem Header="Denuncia Anônima" Click="DenunciaAnonMenuItem_Click" />
-                    <MenuItem Header="Ocorrência" Click="OcorrenciaMenuItem_Click"/>
+                    <MenuItem Header="Gerenciar Investigações" Click="OcorrenciaMenuItem_Click"/>
                 </MenuItem>
-                <MenuItem Header="Departamento" >
+                <MenuItem Header="DPCI" >
                     <MenuItem Header="Agente" Click="AgenteMenuItem_Click"/>
                     <MenuItem Header="Viatura" Click="ViaturaMenuItem_Click"/>
                 </MenuItem>
@@ -227,13 +240,13 @@
                 <MenuItem Header="Sobre"/>
             </MenuItem>
         </Menu>
-        
+		
     </Grid>
 
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl x:Name="FlyoutPrincipal">
             <Controls:Flyout x:Name="flyoutAgente" Width="304" Grid.RowSpan="2" AllowDrop="False" AllowFocusElement="True" IsPinned="False" AnimateOnPositionChange="True" Theme="Adapt" Loaded="FlyoutAgente_Loaded">
-                <Canvas>
+                <Canvas x:Name="canvasF">
                     <Image Margin="0,0,0,0" x:Name="agenteProfilePicture" Height="197" Canvas.Left="54" Width="193" Source="/sistemaCorporativo;component/IMAGES/User_Profile.png" Canvas.Top="-19" Stretch="Fill">
                         <Image.Clip>
                             <EllipseGeometry Center="97,89" RadiusX="90" RadiusY="83"/>
@@ -243,14 +256,19 @@
                     <Label Content="Nível:" Canvas.Left="10" Canvas.Top="234.22" FontFamily="Segoe WP SemiLight" FontSize="14"/>
                     <Label x:Name="lblNivel" Content="" Canvas.Left="47" Canvas.Top="234.22" FontFamily="Segoe WP SemiLight" FontSize="14"/>
                     <Image x:Name="imgBrooch" HorizontalAlignment="Left" Height="54" VerticalAlignment="Top" Width="101" Source="/sistemaCorporativo;component/IMAGES/escudo nivel 1.png" Stretch="Fill" Canvas.Left="193" Canvas.Top="216"/>
-                    <Label Content="Cargo:" Canvas.Left="10" Canvas.Top="261.953" FontFamily="Segoe WP SemiLight" FontSize="14"/>
-                    <Label x:Name="lblCargo" Content="" Canvas.Left="54" Canvas.Top="261.953" FontFamily="Segoe WP SemiLight" FontSize="14"/>
-                    <Label Content="Casos resolvidos:" Canvas.Left="10" Canvas.Top="289.686" FontFamily="Segoe WP SemiLight" FontSize="14"/>
-                    <Label x:Name="lblCasosResolvidos" Content="" Canvas.Left="115" Canvas.Top="289.686" FontFamily="Segoe WP SemiLight" FontSize="14"/>
+                    <Label Content="Cargo:" Canvas.Left="10" Canvas.Top="292" FontFamily="Segoe WP SemiLight" FontSize="14"/>
+                    <Label x:Name="lblCargo" Content="" Canvas.Left="54" Canvas.Top="292" FontFamily="Segoe WP SemiLight" FontSize="14"/>
+                    <Label Content="Casos resolvidos:" Canvas.Left="10" Canvas.Top="321" FontFamily="Segoe WP SemiLight" FontSize="14"/>
+                    <Label x:Name="lblCasosResolvidos" Content="" Canvas.Left="115" Canvas.Top="321" FontFamily="Segoe WP SemiLight" FontSize="14"/>
                     <Controls:ToggleSwitch x:Name="tgsTema" Header="Tema Claro" Canvas.Left="10" Canvas.Top="509.72" Height="64.28" Width="109.83" Checked="tgsTema_Checked" IsCheckedChanged="tgsTema_IsCheckedChanged" Content="" />
-                    <Button x:Name="btnFzrLogoff" Content="Fazer logoff" Canvas.Top="619" Width="304.5" Height="34.333" FontSize="10.667" FontFamily="Segoe UI Light" Background="#FF262626" Foreground="White" Click="btnFzrLogoff_Click"/>
-
+                    <Label Content="Pontos experiência:" Canvas.Left="10" Canvas.Top="263" FontFamily="Segoe WP SemiLight" FontSize="14"/>
+                    <Label x:Name="lblPtsExp" Content="" Canvas.Left="129" Canvas.Top="263" FontFamily="Segoe WP SemiLight" FontSize="14" RenderTransformOrigin="0.5,0.5"/>
+                    
+					<DockPanel Canvas.Bottom="1" Height="35.5" Width="304" Canvas.Top="621.5">
+						<Button  x:Name="btnFzrLogoff" Content="Fazer logoff" Canvas.Top="623" Width="304" Height="34" FontSize="10.667" FontFamily="Segoe UI Light" Background="#FF262626" Foreground="White" Click="btnFzrLogoff_Click" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+					</DockPanel>
                 </Canvas>
+				
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>

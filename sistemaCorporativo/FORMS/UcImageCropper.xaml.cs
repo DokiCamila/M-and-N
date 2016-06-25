@@ -101,7 +101,6 @@ namespace ImageCropper
         private RoutedEventHandler cmSelectionCanvasRoutedEventHandler;
         private ContextMenu cmDragCanvas;
         private RoutedEventHandler cmDragCanvasRoutedEventHandler;
-        private string fixedTempName = "temp";
         private long fixedTempIdx = 1;
         private double zoomFactor = 1.0;
         public BitmapImage bmpPopup;
@@ -426,7 +425,7 @@ namespace ImageCropper
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
             }

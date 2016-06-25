@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\App.xaml
-171438786312
+19650714373
 
-33284496338
-26289249523
-FORMS\CadAgente.xaml;FORMS\CadDenuncia.xaml;FORMS\CadDenunciaAnon.xaml;FORMS\CadFingerPrints.xaml;FORMS\CadInvestigacao.xaml;FORMS\CadViatura.xaml;FORMS\ClassificarFingersPrints.xaml;FORMS\CortarImagem.xaml;FORMS\gerarLoginWindow.xaml;FORMS\LoginScreen.xaml;FORMS\LogoffSplash.xaml;FORMS\individualDactiloscopica.xaml;FORMS\PrincipalScreen.xaml;FORMS\SplashScreen.xaml;FORMS\UcImageCropper.xaml;FORMS\WebcamWindow.xaml;Resources\Icons.xaml;
+39-75921655
+28-1632739083
+FORMS\CadAgente.xaml;FORMS\CadCaso.xaml;FORMS\CadDenuncia.xaml;FORMS\CadFingerPrints.xaml;FORMS\CadInvestigacao.xaml;FORMS\CadViatura.xaml;FORMS\ClassificarFingersPrints.xaml;FORMS\CortarImagem.xaml;FORMS\crimeManagementSplash.xaml;FORMS\crimeManagementWindow.xaml;FORMS\gerarLoginWindow.xaml;FORMS\LoginScreen.xaml;FORMS\LogoffSplash.xaml;FORMS\individualDactiloscopica.xaml;FORMS\PrincipalScreen.xaml;FORMS\SplashScreen.xaml;FORMS\UcImageCropper.xaml;FORMS\WebcamWindow.xaml;Resources\Icons.xaml;
 
 False
 

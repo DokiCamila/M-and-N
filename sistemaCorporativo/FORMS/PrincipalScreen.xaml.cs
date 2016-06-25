@@ -24,8 +24,7 @@ using MahApps.Metro;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
 using sistemaCorporativo.UTIL.databaseAdress;
-
-
+using System.Windows.Media.Animation;
 
 
 namespace sistemaCorporativo.FORMS.principalScreen
@@ -35,11 +34,25 @@ namespace sistemaCorporativo.FORMS.principalScreen
     /// </summary>
     public partial class PrincipalScreen : MetroWindow
     {
+        DateTime horaedata;
         private string user;
         public PrincipalScreen(string usuario)
         {
-            InitializeComponent();
+            
+			System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
+			InitializeComponent();
+			
             user = usuario.ToString();
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            //Hora e Data
+            horaedata = DateTime.Now;
+            txbDataHora.Text = "Data: " + horaedata.ToLongDateString() + " Hora: " + horaedata.ToLongTimeString();
         }
 
         //Strings para informações do usuario (FLYOUT)
@@ -48,15 +61,19 @@ namespace sistemaCorporativo.FORMS.principalScreen
         string idAgente;
         string name;
         int nivel;
+        int xp;
+        string ptsexperiencia;
         string ProfilePic;
         //Endereço database
         databaseAddress db = new databaseAddress();
 
+        //Boolean TemaClaro
+        public Boolean temaClaro = false;
         
         
         private void AgenteMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            CadAgente cadAgente = new CadAgente();
+            CadAgente cadAgente = new CadAgente(this);
             cadAgente.ShowDialog();
         }
         
@@ -73,13 +90,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
             cadDenuncia.ShowDialog();
         }
 
-        private void DenunciaAnonMenuItem_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            CadDenunciaAnon cadDenunciaAnon = new CadDenunciaAnon();
-            cadDenunciaAnon.ShowDialog();
-        	
-        }
-
+   
         private void btnPerfil_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             flyoutAgente.IsOpen = true;
@@ -104,6 +115,8 @@ namespace sistemaCorporativo.FORMS.principalScreen
             SolidColorBrush solidLight = new SolidColorBrush();
             solidLight.Color = Color.FromArgb(255, 147, 147, 147);
             btnFzrLogoff.Background = solidLight;
+            temaClaro = true;
+            
             }
             catch (Exception ex)
             {
@@ -129,7 +142,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
             SolidColorBrush solidDark= new SolidColorBrush();
             solidDark.Color = Color.FromArgb(255, 38, 38, 38);
             btnFzrLogoff.Background = solidDark;
-            
+            temaClaro = false;
             }
             catch (Exception ex)
             {
@@ -157,7 +170,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
         {
             try
             {
-             CadAgente cadAgente = new CadAgente();
+             CadAgente cadAgente = new CadAgente(this);
              cadAgente.ShowDialog();
             }
             catch (Exception ex)
@@ -165,7 +178,6 @@ namespace sistemaCorporativo.FORMS.principalScreen
 
                 MessageBox.Show(ex.Message);
             }
-            
             
         }
 
@@ -182,19 +194,18 @@ namespace sistemaCorporativo.FORMS.principalScreen
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void TileOcorrencia_Click(object sender, System.Windows.RoutedEventArgs e)
+		
+        private void TileInvestigacao_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-			try{
-		     CadOcorrencia cadOcorrencia = new CadOcorrencia();
-             cadOcorrencia.ShowDialog();
+        	try
+			{
+				crimeManagementSplash cms = new crimeManagementSplash();
+				cms.ShowDialog();
 			}
-			catch (Exception ex)
-            {
-                
+			catch(Exception ex)
+			{
                 MessageBox.Show(ex.Message);
-            }
-        	
+			}
         }
 
         private void TileDenuncia_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -206,16 +217,9 @@ namespace sistemaCorporativo.FORMS.principalScreen
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
         	
-        }
-
-        private void Tile_Click_4(object sender, System.Windows.RoutedEventArgs e)
-        {
-        	CadDenunciaAnon cadDenunciaAnon = new CadDenunciaAnon();
-            cadDenunciaAnon.ShowDialog();
         }
 
         private void btnFzrLogoff_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -241,7 +245,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
 
             //String para buscar informações do usuario
             string SQL_SEARCH_ADVANCED = "select a.id_Agente, a.nome, l.nome_User from agente a Join LOGIN_AGENTE l on (l.id_Agente = '" + idAgente + "' and l.ID_AGENTE = a.ID_AGENTE and a.status != 0)";
-            string SQL_PROFILE_SEARCH = "select nivel_Agente, casos_resolvidos from perfil_Agente where id_Agente ='" + idAgente + "'";
+            string SQL_PROFILE_SEARCH = "select nivel_Agente, casos_resolvidos, xp from perfil_Agente where id_Agente ='" + idAgente + "' and status = 1";
             OracleCommand cmdConsulta = new OracleCommand(SQL_SEARCH_ADVANCED, Oracon);
             OracleCommand cmdProfile = new OracleCommand(SQL_PROFILE_SEARCH, Oracon);
             OracleDataReader reader = cmdConsulta.ExecuteReader();
@@ -252,6 +256,9 @@ namespace sistemaCorporativo.FORMS.principalScreen
             name = Convert.ToString(reader[1].ToString());
             nivel = Convert.ToInt32(rProfile[0]);
             casosResolvidos = Convert.ToInt32(rProfile[1].ToString());
+            xp = (Convert.ToInt32(rProfile[2].ToString()));
+            ptsexperiencia = (xp.ToString() + " XP");
+            
 
             string SQL_SEARCH_CARGO = "select a.nome, a.id_cargo, c.nome_cargo from CARGO c inner join agente a on c.ID_CARGO = a.ID_CARGO and a.ID_AGENTE ='" + idAgente + "'";
             OracleCommand cmdCargo = new OracleCommand(SQL_SEARCH_CARGO, Oracon);
@@ -271,7 +278,11 @@ namespace sistemaCorporativo.FORMS.principalScreen
 
             Oracon.Close();
 
-            name = nameAndLastName.FormataNome(name);       
+            name = nameAndLastName.FormataNome(name); 
+			
+			//Animation Dockbar
+			Storyboard Animation = this.FindResource("dockbarAnimation") as Storyboard;
+            Animation.Begin();
         }
 
         private void FlyoutAgente_Loaded(object sender, RoutedEventArgs e)
@@ -279,12 +290,14 @@ namespace sistemaCorporativo.FORMS.principalScreen
             //Carregar Informações do Usuario
             lblNomeAgente.Content = name.ToString();
             lblNivel.Content = nivel.ToString();
+            lblPtsExp.Content = ptsexperiencia.ToString();
             lblCargo.Content = cargo.ToString();
             lblCasosResolvidos.Content = casosResolvidos.ToString();
             agenteProfilePicture.Source = new BitmapImage(new Uri(ProfilePic));
 
 
             
-        }	  
+        }
+	  
     }
 }

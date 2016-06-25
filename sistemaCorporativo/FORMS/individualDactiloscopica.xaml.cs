@@ -141,7 +141,7 @@ namespace sistemaCorporativo.FORMS
                 #endregion
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Informações não carregadas!", "Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
             }

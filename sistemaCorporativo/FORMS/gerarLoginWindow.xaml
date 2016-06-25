@@ -5,6 +5,7 @@
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         Title="Gerar Login" WindowStartupLocation="CenterScreen" Height="327.068" Width="386.841" ResizeMode="NoResize"
         BorderBrush="{DynamicResource AccentColorBrush}"
+        WindowTransitionsEnabled="False"
         BorderThickness="0,1" Loaded="MetroWindow_Loaded" ShowInTaskbar="False">
     <Grid>
         <Image Margin="153,110,0,-76" Source="/sistemaCorporativo;component/IMAGES/searchGray.png" Height="262" VerticalAlignment="Top" HorizontalAlignment="Left" Width="178"/>

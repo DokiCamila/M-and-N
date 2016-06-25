@@ -6,6 +6,7 @@
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Custom="http://schemas.AvalonControls/AvalonControlsLibrary/Controls" mc:Ignorable="d" x:Class="sistemaCorporativo.FORMS.CadViatura"
         Title="Cadastro Viatura" Height="397.5" Width="491"
+        WindowTransitionsEnabled="False"
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
 		WindowStartupLocation="CenterScreen" ResizeMode="NoResize" ShowInTaskbar="False" Loaded="MetroWindow_Loaded" KeyUp="MetroWindow_KeyUp">
@@ -300,7 +301,7 @@
                     <TextBox x:Name="txtFabricante" HorizontalAlignment="Left" Height="23" Margin="10,45.486,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="120" TabIndex="1"/>
                     <Label Content="Placa" HorizontalAlignment="Left" Margin="142,19.526,0,0" VerticalAlignment="Top"/>
                     <Label Content="Chassi" HorizontalAlignment="Left" Margin="240,19.526,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txtChassi" HorizontalAlignment="Left" Height="23" Margin="231,46,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="182" TabIndex="3"/>
+                    <TextBox x:Name="txtChassi" HorizontalAlignment="Left" Height="23" Margin="231,46,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="182" TabIndex="3" PreviewKeyDown="txtChassi_PreviewKeyDown"/>
                     <Button x:Name="btnCadastrar" Style="{DynamicResource SquareButtonStyle}" Content="Cadastrar" HorizontalAlignment="Left" Margin="348,269,0,0" VerticalAlignment="Top" Width="97" Height="33" Background="#FF35A3CD" RenderTransformOrigin="0.459,-0.293" Click="btnCadastrar_Click" TabIndex="6"/>
                     <Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}" Content="Cancelar" HorizontalAlignment="Left" Margin="144,269,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnCancelar_Click" TabIndex="4"/>
                     <Button x:Name="btnLimpar" Style="{DynamicResource SquareButtonStyle}" Content="limpar campos" HorizontalAlignment="Left" Margin="246,269,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnLimpar_Click" TabIndex="5"/>

@@ -14,7 +14,11 @@
 				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
+                 
             </ResourceDictionary.MergedDictionaries>
+        	<ControlTemplate x:Key="newTabTemplate" TargetType="{x:Type TabItem}">
+        		<Grid/>
+        	</ControlTemplate>
         </ResourceDictionary>
 
     </Application.Resources>

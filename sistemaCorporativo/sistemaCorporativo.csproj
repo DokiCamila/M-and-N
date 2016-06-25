@@ -116,12 +116,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Downloads\Release V2\Release V2\AvalonControlsLibrary\AvalonControlsLibrary\bin\Debug\AvalonControlsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="Dragablz">
+      <HintPath>..\packages\Dragablz.0.0.3.163\lib\net45\Dragablz.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Effects" />
     <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Odyssey">
+      <HintPath>..\..\..\..\..\Downloads\Odyssey.dll</HintPath>
+    </Reference>
     <Reference Include="Oracle.DataAccess, Version=4.112.3.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\..\app\client\Matheus\product\12.1.0\client_2\odp.net\bin\2.x\Oracle.DataAccess.dll</HintPath>
@@ -152,11 +158,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FORMS\CadCaso.xaml.cs">
+      <DependentUpon>CadCaso.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FORMS\CadDenuncia.xaml.cs">
       <DependentUpon>CadDenuncia.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FORMS\CadDenunciaAnon.xaml.cs">
-      <DependentUpon>CadDenunciaAnon.xaml</DependentUpon>
     </Compile>
     <Compile Include="FORMS\CadFingerPrints.xaml.cs">
       <DependentUpon>CadFingerPrints.xaml</DependentUpon>
@@ -169,6 +175,12 @@
     </Compile>
     <Compile Include="FORMS\CortarImagem.xaml.cs">
       <DependentUpon>CortarImagem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FORMS\crimeManagementSplash.xaml.cs">
+      <DependentUpon>crimeManagementSplash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FORMS\crimeManagementWindow.xaml.cs">
+      <DependentUpon>crimeManagementWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="FORMS\gerarLoginWindow.xaml.cs">
       <DependentUpon>gerarLoginWindow.xaml</DependentUpon>
@@ -186,6 +198,8 @@
       <DependentUpon>WebcamWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TO\Agente.cs" />
+    <Compile Include="TO\Denuncia.cs" />
+    <Compile Include="TO\FingerPrintsAgente.cs" />
     <Compile Include="UTIL\checkPassword.cs" />
     <Compile Include="TO\Viatura.cs" />
     <Compile Include="UTIL\croppingAdorner.cs" />
@@ -193,18 +207,20 @@
     <Compile Include="UTIL\dragCanvas.cs" />
     <Compile Include="UTIL\nameAndLastName.cs" />
     <Compile Include="UTIL\puncturedRect.cs" />
+    <Compile Include="UTIL\SCANNERCLASSES\Device.cs" />
+    <Compile Include="UTIL\SCANNERCLASSES\IScanner.cs" />
     <Compile Include="UTIL\SelectionCanvas.cs" />
     <Page Include="FORMS\CadAgente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FORMS\CadCaso.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="FORMS\CadDenuncia.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="FORMS\CadDenunciaAnon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="FORMS\CadFingerPrints.xaml">
       <SubType>Designer</SubType>
@@ -225,6 +241,14 @@
     <Page Include="FORMS\CortarImagem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FORMS\crimeManagementSplash.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FORMS\crimeManagementWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="FORMS\gerarLoginWindow.xaml">
       <SubType>Designer</SubType>
@@ -272,6 +296,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Properties\DesignTimeResources.xaml" Condition="'$(DesignTime)'=='true' OR ('$(SolutionPath)'!='' AND Exists('$(SolutionPath)') AND '$(BuildingInsideVisualStudio)'!='true' AND '$(BuildingInsideExpressionBlend)'!='true')">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+    </Page>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -302,10 +331,16 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Design\projectGuides.guides" />
+    <None Include="IMAGES\cold_steel_american_lawman.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="IMAGES\Dark_Wallpaper.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="IMAGES\Light_Wallpaper.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="IMAGES\Logo Maior.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="IMAGES\SplashScreenBackground5.png">
@@ -317,17 +352,23 @@
     <None Include="IMAGES\WallpaperDna_Light.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="IMAGES\advanced_search_icon.png" />
     <Resource Include="IMAGES\Assinatura.png" />
+    <Resource Include="IMAGES\btnAdcCase_icon.png" />
+    <Resource Include="IMAGES\btnDelCase_icon.png" />
+    <Resource Include="IMAGES\citations_icon.png" />
     <Resource Include="IMAGES\Close.png" />
     <Resource Include="IMAGES\Denuncia.png" />
     <Resource Include="IMAGES\Denuncia_Anonima.png" />
     <Resource Include="IMAGES\Denuncia_Normal.png" />
     <Resource Include="IMAGES\dna.png" />
+    <Resource Include="IMAGES\evidencia_icon.png" />
     <Resource Include="IMAGES\Face.png" />
     <Resource Include="IMAGES\Finger_Print.png" />
     <Resource Include="IMAGES\Finger_Print_tools.png" />
@@ -335,12 +376,20 @@
     <Resource Include="IMAGES\fundo flat.png" />
     <Resource Include="IMAGES\Icon_Login FLAT DESIGN.png" />
     <Resource Include="IMAGES\impressao Digital Recurso.png" />
+    <Resource Include="IMAGES\investigation_Icon.png" />
     <Resource Include="IMAGES\nothing.png" />
     <Resource Include="IMAGES\Ocorrencia.png" />
     <Resource Include="IMAGES\Pesquisa_Avancada.png" />
     <Resource Include="IMAGES\reconhecimento_Facial.png" />
+    <Resource Include="IMAGES\searchbyAddress_icon.png" />
+    <Resource Include="IMAGES\searchbyBussiness_icon.png" />
+    <Resource Include="IMAGES\searchbyCar_icon.png" />
+    <Resource Include="IMAGES\searchbyNum_icon.png" />
+    <Resource Include="IMAGES\searchbyPerson_icon.png" />
+    <Resource Include="IMAGES\security_icon.png" />
     <Resource Include="IMAGES\Settings.png" />
     <Resource Include="IMAGES\Sobre.png" />
+    <Resource Include="IMAGES\tarefa_icon.png" />
     <Resource Include="IMAGES\Tools.png" />
     <Resource Include="IMAGES\User_Add.png" />
     <Resource Include="IMAGES\User_Profile.png" />

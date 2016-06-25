@@ -4,6 +4,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Title="Classificar Impressão Digital" Height="428.572" Width="505.263"
         BorderBrush="{DynamicResource AccentColorBrush}"
+         WindowTransitionsEnabled="False"
         BorderThickness="1" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" Loaded="classFingerWindow_Loaded">
     <Grid>
 

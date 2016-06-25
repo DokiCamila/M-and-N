@@ -50,7 +50,7 @@ namespace sistemaCorporativo.FORMS
         //Variável para criar o login
         private string SQL_INSERT_LOGIN = "insert into login_agente (id_LoginAgente, id_Agente, nome_User, senha_User, nivel_Acesso, status) values (seq_LoginAgente.NEXTVAL, :idAgente, :nomeUser, :senhaUser, :nivelAcesso, 1)";
          //Variável para criar o perfil
-        private string SQL_INSERT_PROFILE = "insert into perfil_agente (id_PerfilAgente, id_Agente, nivel_Agente, casos_Resolvidos) values(seq_PerfilAgente.NEXTVAL, :idAgente, 1, 0)";
+        private string SQL_INSERT_PROFILE = "insert into perfil_agente (id_PerfilAgente, id_Agente, nivel_Agente, xp, casos_Resolvidos, status) values(seq_PerfilAgente.NEXTVAL, :idAgente, 1, 0, 0, 1)";
         //String para checar se o login ja existe
         private string SQL_CHECK_LOGIN = "SELECT count(l.ID_AGENTE) as total FROM LOGIN_AGENTE l where l.ID_AGENTE = :id and status = 1";
         //Variável que receberá o nome do agente 

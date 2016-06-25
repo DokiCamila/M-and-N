@@ -1,0 +1,22 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls"
+	x:Class="sistemaCorporativo.crimeManagementSplash"
+	x:Name="Window"
+	Title="crimeManagementSplash"
+	Width="618" Height="371" MouseLeftButtonDown="crimeManagementSplashDrag"
+	WindowStartupLocation="CenterScreen" ShowInTaskbar="False"
+	WindowStyle="None" ResizeMode="NoResize" Loaded="Window_Loaded"
+	>
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.Background>
+			<ImageBrush ImageSource="pack://siteoforigin:,,,/IMAGES/cold_steel_american_lawman.jpg"/>
+		</Grid.Background>
+		<ProgressBar x:Name="pgbCrimeM" HorizontalAlignment="Left" Margin="175,311,0,0" VerticalAlignment="Top" Width="271" Height="7" Minimum="0" Maximum="50" Opacity="0" />
+		<Custom:ProgressRing x:Name="pgRCrimeM" IsActive="True" Margin="290.956,208.107,292,130.089" Height="32.804" Width="35.044" Foreground="White"/>
+		<Label x:Name="label1" Content="CRIME" Margin="0,86.543,211.5,0" FontSize="64" FontFamily="Caviar Dreams" HorizontalAlignment="Right" Width="196.377" Height="121.564" VerticalAlignment="Top"/>
+		<Label x:Name="label2" Content="M•A•N•A•G•E•M•E•N•T" Margin="0,0,211.5,167.893" FontSize="16" FontFamily="Caviar Dreams" FontWeight="Bold" Height="39.77" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="186.877"/>
+	</Grid>
+</Window>

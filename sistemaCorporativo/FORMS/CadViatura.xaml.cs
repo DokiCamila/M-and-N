@@ -38,6 +38,8 @@ namespace sistemaCorporativo.FORMS
        
         //Criar Variável para edições(atualizações) e exclusões;
         public string id;
+
+        #region SQL
         //Criar string com o comando para listar
         private string SQL_SELECT_ALL = "select * from viatura where status = 1";
         //Criar string com o comando para inserir
@@ -46,6 +48,7 @@ namespace sistemaCorporativo.FORMS
         private string SQL_DELETE;
         //Criar string (sem o comando) para atualizar
         private string SQL_UPDATE;
+        #endregion
         //endereço
         databaseAddress db = new databaseAddress();
 
@@ -64,7 +67,7 @@ namespace sistemaCorporativo.FORMS
 
                 OracleDataAdapter adapter = new OracleDataAdapter(createCommand);
 
-                DataTable dt = new DataTable("viatura");
+                DataTable dt = new DataTable("Viatura");
                 adapter.Fill(dt);
                 dgvConteudo.ItemsSource = dt.DefaultView;
                 dgvConteudo.Columns[0].Header = "ID";
@@ -96,7 +99,7 @@ namespace sistemaCorporativo.FORMS
             //Checar Strings
             if (txtFabricante.Text == "" || txtPlaca.Text == "" || txtChassi.Text == "")
             {
-                await this.ShowMessageAsync("Atenção", "Preencha todos os campos!");
+                await this.ShowMessageAsync("Aviso", "Todos os campos com '*' são obrigatórios");
             }
             else
             {
@@ -176,11 +179,11 @@ namespace sistemaCorporativo.FORMS
                                 //Abrir conexão com o banco de dados
                                 Oracon.Open();
 
-                                OracleCommand insertCommand = new OracleCommand(SQL_UPDATE, Oracon);
-                                insertCommand.Parameters.Add("fabricantemodelo", objViatura.getFabricanteModelo());
-                                insertCommand.Parameters.Add("placa", objViatura.getPlaca());
-                                insertCommand.Parameters.Add("chassi", objViatura.getChassi());
-                                insertCommand.ExecuteNonQuery();
+                                OracleCommand updateCommand = new OracleCommand(SQL_UPDATE, Oracon);
+                                updateCommand.Parameters.Add("fabricantemodelo", objViatura.getFabricanteModelo());
+                                updateCommand.Parameters.Add("placa", objViatura.getPlaca());
+                                updateCommand.Parameters.Add("chassi", objViatura.getChassi());
+                                updateCommand.ExecuteNonQuery();
 
                                 //Fechar conexão com o banco de dados
                                 Oracon.Close();
@@ -256,7 +259,7 @@ namespace sistemaCorporativo.FORMS
                         //Fechar conexão com o banco de dados
                         Oracon.Close();
 
-                        System.Windows.Forms.MessageBox.Show("Viatura deletada com sucesso!", "Aviso");
+                        System.Windows.Forms.MessageBox.Show("Viatura deletada com sucesso!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                         this.MetroWindow_Loaded(null, null);
 
                     }
@@ -355,6 +358,18 @@ namespace sistemaCorporativo.FORMS
         {
             this.Close();
         }
+		
+		#region Eventos validações controles
+		
+        private void txtChassi_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+        	if(e.Key == Key.Space)
+			{
+				e.Handled = true;
+			}
+        }
+
+		#endregion
 
 
     }

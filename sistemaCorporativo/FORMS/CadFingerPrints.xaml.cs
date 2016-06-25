@@ -17,8 +17,8 @@ using MahApps.Metro.Controls.Dialogs;
 using System.IO;
 using sistemaCorporativo.FORMS.cadAgente;
 using System.Windows.Media.Animation;
-
-
+using sistemaCorporativo.UTIL.Futronic;
+using System.Threading;
 
 namespace sistemaCorporativo.FORMS
 {
@@ -31,15 +31,25 @@ namespace sistemaCorporativo.FORMS
         //Dedos da mão
         public int dedos = 0;
         Boolean documento = false;
-
+  
         //Instanciar
         CadAgente cad;
         public CadFingerPrints(CadAgente info)
         {
             InitializeComponent();
             cad = info;
+            
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
         }
 
+        
+        //Scanner Biométrico
+        static Device d;
+        Thread t = new Thread(Window);
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+		private bool imagemScanner = false;
+        
         //Imagem da ID (same as the CadAgente)
         public BitmapSource polD, polE;
         public BitmapSource IndD, IndE;
@@ -310,6 +320,7 @@ namespace sistemaCorporativo.FORMS
                     if (allowableFileTypes.Contains(f.Extension.ToLower()))
                     {
                         this.UcImageCropper.ImageUrl = f.FullName;
+						rdbDocumento.IsChecked = true;
                         documento = true;
                         
                     }
@@ -329,7 +340,7 @@ namespace sistemaCorporativo.FORMS
         private async void btnInserir_Click(object sender, RoutedEventArgs e)
         {
             
-            if (documento)
+            if (documento || imagemScanner)
             {
                         switch (dedos)
                         {
@@ -435,7 +446,9 @@ namespace sistemaCorporativo.FORMS
 
         private async void inserirImpressao(Image impressao, BitmapSource insertinto) 
         {
-
+            if (documento)
+            {
+                //Inserir via Documento
                 this.UcImageCropper.SaveCroppedImage();
                 if (this.UcImageCropper.bmpPopup != null)
                 {
@@ -450,8 +463,16 @@ namespace sistemaCorporativo.FORMS
                     Passed = false;
                     await this.ShowMessageAsync("Aviso", "Selecione uma impressão digital no documento para continuar!");
 
-                }
-                           
+                } 
+            }
+            else
+            {
+                //Inserir via Leitor
+                impressao.Source = imgFingerLeitor.Source;
+                insertinto = imgFingerLeitor.Source as BitmapSource;
+				Passed = true;
+            }
+                                
         }
 
         private void btnClassificar_Click(object sender, RoutedEventArgs e)
@@ -469,6 +490,10 @@ namespace sistemaCorporativo.FORMS
         }
         private void itmSair_Click(object sender, RoutedEventArgs e)
         {
+			if(dispatcherTimer.IsEnabled)
+			{
+				dispatcherTimer.Stop();
+			}
             this.Close();
         }
 
@@ -552,12 +577,201 @@ namespace sistemaCorporativo.FORMS
              }
 
             //Close Window
-            this.Close();
+            btnCancelar_Click(null, null);
             cad.imgDigitalFront.Source = new BitmapImage(new Uri("pack://application:,,,/IMAGES/impressao Digital Recurso Checked transp.png"));
             Storyboard fingerAnimation = cad.FindResource("RotationImageFingerPrint") as Storyboard;
             fingerAnimation.Begin();
 
         }
-   
+
+        private void SC_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            //Controlando o scroll
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+            {
+                scDocumento.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+                ScrollViewer scrollviewer = sender as ScrollViewer;
+                if (e.Delta > 0)
+                {
+                    scrollviewer.LineLeft();
+                }
+                else
+                {
+                    scrollviewer.LineRight();
+                }
+                e.Handled = true;
+            }
+            else
+            {
+                scDocumento.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+                ScrollViewer scrollviewer = sender as ScrollViewer;
+                if (e.Delta > 0)
+                {
+                    scrollviewer.LineUp();
+                }
+                else
+                {
+                    scrollviewer.LineDown();
+                }
+                e.Handled = true;
+            }
+            
+
+            
+        }
+
+        #region Inserir Via Leitor Biométrico
+        private void rdbLeitor_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+			btnIniciarLeitor.Visibility = Visibility.Visible;
+            btnIniciarLeitor.IsEnabled = true;
+			
+			grdLeitor.Visibility = Visibility.Visible;
+			grdLeitor.IsEnabled = true;
+			
+			scDocumento.Visibility = Visibility.Hidden;
+			scDocumento.IsEnabled = false;
+			
+			Storyboard animation = this.FindResource("leitorAnimation") as Storyboard;
+            animation.Begin();
+			
+			lblStatusText.Visibility = Visibility.Visible;
+			lblStatusLeitor.Visibility = Visibility.Visible;
+
+            
+			documento = false;
+        }
+
+        private void run()
+        {
+			Device d = new Device();
+            if (!d.Init())
+            {
+                statusWrite("Dispositivo Desconectado!");
+                return;
+            }
+            statusWrite("Dispositivo Conectado!");
+
+
+            System.Drawing.Bitmap fingerprint = new System.Drawing.Bitmap(d.ExportBitMapFrame());
+
+           
+            //Show
+            imgFingerLeitor.Source = ConvertToBI(fingerprint);
+			if(!imagemScanner)
+			{
+				imagemScanner = true;
+				
+			}
+			
+            d.SetDiodesStatus(true, true);
+
+            d.SetDiodesStatus(false, false);
+            d.Dispose();
+
+           
+        }
+
+        private BitmapImage ConvertToBI(System.Drawing.Bitmap bmp)
+        {
+            //Convert
+            //Converter Bitmap To BitmapImage
+            MemoryStream ms = new MemoryStream();
+            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            BitmapImage fingerprintBitmapImage = new BitmapImage();
+            fingerprintBitmapImage.BeginInit();
+            ms.Seek(0, SeekOrigin.Begin);
+            fingerprintBitmapImage.StreamSource = ms;
+            fingerprintBitmapImage.EndInit();
+
+            return fingerprintBitmapImage;
+        }
+
+        private void statusWrite(string text)
+        {
+            lblStatusLeitor.Content = text;
+        }
+
+        static void Wait(int n)
+        {
+            int x = 0;
+            for (int i = 0; i < n; i++)
+                x += i;
+            
+        }
+
+        static void Window()
+        {
+            while (d.Connected)
+            {
+                Thread.Sleep(10000);
+                if (d.IsFinger())
+                {
+                }
+            }
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            //Iniciar Captura via Leitor
+            run();
+        }
+		
+		private void btnIniciarLeitor_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+        	dispatcherTimer.Start();
+			rdbDocumento.IsEnabled = false;
+			itmAbrirDoc.IsEnabled = false;
+			btnParar.IsEnabled = true;
+			btnParar.Visibility = Visibility.Visible;
+			btnIniciarLeitor.IsEnabled = false;
+			btnIniciarLeitor.Visibility = Visibility.Hidden;
+        }
+
+        #endregion
+
+        private void rdbDocumento_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+        	scDocumento.Visibility = Visibility.Visible;
+			scDocumento.IsEnabled = true;
+			
+			grdLeitor.Visibility = Visibility.Hidden;
+			grdLeitor.IsEnabled = false;
+			
+			Storyboard animation = this.FindResource("documentoAnimation") as Storyboard;
+            animation.Begin();
+			
+			lblStatusText.Visibility = Visibility.Hidden;
+			lblStatusLeitor.Visibility = Visibility.Hidden;
+			
+			if(dispatcherTimer.IsEnabled)
+			{
+				dispatcherTimer.Stop();
+			}	
+			imgFingerLeitor.Source = null;
+			documento = true;
+			imagemScanner = false;
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+			if(dispatcherTimer.IsEnabled)
+			{
+				dispatcherTimer.Stop();
+			}
+            this.Close();
+        }
+
+        private void btnParar_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+        	dispatcherTimer.Stop();
+			rdbDocumento.IsEnabled = true;
+			itmAbrirDoc.IsEnabled = true;
+			btnParar.IsEnabled = false;
+			btnParar.Visibility = Visibility.Hidden;
+			btnIniciarLeitor.IsEnabled = true;
+			btnIniciarLeitor.Visibility = Visibility.Visible;
+			imagemScanner = false;
+        }
     }
 }

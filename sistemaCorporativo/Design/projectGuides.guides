@@ -13,13 +13,42 @@
         </GuideModel>
       </GuideModels>
     </ProjectItemGuide>
-    <ProjectItemGuide TargetFile="FORMS\SplashScreen.xaml">
+    <ProjectItemGuide TargetFile="FORMS\crimeManagementSplash.xaml">
       <GuideModels>
         <GuideModel>
           <Guides>
-            <Guide Alignment="Left" Position="80" />
-            <Guide Alignment="Left" Position="344" />
-            <Guide Alignment="Top" Position="165" />
+            <Guide Alignment="Top" Position="184" />
+            <Guide Alignment="Left" Position="308" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
+    <ProjectItemGuide TargetFile="FORMS\CadFingerPrints.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Top" Position="543" />
+            <Guide Alignment="Top" Position="628" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
+    <ProjectItemGuide TargetFile="FORMS\crimeManagementWindow.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Left" Position="750" />
+            <Guide Alignment="Left" Position="142" />
+            <Guide Alignment="Top" Position="374" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
+    <ProjectItemGuide TargetFile="FORMS\individualDactiloscopica.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Top" Position="586" />
           </Guides>
         </GuideModel>
       </GuideModels>
@@ -28,12 +57,35 @@
       <GuideModels>
         <GuideModel>
           <Guides>
-            <Guide Alignment="Left" Position="630" />
-            <Guide Alignment="Left" Position="295" />
-            <Guide Alignment="Top" Position="660" />
-            <Guide Alignment="Left" Position="66" />
             <Guide Alignment="Top" Position="146" />
+            <Guide Alignment="Left" Position="630" />
             <Guide Alignment="Left" Position="516" />
+            <Guide Alignment="Left" Position="66" />
+            <Guide Alignment="Left" Position="295" />
+            <Guide Alignment="Top" Position="648" />
+            <Guide Alignment="Top" Position="685" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
+    <ProjectItemGuide TargetFile="FORMS\CadCaso.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Top" Position="255" />
+            <Guide Alignment="Top" Position="93" />
+            <Guide Alignment="Top" Position="124" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
+    <ProjectItemGuide TargetFile="FORMS\CadDenuncia.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Left" Position="579" />
+            <Guide Alignment="Left" Position="25" />
+            <Guide Alignment="Left" Position="69" />
           </Guides>
         </GuideModel>
       </GuideModels>
@@ -43,6 +95,17 @@
         <GuideModel>
           <Guides>
             <Guide Alignment="Left" Position="729" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
+    <ProjectItemGuide TargetFile="FORMS\SplashScreen.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Left" Position="80" />
+            <Guide Alignment="Left" Position="344" />
+            <Guide Alignment="Top" Position="165" />
           </Guides>
         </GuideModel>
       </GuideModels>
