@@ -106,7 +106,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
         //Variável id para gerar Logins (UNÍCA)
         public string idAgente;
         //Cropped Bitmap para a foto do Agente
-        BitmapImage fotoPerfil = new BitmapImage();
+        CroppedBitmap fotoPerfil = new CroppedBitmap();
         //endereço banco
         databaseAddress db = new databaseAddress();
         //Boolean para o editMode
@@ -403,7 +403,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                         //Checar se foi upado uma Foto
                                                         if (fotoInserida == true)
                                                         {
-                                                            fotoPerfil = imgFoto.Source as BitmapImage;
+                                                            fotoPerfil = imgFoto.Source as CroppedBitmap;
                                                             //Criar Diretório onde serão armazenadas as fotos de perfis
                                                             string subPath = "ImagesData";
                                                             string path = System.IO.Path.Combine(subPath, "ProfilePictures");
@@ -677,7 +677,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                     {
 
 
-                                                        fotoPerfil = imgFoto.Source as BitmapImage;
+                                                        fotoPerfil = imgFoto.Source as CroppedBitmap;
                                                         //Criar Diretório onde serão armazenadas as fotos de perfis
                                                         string subPath = "ImagesData";
                                                         string path = System.IO.Path.Combine(subPath, "ProfilePictures");
@@ -945,10 +945,6 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                                 break;
                                                         }
 
-                                                        //ATUALIZANDO IMPRESSÕES AGENTE;
-
-
-
                                                         //ESSE CAMPO ABAIXO NÃO É OBRIGATÓRIO POIS SERÁ PREENCHIDO AUTOMATICAMENTE
                                                         //insertCommand.Parameters.Add("status", objAgente.getStatus());
                                                         insertCommand.ExecuteNonQuery();
@@ -1168,6 +1164,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
                         System.Windows.Forms.MessageBox.Show("Agente deletado com sucesso!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                         this.MetroWindow_Loaded(null, null);
+						btnLimpar_Click(null,null);
 
                     }
                     catch (Exception ex)
@@ -1306,7 +1303,10 @@ namespace sistemaCorporativo.FORMS.cadAgente
             //Cadastrar por tecla
             if (e.Key == Key.Enter)
             {
-                btnCadastrar_Click(sender, e);
+                if (gCadastrar.IsSelected == true)
+                {
+                    btnCadastrar_Click(sender, e);
+                }
             }
             //Apagar por tecla
             if (e.Key == Key.Delete)
@@ -1321,7 +1321,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
             {
                 object linha = dgvConteudo.SelectedItem;
                 idAgente = (dgvConteudo.SelectedCells[0].Column.GetCellContent(linha) as TextBlock).Text;
-                gerarLoginWindow gerarLogin = new gerarLoginWindow(idAgente);
+                GerarLoginWindow gerarLogin = new GerarLoginWindow(idAgente);
                 gerarLogin.ShowDialog();
             }
             else

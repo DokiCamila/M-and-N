@@ -199,7 +199,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
         {
         	try
 			{
-				crimeManagementSplash cms = new crimeManagementSplash();
+				CrimeManagementSplash cms = new CrimeManagementSplash();
 				cms.ShowDialog();
 			}
 			catch(Exception ex)
@@ -220,6 +220,18 @@ namespace sistemaCorporativo.FORMS.principalScreen
                 MessageBox.Show(ex.Message);
             }
         	
+        }
+		
+	    private void tileCadUnidade_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+			CadUnidades wndCadUnidades = new CadUnidades();
+			wndCadUnidades.ShowDialog();
+        }
+
+        private void tileCadAgenAux_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            CadOutrasAgencias wndCadAgencia = new CadOutrasAgencias();
+			wndCadAgencia.ShowDialog();
         }
 
         private void btnFzrLogoff_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -297,7 +309,6 @@ namespace sistemaCorporativo.FORMS.principalScreen
 
 
             
-        }
-	  
+        }  
     }
 }

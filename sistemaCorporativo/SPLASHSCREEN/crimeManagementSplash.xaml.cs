@@ -17,10 +17,10 @@ namespace sistemaCorporativo
 	/// <summary>
 	/// Interaction logic for crimeManagementSplash.xaml
 	/// </summary>
-	public partial class crimeManagementSplash : Window
+	public partial class CrimeManagementSplash : Window
 	{
 		private Timer timer;
-		public crimeManagementSplash()
+		public CrimeManagementSplash()
 		{
 			this.InitializeComponent();
 			
@@ -40,7 +40,7 @@ namespace sistemaCorporativo
                else
                {
                    timer.Stop();
-                   crimeManagementWindow cmw = new crimeManagementWindow();
+                   CrimeManagementWindow cmw = new CrimeManagementWindow();
 				   this.Hide();
 				   this.Close();
 				   cmw.ShowDialog();

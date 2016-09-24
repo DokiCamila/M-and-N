@@ -154,7 +154,7 @@ namespace sistemaCorporativo.FORMS
                 //Não é anonima, realizar validações
                 if (txtNome.Text == "" || cmbTipo.Text == "" || txtDocumento.Text == "" || cmbEmissor.Text == "")
                 {
-                    await this.ShowMessageAsync("Aviso", "Todos os campos com '*' são obrigatórios");
+                    await this.ShowMessageAsync("Aviso", "Todos os campos com '*' são obrigatórios!");
                     return;
                 }
 

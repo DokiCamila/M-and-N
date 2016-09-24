@@ -3,100 +3,375 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+	xmlns:Custom="http://schemas.AvalonControls/AvalonControlsLibrary/Controls"
 	x:Class="sistemaCorporativo.CadCaso"
-	x:Name="CadCasoWnd"
+	x:Name="wndCadCaso"
 	Title="Cadastrar Caso"
 	Width="1073.65" Height="584.167" WindowStartupLocation="CenterScreen"
     BorderBrush="{DynamicResource AccentColorBrush}"
     BorderThickness="1"
     ShowInTaskbar="False"
 	ShowMaxRestoreButton="False" 
-    ShowMinButton="False" ResizeMode="NoResize">
+    ShowMinButton="False" ResizeMode="NoResize" Loaded="wndCadCaso_Loaded">
+	<Controls:MetroWindow.Resources>
+		<Style x:Key="MaskedTextBoxStyle1" TargetType="{x:Type Custom:MaskedTextBox}">
+			<Setter Property="ContextMenu" Value="{DynamicResource TextBoxMetroContextMenu}"/>
+			<Setter Property="Controls:TextBoxHelper.IsMonitoring" Value="True"/>
+			<Setter Property="Controls:ControlsHelper.ButtonWidth" Value="22"/>
+			<Setter Property="SelectionBrush" Value="{DynamicResource HighlightBrush}"/>
+			<Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}"/>
+			<Setter Property="FontSize" Value="{DynamicResource ContentFontSize}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="MinHeight" Value="26"/>
+			<Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
+			<Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}"/>
+			<Setter Property="Controls:ControlsHelper.FocusBorderBrush" Value="{DynamicResource TextBoxFocusBorderBrush}"/>
+			<Setter Property="Controls:ControlsHelper.MouseOverBorderBrush" Value="{DynamicResource TextBoxMouseOverBorderBrush}"/>
+			<Setter Property="SnapsToDevicePixels" Value="True"/>
+			<Setter Property="Validation.ErrorTemplate" Value="{DynamicResource ValidationErrorTemplate}"/>
+			<Setter Property="CaretBrush" Value="{DynamicResource BlackBrush}"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Custom:MaskedTextBox}">
+						<ControlTemplate.Resources>
+							<Storyboard x:Key="enterGotFocus">
+								<DoubleAnimation Duration="0:0:0.2" To="0.2" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+							</Storyboard>
+							<Storyboard x:Key="exitGotFocus">
+								<DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+							</Storyboard>
+							<Storyboard x:Key="enterHasText">
+								<DoubleAnimation Duration="0:0:0.2" From="0.2" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+							</Storyboard>
+							<Storyboard x:Key="exitHasText">
+								<DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+							</Storyboard>
+						</ControlTemplate.Resources>
+						<Grid>
+							<Border x:Name="Base" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+							<Grid x:Name="PART_InnerGrid" Margin="2">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition x:Name="ButtonColumn" Width="{Binding (Controls:ControlsHelper.ButtonWidth), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto"/>
+									<RowDefinition x:Name="ButtonRow" Height="*"/>
+								</Grid.RowDefinitions>
+								<Border x:Name="ReadOnlyVisualElement" Background="{x:Null}" Grid.ColumnSpan="2" Opacity="0" Grid.Row="1"/>
+								<ScrollViewer x:Name="PART_ContentHost" BorderThickness="0" Background="{x:Null}" Grid.Column="0" IsTabStop="False" Margin="2" Grid.Row="1" VerticalAlignment="Stretch"/>
+								<TextBlock x:Name="Message" Grid.Column="0" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" Margin="6,2" Opacity="0.6" Padding="{TemplateBinding Padding}" Grid.Row="1" Text="{TemplateBinding Controls:TextBoxHelper.Watermark}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+								<Grid x:Name="FloatingMessageContainer" Grid.ColumnSpan="2" Grid.Column="0" Height="0" IsHitTestVisible="False" Margin="5,0" Visibility="Visible">
+									<TextBlock x:Name="FloatingMessage" Foreground="{TemplateBinding Foreground}" FontSize="{DynamicResource FloatingWatermarkFontSize}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Opacity="0.6" Text="{TemplateBinding Controls:TextBoxHelper.Watermark}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+										<TextBlock.RenderTransform>
+											<TranslateTransform/>
+										</TextBlock.RenderTransform>
+									</TextBlock>
+								</Grid>
+								<Button x:Name="PART_ClearText" Content="{Binding (Controls:TextBoxHelper.ButtonContent), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Grid.Column="1" Foreground="{TemplateBinding Foreground}" FontSize="16" FontFamily="{Binding (Controls:TextBoxHelper.ButtonFontFamily), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" IsTabStop="False" Controls:TextBoxHelper.IsClearTextButtonBehaviorEnabled="{Binding (Controls:TextBoxHelper.ClearTextButton), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Grid.RowSpan="2" Style="{DynamicResource ChromelessButtonStyle}">
+									<Button.Visibility>
+										<Binding Mode="OneWay" Path="(Controls:TextBoxHelper.ClearTextButton)" RelativeSource="{RelativeSource TemplatedParent}">
+											<Binding.Converter>
+												<BooleanToVisibilityConverter/>
+											</Binding.Converter>
+										</Binding>
+									</Button.Visibility>
+								</Button>
+							</Grid>
+							<Border x:Name="DisabledVisualElement" BorderBrush="{DynamicResource ControlsDisabledBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{DynamicResource ControlsDisabledBrush}" IsHitTestVisible="False" Opacity="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="">
+								<Setter Property="Visibility" TargetName="Message" Value="Visible"/>
+							</DataTrigger>
+							<DataTrigger Binding="{Binding (Controls:TextBoxHelper.HasText), RelativeSource={RelativeSource Self}}" Value="False">
+								<DataTrigger.EnterActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="Height" Storyboard.TargetName="FloatingMessageContainer">
+												<DoubleAnimation.EasingFunction>
+													<ExponentialEase EasingMode="EaseInOut" Exponent="2"/>
+												</DoubleAnimation.EasingFunction>
+											</DoubleAnimation>
+											<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FloatingMessageContainer"/>
+											<DoubleAnimation Duration="0:0:0.2" To="20" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" Storyboard.TargetName="FloatingMessage">
+												<DoubleAnimation.EasingFunction>
+													<ExponentialEase EasingMode="EaseIn" Exponent="2"/>
+												</DoubleAnimation.EasingFunction>
+											</DoubleAnimation>
+										</Storyboard>
+									</BeginStoryboard>
+								</DataTrigger.EnterActions>
+								<DataTrigger.ExitActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.2" To="15" Storyboard.TargetProperty="Height" Storyboard.TargetName="FloatingMessageContainer">
+												<DoubleAnimation.EasingFunction>
+													<ExponentialEase EasingMode="EaseInOut" Exponent="2"/>
+												</DoubleAnimation.EasingFunction>
+											</DoubleAnimation>
+											<DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FloatingMessageContainer"/>
+											<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" Storyboard.TargetName="FloatingMessage">
+												<DoubleAnimation.EasingFunction>
+													<ExponentialEase EasingMode="EaseOut" Exponent="2"/>
+												</DoubleAnimation.EasingFunction>
+											</DoubleAnimation>
+										</Storyboard>
+									</BeginStoryboard>
+								</DataTrigger.ExitActions>
+							</DataTrigger>
+							<DataTrigger Binding="{Binding (Controls:TextBoxHelper.Watermark), RelativeSource={RelativeSource Self}}" Value="">
+								<DataTrigger.EnterActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="Height" Storyboard.TargetName="FloatingMessageContainer">
+												<DoubleAnimation.EasingFunction>
+													<ExponentialEase EasingMode="EaseInOut" Exponent="2"/>
+												</DoubleAnimation.EasingFunction>
+											</DoubleAnimation>
+											<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FloatingMessageContainer"/>
+											<DoubleAnimation Duration="0:0:0.2" To="20" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" Storyboard.TargetName="FloatingMessage">
+												<DoubleAnimation.EasingFunction>
+													<ExponentialEase EasingMode="EaseIn" Exponent="2"/>
+												</DoubleAnimation.EasingFunction>
+											</DoubleAnimation>
+										</Storyboard>
+									</BeginStoryboard>
+								</DataTrigger.EnterActions>
+								<DataTrigger.ExitActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.2" To="15" Storyboard.TargetProperty="Height" Storyboard.TargetName="FloatingMessageContainer">
+												<DoubleAnimation.EasingFunction>
+													<ExponentialEase EasingMode="EaseInOut" Exponent="2"/>
+												</DoubleAnimation.EasingFunction>
+											</DoubleAnimation>
+											<DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FloatingMessageContainer"/>
+											<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" Storyboard.TargetName="FloatingMessage">
+												<DoubleAnimation.EasingFunction>
+													<ExponentialEase EasingMode="EaseOut" Exponent="2"/>
+												</DoubleAnimation.EasingFunction>
+											</DoubleAnimation>
+										</Storyboard>
+									</BeginStoryboard>
+								</DataTrigger.ExitActions>
+							</DataTrigger>
+							<DataTrigger Binding="{Binding (Controls:TextBoxHelper.UseFloatingWatermark), RelativeSource={RelativeSource Self}}" Value="False">
+								<DataTrigger.EnterActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="Height" Storyboard.TargetName="FloatingMessageContainer">
+												<DoubleAnimation.EasingFunction>
+													<ExponentialEase EasingMode="EaseInOut" Exponent="2"/>
+												</DoubleAnimation.EasingFunction>
+											</DoubleAnimation>
+											<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FloatingMessageContainer"/>
+											<DoubleAnimation Duration="0:0:0.2" To="20" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" Storyboard.TargetName="FloatingMessage">
+												<DoubleAnimation.EasingFunction>
+													<ExponentialEase EasingMode="EaseIn" Exponent="2"/>
+												</DoubleAnimation.EasingFunction>
+											</DoubleAnimation>
+										</Storyboard>
+									</BeginStoryboard>
+								</DataTrigger.EnterActions>
+								<DataTrigger.ExitActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.2" To="15" Storyboard.TargetProperty="Height" Storyboard.TargetName="FloatingMessageContainer">
+												<DoubleAnimation.EasingFunction>
+													<ExponentialEase EasingMode="EaseInOut" Exponent="2"/>
+												</DoubleAnimation.EasingFunction>
+											</DoubleAnimation>
+											<DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FloatingMessageContainer"/>
+											<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" Storyboard.TargetName="FloatingMessage">
+												<DoubleAnimation.EasingFunction>
+													<ExponentialEase EasingMode="EaseOut" Exponent="2"/>
+												</DoubleAnimation.EasingFunction>
+											</DoubleAnimation>
+										</Storyboard>
+									</BeginStoryboard>
+								</DataTrigger.ExitActions>
+							</DataTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="TextWrapping" Value="NoWrap"/>
+									<Condition Property="AcceptsReturn" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Width" TargetName="ButtonColumn" Value="{Binding ActualHeight, ElementName=ButtonRow, Mode=OneWay}"/>
+							</MultiTrigger>
+							<DataTrigger Binding="{Binding (Controls:TextBoxHelper.ClearTextButton), RelativeSource={RelativeSource Self}}" Value="False">
+								<Setter Property="Grid.ColumnSpan" TargetName="PART_ContentHost" Value="2"/>
+								<Setter Property="Grid.ColumnSpan" TargetName="Message" Value="2"/>
+							</DataTrigger>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="BorderBrush" TargetName="Base" Value="{Binding (Controls:ControlsHelper.MouseOverBorderBrush), RelativeSource={RelativeSource TemplatedParent}}"/>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="False">
+								<Setter Property="Opacity" TargetName="DisabledVisualElement" Value="0.6"/>
+							</Trigger>
+							<Trigger Property="IsReadOnly" Value="True">
+								<Setter Property="Opacity" TargetName="ReadOnlyVisualElement" Value="1"/>
+							</Trigger>
+							<Trigger Property="IsFocused" Value="True">
+								<Setter Property="BorderBrush" TargetName="Base" Value="{Binding (Controls:ControlsHelper.FocusBorderBrush), RelativeSource={RelativeSource TemplatedParent}}"/>
+								<Setter Property="Foreground" TargetName="FloatingMessage" Value="{DynamicResource AccentColorBrush}"/>
+								<Setter Property="Opacity" TargetName="FloatingMessage" Value="1"/>
+							</Trigger>
+							<Trigger Property="IsMouseOver" SourceName="PART_ClearText" Value="True">
+								<Setter Property="Background" TargetName="PART_ClearText" Value="{DynamicResource GrayBrush8}"/>
+								<Setter Property="Foreground" TargetName="PART_ClearText" Value="{DynamicResource AccentColorBrush}"/>
+							</Trigger>
+							<Trigger Property="IsPressed" SourceName="PART_ClearText" Value="True">
+								<Setter Property="Background" TargetName="PART_ClearText" Value="{DynamicResource BlackBrush}"/>
+								<Setter Property="Foreground" TargetName="PART_ClearText" Value="{DynamicResource WhiteBrush}"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="Controls:TextBoxHelper.HasText" Value="False"/>
+									<Condition Property="IsFocused" Value="True"/>
+								</MultiTrigger.Conditions>
+								<MultiTrigger.EnterActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.2" To="0.2" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</MultiTrigger.EnterActions>
+								<MultiTrigger.ExitActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</MultiTrigger.ExitActions>
+							</MultiTrigger>
+							<Trigger Property="Controls:TextBoxHelper.HasText" Value="True">
+								<Trigger.EnterActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.2" From="0.2" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</Trigger.EnterActions>
+								<Trigger.ExitActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Message"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</Trigger.ExitActions>
+							</Trigger>
+							<Trigger Property="Controls:TextBoxHelper.IsWaitingForData" Value="True">
+								<Trigger.EnterActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation AutoReverse="True" Duration="0:0:2" From="0" RepeatBehavior="Forever" To="1" Storyboard.TargetProperty="(Effect).Opacity" Storyboard.TargetName="Base"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</Trigger.EnterActions>
+								<Setter Property="Effect" TargetName="Base">
+									<Setter.Value>
+										<DropShadowEffect BlurRadius="10" Color="{DynamicResource BlackColor}" Opacity="0" ShadowDepth="0"/>
+									</Setter.Value>
+								</Setter>
+							</Trigger>
+							<Trigger Property="Controls:TextBoxHelper.IsWaitingForData" Value="False">
+								<Setter Property="Effect" TargetName="Base" Value="{x:Null}"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Controls:MetroWindow.Resources>
 
-    <Grid x:Name="LayoutRoot">
-        <GroupBox x:Name="grbInfoBasica" Header="Informações Básicas" Style="{x:Null}" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Height="192.127" Width="928.65" BorderThickness="1">
-            <Grid Margin="0,0,-2,-0.96">
-                <Label Content="Número do Caso:*" HorizontalAlignment="Left" Margin="21.995,10,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtNumCaso" HorizontalAlignment="Left" Height="23" Margin="134.513,9.84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182"/>
-                <TextBox x:Name="txtTituloCaso" HorizontalAlignment="Left" Height="23" Margin="134.513,40.84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182"/>
-                <Label Content="Título do Caso:" HorizontalAlignment="Left" Margin="40.596,40.88,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cmbTipoCaso" HorizontalAlignment="Left" Margin="134.513,71.84,0,0" VerticalAlignment="Top" Width="182">
-                	<ComboBoxItem Content="Denúncia/Encaminhamento"/>
-                	<ComboBoxItem Content="Investigação"/>
-                	<ComboBoxItem Content="Relatório"/>
-                </ComboBox>
-                <Label Content="Tipo do Caso:*" HorizontalAlignment="Left" Margin="42.303,71.84,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cmbDeptLocal" HorizontalAlignment="Left" Margin="134.513,102.84,0,0" VerticalAlignment="Top" Width="182">
-                	<ComboBoxItem Content="Dept1 / São Paulo"/>
-                	<ComboBoxItem Content="Dept2 / Barueri"/>
-                	<ComboBoxItem Content="Dept3 / Guarulhos"/>
+	<Grid x:Name="LayoutRoot">
+		<GroupBox x:Name="grbInfoBasica" Header="Informações Básicas" Style="{x:Null}" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Height="192.127" Width="928.65" BorderThickness="1">
+			<Grid Margin="0,0,-2,-0.96">
+				<Label Content="Número do Caso:*" HorizontalAlignment="Left" Margin="21.995,10,0,0" VerticalAlignment="Top"/>
+				<TextBox x:Name="txtNumCaso" HorizontalAlignment="Left" Height="23" Margin="134.513,9.84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TabIndex="0"/>
+				<TextBox x:Name="txtTituloCaso" HorizontalAlignment="Left" Height="23" Margin="134.513,40.84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" MaxLength="40" TabIndex="1"/>
+				<Label Content="Título do Caso:" HorizontalAlignment="Left" Margin="40.596,40.88,0,0" VerticalAlignment="Top"/>
+				<ComboBox x:Name="cmbTipoCaso" HorizontalAlignment="Left" Margin="134.513,71.84,0,0" VerticalAlignment="Top" Width="182" TabIndex="2">
+					<ComboBoxItem Content="Investigação"/>
+					<ComboBoxItem Content="Relatório"/>
+				</ComboBox>
+				<Label Content="Tipo:" HorizontalAlignment="Left" Margin="93.635,71.96,0,0" VerticalAlignment="Top"/>
+				<ComboBox x:Name="cmbDeptLocal" HorizontalAlignment="Left" Margin="134.513,102.84,0,0" VerticalAlignment="Top" Width="182" TabIndex="3" DropDownOpened="cmbDeptLocal_DropDownOpened">
+					<ComboBoxItem Content="Dept1 / São Paulo"/>
+					<ComboBoxItem Content="Dept2 / Barueri"/>
+					<ComboBoxItem Content="Dept3 / Guarulhos"/>
 					<ComboBoxItem Content="Dept4 / Campinas"/>
 					<ComboBoxItem Content="Dept5 / Jundiaí"/>
-                </ComboBox>
-                <Label Content="Dept/Localização:*" HorizontalAlignment="Left" Margin="21.995,102.88,0,0" VerticalAlignment="Top"/>
-                <Label Content="Agente 1 (Principal):*" HorizontalAlignment="Left" Margin="349,9.96,0,0" VerticalAlignment="Top"/>
-                <Label Content="Agente 2:*" HorizontalAlignment="Left" Margin="404.633,41,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cmbAgente1" HorizontalAlignment="Left" Margin="470.207,9.96,0,0" VerticalAlignment="Top" Width="151"/>
-                <ComboBox x:Name="cmbAgente2" HorizontalAlignment="Left" Margin="470.207,40.96,0,0" VerticalAlignment="Top" Width="151"/>
-                <Label x:Name="___No_Name_" Content="Agente 3:" HorizontalAlignment="Left" Margin="404.633,71.88,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cmbAgente3" HorizontalAlignment="Left" Margin="470.207,71.84,0,0" VerticalAlignment="Top" Width="151"/>
-                <Label x:Name="___No_Name__Copy" Content="Agente 4:" HorizontalAlignment="Left" Margin="404.633,102.88,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cmbAgente4" HorizontalAlignment="Left" Margin="470.207,102.84,0,0" VerticalAlignment="Top" Width="151"/>
-                <Label Content="Data de Abertura:*" HorizontalAlignment="Left" Margin="667.995,10.04,0,0" VerticalAlignment="Top"/>
-                <Label Content="Data de Fechamento:" HorizontalAlignment="Left" Margin="654.301,71.96,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtDataAbertura" HorizontalAlignment="Left" Height="23" Margin="781.59,9.96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117"/>
-                <TextBox x:Name="txtDataFechamento" HorizontalAlignment="Left" Height="23" Margin="781.588,71.92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117"/>
-                <ComboBox x:Name="cmbStatusCaso" HorizontalAlignment="Left" Margin="781.589,41,0,0" VerticalAlignment="Top" Width="117">
-                	<ComboBoxItem Content="Ativo"/>
-                	<ComboBoxItem Content="Destruição de Evidências"/>
-                	<ComboBoxItem Content="Encerrado"/>
-                	<ComboBoxItem Content="Encerrado/Força-Tarefa"/>
-                	<ComboBoxItem Content="Jurídico"/>
-                </ComboBox>
-                <Label Content="Status:*" HorizontalAlignment="Left" Margin="726.488,41,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cmbCatCaso" HorizontalAlignment="Left" Margin="134.513,134.127,0,0" VerticalAlignment="Top" Width="182">
-                	<ComboBoxItem Content="Assalto"/>
-                	<ComboBoxItem Content="Caso DPIC"/>
-                	<ComboBoxItem Content="Desvio"/>
-                	<ComboBoxItem Content="Força-Tarefa"/>
-                	<ComboBoxItem Content="Grande-Jurí (STF)"/>
-                	<ComboBoxItem Content="Homicídio"/>
-                	<ComboBoxItem Content="Interdição"/>
-                	<ComboBoxItem Content="Lavagem de Dinheiro / Inv. Financeira"/>
-                	<ComboBoxItem Content="Suicídio"/>
-                </ComboBox>
-                <Label Content="Categoria do Caso:" HorizontalAlignment="Left" Margin="19.418,133.84,0,0" VerticalAlignment="Top"/>
-            </Grid>
+				</ComboBox>
+				<Label Content="Unidade/Localização:*" HorizontalAlignment="Left" Margin="3.348,102.88,0,0" VerticalAlignment="Top"/>
+				<Label Content="Agente 1 (Principal):*" HorizontalAlignment="Left" Margin="349,9.96,0,0" VerticalAlignment="Top"/>
+				<Label Content="Agente 2:*" HorizontalAlignment="Left" Margin="404.633,41,0,0" VerticalAlignment="Top"/>
+				<ComboBox x:Name="cmbAgente1" HorizontalAlignment="Left" Margin="470.207,9.96,0,0" VerticalAlignment="Top" Width="151" TabIndex="5"/>
+				<ComboBox x:Name="cmbAgente2" HorizontalAlignment="Left" Margin="470.207,40.96,0,0" VerticalAlignment="Top" Width="151" TabIndex="6"/>
+				<Label Content="Agente 3:" HorizontalAlignment="Left" Margin="404.633,71.88,0,0" VerticalAlignment="Top"/>
+				<ComboBox Controls:TextBoxHelper.ClearTextButton="True"  x:Name="cmbAgente3" HorizontalAlignment="Left" Margin="470.207,71.84,0,0" VerticalAlignment="Top" Width="151" TabIndex="7"/>
+				<Label Content="Agente 4:" HorizontalAlignment="Left" Margin="404.633,102.88,0,0" VerticalAlignment="Top"/>
+				<ComboBox Controls:TextBoxHelper.ClearTextButton="True"  x:Name="cmbAgente4" HorizontalAlignment="Left" Margin="470.207,102.84,0,0" VerticalAlignment="Top" Width="151" TabIndex="8"/>
+				<Label Content="Data de Abertura:*" HorizontalAlignment="Left" Margin="667.995,10.04,0,0" VerticalAlignment="Top"/>
+				<Label Content="Data de Fechamento:" HorizontalAlignment="Left" Margin="654.301,71.96,0,0" VerticalAlignment="Top"/>
+				<ComboBox x:Name="cmbStatusCaso" HorizontalAlignment="Left" Margin="781.589,41,0,0" VerticalAlignment="Top" Width="117" TabIndex="10" DropDownClosed="cmbStatusCaso_DropDownClosed">
+					<ComboBoxItem Content="Aberto"/>
+					<ComboBoxItem Content="Destruição de Evidências"/>
+					<ComboBoxItem Content="Encerrado"/>
+					<ComboBoxItem Content="Encerrado/Força-Tarefa"/>
+					<ComboBoxItem Content="Jurídico"/>
+				</ComboBox>
+				<Label Content="Status:*" HorizontalAlignment="Left" Margin="726.488,41,0,0" VerticalAlignment="Top"/>
+				<ComboBox x:Name="cmbCatCaso" HorizontalAlignment="Left" Margin="134.513,134.127,0,0" VerticalAlignment="Top" Width="182" DropDownClosed="cmbCatCaso_DropDownClosed" TabIndex="4">
+					<ComboBoxItem Content="Assalto"/>
+					<ComboBoxItem Content="Caso DPIC"/>
+					<ComboBoxItem Content="Crime Sexual"/>
+					<ComboBoxItem Content="Desvio"/>
+					<ComboBoxItem Content="Força-Tarefa"/>
+					<ComboBoxItem Content="Grande-Jurí (STF)"/>
+					<ComboBoxItem Content="Homicídio"/>
+					<ComboBoxItem Content="Incêndio"/>
+					<ComboBoxItem Content="Interdição"/>
+					<ComboBoxItem Content="Lavagem de Dinheiro / Inv. Financeira"/>
+					<ComboBoxItem Content="Suicídio"/>
+				</ComboBox>
+				<Label Content="Categoria do Caso:*" HorizontalAlignment="Left" Margin="15.345,133.84,0,0" VerticalAlignment="Top"/>
+				<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="116.998" x:Name="txtDataAbertura"  Mask="00/00/0000" CharacterCasing="Upper" Margin="781.59,10.04,0,0" TabIndex="9" Style="{DynamicResource MaskedTextBoxStyle1}"/>
+				<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="116.997" x:Name="txtDataFechamento"  Mask="00/00/0000" CharacterCasing="Upper" Margin="781.591,72.88,0,0" TabIndex="11" Style="{DynamicResource MaskedTextBoxStyle1}"/>
+				<Button x:Name="btnNovaUnidade" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Margin="321.513,102.88,0,0" VerticalAlignment="Top" Width="29.5" ToolTip="Cadastrar Nova Unidade" Height="27.96" TabIndex="20" Click="btnNovaUnidade_Click">
+					<Image Source="/sistemaCorporativo;component/IMAGES/addNewBlue.png" Height="10.293" Width="12.627" OpacityMask="Black" Margin="0,0,0.21,0" />
+				</Button>
+			</Grid>
 
 
-        </GroupBox>
-        <Button x:Name="btnArquivar" Style="{DynamicResource SquareButtonStyle}"  Content="Arquivar" HorizontalAlignment="Left" Margin="957.5,28.88,0,0" VerticalAlignment="Top" Width="90.317"/>
-        <Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}"  Content="Cancelar" HorizontalAlignment="Left" Margin="957.5,64.04,0,0" VerticalAlignment="Top" Width="90.317" Click="btnCancelar_Click"/>
-        <TabControl HorizontalAlignment="Left" Margin="10,212.127,0,10" Width="1045.65">
-            <TabItem Header="Detalhes">
-				<Grid Margin="0,0.083,-6.675,-9.8">
-					<GroupBox Style="{x:Null}" Header="Outras Agências" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="149.96" Width="758.423">
+		</GroupBox>
+		<Button x:Name="btnArquivar" Style="{DynamicResource SquareButtonStyle}"  Content="Arquivar" HorizontalAlignment="Left" Margin="957.5,28.88,0,0" VerticalAlignment="Top" Width="90.317" Click="btnArquivar_Click" TabIndex="34"/>
+		<TabControl HorizontalAlignment="Left" Margin="10,217.127,0,5" Width="1045.65">
+			<TabItem Header="Detalhes" TabIndex="12" IsSelected="True">
+				<Grid x:Name="grdDetalhes" Margin="0,0.083,-6.675,-9.8">
+					<GroupBox x:Name="grbOutrasAgencias" Style="{x:Null}" Header="Outras Agências" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="149.96" Width="785.423" IsEnabled="False">
 						<Grid>
 							<Label Content="Nome da Agência Auxiliadora:" HorizontalAlignment="Left" Margin="6.995,10,0,0" VerticalAlignment="Top"/>
-							<ComboBox x:Name="cmbTipoCaso_Copy" HorizontalAlignment="Left" Margin="181.918,10,0,0" VerticalAlignment="Top" Width="164">
-								<ComboBoxItem Content="Departamento da Polícia Federal (DPF)"/>
-								<ComboBoxItem Content="INTERPOL (Polícia Internacional)"/>
-								<ComboBoxItem Content="Polícia Civil do Estado de São Paulo (PCESP)"/>
-								<ComboBoxItem Content="Polícia Militar do Estado de São Paulo (PMESP)"/>
-							</ComboBox>
-							<TextBox x:Name="txtNumCaso_Copy" HorizontalAlignment="Left" Height="23" Margin="181.918,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
+							<ComboBox x:Name="cmbNomeAgenciaAux" HorizontalAlignment="Left" Margin="181.918,10,0,0" VerticalAlignment="Top" Width="164" TabIndex="19" DropDownOpened="cmbNomeAgenciaAux_DropDownOpened" />
+							<TextBox x:Name="txtNomeAgente" HorizontalAlignment="Left" Height="23" Margin="181.918,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" TabIndex="21" />
 							<Label Content="Nome do Agente:" HorizontalAlignment="Left" Margin="72.811,41.04,0,0" VerticalAlignment="Top"/>
-							<DataGrid x:Name="dgvOutrasAgencias" HorizontalAlignment="Left" Margin="362.5,10,0,0" VerticalAlignment="Top" Height="107" Width="276.423" Background="#FF2E2E2E">
+							<DataGrid x:Name="dgvOutrasAgencias" HorizontalAlignment="Left" Margin="395.5,10,0,0" VerticalAlignment="Top" Height="107" Width="276.423" Background="#FF2E2E2E" TabIndex="22" IsReadOnly="True">
 								<DataGrid.Columns>
-									<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Nome da Agência"/>
-									<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Nome do Agente" Width="*"/>
+									<DataGridTextColumn Binding="{Binding nomeAgencia}" ClipboardContentBinding="{x:Null}" Header="Nome da Agência"/>
+                                    <DataGridTextColumn Binding="{Binding nomeAgente}" ClipboardContentBinding="{x:Null}" Header="Nome do Agente" MinWidth="145"/>
 								</DataGrid.Columns>
 							</DataGrid>
-							<Button x:Name="btnAddAgenAux" Style="{DynamicResource SquareButtonStyle}" Content="Adicionar" HorizontalAlignment="Left" Margin="652.923,10,0,0" VerticalAlignment="Top" Width="75"/>
-							<Button x:Name="btnDelAgenAux" Style="{DynamicResource SquareButtonStyle}" Content="excluir" HorizontalAlignment="Left" Margin="652.923,46.893,0,0" VerticalAlignment="Top" Width="75"/>
+							<Button x:Name="btnAddAgenAux" Style="{DynamicResource SquareButtonStyle}" Content="Adicionar" HorizontalAlignment="Left" Margin="685.923,10,0,0" VerticalAlignment="Top" Width="75" TabIndex="23" Click="btnAddAgenAux_Click"/>
+							<Button x:Name="btnDelAgenAux" Style="{DynamicResource SquareButtonStyle}" Content="excluir" HorizontalAlignment="Left" Margin="685.923,46.893,0,0" VerticalAlignment="Top" Width="75" TabIndex="24" Click="btnDelAgenAux_Click"/>
+							<Button x:Name="btnNovaAgenciaAux" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Margin="350.918,10,0,0" VerticalAlignment="Top" Width="29.5" ToolTip="Cadastrar Novo Departamento Auxiliar" Height="27.96" TabIndex="20" Click="btnNovaAgenciaAux_Click">
+						    <Image Source="/sistemaCorporativo;component/IMAGES/addNewBlue.png" Height="10.293" Width="11.627" OpacityMask="Black" Margin="0,0,0.21,0" />
+							</Button>
 						</Grid>
 					</GroupBox>
-					<ComboBox x:Name="cmbMunicipio" HorizontalAlignment="Left" Margin="10,205.171,0,0" VerticalAlignment="Top" Width="214">
+					<ComboBox x:Name="cmbMunicipio" HorizontalAlignment="Left" Margin="10,205.171,0,0" VerticalAlignment="Top" Width="214" TabIndex="31">
 						<ComboBoxItem Content="Araçatuba"/>
 						<ComboBoxItem Content="Araçoiaba da Serra"/>
 						<ComboBoxItem Content="Aramina"/>
@@ -734,12 +1009,12 @@
 						<ComboBoxItem Content="Vargem Grande Paulista"/>
 						<ComboBoxItem Content="Várzea Paulista"/>
 					</ComboBox>
-					<Label Content="Munícipio:" HorizontalAlignment="Left" Margin="10,179.211,0,0" VerticalAlignment="Top"/>
-					<CheckBox x:Name="ckbRefOutraAgencia" Content="Referida a Outra Agência" HorizontalAlignment="Left" Margin="876.238,131.776,0,0" VerticalAlignment="Top" Width="161.754"/>
-					<CheckBox x:Name="ckbGrandeJuri" Content="Grande Júri (STF)" HorizontalAlignment="Left" Margin="876.238,154.776,0,0" VerticalAlignment="Top" Width="121.25"/>
-					<CheckBox x:Name="ckbInterJuri" Content="Intervenção ao Júri" HorizontalAlignment="Left" Margin="876.238,177.776,0,0" VerticalAlignment="Top" Width="129.42"/>
-					<CheckBox x:Name="ckbRelJuri" Content="Relatório ao Júri" HorizontalAlignment="Left" Margin="876.238,199.171,0,0" VerticalAlignment="Top" Width="129.42"/>
-					<Button x:Name="btnSeguranca" Style="{DynamicResource SquareButtonStyle}"  HorizontalAlignment="Left" Margin="876.238,231.92,0,0" VerticalAlignment="Top" Width="123">
+					<Label Content="Munícipio:*" HorizontalAlignment="Left" Margin="10,179.211,0,0" VerticalAlignment="Top"/>
+					<CheckBox x:Name="ckbRefOutraAgencia" Content="Referida a Outra Agência" HorizontalAlignment="Left" Margin="876.238,131.776,0,0" VerticalAlignment="Top" Width="161.754" Checked="ckbRefOutraAgencia_Checked" Unchecked="ckbRefOutraAgencia_Unchecked" TabIndex="27"/>
+					<CheckBox x:Name="ckbGrandeJuri" Content="Grande Júri (STF)" HorizontalAlignment="Left" Margin="876.238,154.776,0,0" VerticalAlignment="Top" Width="121.25" TabIndex="28"/>
+					<CheckBox x:Name="ckbInterJuri" Content="Intervenção ao Júri" HorizontalAlignment="Left" Margin="876.238,177.776,0,0" VerticalAlignment="Top" Width="129.42" TabIndex="29"/>
+					<CheckBox x:Name="ckbRelJuri" Content="Relatório ao Júri" HorizontalAlignment="Left" Margin="876.238,199.171,0,0" VerticalAlignment="Top" Width="129.42" TabIndex="30"/>
+					<Button x:Name="btnSeguranca" Style="{DynamicResource SquareButtonStyle}"  HorizontalAlignment="Left" Margin="876.238,231.92,0,0" VerticalAlignment="Top" Width="123" TabIndex="33">
 						<StackPanel Width="113" Height="28.96">
 							<Canvas>
 								<Image Source="/sistemaCorporativo;component/IMAGES/security_icon.png" Height="31.126" Width="31" Canvas.Top="0.75"  />
@@ -747,7 +1022,7 @@
 							</Canvas>
 						</StackPanel>
 					</Button>
-					<ComboBox x:Name="cmbTipoLavagem" HorizontalAlignment="Left" Margin="817.325,35.96,0,0" VerticalAlignment="Top" Width="214">
+					<ComboBox x:Name="cmbTipoLavagem" HorizontalAlignment="Left" Margin="817.325,35.96,0,0" VerticalAlignment="Top" Width="214" IsEnabled="False" TabIndex="25">
 						<ComboBoxItem Content="Empresa de Fachada"/>
 						<ComboBoxItem Content="Empresa Fictícia"/>
 						<ComboBoxItem Content="Laranja"/>
@@ -766,654 +1041,85 @@
 
 					</ComboBox>
 					<Label Content="Tipologia da Lavagem:" HorizontalAlignment="Left" Margin="817.325,10,0,0" VerticalAlignment="Top"/>
-					<TextBox x:Name="cmbForcaTarefa" HorizontalAlignment="Left" Height="23" Margin="817.325,92.92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214"/>
+					<TextBox x:Name="txtForcaTarefa" HorizontalAlignment="Left" Height="23" Margin="817.325,92.92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" MaxLength="30" TabIndex="26"/>
 					<Label Content="Força-Tarefa:" HorizontalAlignment="Left" Margin="817.325,66.96,0,0" VerticalAlignment="Top"/>
-					<ComboBox x:Name="cmbEstado" HorizontalAlignment="Left" Margin="235.658,205.171,0,0" VerticalAlignment="Top" Width="65.303" IsEnabled="False">
-						<ComboBoxItem Content="Araçatuba"/>
-						<ComboBoxItem Content="Araçoiaba da Serra"/>
-						<ComboBoxItem Content="Aramina"/>
-						<ComboBoxItem Content="Arandu"/>
-						<ComboBoxItem Content="Arapeí"/>
-						<ComboBoxItem Content="Araraquara"/>
-						<ComboBoxItem Content="Araras"/>
-						<ComboBoxItem Content="Arco-Íris"/>
-						<ComboBoxItem Content="Arealva"/>
-						<ComboBoxItem Content="Areias"/>
-						<ComboBoxItem Content="Areiópolis"/>
-						<ComboBoxItem Content="Ariranha"/>
-						<ComboBoxItem Content="Artur Nogueira"/>
-						<ComboBoxItem Content="Arujá"/>
-						<ComboBoxItem Content="Aspásia"/>
-						<ComboBoxItem Content="Assis"/>
-						<ComboBoxItem Content="Atibaia"/>
-						<ComboBoxItem Content="Auriflama"/>
-						<ComboBoxItem Content="Avaí"/>
-						<ComboBoxItem Content="Avanhandava"/>
-						<ComboBoxItem Content="Avaré"/>
-						<ComboBoxItem Content="Adamantina"/>
-						<ComboBoxItem Content="Adolfo"/>
-						<ComboBoxItem Content="Aguaí"/>
-						<ComboBoxItem Content="Águas da Prata"/>
-						<ComboBoxItem Content="Águas de Lindóia"/>
-						<ComboBoxItem Content="Águas de Santa Bárbara"/>
-						<ComboBoxItem Content="Águas de São Pedro"/>
-						<ComboBoxItem Content="Agudos"/>
-						<ComboBoxItem Content="Alambari"/>
-						<ComboBoxItem Content="Alfredo Marcondes"/>
-						<ComboBoxItem Content="Altair"/>
-						<ComboBoxItem Content="Altinópolis"/>
-						<ComboBoxItem Content="Alto Alegre"/>
-						<ComboBoxItem Content="Alumínio"/>
-						<ComboBoxItem Content="Álvares Florence"/>
-						<ComboBoxItem Content="Álvares Machado"/>
-						<ComboBoxItem Content="Álvaro de Carvalho"/>
-						<ComboBoxItem Content="Alvinlândia"/>
-						<ComboBoxItem Content="Americana"/>
-						<ComboBoxItem Content="Américo Brasiliense"/>
-						<ComboBoxItem Content="Américo de Campos"/>
-						<ComboBoxItem Content="Amparo"/>
-						<ComboBoxItem Content="Analândia"/>
-						<ComboBoxItem Content="Andradina"/>
-						<ComboBoxItem Content="Angatuba"/>
-						<ComboBoxItem Content="Anhembi"/>
-						<ComboBoxItem Content="Anhumas"/>
-						<ComboBoxItem Content="Aparecida"/>
-						<ComboBoxItem Content="Aparecida d'Oeste"/>
-						<ComboBoxItem Content="Apiaí"/>
-						<ComboBoxItem Content="Araçariguama"/>
-						<ComboBoxItem Content="Bady Bassitt"/>
-						<ComboBoxItem Content="Barbosa"/>
-						<ComboBoxItem Content="Bariri"/>
-						<ComboBoxItem Content="Barra Bonita"/>
-						<ComboBoxItem Content="Barra do Chapéu"/>
-						<ComboBoxItem Content="Barra do Turvo"/>
-						<ComboBoxItem Content="Barretos"/>
-						<ComboBoxItem Content="Barrinha"/>
-						<ComboBoxItem Content="Barueri"/>
-						<ComboBoxItem Content="Bastos"/>
-						<ComboBoxItem Content="Batatais"/>
-						<ComboBoxItem Content="Bauru"/>
-						<ComboBoxItem Content="Bebedouro"/>
-						<ComboBoxItem Content="Bento de Abreu"/>
-						<ComboBoxItem Content="Bernardino de Campos"/>
-						<ComboBoxItem Content="Balbinos"/>
-						<ComboBoxItem Content="Bálsamo"/>
-						<ComboBoxItem Content="Bananal"/>
-						<ComboBoxItem Content="Barão de Antonina"/>
-						<ComboBoxItem Content="Bertioga"/>
-						<ComboBoxItem Content="Bilac"/>
-						<ComboBoxItem Content="Birigui"/>
-						<ComboBoxItem Content="Biritibamirim"/>
-						<ComboBoxItem Content="Boa Esperança do Sul"/>
-						<ComboBoxItem Content="Bocaina"/>
-						<ComboBoxItem Content="Bofete"/>
-						<ComboBoxItem Content="Boituva"/>
-						<ComboBoxItem Content="Bom Jesus dos Perdões"/>
-						<ComboBoxItem Content="Bom Sucesso de Itararé"/>
-						<ComboBoxItem Content="Borá"/>
-						<ComboBoxItem Content="Boracéia"/>
-						<ComboBoxItem Content="Borborema"/>
-						<ComboBoxItem Content="Borebi"/>
-						<ComboBoxItem Content="Botucatu"/>
-						<ComboBoxItem Content="Bragança Paulista"/>
-						<ComboBoxItem Content="Braúna"/>
-						<ComboBoxItem Content="Brejo Alegre"/>
-						<ComboBoxItem Content="Brodowski"/>
-						<ComboBoxItem Content="Brotas"/>
-						<ComboBoxItem Content="Buri"/>
-						<ComboBoxItem Content="Buritama"/>
-						<ComboBoxItem Content="Buritizal"/>
-						<ComboBoxItem Content="Cabrália Paulista"/>
-						<ComboBoxItem Content="Cabreúva"/>
-						<ComboBoxItem Content="Cedral"/>
-						<ComboBoxItem Content="Cerqueira César"/>
-						<ComboBoxItem Content="Cerquilho"/>
-						<ComboBoxItem Content="Cesário Lange"/>
-						<ComboBoxItem Content="Charqueada"/>
-						<ComboBoxItem Content="Chavantes"/>
-						<ComboBoxItem Content="Clementina"/>
-						<ComboBoxItem Content="Colina"/>
-						<ComboBoxItem Content="Colômbia"/>
-						<ComboBoxItem Content="Conchal"/>
-						<ComboBoxItem Content="Conchas"/>
-						<ComboBoxItem Content="Cordeirópolis"/>
-						<ComboBoxItem Content="Coroados"/>
-						<ComboBoxItem Content="Coronel Macedo"/>
-						<ComboBoxItem Content="Corumbataí"/>
-						<ComboBoxItem Content="Cosmópolis"/>
-						<ComboBoxItem Content="Caçapava"/>
-						<ComboBoxItem Content="Cachoeira Paulista"/>
-						<ComboBoxItem Content="Caconde"/>
-						<ComboBoxItem Content="Cafelândia"/>
-						<ComboBoxItem Content="Caiabu"/>
-						<ComboBoxItem Content="Caieiras"/>
-						<ComboBoxItem Content="Caiuá"/>
-						<ComboBoxItem Content="Cajamar"/>
-						<ComboBoxItem Content="Cajati"/>
-						<ComboBoxItem Content="Cajobi"/>
-						<ComboBoxItem Content="Cajuru"/>
-						<ComboBoxItem Content="Campina do Monte Alegre"/>
-						<ComboBoxItem Content="Campinas"/>
-						<ComboBoxItem Content="Campo Limpo Paulista"/>
-						<ComboBoxItem Content="Campos do Jordão"/>
-						<ComboBoxItem Content="Campos Novos Paulista"/>
-						<ComboBoxItem Content="Cananéia"/>
-						<ComboBoxItem Content="Canas"/>
-						<ComboBoxItem Content="Cândido Mota"/>
-						<ComboBoxItem Content="Cândido Rodrigues"/>
-						<ComboBoxItem Content="Canitar"/>
-						<ComboBoxItem Content="Capão Bonito"/>
-						<ComboBoxItem Content="Capela do Alto"/>
-						<ComboBoxItem Content="Capivari"/>
-						<ComboBoxItem Content="Caraguatatuba"/>
-						<ComboBoxItem Content="Carapicuíba"/>
-						<ComboBoxItem Content="Cardoso"/>
-						<ComboBoxItem Content="Casa Branca"/>
-						<ComboBoxItem Content="Cássia dos Coqueiros"/>
-						<ComboBoxItem Content="Castilho"/>
-						<ComboBoxItem Content="Catanduva"/>
-						<ComboBoxItem Content="Catiguá"/>
-						<ComboBoxItem Content="Cosmorama"/>
-						<ComboBoxItem Content="Cotia"/>
-						<ComboBoxItem Content="Cravinhos"/>
-						<ComboBoxItem Content="Cristais Paulista"/>
-						<ComboBoxItem Content="Cruzália"/>
-						<ComboBoxItem Content="Cruzeiro"/>
-						<ComboBoxItem Content="Cubatão"/>
-						<ComboBoxItem Content="Cunha"/>
-						<ComboBoxItem Content="Descalvado"/>
-						<ComboBoxItem Content="Diadema"/>
-						<ComboBoxItem Content="Dirce Reis"/>
-						<ComboBoxItem Content="Divinolândia"/>
-						<ComboBoxItem Content="Dobrada"/>
-						<ComboBoxItem Content="Dois Córregos"/>
-						<ComboBoxItem Content="Dolcinópolis"/>
-						<ComboBoxItem Content="Dourado"/>
-						<ComboBoxItem Content="Dracena"/>
-						<ComboBoxItem Content="Duartina"/>
-						<ComboBoxItem Content="Dumont"/>
-						<ComboBoxItem Content="Echaporã"/>
-						<ComboBoxItem Content="Eldorado"/>
-						<ComboBoxItem Content="Elias Fausto"/>
-						<ComboBoxItem Content="Elisiário"/>
-						<ComboBoxItem Content="Embaúba"/>
-						<ComboBoxItem Content="Embu"/>
-						<ComboBoxItem Content="Embu-Guaçu"/>
-						<ComboBoxItem Content="Emilianópolis"/>
-						<ComboBoxItem Content="Engenheiro Coelho"/>
-						<ComboBoxItem Content="Espírito Santo do Pinhal"/>
-						<ComboBoxItem Content="Espírito Santo do Turvo"/>
-						<ComboBoxItem Content="Estiva Gerbi"/>
-						<ComboBoxItem Content="Estrela do Norte"/>
-						<ComboBoxItem Content="Estrela d'Oeste"/>
-						<ComboBoxItem Content="Euclides da Cunha Paulista"/>
-						<ComboBoxItem Content="Fartura"/>
-						<ComboBoxItem Content="Fernando Prestes"/>
-						<ComboBoxItem Content="Fernandópolis"/>
-						<ComboBoxItem Content="Fernão"/>
-						<ComboBoxItem Content="Ferraz de Vasconcelos"/>
-						<ComboBoxItem Content="Flora Rica"/>
-						<ComboBoxItem Content="Floreal"/>
-						<ComboBoxItem Content="Flórida Paulista"/>
-						<ComboBoxItem Content="Florínea"/>
-						<ComboBoxItem Content="Franca"/>
-						<ComboBoxItem Content="Francisco Morato"/>
-						<ComboBoxItem Content="Franco da Rocha"/>
-						<ComboBoxItem Content="Gabriel Monteiro"/>
-						<ComboBoxItem Content="Garça"/>
-						<ComboBoxItem Content="Gastão Vidigal"/>
-						<ComboBoxItem Content="Gavião Peixoto"/>
-						<ComboBoxItem Content="General Salgado"/>
-						<ComboBoxItem Content="Getulina"/>
-						<ComboBoxItem Content="Glicério"/>
-						<ComboBoxItem Content="Guaiçara"/>
-						<ComboBoxItem Content="Guaimbê"/>
-						<ComboBoxItem Content="Guaíra"/>
-						<ComboBoxItem Content="Guapiaçu"/>
-						<ComboBoxItem Content="Guapiara"/>
-						<ComboBoxItem Content="Guará"/>
-						<ComboBoxItem Content="Guaraçaí"/>
-						<ComboBoxItem Content="Guaraci"/>
-						<ComboBoxItem Content="Guarani d'Oeste"/>
-						<ComboBoxItem Content="Guarantã"/>
-						<ComboBoxItem Content="Guararapes"/>
-						<ComboBoxItem Content="Guararema"/>
-						<ComboBoxItem Content="Guaratinguetá"/>
-						<ComboBoxItem Content="Guareí"/>
-						<ComboBoxItem Content="Guariba"/>
-						<ComboBoxItem Content="Guarujá"/>
-						<ComboBoxItem Content="Guarulhos"/>
-						<ComboBoxItem Content="Guatapará"/>
-						<ComboBoxItem Content="Guzolândia"/>
-						<ComboBoxItem Content="Herculândia"/>
-						<ComboBoxItem Content="Holambra"/>
-						<ComboBoxItem Content="Hortolândia"/>
-						<ComboBoxItem Content="Iacanga"/>
-						<ComboBoxItem Content="Iacri"/>
-						<ComboBoxItem Content="Iaras"/>
-						<ComboBoxItem Content="Itaóca"/>
-						<ComboBoxItem Content="Itapecerica da Serra"/>
-						<ComboBoxItem Content="Itapetininga"/>
-						<ComboBoxItem Content="Itapeva"/>
-						<ComboBoxItem Content="Itapevi"/>
-						<ComboBoxItem Content="Itapira"/>
-						<ComboBoxItem Content="Itapirapuã Paulista"/>
-						<ComboBoxItem Content="Itápolis"/>
-						<ComboBoxItem Content="Itaporanga"/>
-						<ComboBoxItem Content="Itapuí"/>
-						<ComboBoxItem Content="Itapura"/>
-						<ComboBoxItem Content="Itaquaquecetuba"/>
-						<ComboBoxItem Content="Itararé"/>
-						<ComboBoxItem Content="Itariri"/>
-						<ComboBoxItem Content="Itatiba"/>
-						<ComboBoxItem Content="Ibaté"/>
-						<ComboBoxItem Content="Ibirá"/>
-						<ComboBoxItem Content="Ibirarema"/>
-						<ComboBoxItem Content="Ibiúna"/>
-						<ComboBoxItem Content="Icém"/>
-						<ComboBoxItem Content="Iepê"/>
-						<ComboBoxItem Content="Igaraçu do Tietê"/>
-						<ComboBoxItem Content="Igarapava"/>
-						<ComboBoxItem Content="Igaratá"/>
-						<ComboBoxItem Content="Iguape"/>
-						<ComboBoxItem Content="Ilha Comprida"/>
-						<ComboBoxItem Content="Ilha Solteira"/>
-						<ComboBoxItem Content="Ilhabela"/>
-						<ComboBoxItem Content="Indaiatuba"/>
-						<ComboBoxItem Content="Indiana"/>
-						<ComboBoxItem Content="Indiaporã"/>
-						<ComboBoxItem Content="Inúbia Paulista"/>
-						<ComboBoxItem Content="Ipaussu"/>
-						<ComboBoxItem Content="Iperó"/>
-						<ComboBoxItem Content="Ipeúna"/>
-						<ComboBoxItem Content="Ipiguá"/>
-						<ComboBoxItem Content="Iporanga"/>
-						<ComboBoxItem Content="Ipuã"/>
-						<ComboBoxItem Content="Iracemápolis"/>
-						<ComboBoxItem Content="Irapuã"/>
-						<ComboBoxItem Content="Irapuru"/>
-						<ComboBoxItem Content="Itaberá"/>
-						<ComboBoxItem Content="Itaí"/>
-						<ComboBoxItem Content="Itajobi"/>
-						<ComboBoxItem Content="Itaju"/>
-						<ComboBoxItem Content="Itanhaém"/>
-						<ComboBoxItem Content="Itatinga"/>
-						<ComboBoxItem Content="Itirapina"/>
-						<ComboBoxItem Content="Itirapuã"/>
-						<ComboBoxItem Content="Itobi"/>
-						<ComboBoxItem Content="Itu"/>
-						<ComboBoxItem Content="Itupeva"/>
-						<ComboBoxItem Content="Ituverava"/>
-						<ComboBoxItem Content="Jaborandi"/>
-						<ComboBoxItem Content="Jaboticabal"/>
-						<ComboBoxItem Content="Jacareí"/>
-						<ComboBoxItem Content="Jaci"/>
-						<ComboBoxItem Content="Jacupiranga"/>
-						<ComboBoxItem Content="Jaguariúna"/>
-						<ComboBoxItem Content="Jales"/>
-						<ComboBoxItem Content="ambeiro"/>
-						<ComboBoxItem Content="Jandira"/>
-						<ComboBoxItem Content="Jardinópolis"/>
-						<ComboBoxItem Content="Jarinu"/>
-						<ComboBoxItem Content="Jaú"/>
-						<ComboBoxItem Content="Jeriquara"/>
-						<ComboBoxItem Content="Joanópolis"/>
-						<ComboBoxItem Content="João Ramalho"/>
-						<ComboBoxItem Content="José Bonifácio"/>
-						<ComboBoxItem Content="Júlio Mesquita"/>
-						<ComboBoxItem Content="Jumirim"/>
-						<ComboBoxItem Content="Jundiaí"/>
-						<ComboBoxItem Content="Junqueirópolis"/>
-						<ComboBoxItem Content="Juquiá"/>
-						<ComboBoxItem Content="Juquitiba"/>
-						<ComboBoxItem Content="Lagoinha"/>
-						<ComboBoxItem Content="Laranjal Paulista"/>
-						<ComboBoxItem Content="Lavínia"/>
-						<ComboBoxItem Content="Lavrinhas"/>
-						<ComboBoxItem Content="Leme"/>
-						<ComboBoxItem Content="Lençóis Paulista"/>
-						<ComboBoxItem Content="Limeira"/>
-						<ComboBoxItem Content="Lindóia"/>
-						<ComboBoxItem Content="Lins"/>
-						<ComboBoxItem Content="Lorena"/>
-						<ComboBoxItem Content="Lourdes"/>
-						<ComboBoxItem Content="Louveira"/>
-						<ComboBoxItem Content="Lucélia"/>
-						<ComboBoxItem Content="Lucianópolis"/>
-						<ComboBoxItem Content="Luís Antônio"/>
-						<ComboBoxItem Content="Luiziânia"/>
-						<ComboBoxItem Content="Lupércio"/>
-						<ComboBoxItem Content="Lutécia"/>
-						<ComboBoxItem Content="Macatuba"/>
-						<ComboBoxItem Content="Macaubal"/>
-						<ComboBoxItem Content="Macedônia"/>
-						<ComboBoxItem Content="Monte Alegre do Sul"/>
-						<ComboBoxItem Content="Monte Alto"/>
-						<ComboBoxItem Content="Monte Aprazível"/>
-						<ComboBoxItem Content="Monte Azul Paulista"/>
-						<ComboBoxItem Content="Monte Castelo"/>
-						<ComboBoxItem Content="Monte Mor"/>
-						<ComboBoxItem Content="Monteiro Lobato"/>
-						<ComboBoxItem Content="Morro Agudo"/>
-						<ComboBoxItem Content="morungaba"/>
-						<ComboBoxItem Content="Motuca"/>
-						<ComboBoxItem Content="Murutinga do Sul"/>
-						<ComboBoxItem Content="Magda"/>
-						<ComboBoxItem Content="Mairinque"/>
-						<ComboBoxItem Content="Mairiporã"/>
-						<ComboBoxItem Content="Manduri"/>
-						<ComboBoxItem Content="Marabá Paulista"/>
-						<ComboBoxItem Content="Maracaí"/>
-						<ComboBoxItem Content="Marapoama"/>
-						<ComboBoxItem Content="Mariápolis"/>
-						<ComboBoxItem Content="Marília"/>
-						<ComboBoxItem Content="Marinópolis"/>
-						<ComboBoxItem Content="Martinópolis"/>
-						<ComboBoxItem Content="Matão"/>
-						<ComboBoxItem Content="Mauá"/>
-						<ComboBoxItem Content="Mendonça"/>
-						<ComboBoxItem Content="Meridiano"/>
-						<ComboBoxItem Content="Mesópolis"/>
-						<ComboBoxItem Content="Miguelópolis"/>
-						<ComboBoxItem Content="Mineiros do Tietê"/>
-						<ComboBoxItem Content="Mira Estrela"/>
-						<ComboBoxItem Content="Miracatu"/>
-						<ComboBoxItem Content="Mirandópolis"/>
-						<ComboBoxItem Content="Mirante do Paranapanema"/>
-						<ComboBoxItem Content="Mirassolândia"/>
-						<ComboBoxItem Content="Mococa"/>
-						<ComboBoxItem Content="Mogi das Cruzes"/>
-						<ComboBoxItem Content="Mogi Guaçu"/>
-						<ComboBoxItem Content="Mogi Mirim"/>
-						<ComboBoxItem Content="Mombuca"/>
-						<ComboBoxItem Content="Monções"/>
-						<ComboBoxItem Content="Mongaguá"/>
-						<ComboBoxItem Content="Nantes"/>
-						<ComboBoxItem Content="Narandiba"/>
-						<ComboBoxItem Content="Nova Granada"/>
-						<ComboBoxItem Content="Nova Guataporanga"/>
-						<ComboBoxItem Content="Nova Independência"/>
-						<ComboBoxItem Content="Nova Luzitânia"/>
-						<ComboBoxItem Content="Nova Odessa"/>
-						<ComboBoxItem Content="Novais"/>
-						<ComboBoxItem Content="Novo Horizonte"/>
-						<ComboBoxItem Content="Nuporanga"/>
-						<ComboBoxItem Content="Natividade da Serra"/>
-						<ComboBoxItem Content="Nazaré Paulista"/>
-						<ComboBoxItem Content="Neves Paulista"/>
-						<ComboBoxItem Content="Nhandeara"/>
-						<ComboBoxItem Content="Nipoã"/>
-						<ComboBoxItem Content="Nova Aliança"/>
-						<ComboBoxItem Content="Nova Campina"/>
-						<ComboBoxItem Content="Nova Canaã Paulista"/>
-						<ComboBoxItem Content="Nova Castilho"/>
-						<ComboBoxItem Content="Nova Europa"/>
-						<ComboBoxItem Content="Ocauçu"/>
-						<ComboBoxItem Content="Óleo"/>
-						<ComboBoxItem Content="Orindiúva"/>
-						<ComboBoxItem Content="Orlândia"/>
-						<ComboBoxItem Content="Osasco"/>
-						<ComboBoxItem Content="Oscar Bressane"/>
-						<ComboBoxItem Content="Osvaldo Cruzv"/>
-						<ComboBoxItem Content="Ourinhos"/>
-						<ComboBoxItem Content="Ouro Verde"/>
-						<ComboBoxItem Content="Ouroeste"/>
-						<ComboBoxItem Content="Olímpia"/>
-						<ComboBoxItem Content="Onda Verde"/>
-						<ComboBoxItem Content="Oriente"/>
-						<ComboBoxItem Content="Pacaembu"/>
-						<ComboBoxItem Content="Palestina"/>
-						<ComboBoxItem Content="Palmares Paulista"/>
-						<ComboBoxItem Content="Palmeira d'Oeste"/>
-						<ComboBoxItem Content="Palmital"/>
-						<ComboBoxItem Content="Panorama"/>
-						<ComboBoxItem Content="Paraguaçu Paulista"/>
-						<ComboBoxItem Content="Paraibuna"/>
-						<ComboBoxItem Content="Paraíso"/>
-						<ComboBoxItem Content="Paranapanema"/>
-						<ComboBoxItem Content="Paranapuã"/>
-						<ComboBoxItem Content="Platina"/>
-						<ComboBoxItem Content="Poá"/>
-						<ComboBoxItem Content="Pompeia"/>
-						<ComboBoxItem Content="Pongaí"/>
-						<ComboBoxItem Content="Pontal"/>
-						<ComboBoxItem Content="Pontalinda"/>
-						<ComboBoxItem Content="Pontes Gestal"/>
-						<ComboBoxItem Content="Populina"/>
-						<ComboBoxItem Content="Porto Feliz"/>
-						<ComboBoxItem Content="Porto Ferreira"/>
-						<ComboBoxItem Content="Potim"/>
-						<ComboBoxItem Content="Pracinha"/>
-						<ComboBoxItem Content="Parapuã"/>
-						<ComboBoxItem Content="Pardinho"/>
-						<ComboBoxItem Content="Pariquera-Açu"/>
-						<ComboBoxItem Content="Parisi"/>
-						<ComboBoxItem Content="Patrocínio Paulista"/>
-						<ComboBoxItem Content="Paulicéia"/>
-						<ComboBoxItem Content="Paulínia"/>
-						<ComboBoxItem Content="Paulistânia"/>
-						<ComboBoxItem Content="Paulo de Faria"/>
-						<ComboBoxItem Content="Pederneiras"/>
-						<ComboBoxItem Content="Pedra Bela"/>
-						<ComboBoxItem Content="Pedranópolis"/>
-						<ComboBoxItem Content="Pedregulho"/>
-						<ComboBoxItem Content="Pedreira"/>
-						<ComboBoxItem Content="Pedrinhas Paulista"/>
-						<ComboBoxItem Content="Pedro de Toledo"/>
-						<ComboBoxItem Content="Penápolis"/>
-						<ComboBoxItem Content="Pereira Barreto"/>
-						<ComboBoxItem Content="Pereiras"/>
-						<ComboBoxItem Content="Peruíbe"/>
-						<ComboBoxItem Content="Piacatu"/>
-						<ComboBoxItem Content="Piedade"/>
-						<ComboBoxItem Content="Pilar do Sul"/>
-						<ComboBoxItem Content="Pindamonhangaba"/>
-						<ComboBoxItem Content="Pindorama"/>
-						<ComboBoxItem Content="Pinhalzinho"/>
-						<ComboBoxItem Content="Piquerobi"/>
-						<ComboBoxItem Content="Piquete"/>
-						<ComboBoxItem Content="Piracaia"/>
-						<ComboBoxItem Content="Piraju"/>
-						<ComboBoxItem Content="Pirajuí"/>
-						<ComboBoxItem Content="Pirapora do Bom Jesus"/>
-						<ComboBoxItem Content="Pirapozinho"/>
-						<ComboBoxItem Content="Pirassununga"/>
-						<ComboBoxItem Content="Piratininga"/>
-						<ComboBoxItem Content="Pitangueiras"/>
-						<ComboBoxItem Content="Planalto"/>
-						<ComboBoxItem Content="Quadra"/>
-						<ComboBoxItem Content="Quatá"/>
-						<ComboBoxItem Content="Queiroz"/>
-						<ComboBoxItem Content="Queluz"/>
-						<ComboBoxItem Content="Quintana"/>
-						<ComboBoxItem Content="Pradópolis"/>
-						<ComboBoxItem Content="Praia Grande"/>
-						<ComboBoxItem Content="Presidente Alves"/>
-						<ComboBoxItem Content="Presidente Bernardes"/>
-						<ComboBoxItem Content="Presidente Epitácio"/>
-						<ComboBoxItem Content="Presidente Prudente"/>
-						<ComboBoxItem Content="Presidente Venceslau"/>
-						<ComboBoxItem Content="Promissão"/>
-						<ComboBoxItem Content="Rafard"/>
-						<ComboBoxItem Content="Rancharia"/>
-						<ComboBoxItem Content="Ribeirão Corrente"/>
-						<ComboBoxItem Content="Ribeirão do Sul"/>
-						<ComboBoxItem Content="Ribeirão dos Índios"/>
-						<ComboBoxItem Content="Ribeirão Grande"/>
-						<ComboBoxItem Content="Ribeirão Pires"/>
-						<ComboBoxItem Content="Ribeirão Preto"/>
-						<ComboBoxItem Content="Rifaina"/>
-						<ComboBoxItem Content="Rincão"/>
-						<ComboBoxItem Content="Rinópolis"/>
-						<ComboBoxItem Content="Rio Claro"/>
-						<ComboBoxItem Content="Redenção da Serra"/>
-						<ComboBoxItem Content="Regente Feijó"/>
-						<ComboBoxItem Content="Reginópolis"/>
-						<ComboBoxItem Content="Registro"/>
-						<ComboBoxItem Content="Restinga"/>
-						<ComboBoxItem Content="Ribeira"/>
-						<ComboBoxItem Content="Ribeirão Bonito"/>
-						<ComboBoxItem Content="Ribeirão Branco"/>
-						<ComboBoxItem Content="Rio das Pedras"/>
-						<ComboBoxItem Content="Rio Grande da Serra"/>
-						<ComboBoxItem Content="Riolândia"/>
-						<ComboBoxItem Content="Riversul"/>
-						<ComboBoxItem Content="Rosana"/>
-						<ComboBoxItem Content="Roseira"/>
-						<ComboBoxItem Content="Rubiácea"/>
-						<ComboBoxItem Content="Rubinéia"/>
-						<ComboBoxItem Content="Sabino"/>
-						<ComboBoxItem Content="Sagres"/>
-						<ComboBoxItem Content="Sales"/>
-						<ComboBoxItem Content="Sales Oliveira"/>
-						<ComboBoxItem Content="Salesópolis"/>
-						<ComboBoxItem Content="Salmourão"/>
-						<ComboBoxItem Content="Saltinho"/>
-						<ComboBoxItem Content="Salto"/>
-						<ComboBoxItem Content="Salto de Pirapora"/>
-						<ComboBoxItem Content="Salto Grande"/>
-						<ComboBoxItem Content="Serra Negra"/>
-						<ComboBoxItem Content="Serrana"/>
-						<ComboBoxItem Content="Sertãozinho"/>
-						<ComboBoxItem Content="Sete Barras"/>
-						<ComboBoxItem Content="Severínia"/>
-						<ComboBoxItem Content="Silveiras"/>
-						<ComboBoxItem Content="Socorro"/>
-						<ComboBoxItem Content="Sorocaba"/>
-						<ComboBoxItem Content="Sud Mennucci"/>
-						<ComboBoxItem Content="Sumaré"/>
-						<ComboBoxItem Content="Suzanápolis"/>
-						<ComboBoxItem Content="Suzano"/>
-						<ComboBoxItem Content="Sandovalina"/>
-						<ComboBoxItem Content="Santa Adélia"/>
-						<ComboBoxItem Content="Santa Albertina"/>
-						<ComboBoxItem Content="Santa Bárbara d'Oeste"/>
-						<ComboBoxItem Content="Santa Branca"/>
-						<ComboBoxItem Content="Santa Clara d'Oeste"/>
-						<ComboBoxItem Content="Santa Cruz da Conceição"/>
-						<ComboBoxItem Content="Santa Cruz da Esperança"/>
-						<ComboBoxItem Content="Santa Cruz das Palmeiras"/>
-						<ComboBoxItem Content="Santa Cruz do Rio Pardo"/>
-						<ComboBoxItem Content="Santa Ernestina"/>
-						<ComboBoxItem Content="Santa Fé do Sul"/>
-						<ComboBoxItem Content="Santa Gertrudes"/>
-						<ComboBoxItem Content="Santa Isabel"/>
-						<ComboBoxItem Content="Santa Lúcia"/>
-						<ComboBoxItem Content="Santa Maria da Serra"/>
-						<ComboBoxItem Content="Santa Mercedes"/>
-						<ComboBoxItem Content="Santa Rita do Passa-Quatro"/>
-						<ComboBoxItem Content="Santa Rita d'Oeste"/>
-						<ComboBoxItem Content="Santa Rosa de Viterbo"/>
-						<ComboBoxItem Content="Santa Salete"/>
-						<ComboBoxItem Content="Santana da Ponte Pensa"/>
-						<ComboBoxItem Content="Santana de Parnaíba"/>
-						<ComboBoxItem Content="Santo Anastácio"/>
-						<ComboBoxItem Content="Santo André"/>
-						<ComboBoxItem Content="Santo Antônio da Alegria"/>
-						<ComboBoxItem Content="Santo Antônio de Posse"/>
-						<ComboBoxItem Content="Santo Antônio do Aracanguá"/>
-						<ComboBoxItem Content="Santo Antônio do Jardim"/>
-						<ComboBoxItem Content="Santo Antônio do Pinhal"/>
-						<ComboBoxItem Content="Santo Expedito"/>
-						<ComboBoxItem Content="Santópolis do Aguapeí"/>
-						<ComboBoxItem Content="Santos"/>
-						<ComboBoxItem Content="São Bento do Sapucaí"/>
-						<ComboBoxItem Content="São Bernardo do Campo"/>
-						<ComboBoxItem Content="São Caetano do Sul"/>
-						<ComboBoxItem Content="São Carlos"/>
-						<ComboBoxItem Content="São Francisco"/>
-						<ComboBoxItem Content="São João da Boa Vista"/>
-						<ComboBoxItem Content="São João das Duas Pontes"/>
-						<ComboBoxItem Content="São João de Iracema"/>
-						<ComboBoxItem Content="São João do Pau d'Alho"/>
-						<ComboBoxItem Content="São Joaquim da Barra"/>
-						<ComboBoxItem Content="São José da Bela Vista"/>
-						<ComboBoxItem Content="São José do Barreiro"/>
-						<ComboBoxItem Content="São José do Rio Pardo"/>
-						<ComboBoxItem Content="São José do Rio Preto"/>
-						<ComboBoxItem Content="São José dos Campos"/>
-						<ComboBoxItem Content="São Lourenço da Serra"/>
-						<ComboBoxItem Content="São Luiz do Paraitinga"/>
-						<ComboBoxItem Content="São Manuel"/>
-						<ComboBoxItem Content="São Miguel Arcanjo"/>
-						<ComboBoxItem Content="São Paulo"/>
-						<ComboBoxItem Content="São Pedro"/>
-						<ComboBoxItem Content="São Pedro do Turvo"/>
-						<ComboBoxItem Content="São Roque"/>
-						<ComboBoxItem Content="São Sebastião"/>
-						<ComboBoxItem Content="São Sebastião da Grama"/>
-						<ComboBoxItem Content="São Simão"/>
-						<ComboBoxItem Content="São Vicente"/>
-						<ComboBoxItem Content="Sarapuí"/>
-						<ComboBoxItem Content="Sarutaiá"/>
-						<ComboBoxItem Content="Sebastianópolis do Sul"/>
-						<ComboBoxItem Content="Serra Azul"/>
-						<ComboBoxItem Content="Tabapuã"/>
-						<ComboBoxItem Content="Tabatinga"/>
-						<ComboBoxItem Content="Taboão da Serra"/>
-						<ComboBoxItem Content="Taciba"/>
-						<ComboBoxItem Content="Trabiju"/>
-						<ComboBoxItem Content="Tremembé"/>
-						<ComboBoxItem Content="Três Fronteiras"/>
-						<ComboBoxItem Content="Tuiuti"/>
-						<ComboBoxItem Content="Tupã"/>
-						<ComboBoxItem Content="Tupi Paulista"/>
-						<ComboBoxItem Content="Turiúba"/>
-						<ComboBoxItem Content="Turmalina"/>
-						<ComboBoxItem Content="Taguaí"/>
-						<ComboBoxItem Content="Taiaçu"/>
-						<ComboBoxItem Content="Taiúva"/>
-						<ComboBoxItem Content="Tambaú"/>
-						<ComboBoxItem Content="Tanabi"/>
-						<ComboBoxItem Content="Tapiraí"/>
-						<ComboBoxItem Content="Tapiratiba"/>
-						<ComboBoxItem Content="Taquaral"/>
-						<ComboBoxItem Content="Taquaritinga"/>
-						<ComboBoxItem Content="Taquarituba"/>
-						<ComboBoxItem Content="Taquarivaí"/>
-						<ComboBoxItem Content="Tarabai"/>
-						<ComboBoxItem Content="Tarumã"/>
-						<ComboBoxItem Content="Tatuí"/>
-						<ComboBoxItem Content="Taubaté"/>
-						<ComboBoxItem Content="Tejupá"/>
-						<ComboBoxItem Content="Teodoro Sampaio"/>
-						<ComboBoxItem Content="Terra Roxa"/>
-						<ComboBoxItem Content="Tietê"/>
-						<ComboBoxItem Content="Timbo"/>
-						<ComboBoxItem Content="Timburi"/>
-						<ComboBoxItem Content="Torre de Pedra"/>
-						<ComboBoxItem Content="Torrinha"/>
-						<ComboBoxItem Content="Ubarana"/>
-						<ComboBoxItem Content="Ubatuba"/>
-						<ComboBoxItem Content="Ubirajara"/>
-						<ComboBoxItem Content="Uchoa"/>
-						<ComboBoxItem Content="União Paulista"/>
-						<ComboBoxItem Content="Urânia"/>
-						<ComboBoxItem Content="Uru"/>
-						<ComboBoxItem Content="Urupês"/>
-						<ComboBoxItem Content="Valentim Gentil"/>
-						<ComboBoxItem Content="Valinhos"/>
-						<ComboBoxItem Content="Vera Cruz"/>
-						<ComboBoxItem Content="Vinhedo"/>
-						<ComboBoxItem Content="Viradouro"/>
-						<ComboBoxItem Content="Vista Alegre do Alto"/>
-						<ComboBoxItem Content="Vitória Brasil"/>
-						<ComboBoxItem Content="Votorantim"/>
-						<ComboBoxItem Content="Votuporanga"/>
-						<ComboBoxItem Content="Valparaíso"/>
-						<ComboBoxItem Content="Vargem"/>
-						<ComboBoxItem Content="Vargem Grande do Sul"/>
-						<ComboBoxItem Content="Vargem Grande Paulista"/>
-						<ComboBoxItem Content="Várzea Paulista"/>
+					<ComboBox x:Name="cmbEstado" HorizontalAlignment="Left" Margin="235.658,205.171,0,0" VerticalAlignment="Top" Width="65.303" IsEnabled="False" TabIndex="32">
+						<ComboBoxItem Content="AC"/>
+						<ComboBoxItem Content="AL"/>
+						<ComboBoxItem Content="AP"/>
+						<ComboBoxItem Content="AM"/>
+						<ComboBoxItem Content="BA"/>
+						<ComboBoxItem Content="CE"/>
+						<ComboBoxItem Content="DF"/>
+						<ComboBoxItem Content="ES"/>
+						<ComboBoxItem Content="GO"/>
+						<ComboBoxItem Content="MA"/>
+						<ComboBoxItem Content="MT"/>
+						<ComboBoxItem Content="MS"/>
+						<ComboBoxItem Content="MG"/>
+						<ComboBoxItem Content="PR"/>
+						<ComboBoxItem Content="PB"/>
+						<ComboBoxItem Content="PA"/>
+						<ComboBoxItem Content="PE"/>
+						<ComboBoxItem Content="PI"/>
+						<ComboBoxItem Content="RJ"/>
+						<ComboBoxItem Content="RN"/>
+						<ComboBoxItem Content="RS"/>
+						<ComboBoxItem Content="RO"/>
+						<ComboBoxItem Content="RR"/>
+						<ComboBoxItem Content="SC"/>
+						<ComboBoxItem Content="SE"/>
+						<ComboBoxItem Content="SP"/>
+						<ComboBoxItem Content="TO"/>
 					</ComboBox>
-					<Label Content="Estado:" HorizontalAlignment="Left" Margin="235.658,179.211,0,0" VerticalAlignment="Top"/>
+					<Label Content="Estado:*" HorizontalAlignment="Left" Margin="235.658,179.211,0,0" VerticalAlignment="Top"/>
 				</Grid>
 			</TabItem>
-            <TabItem Header="Sujeito">
-                <Grid/>
-            </TabItem>
+			<TabItem x:Name="tabEnvolvidos" Header="Envolvidos" TabIndex="13" IsEnabled="False">
+				<Grid x:Name="grdEnvolvidos">
+					<DataGrid x:Name="dgvOutrasAgencias_Copy" HorizontalAlignment="Left" Margin="10,10,0,10" Width="850.923" Background="#FF2E2E2E"/>
+				    <Button x:Name="btnCadPessoaFisica" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="865.923,10,0,0" VerticalAlignment="Top" Width="169.227" Height="40.62" Click="btnCadPessoaFisica_Click">
+				    <StackPanel Width="156.26" Height="28.96">
+					<Canvas>
+						<Image Source="/sistemaCorporativo;component/IMAGES/pessoFisica_icon.png" Height="27.127" Width="33" Canvas.Top="1.083" Canvas.Left="-2.667"  />
+						<TextBlock HorizontalAlignment="Left" Canvas.Left="24.333" Canvas.Top="6.499"><Run Text="Adicionar Pessoa Física"/></TextBlock>
+					</Canvas>
+				    </StackPanel>
+			        </Button>
+				    <Button Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="865.923,55.62,0,0" VerticalAlignment="Top" Width="169.227" Height="40.62">
+				    	<StackPanel Width="156.26" Height="28.96">
+				    		<Canvas>
+				    			<Image Source="/sistemaCorporativo;component/IMAGES/searchbyBussiness_icon.png" Height="29.793" Width="31" Canvas.Top="0.75"  />
+				    			<TextBlock Canvas.Left="24.667" Canvas.Top="-2.083" Width="118.833" Height="34.293" HorizontalAlignment="Center" TextAlignment="Center"><Run Text="Adicionar Pessoa"/><LineBreak/><Run Text="Jurídica"/></TextBlock>
+				    		</Canvas>
+				    	</StackPanel>
+				    </Button>
+				    <Button Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="865.923,101.24,0,0" VerticalAlignment="Top" Width="169.227" Height="40.62">
+				    	<StackPanel Width="156.26" Height="28.96">
+				    		<Canvas>
+				    			<Image Source="/sistemaCorporativo;component/IMAGES/searchbyCar_icon.png" Height="29.793" Width="31" Canvas.Top="0.75"  />
+				    			<TextBlock HorizontalAlignment="Left" Canvas.Left="28" Canvas.Top="5.5" Width="123.09" TextAlignment="Center"><Run Text="Adicionar Veículo"/></TextBlock>
+				    		</Canvas>
+				    	</StackPanel>
+				    </Button>
+				    <Button Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="865.923,166.62,0,0" VerticalAlignment="Top" Width="169.227" Height="40.62">
+				    	<StackPanel Width="151.427" Height="28.96">
+				    		<Canvas>
+				    			<Image Source="/sistemaCorporativo;component/IMAGES/deleteEnvolvido_icon.png" Height="28.71" Width="33" Canvas.Left="1"  />
+				    			<TextBlock HorizontalAlignment="Left" Canvas.Left="34" Canvas.Top="5.5" Width="109.95"><Run Text="Deletar Envolvído"/></TextBlock>
+				    		</Canvas>
+				    	</StackPanel>
+				    </Button>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="tabEvidencias" Content="" Header="Evidências" TabIndex="14" IsSelected="True" IsEnabled="False"/>
+			<TabItem x:Name="tabCenaDoCrime" Header="Cena do Crime" IsEnabled="False" TabIndex="15"/>
+			<TabItem x:Name="tabAnexos" Content="" Header="Anexos" TabIndex="16" IsEnabled="False"/>
+			<TabItem x:Name="tabRelatos" Content="" Header="Relatos" TabIndex="17" IsEnabled="False"/>
+			<TabItem x:Name="tabCasosRel" Content="" Header="Casos Relacionados" TabIndex="18" IsEnabled="False"/>
             
-        </TabControl>
+		</TabControl>
+		<Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}"  Content="Cancelar" HorizontalAlignment="Left" Margin="957.5,61.84,0,0" VerticalAlignment="Top" Width="90.317" Click="btnCancelar_Click" TabIndex="36"/>
 
-    </Grid>
+	</Grid>
 </Controls:MetroWindow>

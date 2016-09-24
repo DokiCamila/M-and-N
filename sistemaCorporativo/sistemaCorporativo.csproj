@@ -158,6 +158,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FORMS\CadOutrasAgencias.xaml.cs">
+      <DependentUpon>CadOutrasAgencias.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FORMS\CadCaso.xaml.cs">
       <DependentUpon>CadCaso.xaml</DependentUpon>
     </Compile>
@@ -170,26 +173,38 @@
     <Compile Include="FORMS\CadInvestigacao.xaml.cs">
       <DependentUpon>CadInvestigacao.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FORMS\CadUnidades.xaml.cs">
+      <DependentUpon>CadUnidades.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FORMS\ClassificarFingersPrints.xaml.cs">
       <DependentUpon>ClassificarFingersPrints.xaml</DependentUpon>
     </Compile>
     <Compile Include="FORMS\CortarImagem.xaml.cs">
       <DependentUpon>CortarImagem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FORMS\crimeManagementSplash.xaml.cs">
-      <DependentUpon>crimeManagementSplash.xaml</DependentUpon>
+    <Compile Include="FORMS\Envolvido Físico\BuscarPessoaFisica.xaml.cs">
+      <DependentUpon>BuscarPessoaFisica.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FORMS\crimeManagementWindow.xaml.cs">
-      <DependentUpon>crimeManagementWindow.xaml</DependentUpon>
+    <Compile Include="FORMS\Envolvido Físico\CadPessoaFisica.xaml.cs">
+      <DependentUpon>CadPessoaFisica.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FORMS\gerarLoginWindow.xaml.cs">
-      <DependentUpon>gerarLoginWindow.xaml</DependentUpon>
+    <Compile Include="FORMS\Envolvido Físico\TipoPessoaFisicaWindow.xaml.cs">
+      <DependentUpon>TipoPessoaFisicaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FORMS\LogoffSplash.xaml.cs">
+    <Compile Include="SPLASHSCREEN\CrimeManagementSplash.xaml.cs">
+      <DependentUpon>CrimeManagementSplash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FORMS\CrimeManagementWindow.xaml.cs">
+      <DependentUpon>CrimeManagementWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FORMS\GerarLoginWindow.xaml.cs">
+      <DependentUpon>GerarLoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SPLASHSCREEN\LogoffSplash.xaml.cs">
       <DependentUpon>LogoffSplash.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FORMS\individualDactiloscopica.xaml.cs">
-      <DependentUpon>individualDactiloscopica.xaml</DependentUpon>
+    <Compile Include="FORMS\IndividualDactiloscopica.xaml.cs">
+      <DependentUpon>IndividualDactiloscopica.xaml</DependentUpon>
     </Compile>
     <Compile Include="FORMS\UcImageCropper.xaml.cs">
       <DependentUpon>UcImageCropper.xaml</DependentUpon>
@@ -197,9 +212,13 @@
     <Compile Include="FORMS\WebcamWindow.xaml.cs">
       <DependentUpon>WebcamWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TO\Agencia.cs" />
     <Compile Include="TO\Agente.cs" />
+    <Compile Include="TO\Caso.cs" />
     <Compile Include="TO\Denuncia.cs" />
     <Compile Include="TO\FingerPrintsAgente.cs" />
+    <Compile Include="TO\OutrasAgencias.cs" />
+    <Compile Include="TO\Unidade.cs" />
     <Compile Include="UTIL\checkPassword.cs" />
     <Compile Include="TO\Viatura.cs" />
     <Compile Include="UTIL\croppingAdorner.cs" />
@@ -210,6 +229,10 @@
     <Compile Include="UTIL\SCANNERCLASSES\Device.cs" />
     <Compile Include="UTIL\SCANNERCLASSES\IScanner.cs" />
     <Compile Include="UTIL\SelectionCanvas.cs" />
+    <Page Include="FORMS\CadOutrasAgencias.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="FORMS\CadAgente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -230,6 +253,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FORMS\CadUnidades.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="FORMS\CadViatura.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,15 +269,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FORMS\crimeManagementSplash.xaml">
+    <Page Include="FORMS\Envolvido Físico\BuscarPessoaFisica.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="FORMS\crimeManagementWindow.xaml">
+    <Page Include="FORMS\Envolvido Físico\CadPessoaFisica.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="FORMS\gerarLoginWindow.xaml">
+    <Page Include="FORMS\Envolvido Físico\TipoPessoaFisicaWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SPLASHSCREEN\CrimeManagementSplash.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FORMS\CrimeManagementWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FORMS\GerarLoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -272,11 +311,11 @@
       <DependentUpon>LoginScreen.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="FORMS\LogoffSplash.xaml">
+    <Page Include="SPLASHSCREEN\LogoffSplash.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="FORMS\individualDactiloscopica.xaml">
+    <Page Include="FORMS\IndividualDactiloscopica.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -284,7 +323,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FORMS\SplashScreen.xaml">
+    <Page Include="SPLASHSCREEN\SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -310,7 +349,7 @@
     <Compile Include="FORMS\PrincipalScreen.xaml.cs">
       <DependentUpon>PrincipalScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FORMS\SplashScreen.xaml.cs">
+    <Compile Include="SPLASHSCREEN\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -358,12 +397,16 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="IMAGES\addNew.png" />
+    <Resource Include="IMAGES\addNewBlue.png" />
     <Resource Include="IMAGES\advanced_search_icon.png" />
     <Resource Include="IMAGES\Assinatura.png" />
     <Resource Include="IMAGES\btnAdcCase_icon.png" />
     <Resource Include="IMAGES\btnDelCase_icon.png" />
+    <Resource Include="IMAGES\Check.png" />
     <Resource Include="IMAGES\citations_icon.png" />
     <Resource Include="IMAGES\Close.png" />
+    <Resource Include="IMAGES\deleteEnvolvido_icon.png" />
     <Resource Include="IMAGES\Denuncia.png" />
     <Resource Include="IMAGES\Denuncia_Anonima.png" />
     <Resource Include="IMAGES\Denuncia_Normal.png" />
@@ -376,10 +419,14 @@
     <Resource Include="IMAGES\fundo flat.png" />
     <Resource Include="IMAGES\Icon_Login FLAT DESIGN.png" />
     <Resource Include="IMAGES\impressao Digital Recurso.png" />
+    <Resource Include="IMAGES\INTERPOL logo.png" />
     <Resource Include="IMAGES\investigation_Icon.png" />
     <Resource Include="IMAGES\nothing.png" />
     <Resource Include="IMAGES\Ocorrencia.png" />
+    <Resource Include="IMAGES\OutDepartamentos_FLAT.png" />
+    <Resource Include="IMAGES\PesquisarPessoaFisica.png" />
     <Resource Include="IMAGES\Pesquisa_Avancada.png" />
+    <Resource Include="IMAGES\pessoFisica_icon.png" />
     <Resource Include="IMAGES\reconhecimento_Facial.png" />
     <Resource Include="IMAGES\searchbyAddress_icon.png" />
     <Resource Include="IMAGES\searchbyBussiness_icon.png" />
@@ -391,6 +438,7 @@
     <Resource Include="IMAGES\Sobre.png" />
     <Resource Include="IMAGES\tarefa_icon.png" />
     <Resource Include="IMAGES\Tools.png" />
+    <Resource Include="IMAGES\Unidades_FLAT.png" />
     <Resource Include="IMAGES\User_Add.png" />
     <Resource Include="IMAGES\User_Profile.png" />
     <Resource Include="IMAGES\Viatura.png" />

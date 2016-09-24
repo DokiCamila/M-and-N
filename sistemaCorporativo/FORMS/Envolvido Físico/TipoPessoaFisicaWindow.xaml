@@ -1,0 +1,23 @@
+﻿<Controls:MetroWindow x:Name="wndTipoPessoaFisica" x:Class="sistemaCorporativo.FORMS.TipoPessoaFisicaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+	    xmlns:Custom="http://schemas.AvalonControls/AvalonControlsLibrary/Controls"
+		BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        Title="Selecione a Categoria do Envolvido Físico" Height="288.5" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ShowMaxRestoreButton="False" Loaded="wndTipoPessoaFisica_Loaded" >
+    <Grid>
+        <DataGrid x:Name="dgvCategogiaEnvolvido" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="237" Width="370" ColumnWidth="Auto" IsReadOnly="True"/>
+        <Button x:Name="btnOk" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="391.5,10,0,0" VerticalAlignment="Top" Width="90" Click="btnOk_Click">
+            <TextBlock Text="Ok" />
+        </Button>
+        <Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="391.5,42.96,0,0" VerticalAlignment="Top" Width="90" Click="btnCancelar_Click">
+            <TextBlock Text="Cancelar" />
+        </Button>
+        <Button x:Name="btnAjuda" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="391.5,218.54,0,0" VerticalAlignment="Top" Width="90">
+            <TextBlock Text="Ajuda" />
+        </Button>
+
+    </Grid>
+</Controls:MetroWindow>

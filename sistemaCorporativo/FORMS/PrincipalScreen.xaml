@@ -176,10 +176,6 @@
 
                 <Label Content="Cadastro" HorizontalAlignment="Left" Margin="27,2.017,0,0" VerticalAlignment="Top" FontFamily="Segoe WP Light" FontSize="29.333"/>
 
-                
-                
-                
-
                 <Controls:Tile Margin="566,51.034,792.5,275.965" Height="Auto" Width="Auto" TiltFactor="2" Title="Comparar Impressão Digital">
                     <Controls:Tile.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
@@ -198,6 +194,14 @@
                     </Controls:Tile.Background>
                     <Image Source="/sistemaCorporativo;component/IMAGES/Denuncia_Normal_FLAT.png" Margin="73,12,10,0"  Height="121" Width="250"/>
                 </Controls:Tile>
+
+				<Controls:Tile x:Name="tileCadUnidade" Margin="363.5,344,1177.333,126.165" Height="43.835" Width="55.167" Click="tileCadUnidade_Click" Title="" ToolTip="Cadastrar Nova Unidade do Departamento">
+        		<Controls:Tile.Background>
+        			<SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+        		</Controls:Tile.Background>
+        		<Image Source="/sistemaCorporativo;component/IMAGES/Unidades_FLAT.png"  Height="65.833" Width="128.333" Margin="32,6,0,0"/>
+        	    </Controls:Tile>
+
                 <Controls:Tile x:Name="tileViatura" Margin="242,51.034,1116.5,275.965" Height="Auto" Width="Auto" Click="TileViatura_Click_" Title="Cadastrar Viatura">
                     <Controls:Tile.Background>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
@@ -215,6 +219,12 @@
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                     </Controls:Tile.Background>
                     <Image Source="/sistemaCorporativo;component/IMAGES/Sobre_FLAT.png" Margin="52,9,0,0" Width="79.5" Height="75.002"/>
+                </Controls:Tile>
+                <Controls:Tile x:Name="tileCadAgenAux" Margin="424.833,344,1116,126.165" Height="43.835" Width="55.167" Click="tileCadAgenAux_Click" Title="" ToolTip="Cadastrar Outras Agencias">
+                	<Controls:Tile.Background>
+                		<SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                	</Controls:Tile.Background>
+                	<Image Source="/sistemaCorporativo;component/IMAGES/OutDepartamentos_FLAT.png"  Height="71" Width="146" Margin="32,4.6,0,0"/>
                 </Controls:Tile>
 
             </Grid>

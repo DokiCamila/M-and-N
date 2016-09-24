@@ -4,8 +4,8 @@
 	xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
 	xmlns:Custom="http://schemas.AvalonControls/AvalonControlsLibrary/Controls"
-	x:Class="sistemaCorporativo.crimeManagementWindow"
-	x:Name="crimeManagementWnd"
+	x:Class="sistemaCorporativo.CrimeManagementWindow"
+	x:Name="wndCrimeManagement"
 	Title="Gestor Criminal"
 	Width="1356.917" Height="707.224" WindowStartupLocation="CenterScreen"
 	WindowTransitionsEnabled="False"
@@ -15,7 +15,7 @@
     ShowMinButton="False"
     ShowInTaskbar="False"
 	ResizeMode="NoResize"
-	TextBlock.TextAlignment="Center">
+	TextBlock.TextAlignment="Center" Loaded="wndCrimeManagement_Loaded">
 	<Controls:MetroWindow.Resources>
 		<Storyboard x:Key="grdInvestigaçõesAnim">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grdInvestigações">
@@ -29,6 +29,9 @@
 		</Storyboard>
 	</Controls:MetroWindow.Resources>
 	<Grid x:Name="LayoutRoot" Margin="0,0,0,0.5">
+		<Grid.Background>
+			<ImageBrush/>
+		</Grid.Background>
 		<Menu Height="30" VerticalAlignment="Top" Loaded="Menu_Loaded">
 			<MenuItem Header="Arquivo" Foreground="White">
 				<MenuItem Header="Sair"/>
@@ -110,7 +113,7 @@
 			</ListBox>
 		</Grid>
 
-		<Grid x:Name="grdBackground" Height="598.016" Margin="156.958,74.333,8.625,0" VerticalAlignment="Top" Background="#FF2C2C2C">
+		<Grid x:Name="grdBackground" Height="598.016" Margin="155.583,74.333,8.625,0" VerticalAlignment="Top" Background="#FF2C2C2C">
 			<Image HorizontalAlignment="Left" Height="339.266" Margin="377.667,126.334,0,0" VerticalAlignment="Top" Width="453" Source="pack://siteoforigin:,,,/IMAGES/Logo Maior.png" Stretch="Fill"/>
 		</Grid>
 		<Grid x:Name="grdInvestigações" Margin="156.958,74.333,8.625,4.375" Background="#FF2C2C2C" IsEnabled="False" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
@@ -130,7 +133,7 @@
 				</Canvas>
 		    </StackPanel>
 			</Button>
-			<Button x:Name="btnAddCaso_Copy" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="1008.042,73.62,0,0" VerticalAlignment="Top" Width="165.292" Height="40.62">
+			<Button x:Name="btnDelCaso" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="1008.042,73.62,0,0" VerticalAlignment="Top" Width="165.292" Height="40.62" Click="btnDelCaso_Click">
 				<StackPanel Width="151.427" Height="28.96">
 					<Canvas>
 						<Image Source="/sistemaCorporativo;component/IMAGES/btnDelCase_icon.png" Height="15.96" Width="33" Canvas.Left="1" Canvas.Top="5.5"  />
@@ -193,7 +196,7 @@
 					</Canvas>
 				</StackPanel>
 			</Button>
-			<DataGrid x:Name="dgvCasos" HorizontalAlignment="Left" Margin="12.097,28,0,0" VerticalAlignment="Top" Height="541.96" Width="986.042" RenderTransformOrigin="0.5,0.5">
+			<DataGrid x:Name="dgvCasos" HorizontalAlignment="Left" Margin="12.097,28,0,0" VerticalAlignment="Top" Height="541.96" Width="986.042" RenderTransformOrigin="0.5,0.5" IsReadOnly="True" AutoGeneratingColumn="dgvCasos_AutoGeneratingColumn" MouseDoubleClick="dgvCasos_MouseDoubleClick">
 				<DataGrid.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>

@@ -28,11 +28,11 @@ namespace sistemaCorporativo.FORMS
     /// <summary>
     /// Interaction logic for gerarLoginWindow.xaml
     /// </summary>
-    public partial class gerarLoginWindow : MetroWindow
+    public partial class GerarLoginWindow : MetroWindow
     {
         //Variável que vai receber o id pelo método construtor
         string id;
-        public gerarLoginWindow(string idAgente)
+        public GerarLoginWindow(string idAgente)
         {
             InitializeComponent();
             id = idAgente;

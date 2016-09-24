@@ -14,7 +14,7 @@
         <Label Content="          de&#xA;Investigação" HorizontalAlignment="Left" Margin="249,280.744,0,0" VerticalAlignment="Top" FontFamily="Dolce Vita A Few Extra Pounds" FontSize="29.333"/>
         <Controls:MetroProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Margin="0,358.23,0,-5.999" VerticalAlignment="Top" Width="688.56" Height="1.5" RenderTransformOrigin="0.5,0.5" Minimum="0" Maximum="100" Background="#FFDEDCDB" Foreground="#FF2ADEBD"/>
         <Label Content="(C) Copyright Equipe07 - ITB Brasílio 2015 - 2016. All rights reserved" HorizontalAlignment="Left" Margin="320,-5,0,0" VerticalAlignment="Top" Height="26"/>
-        <Label x:Name="lblVersao" Content="v1.3b" HorizontalAlignment="Left" Margin="412,270,0,0" VerticalAlignment="Top" FontFamily="Dolce Vita A Few Extra Pounds" FontSize="13.333" RenderTransformOrigin="0.5,0.5">
+        <Label x:Name="lblVersao" Content="v1.3.1b" HorizontalAlignment="Left" Margin="410.75,270.25,0,0" VerticalAlignment="Top" FontFamily="Dolce Vita A Few Extra Pounds" FontSize="13.333" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
