@@ -15,13 +15,13 @@
 	<Grid x:Name="LayoutRoot">
 		<Image HorizontalAlignment="Left" Height="302" Margin="281.784,0,-89.463,-10.599" VerticalAlignment="Top" Width="317.463" Source="/sistemaCorporativo;component/IMAGES/INTERPOL logo.png" Stretch="Fill"/>
 		<Label Content="Nome da Agencia:*" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
-		<TextBox x:Name="txtNomeAgencia" HorizontalAlignment="Left" Height="23" Margin="128.747,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237"/>
+		<TextBox x:Name="txtNomeAgencia" HorizontalAlignment="Left" Height="23" Margin="128.747,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" TabIndex="0"/>
 		<Label Content="Sigla:*" HorizontalAlignment="Left" Margin="376.2,20,0,0" VerticalAlignment="Top" Width="42.731"/>
-		<TextBox x:Name="txtSigla" HorizontalAlignment="Left" Height="23" Margin="423.931,19.96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74.353"/>
-		<DataGrid x:Name="dgvAgenciaAuxiliadora" IsReadOnly="True" SelectionMode="Extended" FrozenColumnCount="2"  HorizontalAlignment="Left" Margin="10,91.5,0,0" VerticalAlignment="Top" Height="142.401" Width="426.284" MouseDoubleClick="dgvAgenciaAuxiliadora_MouseDoubleClick" />
+		<TextBox x:Name="txtSigla" HorizontalAlignment="Left" Height="23" Margin="423.931,19.96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74.353" TabIndex="1"/>
+		<DataGrid x:Name="dgvAgenciaAuxiliadora" IsReadOnly="True" SelectionMode="Extended" FrozenColumnCount="2"  HorizontalAlignment="Left" Margin="10,91.5,0,0" VerticalAlignment="Top" Height="142.401" Width="426.284" MouseDoubleClick="dgvAgenciaAuxiliadora_MouseDoubleClick" TabIndex="2" />
 		<Button x:Name="btnCadastrar" Style="{DynamicResource SquareButtonStyle}" Content="Cadastrar" HorizontalAlignment="Left" Margin="402.784,248.401,0,0" VerticalAlignment="Top" Width="97" Height="33" Background="#FF35A3CD" RenderTransformOrigin="0.459,-0.293" TabIndex="6" Click="btnCadastrar_Click"/>
-		<Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}" Content="Cancelar" HorizontalAlignment="Left" Margin="96.784,248.401,0,0" VerticalAlignment="Top" Width="97" Height="33" TabIndex="4" Click="btnCancelar_Click"/>
-		<Button x:Name="btnLimpar" Style="{DynamicResource SquareButtonStyle}" Content="limpar campos" HorizontalAlignment="Left" Margin="198.784,248.401,0,0" VerticalAlignment="Top" Width="97" Height="33" TabIndex="5" Click="btnLimpar_Click"/>
-		<Button x:Name="btnExcluir" Style="{DynamicResource SquareButtonStyle}" Content="excluir" HorizontalAlignment="Left" Margin="300.784,248.401,0,0" VerticalAlignment="Top" Width="97" Height="33" TabIndex="4" Click="btnExcluir_Click"/>
+		<Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}" Content="Cancelar" HorizontalAlignment="Left" Margin="96.784,248.401,0,0" VerticalAlignment="Top" Width="97" Height="33" TabIndex="3" Click="btnCancelar_Click"/>
+		<Button x:Name="btnLimpar" Style="{DynamicResource SquareButtonStyle}" Content="limpar campos" HorizontalAlignment="Left" Margin="198.784,248.401,0,0" VerticalAlignment="Top" Width="97" Height="33" TabIndex="4" Click="btnLimpar_Click"/>
+		<Button x:Name="btnExcluir" Style="{DynamicResource SquareButtonStyle}" Content="excluir" HorizontalAlignment="Left" Margin="300.784,248.401,0,0" VerticalAlignment="Top" Width="97" Height="33" TabIndex="5" Click="btnExcluir_Click"/>
 	</Grid>
 </Controls:MetroWindow>

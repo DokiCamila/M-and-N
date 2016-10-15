@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\
 sistemaCorporativo
 none
 false
 DEBUG;TRACE
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\App.xaml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\App.xaml
 241227629220
 
-44-1926302206
-28-1632739083
+142845098944
+27654002096
 FORMS\CadOutrasAgencias.xaml;FORMS\CadAgente.xaml;FORMS\CadCaso.xaml;FORMS\CadDenuncia.xaml;FORMS\CadFingerPrints.xaml;FORMS\CadInvestigacao.xaml;FORMS\CadUnidades.xaml;FORMS\CadViatura.xaml;FORMS\ClassificarFingersPrints.xaml;FORMS\CortarImagem.xaml;FORMS\Envolvido Físico\BuscarPessoaFisica.xaml;FORMS\Envolvido Físico\CadPessoaFisica.xaml;FORMS\Envolvido Físico\TipoPessoaFisicaWindow.xaml;SPLASHSCREEN\CrimeManagementSplash.xaml;FORMS\CrimeManagementWindow.xaml;FORMS\GerarLoginWindow.xaml;FORMS\LoginScreen.xaml;SPLASHSCREEN\LogoffSplash.xaml;FORMS\IndividualDactiloscopica.xaml;FORMS\PrincipalScreen.xaml;SPLASHSCREEN\SplashScreen.xaml;FORMS\UcImageCropper.xaml;FORMS\WebcamWindow.xaml;Resources\Icons.xaml;
 
 False

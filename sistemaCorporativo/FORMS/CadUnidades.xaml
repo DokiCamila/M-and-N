@@ -13,8 +13,8 @@
 
 	<Grid x:Name="LayoutRoot">
 		<Label Content="Nome da Unidade:*" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
-		<TextBox x:Name="txtNomeUnidade" HorizontalAlignment="Left" Height="23" Margin="128.747,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="251.253"/>
-		<ComboBox x:Name="cmbMunicipio" HorizontalAlignment="Left" Margin="155.747,52,0,0" VerticalAlignment="Top" Width="224.253" TabIndex="31">
+		<TextBox x:Name="txtNomeUnidade" HorizontalAlignment="Left" Height="23" Margin="128.747,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="251.253" TabIndex="0"/>
+		<ComboBox x:Name="cmbMunicipio" HorizontalAlignment="Left" Margin="155.747,52,0,0" VerticalAlignment="Top" Width="224.253" TabIndex="1">
 			<ComboBoxItem Content="Araçatuba"/>
 			<ComboBoxItem Content="Araçoiaba da Serra"/>
 			<ComboBoxItem Content="Aramina"/>
@@ -653,9 +653,9 @@
 			<ComboBoxItem Content="Várzea Paulista"/>
 		</ComboBox>
 		<Label Content="Município:*" HorizontalAlignment="Left" Margin="80.44,50.96,0,0" VerticalAlignment="Top"/>
-		<DataGrid x:Name="dgvUnidades"  IsReadOnly="True" SelectionMode="Extended" FrozenColumnCount="2" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Height="162" Width="370" MouseDoubleClick="dgvUnidades_MouseDoubleClick"/>
-		<Button x:Name="btnCadastrar" Style="{DynamicResource SquareButtonStyle}" Content="Cadastrar" HorizontalAlignment="Left" Margin="394.784,21,0,0" VerticalAlignment="Top" Width="97" Height="33" Background="#FF35A3CD" RenderTransformOrigin="0.459,-0.293" TabIndex="6" Click="btnCadastrar_Click"/>
-		<Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}" Content="Cancelar" HorizontalAlignment="Left" Margin="394.784,135,0,0" VerticalAlignment="Top" Width="97" Height="33" TabIndex="4" Click="btnCancelar_Click"/>
+		<DataGrid x:Name="dgvUnidades"  IsReadOnly="True" SelectionMode="Extended" FrozenColumnCount="2" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Height="162" Width="370" MouseDoubleClick="dgvUnidades_MouseDoubleClick" TabIndex="2"/>
+		<Button x:Name="btnCadastrar" Style="{DynamicResource SquareButtonStyle}" Content="Cadastrar" HorizontalAlignment="Left" Margin="394.784,21,0,0" VerticalAlignment="Top" Width="97" Height="33" Background="#FF35A3CD" RenderTransformOrigin="0.459,-0.293" TabIndex="3" Click="btnCadastrar_Click"/>
+		<Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}" Content="Cancelar" HorizontalAlignment="Left" Margin="394.784,135,0,0" VerticalAlignment="Top" Width="97" Height="33" TabIndex="6" Click="btnCancelar_Click"/>
 		<Button x:Name="btnLimpar" Style="{DynamicResource SquareButtonStyle}" Content="limpar campos" HorizontalAlignment="Left" Margin="394.784,97,0,0" VerticalAlignment="Top" Width="97" Height="33" TabIndex="5" Click="btnLimpar_Click"/>
 		<Button x:Name="btnExcluir" Style="{DynamicResource SquareButtonStyle}" Content="excluir" HorizontalAlignment="Left" Margin="394.784,59,0,0" VerticalAlignment="Top" Width="97" Height="33" TabIndex="4" Click="btnExcluir_Click"/>
 	</Grid>

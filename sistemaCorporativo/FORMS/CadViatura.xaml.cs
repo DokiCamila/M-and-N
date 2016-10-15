@@ -261,6 +261,7 @@ namespace sistemaCorporativo.FORMS
 
                         System.Windows.Forms.MessageBox.Show("Viatura deletada com sucesso!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                         this.MetroWindow_Loaded(null, null);
+                        this.btnLimpar_Click(null, null);
 
                     }
                     catch (OracleException orclEx)

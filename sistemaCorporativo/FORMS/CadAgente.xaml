@@ -374,7 +374,7 @@
                         <ControlsA:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="119" x:Name="txtNascimento"  Mask="00/00/0000" CharacterCasing="Upper" Margin="486,69,0,0" Grid.RowSpan="2" TabIndex="4" Grid.Column="1"/>
                         <Label Content="RG*" HorizontalAlignment="Left" Margin="18,95,0,0" VerticalAlignment="Top" Height="26" Width="30" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
                         <Label Content="CPF*" HorizontalAlignment="Left" Margin="154,95,0,0" VerticalAlignment="Top" Height="26" Width="53" Grid.RowSpan="2" Grid.Column="1"/>
-                        <ControlsA:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="124" x:Name="txtCpf"  Mask="000.000.000-00" CharacterCasing="Upper" Margin="154,121,0,0" Grid.Row="1" TabIndex="6" Grid.Column="1" Text="___.___.___-__"/>
+                        <ControlsA:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="124" x:Name="txtCpf"  Mask="000,000,000-00" CharacterCasing="Upper" Margin="154,121,0,0" Grid.Row="1" TabIndex="6" Grid.Column="1" Text="___.___.___-__"/>
                         <Label Content="Tipo sanguíneo*" HorizontalAlignment="Left" Margin="302,95,0,0" VerticalAlignment="Top" Height="26" Width="97" Grid.RowSpan="2" Grid.Column="1"/>
                         <ComboBox x:Name="cmbTipoSangue" HorizontalAlignment="Left" Margin="302,121,0,0" VerticalAlignment="Top" Width="79" Height="26" Grid.RowSpan="2" TabIndex="7" Grid.Column="1">
                             <ComboBoxItem Content="A+"/>
@@ -425,7 +425,7 @@
                             <ComboBoxItem Content="TO"/>
                         </ComboBox>
                         <Label Content="CEP*" HorizontalAlignment="Left" Margin="18,2,0,0" VerticalAlignment="Top" Height="26" Width="41" Grid.ColumnSpan="2" Grid.Row="3"/>
-                        <ControlsA:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="73" x:Name="txtCep"  Mask="00000-000" CharacterCasing="Upper" Grid.ColumnSpan="2" Margin="18,28,0,0" Grid.Row="3" TabIndex="11"/>
+                        <ControlsA:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="73" x:Name="txtCep"  Mask="00000-000" CharacterCasing="Upper" Grid.ColumnSpan="2" Margin="18,28,0,0" Grid.Row="3" TabIndex="11" KeyDown="txtCep_KeyDown"/>
                         <Label Content="Logradouro*" HorizontalAlignment="Left" Margin="106,2,0,0" VerticalAlignment="Top" Height="26" Width="91" Grid.Row="3" Grid.Column="1"/>
                         <TextBox x:Name="txtLogradouro" Height="26" Margin="106,28,551,0" TextWrapping="NoWrap" VerticalAlignment="Top" Grid.Row="3" TabIndex="12" Grid.Column="1"/>
                         <Label Content="Numero*" HorizontalAlignment="Left" Margin="302,2,0,0" VerticalAlignment="Top" Height="26" Width="65" Grid.Row="3" Grid.Column="1"/>
@@ -490,7 +490,7 @@
                             <ComboBoxItem Content="Separado(a)"/>
                             <ComboBoxItem Content="Companheiro(a)"/>
                         </ComboBox>
-                        <TextBox x:Name="txtRg" HorizontalAlignment="Left" Height="26" Margin="18,121,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="121" Grid.RowSpan="2" Grid.ColumnSpan="2" TabIndex="5" PreviewKeyDown="txtRg_PreviewKeyDown"/>
+                        <TextBox x:Name="txtRg" HorizontalAlignment="Left" Height="26" Margin="18,121,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="121" Grid.RowSpan="2" Grid.ColumnSpan="2" TabIndex="5" PreviewKeyDown="txtRg_PreviewKeyDown" MaxLength="12"/>
                         <Button x:Name="btnLimpar" Style="{DynamicResource SquareButtonStyle}" Content="Limpar" HorizontalAlignment="Left" Margin="426,161,0,0" VerticalAlignment="Top" Width="107" Height="42" Click="btnLimpar_Click" Grid.Row="4" TabIndex="32" Grid.Column="1"/>
                         <Canvas x:Name="cnvPhoto" HorizontalAlignment="Left" Height="190" Margin="248,105,0,0" Grid.RowSpan="4" VerticalAlignment="Top" Width="350" Background="#FF343434" RenderTransformOrigin="0.5,0.5" IsEnabled="False" Grid.Column="1" Visibility="Hidden">
                             <Canvas.RenderTransform>

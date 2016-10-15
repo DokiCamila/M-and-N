@@ -195,7 +195,7 @@
                     <Image Source="/sistemaCorporativo;component/IMAGES/Denuncia_Normal_FLAT.png" Margin="73,12,10,0"  Height="121" Width="250"/>
                 </Controls:Tile>
 
-				<Controls:Tile x:Name="tileCadUnidade" Margin="363.5,344,1177.333,126.165" Height="43.835" Width="55.167" Click="tileCadUnidade_Click" Title="" ToolTip="Cadastrar Nova Unidade do Departamento">
+				<Controls:Tile x:Name="tileCadUnidade" Margin="363.5,344,1177.333,125.157" Height="44.8" Width="55.167" Click="tileCadUnidade_Click" Title="" ToolTip="Cadastrar Nova Unidade do Departamento">
         		<Controls:Tile.Background>
         			<SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
         		</Controls:Tile.Background>
@@ -226,7 +226,12 @@
                 	</Controls:Tile.Background>
                 	<Image Source="/sistemaCorporativo;component/IMAGES/OutDepartamentos_FLAT.png"  Height="71" Width="146" Margin="32,4.6,0,0"/>
                 </Controls:Tile>
-
+				<Controls:Tile x:Name="tilePessoaF" Margin="363.5,394.201,1177.333,74.964" Height="44.8" Width="55.167" Click="tilePessoaF_Click" Title="" ToolTip="Cadastrar Pessoa Física">
+                	<Controls:Tile.Background>
+                		<SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                	</Controls:Tile.Background>
+                	<Image Source="/sistemaCorporativo;component/IMAGES/CadEnvolvido_FLAT.png"  Height="77" Width="144" Margin="42,4.6,0,0"/>
+                </Controls:Tile>
             </Grid>
         </ScrollViewer>
         <Menu IsMainMenu="True" Height="29" VerticalAlignment="Top">

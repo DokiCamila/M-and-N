@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-        xmlns:Custom="http://schemas.AvalonControls/AvalonControlsLibrary/Controls" x:Name="wndCadPessoaFisica" x:Class="sistemaCorporativo.FORMS.CadPessoaFisica"
+        xmlns:Custom="http://schemas.AvalonControls/AvalonControlsLibrary/Controls" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="wndCadPessoaFisica" x:Class="sistemaCorporativo.FORMS.CadPessoaFisica"
         Title="Cadastrar Envolvido: Pessoa Física" Height="798.656" Width="1381.374"
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         ShowInTaskbar="False" WindowStartupLocation="CenterScreen"
-		WindowState="Maximized" IgnoreTaskbarOnMaximize="True"  ShowMinButton="False" ShowMaxRestoreButton="False">
+		WindowState="Maximized" IgnoreTaskbarOnMaximize="True"  ShowMinButton="False" ShowMaxRestoreButton="False" Loaded="wndCadPessoaFisica_Loaded">
 
 	<Controls:MetroWindow.Resources>
 		<Style x:Key="MaskedTextBoxStyle1" TargetType="{x:Type Custom:MaskedTextBox}">
@@ -824,89 +824,298 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
+		<Style x:Key="btnIds" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid>
+							<Ellipse x:Name="ellipse" Fill="#FF525C5D" Stroke="#FF7F8C8D"/>
+							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content=""/>
+							<Image HorizontalAlignment="Left" Height="34.25" VerticalAlignment="Top" Width="32.167" Source="/sistemaCorporativo;component/IMAGES/abrirPasta.png" Margin="14,10,0,0"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsDefault" Value="False"/>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="ellipse" Value="#FF6F7A7C"/>
+							</Trigger>
+							<Trigger Property="IsDefault" Value="False"/>
+							<Trigger Property="IsPressed" Value="True">
+								<Setter Property="Fill" TargetName="ellipse" Value="#FF3B4344"/>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid>
+							<Ellipse x:Name="ellipse" Fill="#FF525C5D" Stroke="#FF7F8C8D"/>
+							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content=""/>
+							<Image HorizontalAlignment="Left" Height="47.25" VerticalAlignment="Top" Width="39.5" Source="/sistemaCorporativo;component/IMAGES/abrirLeitor.png" Margin="15,12.5,0,0"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsDefault" Value="False"/>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="ellipse" Value="#FF6F7A7C"/>
+							</Trigger>
+							<Trigger Property="IsDefault" Value="False"/>
+							<Trigger Property="IsPressed" Value="True">
+								<Setter Property="Fill" TargetName="ellipse" Value="#FF3B4344"/>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid Margin="0,0,0,0.75">
+							<Ellipse x:Name="ellipse" Fill="#FF525C5D" Stroke="#FF7F8C8D" Margin="0"/>
+							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content=""/>
+							<Image HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="/sistemaCorporativo;component/IMAGES/Close.png" Margin="4.5,3.046,4.25,3.584"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsDefault" Value="False"/>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="ellipse" Value="#FF6F7A7C"/>
+							</Trigger>
+							<Trigger Property="IsDefault" Value="False"/>
+							<Trigger Property="IsPressed" Value="True">
+								<Setter Property="Fill" TargetName="ellipse" Value="#FF3B4344"/>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 	</Controls:MetroWindow.Resources>
 
 	<Grid Margin="0,-0.04,0,0.04">
 		<TabControl TabStripPlacement="Left">
 			<TabControl.Resources>
-                    <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}">
-                        <Setter Property="Padding" Value="8" />
-                        <Setter Property="HeaderTemplate">
-                            <Setter.Value>
-                                <DataTemplate>
-                                    <ContentPresenter Content="{TemplateBinding Content}">
-                                        <ContentPresenter.LayoutTransform>
-                                            <RotateTransform Angle="270" />
-                                        </ContentPresenter.LayoutTransform>
-                                    </ContentPresenter>
-                                </DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </TabControl.Resources>
-			<TabItem Header="Pessoais">
-				<Grid Margin="0,0,-2.999,0" Background="Black">
-					<GroupBox x:Name="grbDadosPessoais" Style="{x:Null}" Header="Dados Pessoais" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="330.293" Width="577.707">
+				<Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}">
+					<Setter Property="Padding" Value="8" />
+					<Setter Property="HeaderTemplate">
+						<Setter.Value>
+							<DataTemplate>
+								<ContentPresenter Content="{TemplateBinding Content}">
+									<ContentPresenter.LayoutTransform>
+										<RotateTransform Angle="270" />
+									</ContentPresenter.LayoutTransform>
+								</ContentPresenter>
+							</DataTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</TabControl.Resources>
+			<TabItem x:Name="tbPessoais" Header="Pessoais" TabIndex="0">
+				<Grid Margin="0,0,-2.999,0">
+				
+					<GroupBox x:Name="grbDadosPessoais" Style="{x:Null}" Header="Dados Pessoais" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="363.254" Width="577.707">
 						<Grid>
-							<TextBox x:Name="txtPrimeiroNome" HorizontalAlignment="Left" Height="23" Margin="121.033,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103"/>
+							<TextBox x:Name="txtNacionalidade" HorizontalAlignment="Left" Height="23" Margin="416.117,271.82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139.59" TabIndex="19"/>
+							<ComboBox x:Name="cmbNaturalidade" HorizontalAlignment="Left" Margin="415.536,241.02,0,0" VerticalAlignment="Top" Width="140.09" TabIndex="18">
+								<ComboBoxItem Content="Acre"/>
+								<ComboBoxItem Content="Alagoas"/>
+								<ComboBoxItem Content="Amapá"/>
+								<ComboBoxItem Content="Amazonas"/>
+								<ComboBoxItem Content="Bahia"/>
+								<ComboBoxItem Content="Ceará"/>
+								<ComboBoxItem Content="Distrito Federal"/>
+								<ComboBoxItem Content="Espírito Santo"/>
+								<ComboBoxItem Content="Goiás"/>
+								<ComboBoxItem Content="Maranhão"/>
+								<ComboBoxItem Content="Mato Grosso"/>
+								<ComboBoxItem Content="Mato Grosso do Sul"/>
+								<ComboBoxItem Content="Minas Gerais"/>
+								<ComboBoxItem Content="Pará"/>
+								<ComboBoxItem Content="Paraíba"/>
+								<ComboBoxItem Content="Paraná"/>
+								<ComboBoxItem Content="Pernambuco"/>
+								<ComboBoxItem Content="Piauí"/>
+								<ComboBoxItem Content="Rio de Janeiro"/>
+								<ComboBoxItem Content="Rio Grande do Norte"/>
+								<ComboBoxItem Content="Rio Grande do Sul"/>
+								<ComboBoxItem Content="Rondônia"/>
+								<ComboBoxItem Content="Roraima"/>
+								<ComboBoxItem Content="Santa Catarina"/>
+								<ComboBoxItem Content="São Paulo"/>
+								<ComboBoxItem Content="Sergipe"/>
+								<ComboBoxItem Content="Tocantins"/>
+							</ComboBox>
+							<DatePicker x:Name="txtDataMorte" HorizontalAlignment="Left" Margin="143.337,117.02,0,0" VerticalAlignment="Top" Width="137.5" IsTodayHighlighted="True" SelectedDateFormat="Short" Focusable="False" TabIndex="7"/>
+			
+							<DatePicker x:Name="txtDataNascimento" HorizontalAlignment="Left" Margin="143.337,86.08,0,0" VerticalAlignment="Top" Width="137.5" IsTodayHighlighted="True" SelectedDateFormat="Short" Focusable="False" TabIndex="6"/>
+			
+							<TextBox x:Name="txtPrimeiroNome" HorizontalAlignment="Left" Height="23" Margin="121.033,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103" MaxLength="30" TabIndex="1"/>
 							<Label Content="Primeiro Nome:*" HorizontalAlignment="Left" Margin="18,10.04,0,0" VerticalAlignment="Top"/>
 							<Label Content="Ultimo Nome:*" HorizontalAlignment="Left" Margin="234,10.04,0,0" VerticalAlignment="Top"/>
-							<TextBox x:Name="txtUltimoNome" HorizontalAlignment="Left" Height="23" Margin="328,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227.707"/>
-			
-							<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" x:Name="txtDataNascimento"  Mask="00/00/0000" CharacterCasing="Upper" Margin="143.337,86.04,0,0" TabIndex="9" Style="{DynamicResource MaskedTextBoxStyle1}"/>
-							<Label Content="Data de Nascimento:" HorizontalAlignment="Left" Margin="18,86.08,0,0" VerticalAlignment="Top"/>
+							<TextBox x:Name="txtUltimoNome" HorizontalAlignment="Left" Height="23" Margin="328,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227.707" MaxLength="90" TabIndex="2"/>
+							<Label Content="Data de Nascimento:*" HorizontalAlignment="Left" Margin="12.997,87.12,0,0" VerticalAlignment="Top"/>
 							<Label Content="Data de Morte:" HorizontalAlignment="Left" Margin="48.803,118.08,0,0" VerticalAlignment="Top"/>
-							<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" x:Name="txtDataMorte"  Mask="00/00/0000" CharacterCasing="Upper" Margin="143.337,118.04,0,0" TabIndex="9" Style="{DynamicResource MaskedTextBoxStyle1}"/>
-							<TextBox x:Name="txtAltura" HorizontalAlignment="Left" Height="23" Margin="143.337,149.04,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103"/>
-							<Label Content="Altura (m):" HorizontalAlignment="Left" Margin="73.09,149.04,0,0" VerticalAlignment="Top"/>
-							<TextBox x:Name="txtLargura" HorizontalAlignment="Left" Height="23" Margin="143.337,180.04,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103"/>
-							<Label Content="Largura (m):" HorizontalAlignment="Left" Margin="64.806,180.04,0,0" VerticalAlignment="Top"/>
-							<Label Content="Raça:" HorizontalAlignment="Left" Margin="100.802,211,0,0" VerticalAlignment="Top"/>
-							<ComboBox x:Name="cmbRaca" HorizontalAlignment="Left" Margin="143.337,211.04,0,0" VerticalAlignment="Top" Width="103"/>
+							<TextBox x:Name="txtAltura" HorizontalAlignment="Left" Height="23" Margin="177.837,148.02,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103" TabIndex="8"/>
+							<Label Content="Altura (m):" HorizontalAlignment="Left" Margin="107.59,148.02,0,0" VerticalAlignment="Top"/>
+							<TextBox x:Name="txtLargura" HorizontalAlignment="Left" Height="23" Margin="177.837,179.02,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103" TabIndex="9"/>
+							<Label Content="Largura (m):" HorizontalAlignment="Left" Margin="99.306,179.02,0,0" VerticalAlignment="Top"/>
+							<Label Content="Raça:" HorizontalAlignment="Left" Margin="135.301,240.94,0,0" VerticalAlignment="Top"/>
+							<ComboBox x:Name="cmbRaca" HorizontalAlignment="Left" Margin="177.837,240.98,0,0" VerticalAlignment="Top" Width="103" TabIndex="11">
+								<ComboBoxItem Content="Europóide"/>
+								<ComboBoxItem Content="Negróide"/>
+								<ComboBoxItem Content="Mongolóide"/>
+							</ComboBox>
 							<Label Content="Sexo:*" HorizontalAlignment="Left" Margin="18,47,0,0" VerticalAlignment="Top"/>
-							<RadioButton x:Name="rdbMasculino" Content="Masculino" HorizontalAlignment="Left" Margin="65.79,50.98,0,0" VerticalAlignment="Top" GroupName="sexoEnvolvido"/>
-							<RadioButton x:Name="rdbFeminino" Content="Feminino" HorizontalAlignment="Left" Margin="151.136,50.98,0,0" VerticalAlignment="Top" GroupName="sexoEnvolvido"/>
-							<ComboBox x:Name="cmbCorCabelo" HorizontalAlignment="Left" Margin="143.337,242.04,0,0" VerticalAlignment="Top" Width="103"/>
-							<Label Content="Cor do Cabelo:" HorizontalAlignment="Left" Margin="49.63,241.96,0,0" VerticalAlignment="Top"/>
-							<ComboBox x:Name="cmbCorOlhos" HorizontalAlignment="Left" Margin="143.337,273.04,0,0" VerticalAlignment="Top" Width="103"/>
-							<Label Content="Cor dos Olhos:" HorizontalAlignment="Left" Margin="50.473,272.92,0,0" VerticalAlignment="Top"/>
-							<ComboBox x:Name="cmbCorPele" HorizontalAlignment="Left" Margin="431.628,86.04,0,0" VerticalAlignment="Top" Width="124.079"/>
-							<Label Content="Cor da Pele:" HorizontalAlignment="Left" Margin="353.468,86.08,0,0" VerticalAlignment="Top"/>
-							<TextBox x:Name="txtNaturalidade" HorizontalAlignment="Left" Height="23" Margin="394.596,118.16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161.111"/>
-							<Label Content="Naturalidade:" HorizontalAlignment="Left" Margin="308.446,118.2,0,0" VerticalAlignment="Top"/>
-							<Label Content="Nacionalidade:" HorizontalAlignment="Left" Margin="322.147,242.08,0,0" VerticalAlignment="Top"/>
-							<ComboBox x:Name="cmbNaturalidade" HorizontalAlignment="Left" Margin="415.537,242.04,0,0" VerticalAlignment="Top" Width="140.09"/>
-							<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123.999" x:Name="txtCpf"  Mask="000.000.000-00" CharacterCasing="Upper" Margin="431.628,149.12,0,0" TabIndex="6" Text="___.___.___-__" Style="{DynamicResource MaskedTextBoxStyle3}"/>
-							<Label Content="CPF:" HorizontalAlignment="Left" Margin="394.018,149.08,0,0" VerticalAlignment="Top"/>
-							<TextBox x:Name="txtRg" HorizontalAlignment="Left" Height="23" Margin="431.628,180.04,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="124"/>
-							<Label Content="RG:" HorizontalAlignment="Left" Margin="398.618,180.04,0,0" VerticalAlignment="Top"/>
-							<CheckBox x:Name="ckbEstrangeiroIlegal" Content="Estrangeiro Ilegal" HorizontalAlignment="Left" Margin="440.129,276.9,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.08,0.278"/>
-							<ComboBox x:Name="cmbEstatoCivil" HorizontalAlignment="Left" Margin="452.626,211.24,0,0" VerticalAlignment="Top" Width="103"/>
-							<Label Content="Estado Civil:" HorizontalAlignment="Left" Margin="374.409,211.12,0,0" VerticalAlignment="Top"/>
+							<RadioButton x:Name="rdbMasculino" Content="Masculino" HorizontalAlignment="Left" Margin="65.79,50.98,0,0" VerticalAlignment="Top" GroupName="sexoEnvolvido" IsChecked="True" TabIndex="3"/>
+							<RadioButton x:Name="rdbFeminino" Content="Feminino" HorizontalAlignment="Left" Margin="151.136,50.98,0,0" VerticalAlignment="Top" GroupName="sexoEnvolvido" TabIndex="4"/>
+							<ComboBox x:Name="cmbCorCabelo" HorizontalAlignment="Left" Margin="177.837,271.98,0,0" VerticalAlignment="Top" Width="103" TabIndex="12">
+								<ComboBoxItem Background="#FFE2BC74" Content="Loiro" Foreground="#FF1F1F1F"/>
+								<ComboBoxItem Background="#FFE7A854" Content="Loiro Escuro" Foreground="#FF1F1F1F" />
+								<ComboBoxItem Background="#FFAD4F09" Content="Ruivo"/>
+								<ComboBoxItem Background="#FF9D3E0C" Content="Marrom Avermelhado"/>
+								<ComboBoxItem Background="#FF8B6C42" Content="Castanho"/>
+								<ComboBoxItem Background="#FF5B3C11" Content="Marrom"/>
+								<ComboBoxItem Background="#FF2F1E0E" Content="Marrom Escuro"/>
+								<ComboBoxItem Background="Black" Content="Preto"/>
+								<ComboBoxItem Background="LightGray" Content="Cinza/Grisalho" Foreground="#FF1F1F1F"/>
+								<ComboBoxItem Background="White" Content="Branco" Foreground="#FF1F1F1F"/>
+							</ComboBox>
+							<Label Content="Cor do Cabelo:" HorizontalAlignment="Left" Margin="84.129,271.9,0,0" VerticalAlignment="Top"/>
+							<ComboBox x:Name="cmbCorOlhos" HorizontalAlignment="Left" Margin="452.629,87.24,0,0" VerticalAlignment="Top" Width="103" TabIndex="13">
+								<ComboBoxItem Content="Âmbar/Mel"/>
+								<ComboBoxItem Content="Azul" />
+								<ComboBoxItem Content="Azul-Esverdeado"/>
+								<ComboBoxItem Content="Castanho"/>
+								<ComboBoxItem Content="Cinza"/>
+								<ComboBoxItem Content="Verde"/>
+								<ComboBoxItem Content="Vermelho"/>
+							</ComboBox>
+							<Label Content="Cor dos Olhos:" HorizontalAlignment="Left" Margin="359.764,87.12,0,0" VerticalAlignment="Top"/>
+							<ComboBox x:Name="cmbCorPele" HorizontalAlignment="Left" Margin="431.628,117.02,0,0" VerticalAlignment="Top" Width="124.079" TabIndex="14">
+								<ComboBoxItem Content="Branco" Foreground="#FF1F1F1F">
+									<ComboBoxItem.Background>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="#FFEFE2AD" Offset="0"/>
+											<GradientStop Color="#FFE0D293" Offset="1"/>
+										</LinearGradientBrush>
+									</ComboBoxItem.Background>
+								</ComboBoxItem>
+								<ComboBoxItem Content="Mulato Claro" Foreground="#FF1F1F1F">
+									<ComboBoxItem.Background>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="#FFEBD985" Offset="0"/>
+											<GradientStop Color="#FFE3C467" Offset="1"/>
+										</LinearGradientBrush>
+									</ComboBoxItem.Background>
+								</ComboBoxItem>
+								<ComboBoxItem Content="Mulato Médio" Foreground="#FF1F1F1F">
+									<ComboBoxItem.Background>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="#FFC7A464" Offset="0"/>
+											<GradientStop Color="#FFBC9762" Offset="1"/>
+										</LinearGradientBrush>
+									</ComboBoxItem.Background>
+								</ComboBoxItem>
+								<ComboBoxItem Content="Mulato Escuro">
+									<ComboBoxItem.Background>
+										<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+											<GradientStop Color="#FFBC9762" Offset="0"/>
+											<GradientStop Color="#FF794D30" Offset="1"/>
+										</LinearGradientBrush>
+									</ComboBoxItem.Background>
+								</ComboBoxItem>
+								<ComboBoxItem Content="Negro">
+									<ComboBoxItem.Background>
+										<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+											<GradientStop Color="#FF1B1C2E" Offset="1"/>
+											<GradientStop Color="#FF794D30"/>
+										</LinearGradientBrush>
+									</ComboBoxItem.Background>
+								</ComboBoxItem>
+							</ComboBox>
+							<Label Content="Cor da Pele:" HorizontalAlignment="Left" Margin="353.468,118.28,0,0" VerticalAlignment="Top"/>
+							<Label Content="Naturalidade:*" HorizontalAlignment="Left" Margin="324.963,241.02,0,0" VerticalAlignment="Top"/>
+							<Label Content="Nacionalidade:" HorizontalAlignment="Left" Margin="322.727,271.86,0,0" VerticalAlignment="Top"/>
+							<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123.999" x:Name="txtCpf"  Mask="000,000,000-00" CharacterCasing="Upper" Margin="431.708,147.98,0,0" TabIndex="15" Text="___.___.___-__" Style="{DynamicResource MaskedTextBoxStyle3}"/>
+							<Label Content="CPF:*" HorizontalAlignment="Left" Margin="389.094,146.98,0,0" VerticalAlignment="Top"/>
+							<TextBox x:Name="txtRg" HorizontalAlignment="Left" Height="23" Margin="431.629,178.98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="124" MaxLength="12" TabIndex="16"/>
+							<Label Content="RG:" HorizontalAlignment="Left" Margin="398.697,177.94,0,0" VerticalAlignment="Top"/>
+							<CheckBox x:Name="ckbEstrangeiroIlegal" Content="Estrangeiro Ilegal" HorizontalAlignment="Left" Margin="440.129,309.1,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.08,0.278" TabIndex="20"/>
+							<ComboBox x:Name="cmbEstatoCivil" HorizontalAlignment="Left" Margin="452.707,209.94,0,0" VerticalAlignment="Top" Width="103" TabIndex="17">
+								<ComboBoxItem Content="Solteiro(a)"/>
+								<ComboBoxItem Content="Casado(a)"/>
+								<ComboBoxItem Content="Divorciado(a)"/>
+								<ComboBoxItem Content="Víuvo(a)"/>
+								<ComboBoxItem Content="Separado(a)"/>
+								<ComboBoxItem Content="Companheiro(a)"/>
+							</ComboBox>
+							<Label Content="Estado Civil:" HorizontalAlignment="Left" Margin="374.49,209.94,0,0" VerticalAlignment="Top"/>
 							<Label Content="Conhecido Como:" HorizontalAlignment="Left" Margin="232.195,47,0,0" VerticalAlignment="Top"/>
-							<TextBox x:Name="txtUltimoNome_Copy" HorizontalAlignment="Left" Height="23" Margin="341.772,46.96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="213.935"/>
+							<TextBox x:Name="txtConhecidoComo" HorizontalAlignment="Left" Height="23" Margin="341.772,46.96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="213.935" TabIndex="5"/>
+							<TextBox x:Name="txtPeso" HorizontalAlignment="Left" Height="23" Margin="177.837,209.98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103" TabIndex="10"/>
+							<Label Content="Peso (Kg):" HorizontalAlignment="Left" Margin="110.563,209.98,0,0" VerticalAlignment="Top"/>
 			
 						</Grid>
 					</GroupBox>
-					<GroupBox x:Name="grbEndereco" Style="{x:Null}" Header="Endereço" HorizontalAlignment="Left" Margin="10,353.342,0,0" VerticalAlignment="Top" Height="258.459" Width="577.707">
+					<GroupBox x:Name="grbEndereco" Style="{x:Null}" Header="Endereço" HorizontalAlignment="Left" Margin="10.707,377.842,0,0" VerticalAlignment="Top" Height="258.459" Width="577.707" IsEnabled="False">
 						<Grid>
-							<Label Content="CEP:" HorizontalAlignment="Left" Margin="10,-3.95,0,0" VerticalAlignment="Top"/>
-							<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="73" x:Name="txtCep"  Mask="00000-000" CharacterCasing="Upper" Margin="10,22.01,0,0" TabIndex="11" Style="{DynamicResource MaskedTextBoxStyle2}"/>
-							<Label Content="Logradouro:" HorizontalAlignment="Left" Margin="98.133,-3.95,0,0" VerticalAlignment="Top"/>
-							<TextBox x:Name="txtLogradouro" Height="23" Margin="98.133,22.01,209.041,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-							<Label Content="Nº:" HorizontalAlignment="Left" Margin="366.458,-3.95,0,0" VerticalAlignment="Top"/>
-							<TextBox x:Name="txtNumero" HorizontalAlignment="Left" Height="23" Margin="365.566,22.01,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49.567"/>
+							<Label Content="CEP:*" HorizontalAlignment="Left" Margin="10,-3.95,0,0" VerticalAlignment="Top"/>
+							<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="73" x:Name="txtCep"  Mask="00000-000" CharacterCasing="Upper" Margin="10,22.01,0,0" TabIndex="21" Style="{DynamicResource MaskedTextBoxStyle2}" Text="_____-___" KeyDown="txtCep_KeyDown"/>
+							<Label Content="Logradouro:*" HorizontalAlignment="Left" Margin="98.133,-3.95,0,0" VerticalAlignment="Top"/>
+							<TextBox x:Name="txtLogradouro" Height="23" Margin="98.133,22.01,209.041,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxLength="100" TabIndex="22"/>
+							<Label Content="Nº:*" HorizontalAlignment="Left" Margin="366.458,-3.95,0,0" VerticalAlignment="Top"/>
+							<TextBox x:Name="txtNumero" HorizontalAlignment="Left" Height="23" Margin="365.566,22.01,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49.567" TabIndex="23"/>
 							<Label Content="Complemento:" HorizontalAlignment="Left" Margin="425.866,-3.95,0,0" VerticalAlignment="Top"/>
-							<TextBox HorizontalAlignment="Left" Height="23" Margin="425.601,22.01,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130.106"/>
-							<Label Content="Bairro:" HorizontalAlignment="Left" Margin="10,53.01,0,0" VerticalAlignment="Top"/>
-							<TextBox HorizontalAlignment="Left" Height="23" Margin="10,78.97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137.106"/>
-							<Label Content="Cidade:" HorizontalAlignment="Left" Margin="160.596,53.01,0,0" VerticalAlignment="Top"/>
-							<TextBox HorizontalAlignment="Left" Height="23" Margin="160.596,78.97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137.773"/>
-							<Label Content="UF:" HorizontalAlignment="Left" Margin="312.702,53.01,0,0" VerticalAlignment="Top"/>
-							<ComboBox HorizontalAlignment="Left" Margin="312.702,78.97,0,0" VerticalAlignment="Top" Width="64.964"/>
-							<Button Style="{DynamicResource SquareButtonStyle}" Content="Adicionar" HorizontalAlignment="Left" Margin="482.04,53.01,0,0" VerticalAlignment="Top" Width="73.667"/>
-							<Button Style="{DynamicResource SquareButtonStyle}" Content="Excluir" HorizontalAlignment="Left" Margin="482.04,85.97,0,0" VerticalAlignment="Top" Width="73.667"/>
-							<DataGrid x:Name="dgvOutrasAgencias_Copy2" HorizontalAlignment="Left" Margin="10,119.166,0,0" VerticalAlignment="Top" Height="104" Width="545" Background="#FF2E2E2E">
+							<TextBox x:Name="txtComplemento" HorizontalAlignment="Left" Height="23" Margin="425.601,22.01,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130.106" TabIndex="24"/>
+							<Label Content="Bairro:*" HorizontalAlignment="Left" Margin="10,53.01,0,0" VerticalAlignment="Top"/>
+							<TextBox x:Name="txtBairro" HorizontalAlignment="Left" Height="23" Margin="10,78.97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137.106" MaxLength="60" TabIndex="25"/>
+							<Label Content="Cidade:*" HorizontalAlignment="Left" Margin="160.596,53.01,0,0" VerticalAlignment="Top"/>
+							<TextBox x:Name="txtCidade" HorizontalAlignment="Left" Height="23" Margin="160.596,78.97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137.773" MaxLength="60" TabIndex="26"/>
+							<Label Content="UF:*" HorizontalAlignment="Left" Margin="312.702,53.01,0,0" VerticalAlignment="Top"/>
+							<ComboBox x:Name="cmbUf" HorizontalAlignment="Left" Margin="312.702,78.97,0,0" VerticalAlignment="Top" Width="64.964" TabIndex="27">
+								<ComboBoxItem Content="AC"/>
+								<ComboBoxItem Content="AL"/>
+								<ComboBoxItem Content="AP"/>
+								<ComboBoxItem Content="AM"/>
+								<ComboBoxItem Content="BA"/>
+								<ComboBoxItem Content="CE"/>
+								<ComboBoxItem Content="DF"/>
+								<ComboBoxItem Content="ES"/>
+								<ComboBoxItem Content="GO"/>
+								<ComboBoxItem Content="MA"/>
+								<ComboBoxItem Content="MT"/>
+								<ComboBoxItem Content="MS"/>
+								<ComboBoxItem Content="MG"/>
+								<ComboBoxItem Content="PR"/>
+								<ComboBoxItem Content="PB"/>
+								<ComboBoxItem Content="PA"/>
+								<ComboBoxItem Content="PE"/>
+								<ComboBoxItem Content="PI"/>
+								<ComboBoxItem Content="RJ"/>
+								<ComboBoxItem Content="RN"/>
+								<ComboBoxItem Content="RS"/>
+								<ComboBoxItem Content="RO"/>
+								<ComboBoxItem Content="RR"/>
+								<ComboBoxItem Content="SC"/>
+								<ComboBoxItem Content="SE"/>
+								<ComboBoxItem Content="SP"/>
+								<ComboBoxItem Content="TO"/>
+							</ComboBox>
+							<Button x:Name="btnAddEndereco" Style="{DynamicResource SquareButtonStyle}" Content="Adicionar" HorizontalAlignment="Left" Margin="482.04,53.01,0,0" VerticalAlignment="Top" Width="73.667" TabIndex="28" Click="btnAddEndereco_Click"/>
+							<Button x:Name="btnDelEndereco" Style="{DynamicResource SquareButtonStyle}" Content="Excluir" HorizontalAlignment="Left" Margin="482.04,85.97,0,0" VerticalAlignment="Top" Width="73.667" TabIndex="29" Click="btnDelEndereco_Click"/>
+							<DataGrid x:Name="dgvEndereco" HorizontalAlignment="Left" Margin="10,119.166,0,0" VerticalAlignment="Top" Height="104" Width="545" Background="#FF2E2E2E" TabIndex="30" IsReadOnly="True">
 								<DataGrid.Columns>
 									<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Nº" MinWidth="47"/>
 									<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="CEP" MinWidth="78" />
@@ -916,89 +1125,213 @@
 							</DataGrid>
 						</Grid>
 					</GroupBox>
-					<DataGrid x:Name="dgvOutrasAgencias" HorizontalAlignment="Left" Margin="601.784,54.01,0,0" VerticalAlignment="Top" Height="107" Width="194" Background="#FF2E2E2E">
-						<DataGrid.Columns>
-							<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" MinWidth="40" Header="Nº"/>
-							<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Número do Telefone" MinWidth="154" />
-						</DataGrid.Columns>
-					</DataGrid>
-					<Label Content="Telefone Fixo:" HorizontalAlignment="Left" Margin="601.784,23.05,0,0" VerticalAlignment="Top"/>
-					<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106.633" x:Name="txtCpf_Copy"  Mask="(00)0000-0000" CharacterCasing="Upper" Margin="689.574,23.01,0,0" TabIndex="6" Text="___.___.___-__" Style="{DynamicResource MaskedTextBoxStyle3}"/>
-					<Button Style="{DynamicResource SquareButtonStyle}" Content="Adicionar" HorizontalAlignment="Left" Margin="804.54,54.01,0,0" VerticalAlignment="Top" Width="73.667"/>
-					<DataGrid x:Name="dgvOutrasAgencias_Copy" HorizontalAlignment="Left" Margin="601.784,199.677,0,0" VerticalAlignment="Top" Height="107" Width="194" Background="#FF2E2E2E">
-						<DataGrid.Columns>
-							<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" MinWidth="40" Header="Nº"/>
-							<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Número do Celular" MinWidth="154"/>
-						</DataGrid.Columns>
-					</DataGrid>
-					<Label Content="Celular:" HorizontalAlignment="Left" Margin="643.595,166.05,0,0" VerticalAlignment="Top"/>
-					<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="97.999" x:Name="txtCpf_Copy1"  Mask="(00)00000-0000" CharacterCasing="Upper" Margin="697.785,166.01,0,0" TabIndex="6" Text="___.___.___-__" Style="{DynamicResource MaskedTextBoxStyle3}"/>
-					<Button Style="{DynamicResource SquareButtonStyle}" Content="Adicionar" HorizontalAlignment="Left" Margin="804.54,199.677,0,0" VerticalAlignment="Top" Width="73.667"/>
-					<DataGrid x:Name="dgvOutrasAgencias_Copy1" HorizontalAlignment="Left" Margin="601.784,345.294,0,0" VerticalAlignment="Top" Height="107" Width="194" Background="#FF2E2E2E">
-						<DataGrid.Columns>
-							<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="40" Header="Nº"/>
-							<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="E-Mail" MinWidth="154" />
-						</DataGrid.Columns>
-					</DataGrid>
-					<Label Content="E-mail:" HorizontalAlignment="Left" Margin="601.784,314.333,0,0" VerticalAlignment="Top"/>
-					<Button Style="{DynamicResource SquareButtonStyle}" Content="Adicionar" HorizontalAlignment="Left" Margin="804.54,345.294,0,0" VerticalAlignment="Top" Width="73.667"/>
-					<TextBox HorizontalAlignment="Left" Height="23" Margin="652.511,314.293,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143.696"/>
-					<Button Style="{DynamicResource SquareButtonStyle}" Content="Excluir" HorizontalAlignment="Left" Margin="804.54,86.97,0,0" VerticalAlignment="Top" Width="73.667"/>
-					<Button Style="{DynamicResource SquareButtonStyle}" Content="Excluir" HorizontalAlignment="Left" Margin="804.54,232.637,0,0" VerticalAlignment="Top" Width="73.667"/>
-					<Button Style="{DynamicResource SquareButtonStyle}" Content="Excluir" HorizontalAlignment="Left" Margin="804.54,378.254,0,0" VerticalAlignment="Top" Width="73.667"/>
-					<DataGrid x:Name="dgvOutrasAgencias_Copy3" HorizontalAlignment="Left" Margin="601.784,491.294,0,0" VerticalAlignment="Top" Height="107" Width="194" Background="#FF2E2E2E">
-						<DataGrid.Columns>
-							<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="40" Header="Nº"/>
-							<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Nome de Usuário" MinWidth="154" />
-						</DataGrid.Columns>
-					</DataGrid>
-					<Label Content="Nome de Usuário:" HorizontalAlignment="Left" Margin="601.784,460.332,0,0" VerticalAlignment="Top"/>
-					<Button Style="{DynamicResource SquareButtonStyle}" Content="Adicionar" HorizontalAlignment="Left" Margin="804.54,491.293,0,0" VerticalAlignment="Top" Width="73.667"/>
-					<TextBox HorizontalAlignment="Left" Height="23" Margin="704.664,460.292,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91.543"/>
-					<Button Style="{DynamicResource SquareButtonStyle}" Content="Excluir" HorizontalAlignment="Left" Margin="804.54,524.253,0,0" VerticalAlignment="Top" Width="73.667"/>
-					<GroupBox x:Name="grbCarteiraMotorista"  Style="{x:Null}" Header="CNH" HorizontalAlignment="Left" Margin="893,234.577,0,0" VerticalAlignment="Top" Height="138.677" Width="351.923" ToolTip="Carteira Nacional de Habilitação">
+					<GroupBox x:Name="grbCarteiraMotorista"  Style="{x:Null}" Header="CNH" HorizontalAlignment="Left" Margin="893,234.577,0,0" VerticalAlignment="Top" Height="138.677" Width="364.59" ToolTip="Carteira Nacional de Habilitação">
 						<Grid>
-							<Label Content="Nº de Registro" HorizontalAlignment="Left" Margin="8.216,10.04,0,0" VerticalAlignment="Top"/>
-							<TextBox x:Name="txtUltimoNome_Copy1" HorizontalAlignment="Left" Height="23" Margin="102.216,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227.707"/>
-							<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89.667" x:Name="txtDataNascimento_Copy"  Mask="00/00/0000" CharacterCasing="Upper" Margin="85.57,40.96,0,0" TabIndex="9" Style="{DynamicResource MaskedTextBoxStyle1}"/>
-							<Label Content="Emissão:" HorizontalAlignment="Left" Margin="25.333,39.96,0,0" VerticalAlignment="Top"/>
-							<ComboBox x:Name="cmbCorPele_Copy" Margin="249.485,40.96,10,0" VerticalAlignment="Top"/>
-							<Label Content="Cat Hab:" HorizontalAlignment="Left" Margin="186.519,41,0,0" VerticalAlignment="Top" Width="57.966"/>
-							<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89.667" x:Name="txtDataNascimento_Copy1"  Mask="00/00/0000" CharacterCasing="Upper" Margin="85.57,71.92,0,0" TabIndex="9" Style="{DynamicResource MaskedTextBoxStyle1}"/>
-							<Label Content="Validade:" HorizontalAlignment="Left" Margin="22.079,70.92,0,0" VerticalAlignment="Top"/>
-							<ComboBox x:Name="cmbCorPele_Copy1" Margin="249.485,71.88,10,0" VerticalAlignment="Top"/>
-							<Label Content="Estado:" HorizontalAlignment="Left" Margin="195.186,71.96,0,0" VerticalAlignment="Top" Width="49.299"/>
+							<DatePicker x:Name="txtDataEmissaoCnh" HorizontalAlignment="Left" Margin="63.019,41,0,0" VerticalAlignment="Top" Width="137.5" IsTodayHighlighted="True" SelectedDateFormat="Short" Focusable="False" TabIndex="49"/>
+						
+							<Label Content="Nº de Registro" HorizontalAlignment="Left" Margin="10,10.04,0,0" VerticalAlignment="Top"/>
+							<TextBox x:Name="txtNumRegistro" HorizontalAlignment="Left" Height="23" Margin="102.85,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241.073" MaxLength="11" TabIndex="48"/>
+							<Label Content="Emissão:" HorizontalAlignment="Left" Margin="2.782,39.96,0,0" VerticalAlignment="Top"/>
+							<ComboBox x:Name="cmbCatHab" Margin="263.485,40.96,8.667,0" VerticalAlignment="Top" TabIndex="51">
+								<ComboBoxItem Content="A"/>
+								<ComboBoxItem Content="B"/>
+								<ComboBoxItem Content="C"/>
+								<ComboBoxItem Content="D"/>
+								<ComboBoxItem Content="E"/>
+								<ComboBoxItem Content="ACC"/>
+								<ComboBoxItem Content="MOTOR-CASA"/>
+							</ComboBox>	
+							<Label Content="Cat Hab:" HorizontalAlignment="Left" Margin="200.519,41,0,0" VerticalAlignment="Top" Width="57.966"/>
+							<Label Content="Validade:" HorizontalAlignment="Left" Margin="0,70.92,0,0" VerticalAlignment="Top"/>
+							<ComboBox x:Name="cmbEstado" Margin="263.485,71.88,8.667,0" VerticalAlignment="Top" TabIndex="52">
+								<ComboBoxItem Content="AC"/>
+								<ComboBoxItem Content="AL"/>
+								<ComboBoxItem Content="AP"/>
+								<ComboBoxItem Content="AM"/>
+								<ComboBoxItem Content="BA"/>
+								<ComboBoxItem Content="CE"/>
+								<ComboBoxItem Content="DF"/>
+								<ComboBoxItem Content="ES"/>
+								<ComboBoxItem Content="GO"/>
+								<ComboBoxItem Content="MA"/>
+								<ComboBoxItem Content="MT"/>
+								<ComboBoxItem Content="MS"/>
+								<ComboBoxItem Content="MG"/>
+								<ComboBoxItem Content="PR"/>
+								<ComboBoxItem Content="PB"/>
+								<ComboBoxItem Content="PA"/>
+								<ComboBoxItem Content="PE"/>
+								<ComboBoxItem Content="PI"/>
+								<ComboBoxItem Content="RJ"/>
+								<ComboBoxItem Content="RN"/>
+								<ComboBoxItem Content="RS"/>
+								<ComboBoxItem Content="RO"/>
+								<ComboBoxItem Content="RR"/>
+								<ComboBoxItem Content="SC"/>
+								<ComboBoxItem Content="SE"/>
+								<ComboBoxItem Content="SP"/>
+								<ComboBoxItem Content="TO"/>
+							</ComboBox>
+							<Label Content="Estado:" HorizontalAlignment="Left" Margin="209.186,71.96,0,0" VerticalAlignment="Top" Width="49.299"/>
+							<DatePicker x:Name="txtDataValidadeCnh" HorizontalAlignment="Left" Margin="63.019,70.92,0,0" VerticalAlignment="Top" Width="137.5" IsTodayHighlighted="True" SelectedDateFormat="Short" Focusable="False" TabIndex="50"/>
 						
 						</Grid>
 					</GroupBox>
-					<GroupBox x:Name="grbQuadrilha"  Style="{x:Null}" Header="Quadrilha" HorizontalAlignment="Left" Margin="893,10,0,0" VerticalAlignment="Top" Height="217.637" Width="287.423">
+					<GroupBox x:Name="grbQuadrilha"  Style="{x:Null}" Header="Quadrilha" HorizontalAlignment="Left" Margin="893,10,0,0" VerticalAlignment="Top" Height="217.637" Width="287.423" IsEnabled="False">
 						<Grid>
-							<CheckBox x:Name="ckbEstrangeiroIlegal_Copy" Content="Membro de Quadrilha" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.08,0.278"/>
+							<CheckBox x:Name="ckbMembroQuadrilha" Content="Membro de Quadrilha" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.08,0.278" Checked="ckbMembroQuadrilha_Checked" TabIndex="46"/>
 							<Label Content="Códigos da Quadrilha:" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top"/>
-							<ListBox HorizontalAlignment="Left" Height="121.186" Margin="10,63.96,0,0" VerticalAlignment="Top" Width="267.423"/>
+							<ListBox x:Name="lstCodQuadrilha" HorizontalAlignment="Left" Height="121.186" Margin="10,63.96,0,0" VerticalAlignment="Top" Width="255.423" IsEnabled="False" TabIndex="47">
+								<CheckBox Content="Art. 155 - Roubo"/>
+								<CheckBox Content="Art. 171 - Estelionato"/>
+								<CheckBox Content="Art. 180 - Receptação"/>
+								<CheckBox Content="Art. 159 - Extorsão Mediante Sequestro"/>
+								<CheckBox Content="Art. 163 - Dano"/>
+								<CheckBox Content="Art. 147 - Ameaça"/>
+								<CheckBox Content="Art. 148 - Sequestro e Cárcere Privado"/>
+							</ListBox>
 						</Grid>
 					</GroupBox>
-					<GroupBox x:Name="grbQuadrilha_Copy1"  Style="{x:Null}" Header="Observações" HorizontalAlignment="Left" Margin="893,381.636,0,0" VerticalAlignment="Top" Height="216.658" Width="351.923">
+					<GroupBox x:Name="grbObservacoes"  Style="{x:Null}" Header="Observações" HorizontalAlignment="Left" Margin="893,381.636,0,0" VerticalAlignment="Top" Height="230.165" Width="364.59">
 						<Grid>
-							<TextBox HorizontalAlignment="Left" Height="173.698" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="319.923"/>
+							<TextBox Controls:TextBoxHelper.Watermark="Digite aqui informações adicionais sobre o Indivíduo." x:Name="txtObservacoes" HorizontalAlignment="Left" Height="187.205" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="332.59" MaxLength="400" TabIndex="53"/>
 						</Grid>
 					</GroupBox>
-					<Button Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="1196.706,18.01,0,0" VerticalAlignment="Top" Width="97.667" Height="31">
-				    <TextBlock Text="Ok" />
+					<Button x:Name="btnOk" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="1196.706,18.01,0,0" VerticalAlignment="Top" Width="97.667" Height="31" Click="btnOk_Click" TabIndex="54">
+						<TextBlock x:Name="textBtnOk" Text="Cadastrar" />
 					</Button>
-					<Button Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="1196.706,54.01,0,0" VerticalAlignment="Top" Width="97.667" Height="31">
-					<TextBlock Text="Limpar" />
+					<Button x:Name="btnFechar" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="1196.706,54.01,0,0" VerticalAlignment="Top" Width="97.667" Height="31" Click="btnFechar_Click" TabIndex="55">
+						<TextBlock Text="Fechar" />
 					</Button>
-					<Button Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="1196.706,90.01,0,0" VerticalAlignment="Top" Width="97.667" Height="31">
-					<TextBlock Text="Cancelar" />
-					</Button>
+					<Grid x:Name="grdCentral" HorizontalAlignment="Left" Height="593.791" Margin="592.707,18.01,0,0" VerticalAlignment="Top" Width="295.293" IsEnabled="False">
+						<DataGrid x:Name="dgvTelefone" HorizontalAlignment="Left" Margin="10,39.507,0,0" VerticalAlignment="Top" Height="107" Width="194" Background="#FF2E2E2E" IsReadOnly="True" TabIndex="34">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" MinWidth="40" Header="Nº"/>
+								<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Número do Telefone" MinWidth="154" />
+							</DataGrid.Columns>
+						</DataGrid>
+						<Label Content="Telefone Fixo:" HorizontalAlignment="Left" Margin="10,8.547,0,0" VerticalAlignment="Top"/>
+						<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106.633" x:Name="txtTelefoneFixo"  Mask="(00)0000-0000" CharacterCasing="Upper" Margin="97.79,8.507,0,0" TabIndex="31" Text="___.___.___-__" Style="{DynamicResource MaskedTextBoxStyle3}"/>
+						<Button x:Name="btnAddTelFixo" Style="{DynamicResource SquareButtonStyle}" Content="Adicionar" HorizontalAlignment="Left" Margin="212.756,39.507,0,0" VerticalAlignment="Top" Width="73.667" Click="btnAddTelFixo_Click" TabIndex="32"/>
+						<DataGrid x:Name="dgvCelular" HorizontalAlignment="Left" Margin="10.423,187.83,0,0" VerticalAlignment="Top" Height="107" Width="194" Background="#FF2E2E2E" IsReadOnly="True" TabIndex="38">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" MinWidth="40" Header="Nº"/>
+								<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Número do Celular" MinWidth="154"/>
+							</DataGrid.Columns>
+						</DataGrid>
+						<Label Content="Celular:" HorizontalAlignment="Left" Margin="51.811,151.547,0,0" VerticalAlignment="Top"/>
+						<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="97.999" x:Name="txtCelular"  Mask="(00)00000-0000" CharacterCasing="Upper" Margin="106.001,151.507,0,0" TabIndex="35" Text="___.___.___-__" Style="{DynamicResource MaskedTextBoxStyle3}"/>
+						<Button x:Name="btnAddCelular" Style="{DynamicResource SquareButtonStyle}" Content="Adicionar" HorizontalAlignment="Left" Margin="212.756,185.174,0,0" VerticalAlignment="Top" Width="73.667" Click="btnAddCelular_Click" TabIndex="36"/>
+						<DataGrid x:Name="dgvEmail" HorizontalAlignment="Left" Margin="10,330.791,0,0" VerticalAlignment="Top" Height="107" Width="194" Background="#FF2E2E2E" IsReadOnly="True">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="40" Header="Nº"/>
+								<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="E-Mail" MinWidth="154" />
+							</DataGrid.Columns>
+						</DataGrid>
+						<Label Content="E-mail:" HorizontalAlignment="Left" Margin="10,299.83,0,0" VerticalAlignment="Top"/>
+						<Button x:Name="btnAddEmail" Style="{DynamicResource SquareButtonStyle}" Content="Adicionar" HorizontalAlignment="Left" Margin="212.756,330.791,0,0" VerticalAlignment="Top" Width="73.667" Click="btnAddEmail_Click" TabIndex="40"/>
+						<TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="60.727,299.79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143.696" TabIndex="39"/>
+						<Button x:Name="btnDelTelFixo" Style="{DynamicResource SquareButtonStyle}" Content="Excluir" HorizontalAlignment="Left" Margin="212.756,72.467,0,0" VerticalAlignment="Top" Width="73.667" Click="btnDelTelFixo_Click" TabIndex="33"/>
+						<Button x:Name="btnDelCelular" Style="{DynamicResource SquareButtonStyle}" Content="Excluir" HorizontalAlignment="Left" Margin="212.756,218.134,0,0" VerticalAlignment="Top" Width="73.667" Click="btnDelCelular_Click" TabIndex="37"/>
+						<Button x:Name="btnDelEmail" Style="{DynamicResource SquareButtonStyle}" Content="Excluir" HorizontalAlignment="Left" Margin="212.756,363.751,0,0" VerticalAlignment="Top" Width="73.667" Click="btnDelEmail_Click" TabIndex="41"/>
+						<DataGrid x:Name="dgvNomeUsuario" HorizontalAlignment="Left" Margin="10,476.791,0,0" VerticalAlignment="Top" Height="107" Width="194" Background="#FF2E2E2E" IsReadOnly="True" TabIndex="45">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="40" Header="Nº"/>
+								<DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Nome de Usuário" MinWidth="154" />
+							</DataGrid.Columns>
+						</DataGrid>
+						<Label Content="Nome de Usuário:" HorizontalAlignment="Left" Margin="10,445.829,0,0" VerticalAlignment="Top"/>
+						<Button x:Name="btnAddNomeUsuario" Style="{DynamicResource SquareButtonStyle}" Content="Adicionar" HorizontalAlignment="Left" Margin="212.756,476.79,0,0" VerticalAlignment="Top" Width="73.667" Click="btnAddNomeUsuario_Click" TabIndex="43"/>
+						<TextBox x:Name="txtNomeUsuario" HorizontalAlignment="Left" Height="23" Margin="112.88,445.789,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91.543" TabIndex="42"/>
+						<Button x:Name="btnDelNomeUsuario" Style="{DynamicResource SquareButtonStyle}" Content="Excluir" HorizontalAlignment="Left" Margin="212.756,509.75,0,0" VerticalAlignment="Top" Width="73.667" Click="btnDelNomeUsuario_Click" TabIndex="44"/>
+					</Grid>
 				
 				</Grid>
 			</TabItem>
-			<TabItem Header="TabItem">
-				<Grid Background="#FFE5E5E5"/>
+			<TabItem x:Name="tbImpressaoDigital" Header="ID's" TabIndex="56">
+				<Grid Margin="3,-21,-3,21">
+					<Image x:Name="imgPolD" HorizontalAlignment="Left" Height="200" Margin="99.527,75.556,0,0" VerticalAlignment="Top" Width="160" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill"/>
+					<Image x:Name="imgIndD" HorizontalAlignment="Left" Height="200" Margin="302.527,76.04,0,0" VerticalAlignment="Top" Width="160" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill"/>
+					<Image x:Name="imgMedD" HorizontalAlignment="Left" Height="200" Margin="502.527,76.04,0,0" VerticalAlignment="Top" Width="160" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill"/>
+					<Image x:Name="imgAnuD" HorizontalAlignment="Left" Height="200" Margin="702.527,76.04,0,0" VerticalAlignment="Top" Width="160" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill"/>
+					<Image x:Name="imgMinD" HorizontalAlignment="Left" Height="200" Margin="902.527,76.04,0,0" VerticalAlignment="Top" Width="160" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill"/>
+					<Image x:Name="imgPolE" HorizontalAlignment="Left" Height="200" Margin="99.527,286.04,0,0" VerticalAlignment="Top" Width="160" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill"/>
+					<Image x:Name="imgIndE" HorizontalAlignment="Left" Height="200" Margin="302.527,286.04,0,0" VerticalAlignment="Top" Width="160" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill"/>
+					<Image x:Name="imgMedE" HorizontalAlignment="Left" Height="200" Margin="502.527,286.04,0,0" VerticalAlignment="Top" Width="160" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill"/>
+					<Image x:Name="imgAnuE" HorizontalAlignment="Left" Height="200" Margin="702.527,286.04,0,0" VerticalAlignment="Top" Width="160" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill"/>
+					<Image x:Name="imgMinE" HorizontalAlignment="Left" Height="200" Margin="902.527,286.04,0,0" VerticalAlignment="Top" Width="160" Source="/sistemaCorporativo;component/IMAGES/nothing.png" Stretch="Fill"/>
+					<TextBlock HorizontalAlignment="Left" Margin="150.692,44.456,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Light"><Run Language="pt-br" Text="Polegar"/></TextBlock>
+					<TextBlock HorizontalAlignment="Left" Margin="343.357,44.456,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Light"><Run Language="pt-br" Text="Indicador"/></TextBlock>
+					<TextBlock HorizontalAlignment="Left" Margin="556.357,44.456,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Light"><Run Language="pt-br" Text="Médio"/></TextBlock>
+					<TextBlock HorizontalAlignment="Left" Margin="755.857,44.456,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Light"><Run Language="pt-br" Text="Anular"/></TextBlock>
+					<TextBlock HorizontalAlignment="Left" Margin="950.857,44.456,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI Light"><Run Language="pt-br" Text="Mínimo"/></TextBlock>		
+					<TextBlock HorizontalAlignment="Left" Margin="33.192,160.706,0,0" TextWrapping="Wrap" Text="DIREITO" VerticalAlignment="Top" FontSize="24" RenderTransformOrigin="0.5,0.5">
+						<TextBlock.RenderTransform>
+							<TransformGroup>
+								<ScaleTransform/>
+								<SkewTransform/>
+								<RotateTransform Angle="-90"/>
+								<TranslateTransform/>
+							</TransformGroup>
+						</TextBlock.RenderTransform>
+					</TextBlock>
+					<TextBlock HorizontalAlignment="Left" Margin="16.052,370.373,0,0" TextWrapping="Wrap" Text="ESQUERDO" VerticalAlignment="Top" FontSize="24" RenderTransformOrigin="0.5,0.5" Foreground="White">
+						<TextBlock.RenderTransform>
+							<TransformGroup>
+								<ScaleTransform/>
+								<SkewTransform/>
+								<RotateTransform Angle="-90"/>
+								<TranslateTransform/>
+							</TransformGroup>
+						</TextBlock.RenderTransform>
+					</TextBlock>
+					<Button x:Name="btnFolderPolD" HorizontalAlignment="Left" Height="54.25" Margin="154.692,106.874,0,0" Style="{DynamicResource btnIds}" VerticalAlignment="Top" Width="56.167" Click="btnFolderPolD_Click"/>		
+					<Button x:Name="btnFingerPolD" Content="Button" HorizontalAlignment="Left" Height="67.25" Margin="147.691,170.791,0,0" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top" Width="71.5"/>
+					<Button x:Name="btnFolderIndD" Content="Button" HorizontalAlignment="Left" Height="54.25" Margin="354.4,106.874,0,0" Style="{DynamicResource btnIds}" VerticalAlignment="Top" Width="56.167" Click="btnFolderIndD_Click"/>
+					<Button x:Name="btnFolderMedD" Content="Button" HorizontalAlignment="Left" Height="54.25" Margin="553.802,106.874,0,0" Style="{DynamicResource btnIds}" VerticalAlignment="Top" Width="56.167" Click="btnFolderMedD_Click"/>
+					<Button x:Name="btnFolderAnuD" Content="Button" HorizontalAlignment="Left" Height="54.25" Margin="753.925,106.874,0,0" Style="{DynamicResource btnIds}" VerticalAlignment="Top" Width="56.167" Click="btnFolderAnuD_Click"/>
+					<Button x:Name="btnFolderMinD" Content="Button" HorizontalAlignment="Left" Height="54.25" Margin="953.828,106.874,0,0" Style="{DynamicResource btnIds}" VerticalAlignment="Top" Width="56.167" Click="btnFolderMinD_Click"/>
+					<Button x:Name="btnFingerIndD" Content="Button" HorizontalAlignment="Left" Height="67.25" Margin="347.024,170.791,0,0" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top" Width="71.5"/>
+					<Button x:Name="btnFingerMedD" Content="Button" HorizontalAlignment="Left" Height="67.25" Margin="546.802,170.791,0,0" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top" Width="71.5"/>
+					<Button x:Name="btnFingerAnuD" Content="Button" HorizontalAlignment="Left" Height="67.25" Margin="746.969,170.791,0,0" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top" Width="71.5"/>
+					<Button x:Name="btnFingerMinD" Content="Button" HorizontalAlignment="Left" Height="67.25" Margin="946.91,170.791,0,0" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top" Width="71.5"/>
+					<Button x:Name="btnFolderPolE" HorizontalAlignment="Left" Height="54.25" Margin="154.692,318.873,0,0" Style="{DynamicResource btnIds}" VerticalAlignment="Top" Width="56.167" Click="btnFolderPolE_Click"/>
+					<Button x:Name="btnFingerPolE" Content="Button" HorizontalAlignment="Left" Height="67.25" Margin="147.691,382.79,0,0" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top" Width="71.5"/>
+					<Button x:Name="btnFolderIndE" Content="Button" HorizontalAlignment="Left" Height="54.25" Margin="354.4,318.873,0,0" Style="{DynamicResource btnIds}" VerticalAlignment="Top" Width="56.167" Click="btnFolderIndE_Click"/>
+					<Button x:Name="btnFolderMedE" Content="Button" HorizontalAlignment="Left" Height="54.25" Margin="553.802,318.873,0,0" Style="{DynamicResource btnIds}" VerticalAlignment="Top" Width="56.167" Click="btnFolderMedE_Click"/>
+					<Button x:Name="btnFolderAnuE" Content="Button" HorizontalAlignment="Left" Height="54.25" Margin="753.925,318.873,0,0" Style="{DynamicResource btnIds}" VerticalAlignment="Top" Width="56.167" Click="btnFolderAnuE_Click"/>
+					<Button x:Name="btnFolderMinE" Content="Button" HorizontalAlignment="Left" Height="54.25" Margin="953.828,318.873,0,0" Style="{DynamicResource btnIds}" VerticalAlignment="Top" Width="56.167" Click="btnFolderMinE_Click"/>
+					<Button x:Name="btnFingerIndE" Content="Button" HorizontalAlignment="Left" Height="67.25" Margin="347.024,382.79,0,0" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top" Width="71.5"/>
+					<Button x:Name="btnFingerMedE" Content="Button" HorizontalAlignment="Left" Height="67.25" Margin="546.802,382.79,0,0" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top" Width="71.5"/>
+					<Button x:Name="btnFingerAnuE" Content="Button" HorizontalAlignment="Left" Height="67.25" Margin="746.969,382.79,0,0" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top" Width="71.5"/>
+					<Button x:Name="btnFingerMinE" Content="Button" HorizontalAlignment="Left" Height="67.25" Margin="946.91,382.79,0,0" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top" Width="71.5"/>
+					<Path Data="M282.52667,86.04 L282.52667,486.04889" Fill="Gray" HorizontalAlignment="Left" Height="411.493" Margin="282.527,75.556,0,0" Stretch="Fill" Stroke="Gray" VerticalAlignment="Top" Width="1"/>
+					<Path Data="M282.52667,86.04 L282.52667,486.04889" Fill="Gray" HorizontalAlignment="Left" Height="410.484" Margin="482.527,75.556,0,0" Stretch="Fill" Stroke="Gray" VerticalAlignment="Top" Width="1"/>
+					<Path Data="M282.52667,86.04 L282.52667,486.04889" Fill="Gray" HorizontalAlignment="Left" Height="410.484" Margin="682.027,75.556,0,0" Stretch="Fill" Stroke="Gray" VerticalAlignment="Top" Width="1"/>
+					<Path Data="M282.52667,86.04 L282.52667,486.04889" Fill="Gray" HorizontalAlignment="Left" Height="410.484" Margin="882.194,75.556,0,0" Stretch="Fill" Stroke="Gray" VerticalAlignment="Top" Width="1"/>
+					<Button x:Name="btnFecharPolD" HorizontalAlignment="Left" Height="21" Margin="234.525,79.04,0,0" Style="{DynamicResource ButtonStyle2}" VerticalAlignment="Top" Width="22.877" RenderTransformOrigin="0.5,0.5" Click="btnFecharPolD_Click" Visibility="Hidden">
+					</Button>
+					<Button x:Name="btnFecharPolE" HorizontalAlignment="Left" Height="21" Margin="234.525,289.04,0,0" Style="{DynamicResource ButtonStyle2}" VerticalAlignment="Top" Width="23.002" RenderTransformOrigin="0.5,0.5" Click="btnFecharPolE_Click" Visibility="Hidden">
+					</Button>
+					<Button x:Name="btnFecharIndD" HorizontalAlignment="Left" Height="21" Margin="437.65,79.04,0,0" Style="{DynamicResource ButtonStyle2}" VerticalAlignment="Top" Width="22.877" RenderTransformOrigin="0.5,0.5" Click="btnFecharIndD_Click" Visibility="Hidden">
+					</Button>
+					<Button x:Name="btnFecharIndE" HorizontalAlignment="Left" Height="21" Margin="437.527,289.04,0,0" Style="{DynamicResource ButtonStyle2}" VerticalAlignment="Top" Width="22.877" RenderTransformOrigin="0.5,0.5" Click="btnFecharIndE_Click" Visibility="Hidden"/>
+				    <Button x:Name="btnFecharMedD" HorizontalAlignment="Left" Height="21" Margin="637.65,79.04,0,0" Style="{DynamicResource ButtonStyle2}" VerticalAlignment="Top" Width="22.877" RenderTransformOrigin="0.5,0.5" Click="btnFecharMedD_Click" Visibility="Hidden">
+		            </Button>
+	             	<Button x:Name="btnFecharAnuD" HorizontalAlignment="Left" Height="21" Margin="837.527,79.04,0,0" Style="{DynamicResource ButtonStyle2}" VerticalAlignment="Top" Width="22.877" RenderTransformOrigin="0.5,0.5" Click="btnFecharAnuD_Click" Visibility="Hidden">
+					</Button>
+					<Button x:Name="btnFecharMinD" HorizontalAlignment="Left" Height="21" Margin="1037.65,79.04,0,0" Style="{DynamicResource ButtonStyle2}" VerticalAlignment="Top" Width="22.877" RenderTransformOrigin="0.5,0.5" Click="btnFecharMinD_Click" Visibility="Hidden">
+					</Button>
+					<Button x:Name="btnFecharMinE" HorizontalAlignment="Left" Height="21" Margin="1039.65,289.04,0,0" Style="{DynamicResource ButtonStyle2}" VerticalAlignment="Top" Width="22.877" RenderTransformOrigin="0.5,0.5" Click="btnFecharMinE_Click" Visibility="Hidden">
+					</Button>
+					<Button x:Name="btnFecharAnuE" HorizontalAlignment="Left" Height="21" Margin="837.527,289.04,0,0" Style="{DynamicResource ButtonStyle2}" VerticalAlignment="Top" Width="22.877" RenderTransformOrigin="0.5,0.5" Click="btnFecharAnuE_Click" Visibility="Hidden">	
+					</Button>
+					<Button x:Name="btnFecharMedE" HorizontalAlignment="Left" Height="21" Margin="637.527,289.04,0,0" Style="{DynamicResource ButtonStyle2}" VerticalAlignment="Top" Width="22.877" RenderTransformOrigin="0.5,0.5" Click="btnFecharMedE_Click" Visibility="Hidden">
+					</Button>
+				</Grid>
 			</TabItem>
 		</TabControl>
+		
 		
 	</Grid>
 </Controls:MetroWindow>

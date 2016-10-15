@@ -84,24 +84,6 @@
         </GuideModel>
       </GuideModels>
     </ProjectItemGuide>
-    <ProjectItemGuide TargetFile="FORMS\PrincipalScreen.xaml">
-      <GuideModels>
-        <GuideModel>
-          <Guides>
-            <Guide Alignment="Left" Position="295" />
-            <Guide Alignment="Top" Position="146" />
-            <Guide Alignment="Left" Position="66" />
-            <Guide Alignment="Left" Position="367" />
-            <Guide Alignment="Top" Position="685" />
-            <Guide Alignment="Top" Position="648" />
-            <Guide Alignment="Left" Position="630" />
-            <Guide Alignment="Top" Position="537" />
-            <Guide Alignment="Top" Position="524" />
-            <Guide Alignment="Left" Position="516" />
-          </Guides>
-        </GuideModel>
-      </GuideModels>
-    </ProjectItemGuide>
     <ProjectItemGuide TargetFile="FORMS\CadCaso.xaml">
       <GuideModels>
         <GuideModel>
@@ -109,6 +91,62 @@
             <Guide Alignment="Top" Position="74" />
             <Guide Alignment="Top" Position="156" />
             <Guide Alignment="Top" Position="255" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
+    <ProjectItemGuide TargetFile="FORMS\PrincipalScreen.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Left" Position="295" />
+            <Guide Alignment="Top" Position="146" />
+            <Guide Alignment="Left" Position="66" />
+            <Guide Alignment="Top" Position="685" />
+            <Guide Alignment="Top" Position="648" />
+            <Guide Alignment="Left" Position="367" />
+            <Guide Alignment="Top" Position="524" />
+            <Guide Alignment="Top" Position="537" />
+            <Guide Alignment="Left" Position="630" />
+            <Guide Alignment="Left" Position="516" />
+            <Guide Alignment="Left" Position="457" />
+          </Guides>
+        </GuideModel>
+      </GuideModels>
+    </ProjectItemGuide>
+    <ProjectItemGuide TargetFile="FORMS\Envolvido Físico\CadPessoaFisica.xaml">
+      <GuideModels>
+        <GuideModel>
+          <Guides>
+            <Guide Alignment="Left" Position="247" />
+            <Guide Alignment="Left" Position="698" />
+            <Guide Alignment="Left" Position="153" />
+            <Guide Alignment="Top" Position="62" />
+            <Guide Alignment="Left" Position="295" />
+            <Guide Alignment="Left" Position="723" />
+            <Guide Alignment="Left" Position="921" />
+            <Guide Alignment="Left" Position="1040" />
+            <Guide Alignment="Left" Position="318" />
+            <Guide Alignment="Left" Position="521" />
+            <Guide Alignment="Left" Position="523" />
+            <Guide Alignment="Left" Position="563" />
+            <Guide Alignment="Left" Position="498" />
+            <Guide Alignment="Left" Position="1121" />
+            <Guide Alignment="Left" Position="963" />
+            <Guide Alignment="Left" Position="763" />
+            <Guide Alignment="Left" Position="923" />
+            <Guide Alignment="Left" Position="898" />
+            <Guide Alignment="Left" Position="1098" />
+            <Guide Alignment="Left" Position="1123" />
+            <Guide Alignment="Left" Position="721" />
+            <Guide Alignment="Top" Position="293" />
+            <Guide Alignment="Top" Position="490" />
+            <Guide Alignment="Left" Position="363" />
+            <Guide Alignment="Top" Position="272" />
+            <Guide Alignment="Left" Position="320" />
+            <Guide Alignment="Left" Position="160" />
+            <Guide Alignment="Top" Position="59" />
+            <Guide Alignment="Top" Position="83" />
           </Guides>
         </GuideModel>
       </GuideModels>

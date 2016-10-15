@@ -14,6 +14,237 @@
 	ShowMaxRestoreButton="False" 
     ShowMinButton="False" ResizeMode="NoResize" Loaded="wndCadCaso_Loaded">
 	<Controls:MetroWindow.Resources>
+		<Style x:Key="DatePickerStyle1" TargetType="{x:Type DatePicker}">
+            <Setter Property="Foreground" Value="#FF333333"/>
+            <Setter Property="IsTodayHighlighted" Value="True"/>
+            <Setter Property="SelectedDateFormat" Value="Short"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint=".5,0" StartPoint=".5,1">
+                        <GradientStop Color="#FFA3AEB9" Offset="0"/>
+                        <GradientStop Color="#FF8399A9" Offset="0.375"/>
+                        <GradientStop Color="#FF718597" Offset="0.375"/>
+                        <GradientStop Color="#FF617584" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DatePicker}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_DisabledVisual"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid x:Name="PART_Root" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid.Resources>
+                                    <SolidColorBrush x:Key="DisabledBrush" Color="#A5FFFFFF"/>
+                                    <ControlTemplate x:Key="DropDownButtonTemplate" TargetType="{x:Type Button}">
+                                        <Grid>
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualStateGroup.Transitions>
+                                                        <VisualTransition GeneratedDuration="0"/>
+                                                        <VisualTransition GeneratedDuration="0:0:0.1" To="MouseOver"/>
+                                                        <VisualTransition GeneratedDuration="0:0:0.1" To="Pressed"/>
+                                                    </VisualStateGroup.Transitions>
+                                                    <VisualState x:Name="Normal"/>
+                                                    <VisualState x:Name="MouseOver">
+                                                        <Storyboard>
+                                                            <ColorAnimation Duration="0" To="#FF448DCA" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Background"/>
+                                                            <ColorAnimationUsingKeyFrames BeginTime="0" Duration="00:00:00.001" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[3].(GradientStop.Color)" Storyboard.TargetName="BackgroundGradient">
+                                                                <SplineColorKeyFrame KeyTime="0" Value="#7FFFFFFF"/>
+                                                            </ColorAnimationUsingKeyFrames>
+                                                            <ColorAnimationUsingKeyFrames BeginTime="0" Duration="00:00:00.001" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="BackgroundGradient">
+                                                                <SplineColorKeyFrame KeyTime="0" Value="#CCFFFFFF"/>
+                                                            </ColorAnimationUsingKeyFrames>
+                                                            <ColorAnimationUsingKeyFrames BeginTime="0" Duration="00:00:00.001" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="BackgroundGradient">
+                                                                <SplineColorKeyFrame KeyTime="0" Value="#F2FFFFFF"/>
+                                                            </ColorAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Pressed">
+                                                        <Storyboard>
+                                                            <ColorAnimationUsingKeyFrames BeginTime="0" Duration="00:00:00.001" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Background">
+                                                                <SplineColorKeyFrame KeyTime="0" Value="#FF448DCA"/>
+                                                            </ColorAnimationUsingKeyFrames>
+                                                            <DoubleAnimationUsingKeyFrames BeginTime="0" Duration="00:00:00.001" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Highlight">
+                                                                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                                                            </DoubleAnimationUsingKeyFrames>
+                                                            <ColorAnimationUsingKeyFrames BeginTime="0" Duration="00:00:00.001" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="BackgroundGradient">
+                                                                <SplineColorKeyFrame KeyTime="0" Value="#EAFFFFFF"/>
+                                                            </ColorAnimationUsingKeyFrames>
+                                                            <ColorAnimationUsingKeyFrames BeginTime="0" Duration="00:00:00.001" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="BackgroundGradient">
+                                                                <SplineColorKeyFrame KeyTime="0" Value="#C6FFFFFF"/>
+                                                            </ColorAnimationUsingKeyFrames>
+                                                            <ColorAnimationUsingKeyFrames BeginTime="0" Duration="00:00:00.001" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[3].(GradientStop.Color)" Storyboard.TargetName="BackgroundGradient">
+                                                                <SplineColorKeyFrame KeyTime="0" Value="#6BFFFFFF"/>
+                                                            </ColorAnimationUsingKeyFrames>
+                                                            <ColorAnimationUsingKeyFrames BeginTime="0" Duration="00:00:00.001" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="BackgroundGradient">
+                                                                <SplineColorKeyFrame KeyTime="0" Value="#F4FFFFFF"/>
+                                                            </ColorAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Disabled"/>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+                                            <Grid Background="#11FFFFFF" FlowDirection="LeftToRight" HorizontalAlignment="Center" Height="18" Margin="0" VerticalAlignment="Center" Width="19">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="20*"/>
+                                                    <ColumnDefinition Width="20*"/>
+                                                    <ColumnDefinition Width="20*"/>
+                                                    <ColumnDefinition Width="20*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="23*"/>
+                                                    <RowDefinition Height="19*"/>
+                                                    <RowDefinition Height="19*"/>
+                                                    <RowDefinition Height="19*"/>
+                                                </Grid.RowDefinitions>
+                                                <Border x:Name="Highlight" BorderBrush="#FF45D6FA" BorderThickness="1" Grid.ColumnSpan="4" CornerRadius="0,0,1,1" Margin="-1" Opacity="0" Grid.Row="0" Grid.RowSpan="4"/>
+                                                <Border x:Name="Background" BorderBrush="#FFFFFFFF" BorderThickness="1" Background="#FF1F3B53" Grid.ColumnSpan="4" CornerRadius=".5" Margin="0,-1,0,0" Opacity="1" Grid.Row="1" Grid.RowSpan="3"/>
+                                                <Border x:Name="BackgroundGradient" BorderBrush="#BF000000" BorderThickness="1" Grid.ColumnSpan="4" CornerRadius=".5" Margin="0,-1,0,0" Opacity="1" Grid.Row="1" Grid.RowSpan="3">
+                                                    <Border.Background>
+                                                        <LinearGradientBrush EndPoint=".7,1" StartPoint=".7,0">
+                                                            <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                                                            <GradientStop Color="#F9FFFFFF" Offset="0.375"/>
+                                                            <GradientStop Color="#E5FFFFFF" Offset="0.625"/>
+                                                            <GradientStop Color="#C6FFFFFF" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                </Border>
+                                                <Rectangle Grid.ColumnSpan="4" Grid.RowSpan="1" StrokeThickness="1">
+                                                    <Rectangle.Fill>
+                                                        <LinearGradientBrush EndPoint="0.3,-1.1" StartPoint="0.46,1.6">
+                                                            <GradientStop Color="#FF4084BD"/>
+                                                            <GradientStop Color="#FFAFCFEA" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Rectangle.Fill>
+                                                    <Rectangle.Stroke>
+                                                        <LinearGradientBrush EndPoint="0.48,-1" StartPoint="0.48,1.25">
+                                                            <GradientStop Color="#FF494949"/>
+                                                            <GradientStop Color="#FF9F9F9F" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Rectangle.Stroke>
+                                                </Rectangle>
+                                                <Path Grid.ColumnSpan="4" Grid.Column="0" Data="M11.426758,8.4305077 L11.749023,8.4305077 L11.749023,16.331387 L10.674805,16.331387 L10.674805,10.299648 L9.0742188,11.298672 L9.0742188,10.294277 C9.4788408,10.090176 9.9094238,9.8090878 10.365967,9.4510155 C10.82251,9.0929432 11.176106,8.7527733 11.426758,8.4305077 z M14.65086,8.4305077 L18.566387,8.4305077 L18.566387,9.3435936 L15.671368,9.3435936 L15.671368,11.255703 C15.936341,11.058764 16.27293,10.960293 16.681133,10.960293 C17.411602,10.960293 17.969301,11.178717 18.354229,11.615566 C18.739157,12.052416 18.931622,12.673672 18.931622,13.479336 C18.931622,15.452317 18.052553,16.438808 16.294415,16.438808 C15.560365,16.438808 14.951641,16.234707 14.468243,15.826504 L14.881817,14.929531 C15.368796,15.326992 15.837872,15.525723 16.289043,15.525723 C17.298809,15.525723 17.803692,14.895514 17.803692,13.635098 C17.803692,12.460618 17.305971,11.873379 16.310528,11.873379 C15.83071,11.873379 15.399232,12.079271 15.016094,12.491055 L14.65086,12.238613 z" Fill="#FF2F2F2F" HorizontalAlignment="Center" Margin="4,3,4,3" Grid.Row="1" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" Stretch="Fill" VerticalAlignment="Center"/>
+                                                <Ellipse Grid.ColumnSpan="4" Fill="#FFFFFFFF" HorizontalAlignment="Center" Height="3" StrokeThickness="0" VerticalAlignment="Center" Width="3"/>
+                                                <Border x:Name="DisabledVisual" BorderBrush="#B2FFFFFF" BorderThickness="1" Grid.ColumnSpan="4" CornerRadius="0,0,.5,.5" Opacity="0" Grid.Row="0" Grid.RowSpan="4"/>
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="PART_Button" Grid.Column="1" Foreground="{TemplateBinding Foreground}" Focusable="False" HorizontalAlignment="Left" Margin="3,0,3,0" Grid.Row="0" Template="{StaticResource DropDownButtonTemplate}" VerticalAlignment="Top" Width="20"/>
+                                <DatePickerTextBox  x:Name="PART_TextBox" Grid.Column="0" Focusable="{TemplateBinding Focusable}" HorizontalContentAlignment="Stretch" Grid.Row="0" VerticalContentAlignment="Stretch">
+                                    <DatePickerTextBox.Style>
+                                        <Style TargetType="DatePickerTextBox">
+                                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+                                            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+                                            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+                                            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type DatePickerTextBox}">
+                                                        <Grid>
+                                                            <Grid.Resources>
+                                                                <SolidColorBrush x:Key="WatermarkBrush" Color="#FFAAAAAA"/>
+                                                            </Grid.Resources>
+                                                            <VisualStateManager.VisualStateGroups>
+                                                                <VisualStateGroup x:Name="CommonStates">
+                                                                    <VisualStateGroup.Transitions>
+                                                                        <VisualTransition GeneratedDuration="0"/>
+                                                                        <VisualTransition GeneratedDuration="0:0:0.1" To="MouseOver"/>
+                                                                    </VisualStateGroup.Transitions>
+                                                                    <VisualState x:Name="Normal"/>
+                                                                    <VisualState x:Name="MouseOver">
+                                                                        <Storyboard>
+                                                                            <ColorAnimation Duration="0" To="#FF99C1E2" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" Storyboard.TargetName="ContentElement"/>
+                                                                            <ColorAnimation Duration="0" To="#FF99C1E2" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" Storyboard.TargetName="watermark_decorator"/>
+                                                                        </Storyboard>
+                                                                    </VisualState>
+                                                                </VisualStateGroup>
+                                                                <VisualStateGroup x:Name="WatermarkStates">
+                                                                    <VisualStateGroup.Transitions>
+                                                                        <VisualTransition GeneratedDuration="0"/>
+                                                                    </VisualStateGroup.Transitions>
+                                                                    <VisualState x:Name="Unwatermarked"/>
+                                                                    <VisualState x:Name="Watermarked">
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="ContentElement"/>
+                                                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_Watermark"/>
+                                                                        </Storyboard>
+                                                                    </VisualState>
+                                                                </VisualStateGroup>
+                                                                <VisualStateGroup x:Name="FocusStates">
+                                                                    <VisualStateGroup.Transitions>
+                                                                        <VisualTransition GeneratedDuration="0"/>
+                                                                    </VisualStateGroup.Transitions>
+                                                                    <VisualState x:Name="Unfocused"/>
+                                                                    <VisualState x:Name="Focused">
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisual"/>
+                                                                        </Storyboard>
+                                                                    </VisualState>
+                                                                </VisualStateGroup>
+                                                            </VisualStateManager.VisualStateGroups>
+                                                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="1" Opacity="1" Padding="{TemplateBinding Padding}">
+                                                                <Grid x:Name="WatermarkContent" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                                                    <Border x:Name="ContentElement" BorderBrush="#FFFFFFFF" BorderThickness="1"/>
+                                                                    <Border x:Name="watermark_decorator" BorderBrush="#FFFFFFFF" BorderThickness="1">
+                                                                        <ContentControl x:Name="PART_Watermark" Focusable="False" IsHitTestVisible="False" Opacity="0" Padding="2">
+                                                                            <ContentControl.Template>
+                                                                                <ControlTemplate>
+                                                                                    <TextBlock Text="dd/mm/yyyy"/>
+                                                                                </ControlTemplate>
+                                                                            </ContentControl.Template>
+                                                                        </ContentControl>                        
+                                                                    </Border>
+                                                                    <ScrollViewer x:Name="PART_ContentHost" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                                    <Border x:Name="FocusVisual" BorderBrush="#FF45D6FA" CornerRadius="1" IsHitTestVisible="False" Opacity="0"/>
+                                                                </Grid>
+                                                            </Border>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </DatePickerTextBox.Style>
+                                </DatePickerTextBox>
+                                <Grid x:Name="PART_DisabledVisual" Grid.ColumnSpan="2" Grid.Column="0" IsHitTestVisible="False" Opacity="0" Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle Grid.Column="0" Fill="#A5FFFFFF" RadiusY="1" Grid.Row="0" RadiusX="1"/>
+                                    <Rectangle Grid.Column="1" Fill="#A5FFFFFF" Height="18" Margin="3,0,3,0" RadiusY="1" Grid.Row="0" RadiusX="1" Width="19"/>
+                                    <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="false">
+                                <Setter Property="Foreground" TargetName="PART_TextBox" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+			
 		<Style x:Key="MaskedTextBoxStyle1" TargetType="{x:Type Custom:MaskedTextBox}">
 			<Setter Property="ContextMenu" Value="{DynamicResource TextBoxMetroContextMenu}"/>
 			<Setter Property="Controls:TextBoxHelper.IsMonitoring" Value="True"/>
@@ -290,61 +521,61 @@
 	<Grid x:Name="LayoutRoot">
 		<GroupBox x:Name="grbInfoBasica" Header="Informações Básicas" Style="{x:Null}" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Height="192.127" Width="928.65" BorderThickness="1">
 			<Grid Margin="0,0,-2,-0.96">
-				<Label Content="Número do Caso:*" HorizontalAlignment="Left" Margin="21.995,10,0,0" VerticalAlignment="Top"/>
-				<TextBox x:Name="txtNumCaso" HorizontalAlignment="Left" Height="23" Margin="134.513,9.84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TabIndex="0"/>
-				<TextBox x:Name="txtTituloCaso" HorizontalAlignment="Left" Height="23" Margin="134.513,40.84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" MaxLength="40" TabIndex="1"/>
-				<Label Content="Título do Caso:" HorizontalAlignment="Left" Margin="40.596,40.88,0,0" VerticalAlignment="Top"/>
-				<ComboBox x:Name="cmbTipoCaso" HorizontalAlignment="Left" Margin="134.513,71.84,0,0" VerticalAlignment="Top" Width="182" TabIndex="2">
-					<ComboBoxItem Content="Investigação"/>
-					<ComboBoxItem Content="Relatório"/>
-				</ComboBox>
-				<Label Content="Tipo:" HorizontalAlignment="Left" Margin="93.635,71.96,0,0" VerticalAlignment="Top"/>
-				<ComboBox x:Name="cmbDeptLocal" HorizontalAlignment="Left" Margin="134.513,102.84,0,0" VerticalAlignment="Top" Width="182" TabIndex="3" DropDownOpened="cmbDeptLocal_DropDownOpened">
-					<ComboBoxItem Content="Dept1 / São Paulo"/>
-					<ComboBoxItem Content="Dept2 / Barueri"/>
-					<ComboBoxItem Content="Dept3 / Guarulhos"/>
-					<ComboBoxItem Content="Dept4 / Campinas"/>
-					<ComboBoxItem Content="Dept5 / Jundiaí"/>
-				</ComboBox>
-				<Label Content="Unidade/Localização:*" HorizontalAlignment="Left" Margin="3.348,102.88,0,0" VerticalAlignment="Top"/>
-				<Label Content="Agente 1 (Principal):*" HorizontalAlignment="Left" Margin="349,9.96,0,0" VerticalAlignment="Top"/>
-				<Label Content="Agente 2:*" HorizontalAlignment="Left" Margin="404.633,41,0,0" VerticalAlignment="Top"/>
-				<ComboBox x:Name="cmbAgente1" HorizontalAlignment="Left" Margin="470.207,9.96,0,0" VerticalAlignment="Top" Width="151" TabIndex="5"/>
-				<ComboBox x:Name="cmbAgente2" HorizontalAlignment="Left" Margin="470.207,40.96,0,0" VerticalAlignment="Top" Width="151" TabIndex="6"/>
-				<Label Content="Agente 3:" HorizontalAlignment="Left" Margin="404.633,71.88,0,0" VerticalAlignment="Top"/>
-				<ComboBox Controls:TextBoxHelper.ClearTextButton="True"  x:Name="cmbAgente3" HorizontalAlignment="Left" Margin="470.207,71.84,0,0" VerticalAlignment="Top" Width="151" TabIndex="7"/>
-				<Label Content="Agente 4:" HorizontalAlignment="Left" Margin="404.633,102.88,0,0" VerticalAlignment="Top"/>
-				<ComboBox Controls:TextBoxHelper.ClearTextButton="True"  x:Name="cmbAgente4" HorizontalAlignment="Left" Margin="470.207,102.84,0,0" VerticalAlignment="Top" Width="151" TabIndex="8"/>
-				<Label Content="Data de Abertura:*" HorizontalAlignment="Left" Margin="667.995,10.04,0,0" VerticalAlignment="Top"/>
-				<Label Content="Data de Fechamento:" HorizontalAlignment="Left" Margin="654.301,71.96,0,0" VerticalAlignment="Top"/>
-				<ComboBox x:Name="cmbStatusCaso" HorizontalAlignment="Left" Margin="781.589,41,0,0" VerticalAlignment="Top" Width="117" TabIndex="10" DropDownClosed="cmbStatusCaso_DropDownClosed">
-					<ComboBoxItem Content="Aberto"/>
-					<ComboBoxItem Content="Destruição de Evidências"/>
-					<ComboBoxItem Content="Encerrado"/>
-					<ComboBoxItem Content="Encerrado/Força-Tarefa"/>
-					<ComboBoxItem Content="Jurídico"/>
-				</ComboBox>
-				<Label Content="Status:*" HorizontalAlignment="Left" Margin="726.488,41,0,0" VerticalAlignment="Top"/>
-				<ComboBox x:Name="cmbCatCaso" HorizontalAlignment="Left" Margin="134.513,134.127,0,0" VerticalAlignment="Top" Width="182" DropDownClosed="cmbCatCaso_DropDownClosed" TabIndex="4">
-					<ComboBoxItem Content="Assalto"/>
-					<ComboBoxItem Content="Caso DPIC"/>
-					<ComboBoxItem Content="Crime Sexual"/>
-					<ComboBoxItem Content="Desvio"/>
-					<ComboBoxItem Content="Força-Tarefa"/>
-					<ComboBoxItem Content="Grande-Jurí (STF)"/>
-					<ComboBoxItem Content="Homicídio"/>
-					<ComboBoxItem Content="Incêndio"/>
-					<ComboBoxItem Content="Interdição"/>
-					<ComboBoxItem Content="Lavagem de Dinheiro / Inv. Financeira"/>
-					<ComboBoxItem Content="Suicídio"/>
-				</ComboBox>
-				<Label Content="Categoria do Caso:*" HorizontalAlignment="Left" Margin="15.345,133.84,0,0" VerticalAlignment="Top"/>
-				<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="116.998" x:Name="txtDataAbertura"  Mask="00/00/0000" CharacterCasing="Upper" Margin="781.59,10.04,0,0" TabIndex="9" Style="{DynamicResource MaskedTextBoxStyle1}"/>
-				<Custom:MaskedTextBox Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="116.997" x:Name="txtDataFechamento"  Mask="00/00/0000" CharacterCasing="Upper" Margin="781.591,72.88,0,0" TabIndex="11" Style="{DynamicResource MaskedTextBoxStyle1}"/>
-				<Button x:Name="btnNovaUnidade" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Margin="321.513,102.88,0,0" VerticalAlignment="Top" Width="29.5" ToolTip="Cadastrar Nova Unidade" Height="27.96" TabIndex="20" Click="btnNovaUnidade_Click">
-					<Image Source="/sistemaCorporativo;component/IMAGES/addNewBlue.png" Height="10.293" Width="12.627" OpacityMask="Black" Margin="0,0,0.21,0" />
-				</Button>
-			</Grid>
+                <DatePicker x:Name="txtDataFechamento" HorizontalAlignment="Left" Margin="766,71.7,0,0" VerticalAlignment="Top" Width="137.5" IsTodayHighlighted="True" SelectedDateFormat="Short" Focusable="False" IsEnabled="False"/>
+                <DatePicker x:Name="txtDataAbertura" HorizontalAlignment="Left" Margin="766,9.84,0,0" VerticalAlignment="Top" Width="137.5" IsTodayHighlighted="True" SelectedDateFormat="Short" Focusable="False"/>
+                <Label Content="Número do Caso:*" HorizontalAlignment="Left" Margin="21.995,10,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtNumCaso" HorizontalAlignment="Left" Height="23" Margin="134.513,9.84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TabIndex="0"/>
+                <TextBox x:Name="txtTituloCaso" HorizontalAlignment="Left" Height="23" Margin="134.513,40.84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" MaxLength="40" TabIndex="1"/>
+                <Label Content="Título do Caso:" HorizontalAlignment="Left" Margin="40.596,40.88,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmbTipoCaso" HorizontalAlignment="Left" Margin="134.513,71.84,0,0" VerticalAlignment="Top" Width="182" TabIndex="2">
+                    <ComboBoxItem Content="Investigação"/>
+                    <ComboBoxItem Content="Relatório"/>
+                </ComboBox>
+                <Label Content="Tipo:" HorizontalAlignment="Left" Margin="93.635,71.96,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmbDeptLocal" HorizontalAlignment="Left" Margin="134.513,102.84,0,0" VerticalAlignment="Top" Width="182" TabIndex="3" DropDownOpened="cmbDeptLocal_DropDownOpened">
+                    <ComboBoxItem Content="Dept1 / São Paulo"/>
+                    <ComboBoxItem Content="Dept2 / Barueri"/>
+                    <ComboBoxItem Content="Dept3 / Guarulhos"/>
+                    <ComboBoxItem Content="Dept4 / Campinas"/>
+                    <ComboBoxItem Content="Dept5 / Jundiaí"/>
+                </ComboBox>
+                <Label Content="Unidade/Localização:*" HorizontalAlignment="Left" Margin="3.348,102.88,0,0" VerticalAlignment="Top"/>
+                <Label Content="Agente 1 (Principal):*" HorizontalAlignment="Left" Margin="349,9.96,0,0" VerticalAlignment="Top"/>
+                <Label Content="Agente 2:*" HorizontalAlignment="Left" Margin="404.633,41,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmbAgente1" HorizontalAlignment="Left" Margin="470.207,9.96,0,0" VerticalAlignment="Top" Width="151" TabIndex="5" DropDownOpened="cmbAgente1_DropDownOpened" DropDownClosed="cmbAgente1_DropDownClosed"/>
+                <ComboBox x:Name="cmbAgente2" HorizontalAlignment="Left" Margin="470.207,40.96,0,0" VerticalAlignment="Top" Width="151" TabIndex="6" DropDownOpened="cmbAgente2_DropDownOpened" DropDownClosed="cmbAgente2_DropDownClosed"/>
+                <Label Content="Agente 3:" HorizontalAlignment="Left" Margin="404.633,71.88,0,0" VerticalAlignment="Top"/>
+                <ComboBox Controls:TextBoxHelper.ClearTextButton="True"  x:Name="cmbAgente3" HorizontalAlignment="Left" Margin="470.207,71.84,0,0" VerticalAlignment="Top" Width="151" TabIndex="7" DropDownOpened="cmbAgente3_DropDownOpened" DropDownClosed="cmbAgente3_DropDownClosed"/>
+                <Label Content="Agente 4:" HorizontalAlignment="Left" Margin="404.633,102.88,0,0" VerticalAlignment="Top"/>
+                <ComboBox Controls:TextBoxHelper.ClearTextButton="True"  x:Name="cmbAgente4" HorizontalAlignment="Left" Margin="470.207,102.84,0,0" VerticalAlignment="Top" Width="151" TabIndex="8" DropDownOpened="cmbAgente4_DropDownOpened" DropDownClosed="cmbAgente4_DropDownClosed"/>
+                <Label Content="Data de Abertura:*" HorizontalAlignment="Left" Margin="651.995,9.88,0,0" VerticalAlignment="Top"/>
+                <Label Content="Data de Fechamento:" HorizontalAlignment="Left" Margin="638.301,71.8,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmbStatusCaso" HorizontalAlignment="Left" Margin="766,40.84,0,0" VerticalAlignment="Top" Width="137.5" TabIndex="10" DropDownClosed="cmbStatusCaso_DropDownClosed">
+                    <ComboBoxItem Content="Aberto"/>
+                    <ComboBoxItem Content="Destruição de Evidências"/>
+                    <ComboBoxItem Content="Encerrado"/>
+                    <ComboBoxItem Content="Encerrado/Força-Tarefa"/>
+                    <ComboBoxItem Content="Jurídico"/>
+                </ComboBox>
+                <Label Content="Status:*" HorizontalAlignment="Left" Margin="710.488,40.84,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmbCatCaso" HorizontalAlignment="Left" Margin="134.513,134.127,0,0" VerticalAlignment="Top" Width="182" DropDownClosed="cmbCatCaso_DropDownClosed" TabIndex="4">
+                    <ComboBoxItem Content="Assalto"/>
+                    <ComboBoxItem Content="Caso DPIC"/>
+                    <ComboBoxItem Content="Crime Sexual"/>
+                    <ComboBoxItem Content="Desvio"/>
+                    <ComboBoxItem Content="Força-Tarefa"/>
+                    <ComboBoxItem Content="Grande-Jurí (STF)"/>
+                    <ComboBoxItem Content="Homicídio"/>
+                    <ComboBoxItem Content="Incêndio"/>
+                    <ComboBoxItem Content="Interdição"/>
+                    <ComboBoxItem Content="Lavagem de Dinheiro / Inv. Financeira"/>
+                    <ComboBoxItem Content="Suicídio"/>
+                </ComboBox>
+                <Label Content="Categoria do Caso:*" HorizontalAlignment="Left" Margin="15.345,133.84,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="btnNovaUnidade" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Margin="321.513,102.88,0,0" VerticalAlignment="Top" Width="29.5" ToolTip="Cadastrar Nova Unidade" Height="27.96" TabIndex="20" Click="btnNovaUnidade_Click">
+                    <Image Source="/sistemaCorporativo;component/IMAGES/addNewBlue.png" Height="10.293" Width="12.627" OpacityMask="Black" Margin="0,0,0.21,0" />
+                </Button>
+            </Grid>
 
 
 		</GroupBox>
@@ -1077,8 +1308,8 @@
 			</TabItem>
 			<TabItem x:Name="tabEnvolvidos" Header="Envolvidos" TabIndex="13" IsEnabled="False">
 				<Grid x:Name="grdEnvolvidos">
-					<DataGrid x:Name="dgvOutrasAgencias_Copy" HorizontalAlignment="Left" Margin="10,10,0,10" Width="850.923" Background="#FF2E2E2E"/>
-				    <Button x:Name="btnCadPessoaFisica" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="865.923,10,0,0" VerticalAlignment="Top" Width="169.227" Height="40.62" Click="btnCadPessoaFisica_Click">
+					<DataGrid x:Name="dgvEnvolvidos" HorizontalAlignment="Left" Margin="10,10,0,10" Width="844.923" Background="#FF2E2E2E" TabIndex="14" IsReadOnly="True" AutoGeneratingColumn="dgvEnvolvidos_AutoGeneratingColumn"/>
+				    <Button x:Name="btnCadPessoaFisica" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="865.923,10,0,0" VerticalAlignment="Top" Width="169.227" Height="40.62" Click="btnCadPessoaFisica_Click" TabIndex="15">
 				    <StackPanel Width="156.26" Height="28.96">
 					<Canvas>
 						<Image Source="/sistemaCorporativo;component/IMAGES/pessoFisica_icon.png" Height="27.127" Width="33" Canvas.Top="1.083" Canvas.Left="-2.667"  />
@@ -1086,7 +1317,7 @@
 					</Canvas>
 				    </StackPanel>
 			        </Button>
-				    <Button Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="865.923,55.62,0,0" VerticalAlignment="Top" Width="169.227" Height="40.62">
+				    <Button Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="865.923,55.62,0,0" VerticalAlignment="Top" Width="169.227" Height="40.62" TabIndex="16">
 				    	<StackPanel Width="156.26" Height="28.96">
 				    		<Canvas>
 				    			<Image Source="/sistemaCorporativo;component/IMAGES/searchbyBussiness_icon.png" Height="29.793" Width="31" Canvas.Top="0.75"  />
@@ -1094,7 +1325,7 @@
 				    		</Canvas>
 				    	</StackPanel>
 				    </Button>
-				    <Button Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="865.923,101.24,0,0" VerticalAlignment="Top" Width="169.227" Height="40.62">
+				    <Button Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="865.923,101.24,0,0" VerticalAlignment="Top" Width="169.227" Height="40.62" TabIndex="17">
 				    	<StackPanel Width="156.26" Height="28.96">
 				    		<Canvas>
 				    			<Image Source="/sistemaCorporativo;component/IMAGES/searchbyCar_icon.png" Height="29.793" Width="31" Canvas.Top="0.75"  />
@@ -1102,7 +1333,7 @@
 				    		</Canvas>
 				    	</StackPanel>
 				    </Button>
-				    <Button Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="865.923,166.62,0,0" VerticalAlignment="Top" Width="169.227" Height="40.62">
+				    <Button Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="865.923,166.62,0,0" VerticalAlignment="Top" Width="169.227" Height="40.62" TabIndex="18">
 				    	<StackPanel Width="151.427" Height="28.96">
 				    		<Canvas>
 				    			<Image Source="/sistemaCorporativo;component/IMAGES/deleteEnvolvido_icon.png" Height="28.71" Width="33" Canvas.Left="1"  />
@@ -1112,14 +1343,14 @@
 				    </Button>
 				</Grid>
 			</TabItem>
-			<TabItem x:Name="tabEvidencias" Content="" Header="Evidências" TabIndex="14" IsSelected="True" IsEnabled="False"/>
-			<TabItem x:Name="tabCenaDoCrime" Header="Cena do Crime" IsEnabled="False" TabIndex="15"/>
-			<TabItem x:Name="tabAnexos" Content="" Header="Anexos" TabIndex="16" IsEnabled="False"/>
-			<TabItem x:Name="tabRelatos" Content="" Header="Relatos" TabIndex="17" IsEnabled="False"/>
-			<TabItem x:Name="tabCasosRel" Content="" Header="Casos Relacionados" TabIndex="18" IsEnabled="False"/>
+			<TabItem x:Name="tabEvidencias" Content="" Header="Evidências" TabIndex="19" IsSelected="True" IsEnabled="False"/>
+			<TabItem x:Name="tabCenaDoCrime" Header="Cena do Crime" IsEnabled="False" TabIndex="20"/>
+			<TabItem x:Name="tabAnexos" Content="" Header="Anexos" TabIndex="21" IsEnabled="False"/>
+			<TabItem x:Name="tabRelatos" Content="" Header="Relatos" TabIndex="22" IsEnabled="False"/>
+			<TabItem x:Name="tabCasosRel" Content="" Header="Casos Relacionados" TabIndex="23" IsEnabled="False"/>
             
 		</TabControl>
-		<Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}"  Content="Cancelar" HorizontalAlignment="Left" Margin="957.5,61.84,0,0" VerticalAlignment="Top" Width="90.317" Click="btnCancelar_Click" TabIndex="36"/>
+		<Button x:Name="btnFechar" Style="{DynamicResource SquareButtonStyle}"  Content="Fechar" HorizontalAlignment="Left" Margin="957.5,61.84,0,0" VerticalAlignment="Top" Width="90.317" Click="btnFechar_Click" TabIndex="36"/>
 
 	</Grid>
 </Controls:MetroWindow>

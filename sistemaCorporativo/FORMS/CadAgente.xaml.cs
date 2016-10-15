@@ -32,6 +32,7 @@ using System.Drawing;
 using sistemaCorporativo.UTIL.Adorners;
 using sistemaCorporativo.TO.FingerPrintsAgente;
 using sistemaCorporativo.FORMS.principalScreen;
+using sistemaCorporativo.UTIL;
 
 
 
@@ -287,7 +288,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
             destinationPathFoto = "pack://application:,,,/IMAGES/User_Profile.png";
             fotoInserida = false;
             //Caso exclua uma foto de um agente que ja esta no banco de dados
-
+            alterPhoto = false;
 
         }
 
@@ -858,7 +859,7 @@ namespace sistemaCorporativo.FORMS.cadAgente
                                                         updateFingerCommand.Parameters.Add(":minE", objFingerPrints.getMinE());
                                                         updateFingerCommand.Parameters.Add(":fichaDact", objFingerPrints.getFichaDact());
                                                         updateFingerCommand.ExecuteNonQuery();
-                                                        OraconFinger.Open();
+                                                        OraconFinger.Close();
 
                                                         #endregion
 
@@ -1300,6 +1301,10 @@ namespace sistemaCorporativo.FORMS.cadAgente
 
         private void MetroWindow_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            if (txtCep.IsFocused)
+            {
+                return;
+            }
             //Cadastrar por tecla
             if (e.Key == Key.Enter)
             {
@@ -1394,8 +1399,38 @@ namespace sistemaCorporativo.FORMS.cadAgente
             }
         }
 
+         private void txtCep_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+         {
+             if (e.Key == Key.Enter)
+             {
+                 searchByCep objCEP = new searchByCep();
+                 OracleConnection Oracon = new OracleConnection(db.oradb);
+
+                 Oracon.Open();
+                 OracleDataReader drDados;
+                 string cep = txtCep.Text.Replace("-", "");
+                 objCEP.cep = cep;
+                 drDados = objCEP.ProcurarCEP(Oracon);
+                 if (drDados.Read())
+                 {
+
+                     txtLogradouro.Text = Convert.ToString
+                         (drDados["descricao"]);
+
+                     cmbUf.Text = Convert.ToString
+                         (drDados["UF"]);
+
+                     txtBairro.Text = Convert.ToString
+                         (drDados["Bairro"]);
+
+                     txtCidade.Text = Convert.ToString
+                         (drDados["Cidade"]);
+                 }
+                 Oracon.Close();
+             }
+         }
 		
-		#endregion
+		#endregion     
     }
 
 }

@@ -36,7 +36,7 @@ namespace sistemaCorporativo
         #region SQL STRINGS
 
         private string SQL_SELECT_ALL = "select * from AGENCIA where status = 1";
-        private string SQL_INSERT = "insert into AGENCIA (id_AgenciaAux, nome_Agencia, status) values (seq_AgenciaAux.NEXTVAL, :nomesigla, 1)";
+        private string SQL_INSERT = "insert into AGENCIA (id_Agencia, nome_Agencia, status) values (seq_Agencia.NEXTVAL, :nomesigla, 1)";
         private string SQL_UPDATE = "";
         private string SQL_DELETE = "";
 
@@ -142,7 +142,7 @@ namespace sistemaCorporativo
                         //Juntar Nome e Sigla
                         string nomeSigla = txtNomeAgencia.Text + " " + "(" + txtSigla.Text + ")";
 
-                        SQL_UPDATE = "update AGENCIA set nome_Agencia = :nomesigla where id_AgenciaAux =" + idAgencia;
+                        SQL_UPDATE = "update AGENCIA set nome_Agencia = :nomesigla where id_Agencia =" + idAgencia;
                         OracleCommand cmdUpdate = new OracleCommand(SQL_UPDATE, Oracon);
                         cmdUpdate.Parameters.Add("nomesigla", nomeSigla);
                         cmdUpdate.ExecuteNonQuery();
@@ -192,7 +192,7 @@ namespace sistemaCorporativo
                         idAgencia = (dgvAgenciaAuxiliadora.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
 
                         //executando comando usando o ID como base para "apagar" um item
-                        SQL_DELETE = "update AGENCIA set status=0 where id_AgenciaAux =" + idAgencia;
+                        SQL_DELETE = "update AGENCIA set status=0 where id_Agencia =" + idAgencia;
                         OracleCommand deleteCommand = new OracleCommand(SQL_DELETE, Oracon);
                         deleteCommand.ExecuteNonQuery();
 

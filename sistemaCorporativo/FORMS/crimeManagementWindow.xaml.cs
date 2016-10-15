@@ -210,6 +210,7 @@ namespace sistemaCorporativo
                     Oracon.Open();
 
                     #region Enviando dados para a tela addcaso para editar
+
                     //Coletando valores para atualização
 
                     object itemid = dgvCasos.SelectedItem;
@@ -288,6 +289,16 @@ namespace sistemaCorporativo
                         editCaso.txtDataFechamento.Text = dataFechamento;
                     }
 
+                    string statusCaso = drcd[12].ToString();
+                    if (statusCaso == "Aberto" || statusCaso == "Jurídico")
+                    {
+                        editCaso.txtDataFechamento.IsEnabled = false;
+                    }
+                    else
+                    {
+                        editCaso.txtDataFechamento.IsEnabled = true;
+                    }
+
                     editCaso.cmbStatusCaso.Text = drcd[12].ToString();
                     string tipolavagem = drcd[14].ToString();
                     if (tipolavagem != "")
@@ -346,6 +357,7 @@ namespace sistemaCorporativo
                     }
 
                     editCaso.Title = "Editar Caso Nº " + numeroCaso + " | " + titulocaso;
+                    editCaso.btnArquivar.Content = "Atualizar";
 
                     editCaso.ShowDialog();
 

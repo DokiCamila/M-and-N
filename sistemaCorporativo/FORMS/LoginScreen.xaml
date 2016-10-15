@@ -21,8 +21,8 @@
             <ColumnDefinition Width="35*"/>
         </Grid.ColumnDefinitions>
         <Image Margin="10,0,-291.85,0" Height="394.5" VerticalAlignment="Top" HorizontalAlignment="Left" Width="608.35" Source="/sistemaCorporativo;component/IMAGES/Icon_Login FLAT DESIGN.png" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
-        <TextBox x:Name="txtAgente" Height="26" Margin="85,0,0,0" TextWrapping="Wrap" Controls:TextBoxHelper.ClearTextButton="true" Controls:TextBoxHelper.Watermark="Agente" VerticalAlignment="Top" Grid.Row="3" />
-        <PasswordBox x:Name="txtSenha" Margin="85,37,0,0" Controls:TextBoxHelper.Watermark="Senha" Controls:PasswordBoxHelper.CapsLockIcon="Capslock Ativado" VerticalAlignment="Top" Grid.Row="3" Height="26"/>
-        <Button x:Name="btnAcessar" Style="{DynamicResource SquareButtonStyle}" Content="Acessar" Margin="199.676,19,0,0" VerticalAlignment="Top" Height="36.3" Grid.Row="4" Click="btnAcessar_Click" RenderTransformOrigin="0.502,0.5"/>
+        <TextBox x:Name="txtAgente" Height="26" Margin="85,0,0,0" TextWrapping="Wrap" Controls:TextBoxHelper.ClearTextButton="true" Controls:TextBoxHelper.Watermark="Agente" VerticalAlignment="Top" Grid.Row="3" TabIndex="1" />
+        <PasswordBox x:Name="txtSenha" Margin="85,37,0,0" Controls:TextBoxHelper.Watermark="Senha" Controls:PasswordBoxHelper.CapsLockIcon="Capslock Ativado" VerticalAlignment="Top" Grid.Row="3" Height="26" TabIndex="2"/>
+        <Button x:Name="btnAcessar" Style="{DynamicResource SquareButtonStyle}" Content="Acessar" Margin="199.676,19,0,0" VerticalAlignment="Top" Height="36.3" Grid.Row="4" Click="btnAcessar_Click" RenderTransformOrigin="0.502,0.5" TabIndex="3"/>
     </Grid>
 </Controls:MetroWindow>

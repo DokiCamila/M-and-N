@@ -114,7 +114,7 @@
     </Reference>
     <Reference Include="AvalonControlsLibrary, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Downloads\Release V2\Release V2\AvalonControlsLibrary\AvalonControlsLibrary\bin\Debug\AvalonControlsLibrary.dll</HintPath>
+      <HintPath>..\..\..\WPF\Projects\sistemaCorporativo v5.0.4.bak\sistemaCorporativo\bin\x86\Debug\AvalonControlsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Dragablz">
       <HintPath>..\packages\Dragablz.0.0.3.163\lib\net45\Dragablz.dll</HintPath>
@@ -125,12 +125,9 @@
     <Reference Include="Microsoft.Expression.Effects" />
     <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Odyssey">
-      <HintPath>..\..\..\..\..\Downloads\Odyssey.dll</HintPath>
-    </Reference>
-    <Reference Include="Oracle.DataAccess, Version=4.112.3.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64">
+    <Reference Include="Oracle.DataAccess, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\app\client\Matheus\product\12.1.0\client_2\odp.net\bin\2.x\Oracle.DataAccess.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\app\MatheusBuarque\product\11.1.0\client_1\odp.net\bin\2.x\Oracle.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -215,12 +212,109 @@
     <Compile Include="TO\Agencia.cs" />
     <Compile Include="TO\Agente.cs" />
     <Compile Include="TO\Caso.cs" />
+    <Compile Include="TO\ContatoEnvF.cs" />
     <Compile Include="TO\Denuncia.cs" />
+    <Compile Include="TO\EnderecoEnvF.cs" />
+    <Compile Include="TO\EnvolvidoF.cs" />
     <Compile Include="TO\FingerPrintsAgente.cs" />
     <Compile Include="TO\OutrasAgencias.cs" />
     <Compile Include="TO\Unidade.cs" />
     <Compile Include="UTIL\checkPassword.cs" />
     <Compile Include="TO\Viatura.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Básico\Dedo.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Básico\Engine.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Básico\Fingerprint.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Básico\Pessoa.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\BestMatchSkipper.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\MatchAnalysis.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\MatchScoring.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\EdgeConstructor.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\EdgeHash.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\EdgeLocation.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\EdgeLookup.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\EdgePair.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\EdgeShape.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\EdgeTable.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\HashLookup.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\IndexedEdge.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\MinutiaMatcher.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\MinutiaPair.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\MinutiaPairing.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\NeighborEdge.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\PairInfo.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\PairSelector.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\Minuncia\RootPairSelector.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\ParallelMatcher.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Comparação\ProbeIndex.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Extrator.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\AbsoluteContrast.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\ClippedContrast.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\CrossRemover.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\Equalizer.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\HillOrientation.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\ImageInverter.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\InnerMask.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\LinesByOrientation.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\LocalHistogram.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\OrientedSmoother.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\RelativeContrast.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\SegmentationMask.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\Thinner.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\ThresholdBinarizer.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Filtros\VotingFilter.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Minuncias\MinutiaCloudRemover.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Minuncias\MinutiaCollector.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Minuncias\MinutiaMask.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Minuncias\MinutiaShuffler.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Minuncias\StandardDpiScaling.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Minuncias\UniqueMinutiaSorter.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Modelo\BranchMinutiaRemover.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Modelo\DotRemover.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Modelo\FragmentRemover.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Modelo\GapRemover.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Modelo\ISkeletonFilter.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Modelo\KnotRemover.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Modelo\PoreRemover.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Modelo\RidgeTracer.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Modelo\SkeletonBuilder.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Modelo\SkeletonShadow.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Extração\Modelo\TailRemover.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\Angle.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\AssertException.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\BinaryMap.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\BlockMap.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\Calc.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\CircularArray.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\DetailLogger.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\GdiIO.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\Neighborhood.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\Point.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\PointF.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\PointS.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\PolarPoint.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\PriorityQueueF.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\Range.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\RangeF.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\RectangleC.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\ReversedList.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\Size.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\SizeF.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Geral\WpfIO.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Meta\DpiAdjustedAttribute.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Meta\DpiAdjuster.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Meta\NestedAttribute.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Meta\ObjectTree.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Meta\ParameterAttribute.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Meta\ParameterSet.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Meta\ParameterValue.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Templates\CompactFormat.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Templates\IsoFormat.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Templates\ITemplateFormat.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Templates\SerializedFormat.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Templates\Template.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Templates\TemplateBuilder.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Templates\TemplateFormatBase.cs" />
+    <Compile Include="UTIL\ComparaçãoID\Templates\XmlFormat.cs" />
     <Compile Include="UTIL\croppingAdorner.cs" />
     <Compile Include="UTIL\databaseAddress.cs" />
     <Compile Include="UTIL\dragCanvas.cs" />
@@ -228,6 +322,7 @@
     <Compile Include="UTIL\puncturedRect.cs" />
     <Compile Include="UTIL\SCANNERCLASSES\Device.cs" />
     <Compile Include="UTIL\SCANNERCLASSES\IScanner.cs" />
+    <Compile Include="UTIL\searchByCep.cs" />
     <Compile Include="UTIL\SelectionCanvas.cs" />
     <Page Include="FORMS\CadOutrasAgencias.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -397,12 +492,15 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="IMAGES\abrirLeitor.png" />
+    <Resource Include="IMAGES\abrirPasta.png" />
     <Resource Include="IMAGES\addNew.png" />
     <Resource Include="IMAGES\addNewBlue.png" />
     <Resource Include="IMAGES\advanced_search_icon.png" />
     <Resource Include="IMAGES\Assinatura.png" />
     <Resource Include="IMAGES\btnAdcCase_icon.png" />
     <Resource Include="IMAGES\btnDelCase_icon.png" />
+    <Resource Include="IMAGES\CadEnvolvido_FLAT.png" />
     <Resource Include="IMAGES\Check.png" />
     <Resource Include="IMAGES\citations_icon.png" />
     <Resource Include="IMAGES\Close.png" />
@@ -461,6 +559,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAO\" />
+    <Folder Include="Fonts\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IMAGES\Police_man_menu.png" />

@@ -37,6 +37,7 @@ namespace sistemaCorporativo
             crimeWindow = info;
         }
 
+        #region MODOEDICAO
         //Criar Variável para edições(atualizações);
         public Boolean modoEdicao = false;
         public string agente1;
@@ -47,6 +48,7 @@ namespace sistemaCorporativo
         public string idCaso;
         public string idDetalhe;
 
+        #endregion
 
         #region SQL STRINGS
 
@@ -57,7 +59,7 @@ namespace sistemaCorporativo
         //String selecionar todas as Unidades
         private string SELECT_ALL_UNIDADE = "select unidade_Local from UNIDADES where status = 1";
         //Script selecionar todos as Agencias Aux(Agencia, Nome Agente)
-        private string SELECT_ALL_AGENCIASAUX= "select nome_Agencia, nome_Agente from AGENCIAAUX_DET where status =1 and id_DetalheCaso =";
+        private string SELECT_ALL_AGENCIASAUX = "select id_AgenciaAux, nome_Agencia, nome_Agente from AGENCIA_AUX where status = 1 and id_DetalheCaso =";
         //String para inserir um  novo caso
         private string SQL_INSERT_CASO = "insert into caso(ID_CASO, NUMERO_CASO, TITULO_CASO, TIPO_CASO, DEP_LOCALIZACAO, CATEGORIA_CASO, AGENTE1, AGENTE2, AGENTE3, AGENTE4, DATA_ABERTURA, DATA_FECHAMENTO, STATUS_CASO, ID_DETALHECASO, STATUS)"
                                        + "values(seq_Caso.NEXTVAL, :numcaso, :titulocaso, :tipocaso, :deploc, :catcaso, :agente1, :agente2, :agente3, :agente4, :dataabertura, :datafechamento, :statuscaso, :iddetalhecaso, 1)";
@@ -65,17 +67,24 @@ namespace sistemaCorporativo
         private string SQL_INSERT_DETAIL = "insert into detalhes_caso(id_DETALHECASO, TIPO_LAVAGEM, FORCA_TAREFA, MUNICIPIO, ESTADO, REF_OUTRAAGENCIA, GRANDE_JURI, INT_JURI, RELAT_JURI, STATUS)"
                                          + "values (seq_DetalheCaso.NEXTVAL, :tipolavagem, :forcatarefa, :municipio, :estado, :refoutraagencia, :grandejuri, :intjuri, :relatjuri, 1)";
         //String para inserir Agencias Auxiliadoras
-        private string SQL_INSERT_AGENCIASAUX = "insert into AGENCIAAUX_DET(id_AgenciaAuxDet, nome_Agencia, nome_Agente, id_DetalheCaso, status) values (seq_AgenciaAuxDet.NEXTVAL, :nomeAgencia, :nomeAgente, :idDetalheCaso, 1)";
+        private string SQL_INSERT_AGENCIASAUX = "insert into AGENCIA_AUX(id_AgenciaAux, nome_Agencia, nome_Agente, id_DetalheCaso, status) values (seq_AgenciaAux.NEXTVAL, :nomeAgencia, :nomeAgente, :idDetalheCaso, 1)";
 
         //String pegar o Id do ultimo detahle do caso
         private string SELECT_LAST_DETAIL = "SELECT id_DetalheCaso FROM DETALHES_CASO WHERE id_DetalheCaso = ( SELECT MAX(id_DetalheCaso) FROM DETALHES_CASO)";
+        //String pegar o Id do ultimo caso
+        private string SELECT_LAST_CASO = "SELECT id_Caso FROM CASO WHERE id_Caso = ( SELECT MAX(id_Caso) FROM CASO)";
         //String para atualizar caso 
         private string SQL_UPDATE_CASO = "update caso set NUMERO_CASO = :numcaso, TITULO_CASO = :titulocaso, TIPO_CASO = :tipocaso, DEP_LOCALIZACAO = :deploc, CATEGORIA_CASO = :catcaso, AGENTE1 = :agente1, AGENTE2 = :agente2, AGENTE3 = :agente3, AGENTE4 = :agente4, DATA_ABERTURA = :dataabertura, DATA_FECHAMENTO = :datafechamento, STATUS_CASO = :statuscaso where id_Caso =";
         //String para atualizar detalhes
         private string SQL_UPDATE_DETAIL = "update detalhes_caso set TIPO_LAVAGEM = :tipolavagem, FORCA_TAREFA = :forcatafera, MUNICIPIO = :municipio, ESTADO = :estado, REF_OUTRAAGENCIA = :refoutraagencia, GRANDE_JURI = :grandejuri, INT_JURI = :intjuri, RELAT_JURI = :relatjuri where id_Detalhecaso = :idDetalhe";
-
+        //String para deletar as Agencias Auxiliares
+        private string SQL_DELETE_AGENCIASAUX = "update AGENCIA_AUX set status = 0 where id_AgenciaAux = ";
+        private string SQL_SELECT_ENVOLVIDOS = "select e.categoria, f.id_Envolvido, f.primeiro_Nome ||' '|| f.ultimo_Nome as nome_completo, f.dt_nascimento, f.CPF, f.rg, f.nacionalidade from ENV_CASO e Join ENVOLVIDO_F f on (e.Id_EnvolvidoF = f.id_Envolvido and id_Caso = :idCaso)";
 
         #endregion
+
+        //Variaveis para remover um agente ja selecionado
+        string[] removeAgente = new string[4];
 
         //Endereço banco de dados
         databaseAddress db = new databaseAddress();
@@ -99,51 +108,58 @@ namespace sistemaCorporativo
                 cmbAgente3.Items.Add(id + " " + nome);
                 cmbAgente4.Items.Add(id + " " + nome);
             }
+
             #endregion
 
             Oracon.Close();
 
-
+            //setar agentes
+            cmbAgente1.Text = agente1;
+            cmbAgente2.Text = agente2;
+            cmbAgente3.Text = agente3;
+            cmbAgente4.Text = agente4;
 
             if (modoEdicao)
             {
-                //setar agentes
-                cmbAgente1.Text = agente1;
-                cmbAgente2.Text = agente2;
-                cmbAgente3.Text = agente3;
-                cmbAgente4.Text = agente4;
+                removeAgente[0] = agente1;
+                removeAgente[1] = agente2;
+                removeAgente[2] = agente3;
+                removeAgente[3] = agente4;
 
                 #region Carrega Agencias Auxiliadoras GRID
 
                 Oracon.Open();
 
-                OracleCommand cmdSelect = new OracleCommand(SELECT_ALL_AGENCIASAUX + idDetalhe + "order by id_AgenciaAuxDet", Oracon);
+                OracleCommand cmdSelect = new OracleCommand(SELECT_ALL_AGENCIASAUX + idDetalhe + " order by id_AgenciaAux", Oracon);
                 cmdSelect.ExecuteNonQuery();
 
                 OracleDataAdapter adapter = new OracleDataAdapter(cmdSelect);
-                DataTable dt = new DataTable("Agencia Auxiliadora");
-                
+                DataTable dt = new DataTable("Agencia auxiliadora");
+
 
                 adapter.Fill(dt);
 
-                if (dt.Rows.Count > 0)
+
+                dgvOutrasAgencias.Columns.Clear();
+                dgvOutrasAgencias.ItemsSource = dt.DefaultView;
+
+                dgvOutrasAgencias.Columns[0].Header = "ID";
+                dgvOutrasAgencias.Columns[1].Header = "Nome Agencia";
+                dgvOutrasAgencias.Columns[2].Header = "Nome Agente";
+
+                if (dgvOutrasAgencias.Items.Count == 0)
                 {
-                    dgvOutrasAgencias.Columns.Clear();
-                    dgvOutrasAgencias.ItemsSource = dt.DefaultView;
-
-                    dgvOutrasAgencias.Columns[0].Header = "Nome Agencia";
-                    dgvOutrasAgencias.Columns[1].Header = "Nome Agente";
-
-                    adapter.Update(dt);
+                    dgvOutrasAgencias.Columns[2].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
                 }
+
+                adapter.Update(dt);
 
                 Oracon.Close();
 
-				//desbloquear agencias auxiliadoras
-                grbOutrasAgencias.IsEnabled = true;
-
                 #endregion
 
+                //desbloquear agencias auxiliadoras
+                grbOutrasAgencias.IsEnabled = true;
                 //Desbloquear TabItems 
                 tabEnvolvidos.IsEnabled = true;
                 tabEvidencias.IsEnabled = true;
@@ -153,8 +169,40 @@ namespace sistemaCorporativo
                 tabCasosRel.IsEnabled = true;
 
                 //Mudar algumas Propriedades da tela
-                btnArquivar.Content = "Salvar";
+                btnArquivar.Content = "Atualizar";
+
+                //Carregar Envolvidos
+                carregarEnvolvidos();
             }
+        }
+        private void carregarEnvolvidos()
+        {
+            #region CARREGAR ENVOLVIDOS
+            OracleConnection Oracon = new OracleConnection(db.oradb);
+            Oracon.Open();
+            OracleCommand cmdSelectEnv = new OracleCommand(SQL_SELECT_ENVOLVIDOS, Oracon);
+            cmdSelectEnv.Parameters.Add("idCaso", idCaso);
+            cmdSelectEnv.ExecuteNonQuery();
+
+            OracleDataAdapter adapterenv = new OracleDataAdapter(cmdSelectEnv);
+
+            DataSet dtenvf = new DataSet("Envolvidos Físicos");
+
+            adapterenv.Fill(dtenvf);
+            dtenvf.Tables[0].Columns[0].ColumnName = "Categoria";
+            dtenvf.Tables[0].Columns[1].ColumnName = "ID";
+            dtenvf.Tables[0].Columns[2].ColumnName = "Nome Completo";
+            dtenvf.Tables[0].Columns[3].ColumnName = "Data de Nascimento";
+            dtenvf.Tables[0].Columns[4].ColumnName = "CPF";
+            dtenvf.Tables[0].Columns[5].ColumnName = "RG";
+            dtenvf.Tables[0].Columns[6].ColumnName = "Nacionalidade";
+
+            dgvEnvolvidos.ItemsSource = dtenvf.Tables[0].DefaultView;
+           
+
+            Oracon.Close();
+
+            #endregion
         }
 
         #region CRUD (CU)
@@ -164,10 +212,19 @@ namespace sistemaCorporativo
         {
             #region Validations
 
-            if (txtNumCaso.Text == "" || cmbTipoCaso.Text == "" || cmbDeptLocal.Text == "" || cmbCatCaso.Text == "" || cmbAgente1.Text == "" || cmbAgente2.Text == "" || txtDataAbertura.Text == "" || cmbStatusCaso.Text == "")
+            if (txtNumCaso.Text == "" || cmbTipoCaso.Text == "" || cmbDeptLocal.Text == "" || cmbCatCaso.Text == "" || cmbAgente1.Text == null || cmbAgente2.Text == null || txtDataAbertura.Text == "" || cmbStatusCaso.Text == "")
             {
                 await this.ShowMessageAsync("Aviso", "Todos os campos com '*' são obrigatórios para a abertura do caso!");
                 return;
+            }
+
+            if (txtDataFechamento.IsEnabled)
+            {
+                if (txtDataFechamento.Text == "")
+                {
+                    await this.ShowMessageAsync("Aviso", "Insira uma data de fechamento!");
+                    return;
+                }
             }
 
             //Checar se é Lavagem 
@@ -194,6 +251,7 @@ namespace sistemaCorporativo
             {
                 await this.ShowMessageAsync("Aviso", "Todos os campos com '*' são obrigatórios para a abertura do caso!");
                 cmbEstado.Focus();
+                return;
             }
 
             #endregion
@@ -230,38 +288,46 @@ namespace sistemaCorporativo
             }
             int data = txtDataAbertura.Text.IndexOf('_');
 
-            //Validar data
-            if (data != -1)
+            //Data Abertura
+            //Comparar data
+            DateTime hoje = DateTime.Now;
+            DateTime dataAberturaDt = txtDataAbertura.SelectedDate.Value;
+
+            int resultado = DateTime.Compare(hoje, dataAberturaDt);
+            if (resultado == -1)
             {
-                await this.ShowMessageAsync("Aviso", "Formato de data Incorreto!");
+                await this.ShowMessageAsync("Aviso", "A data de abertura não pode ser inserida por ser subsequente a data de hoje!");
                 txtDataAbertura.Focus();
                 return;
             }
-            string dataabertura = txtDataAbertura.Text.Replace("/", "-");
-            dataabertura = formataData(dataabertura);
-            bool eValida = dataValida(dataabertura);
-            if (!eValida)
-            {
-                await this.ShowMessageAsync("Aviso", "Formato de data Incorreto!");
-                txtDataAbertura.Focus();
-                return;
-            }
-            objCaso.setDataAbertura(dataabertura);
+            objCaso.setDataAbertura(txtDataAbertura.SelectedDate.Value);
 
 
             objCaso.setStatus(cmbStatusCaso.Text);
-            if (txtDataFechamento.Text != "__/__/____")
+
+            //Data Fechamento
+            if (txtDataFechamento.IsEnabled)
             {
-                string datafechamento = txtDataFechamento.Text.Replace("/", "-");
-                datafechamento = formataData(datafechamento);
-                bool eValida2 = dataValida(datafechamento);
-                if (!eValida2)
+                //Comparar data
+                DateTime dataFechamentoDt = txtDataFechamento.SelectedDate.Value;
+
+                resultado = DateTime.Compare(hoje, dataFechamentoDt);
+                if (resultado == -1)
                 {
-                    await this.ShowMessageAsync("Aviso", "Formato de data Incorreto!");
+                    await this.ShowMessageAsync("Aviso", "A data de fechamento não pode ser inserida por ser subsequente a data de hoje!");
                     txtDataFechamento.Focus();
                     return;
                 }
-                objCaso.setDataFechamento(datafechamento);
+
+                resultado = DateTime.Compare(dataAberturaDt, dataFechamentoDt);
+                if (resultado == 1)
+                {
+                    await this.ShowMessageAsync("Aviso", "A data de fechamento não pode ser antecedente a data de abertura!");
+                    txtDataFechamento.Focus();
+                    return;
+                }
+
+                objCaso.setDataFechamento(txtDataFechamento.SelectedDate.Value);
             }
 
             objCaso.setTipoLavagem(cmbTipoLavagem.Text);
@@ -337,7 +403,7 @@ namespace sistemaCorporativo
                     OracleDataReader dr = lastIdDetail.ExecuteReader();
                     dr.Read();
 
-                    string idDetail = dr[0].ToString();
+                    idDetalhe = dr[0].ToString();
 
                     //Inserir Caso
                     OracleCommand insertCommandCase = new OracleCommand(SQL_INSERT_CASO, Oracon);
@@ -351,17 +417,41 @@ namespace sistemaCorporativo
                     insertCommandCase.Parameters.Add("agente3", objCaso.getAgente3());
                     insertCommandCase.Parameters.Add("agente4", objCaso.getAgente4());
                     insertCommandCase.Parameters.Add("dataabertura", objCaso.getDataAbertura());
-                    insertCommandCase.Parameters.Add("datafechamento", objCaso.getDataFechamento());
+                    if (txtDataFechamento.IsEnabled)
+                    {
+                        insertCommandCase.Parameters.Add("datafechamento", objCaso.getDataFechamento());
+                    }
+                    else
+                    {
+                        insertCommandCase.Parameters.Add("datafechamento", null);
+                    }
                     insertCommandCase.Parameters.Add("statuscaso", objCaso.getStatus());
-                    insertCommandCase.Parameters.Add("iddetalhecaso", idDetail);
+                    insertCommandCase.Parameters.Add("iddetalhecaso", idDetalhe);
                     insertCommandCase.ExecuteNonQuery();
+
+                    OracleCommand cmdTakeLastCaso = new OracleCommand(SELECT_LAST_CASO, Oracon);
+
+                    OracleDataReader rd = cmdTakeLastCaso.ExecuteReader();
+                    rd.Read();
+                    idCaso = rd[0].ToString();
 
                     Oracon.Close();
 
-                    await this.ShowMessageAsync("Aviso", "Caso registrado com sucesso!");
-                    btnLimpar_Click(null, null);
+                    await this.ShowMessageAsync("Aviso", "Caso arquivado com sucesso!");
                     crimeWindow.wndCrimeManagement_Loaded(null, null);
+                    this.Title = "Editar Caso Nº " + txtNumCaso.Text + " | " + txtTituloCaso.Text;
+                    modoEdicao = true;
 
+                    //desbloquear agencias auxiliadoras
+                    grbOutrasAgencias.IsEnabled = true;
+                    //Desbloquear TabItems 
+                    tabEnvolvidos.IsEnabled = true;
+                    tabEvidencias.IsEnabled = true;
+                    //tabCenaDoCrime.IsEnabled = true;
+                    tabAnexos.IsEnabled = true;
+                    tabRelatos.IsEnabled = true;
+                    tabCasosRel.IsEnabled = true;
+                    this.btnArquivar.Content = "Atualizar";
 
 
                 }
@@ -395,7 +485,7 @@ namespace sistemaCorporativo
                     updateCommand.ExecuteNonQuery();
 
 
-                    //Inserir Caso
+                    //Atualizae Caso
                     OracleCommand updateCommandCase = new OracleCommand(SQL_UPDATE_CASO + idCaso, Oracon);
                     updateCommandCase.Parameters.Add("numcaso", objCaso.getNumeroCaso());
                     updateCommandCase.Parameters.Add("titulocaso", objCaso.getTituloCaso());
@@ -407,7 +497,14 @@ namespace sistemaCorporativo
                     updateCommandCase.Parameters.Add("agente3", objCaso.getAgente3());
                     updateCommandCase.Parameters.Add("agente4", objCaso.getAgente4());
                     updateCommandCase.Parameters.Add("dataabertura", objCaso.getDataAbertura());
-                    updateCommandCase.Parameters.Add("datafechamento", objCaso.getDataFechamento());
+                    if (txtDataFechamento.IsEnabled)
+                    {
+                        updateCommandCase.Parameters.Add("datafechamento", objCaso.getDataFechamento());
+                    }
+                    else
+                    {
+                        updateCommandCase.Parameters.Add("datafechamento", null);
+                    }
                     updateCommandCase.Parameters.Add("statuscaso", objCaso.getStatus());
                     updateCommandCase.ExecuteNonQuery();
 
@@ -415,9 +512,8 @@ namespace sistemaCorporativo
                     Oracon.Close();
 
                     await this.ShowMessageAsync("Aviso", "Caso de Nº " + objCaso.getNumeroCaso() + " atualizado com sucesso!");
-                    btnLimpar_Click(null, null);
                     crimeWindow.wndCrimeManagement_Loaded(null, null);
-
+                    this.Title = "Editar Caso Nº " + txtNumCaso.Text + " | " + txtTituloCaso.Text;
 
                 }
                 catch (OracleException ex)
@@ -430,62 +526,132 @@ namespace sistemaCorporativo
 
         }
 
-        private static string formataData(string data)
-        {
-            int mes = Convert.ToInt32(data.Substring(3, data.IndexOf("-")));
-
-            string monthname = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(mes);
-
-            string day = data.Substring(0, data.IndexOf("-"));
-            string year = data.Substring(6, 4);
-            string newdata = day + "-" + monthname + "-" + year;
-
-            return newdata;
-        }
-        private bool dataValida(string data)
-        {
-            DateTime resultado = DateTime.MinValue;
-
-            if (DateTime.TryParse(data, out resultado))
-                return true;
-
-            return false;
-        }
-
         #endregion
 
         #region AGENCIA AUXILIADORA
         private async void btnAddAgenAux_Click(object sender, RoutedEventArgs e)
         {
-            if (cmbNomeAgenciaAux.Text == "" || txtNomeAgente.Text == "")
+            try
             {
-                await this.ShowMessageAsync("Aviso", "Preencha os campos Nome da Agencia e Nome do Agente para adicionar!");
+                if (cmbNomeAgenciaAux.Text == "" || txtNomeAgente.Text == "")
+                {
+                    await this.ShowMessageAsync("Aviso", "Preencha os campos Nome da Agencia e Nome do Agente para adicionar!");
+                }
+                else
+                {
+                    #region TO
+                    AgenciaAux objAgenciaAux = new AgenciaAux();
+
+                    objAgenciaAux.setNomeAgencia(cmbNomeAgenciaAux.Text);
+                    objAgenciaAux.setNomeAgente(txtNomeAgente.Text);
+
+                    #endregion
+
+                    OracleConnection Oracon = new OracleConnection(db.oradb);
+                    Oracon.Open();
+                    OracleCommand cmdInsert = new OracleCommand(SQL_INSERT_AGENCIASAUX, Oracon);
+                    cmdInsert.Parameters.Add("nomeAgencia", objAgenciaAux.getNomeAgencia());
+                    cmdInsert.Parameters.Add("nomeAgente", objAgenciaAux.getNomeAgente());
+                    cmdInsert.Parameters.Add("idDetalheCaso", idDetalhe);
+
+                    cmdInsert.ExecuteNonQuery();
+                    Oracon.Close();
+
+                    #region Carrega Agencias Auxiliadoras GRID
+
+                    Oracon.Open();
+
+                    OracleCommand cmdSelect = new OracleCommand(SELECT_ALL_AGENCIASAUX + idDetalhe + " order by id_AgenciaAux", Oracon);
+                    cmdSelect.ExecuteNonQuery();
+
+                    OracleDataAdapter adapter = new OracleDataAdapter(cmdSelect);
+                    DataTable dt = new DataTable("Agencia auxiliadora");
+
+                    adapter.Fill(dt);
+
+                    dgvOutrasAgencias.Columns.Clear();
+                    dgvOutrasAgencias.ItemsSource = dt.DefaultView;
+
+                    dgvOutrasAgencias.Columns[0].Header = "ID";
+                    dgvOutrasAgencias.Columns[1].Header = "Nome Agencia";
+                    dgvOutrasAgencias.Columns[2].Header = "Nome Agente";
+
+                    if (dgvOutrasAgencias.Items.Count == 0)
+                    {
+                        dgvOutrasAgencias.Columns[2].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                    }
+
+                    adapter.Update(dt);
+
+                    Oracon.Close();
+
+                    #endregion
+
+                }
             }
-            else
+            catch (Exception ex)
             {
-                #region TO
-                AgenciaAux objAgenciaAux = new AgenciaAux();
-
-                objAgenciaAux.setNomeAgencia(cmbNomeAgenciaAux.Text);
-                objAgenciaAux.setNomeAgente(txtNomeAgente.Text);
-
-                #endregion
-
-                OracleConnection Oracon = new OracleConnection(db.oradb);
-                Oracon.Open();
-                OracleCommand cmdInsert = new OracleCommand(SQL_INSERT_AGENCIASAUX, Oracon);
-                cmdInsert.Parameters.Add("nomeAgencia", objAgenciaAux.getNomeAgencia());
-                cmdInsert.Parameters.Add("nomeAgente", objAgenciaAux.getNomeAgente());
-                cmdInsert.Parameters.Add("idDetalheCaso", idDetalhe);
-
-                cmdInsert.ExecuteNonQuery();
-                Oracon.Close();
-                this.wndCadCaso_Loaded(null, null);
-            }  
+                MessageBox.Show(ex.Message);
+            }
         }
-		private async void btnDelAgenAux_Click(object sender, System.Windows.RoutedEventArgs e)
+        private async void btnDelAgenAux_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-        	
+            try
+            {
+                if (dgvOutrasAgencias.SelectedIndex != -1)
+                {
+
+                    object item = dgvOutrasAgencias.SelectedItem;
+                    string idAgenciaAux = (dgvOutrasAgencias.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
+
+                    OracleConnection Oracon = new OracleConnection(db.oradb);
+                    Oracon.Open();
+
+                    OracleCommand cmdDelete = new OracleCommand(SQL_DELETE_AGENCIASAUX + idAgenciaAux, Oracon);
+
+                    cmdDelete.ExecuteNonQuery();
+                    Oracon.Close();
+
+                    #region Carrega Agencias Auxiliadoras GRID
+
+                    Oracon.Open();
+
+                    OracleCommand cmdSelect = new OracleCommand(SELECT_ALL_AGENCIASAUX + idDetalhe + " order by id_AgenciaAux", Oracon);
+                    cmdSelect.ExecuteNonQuery();
+
+                    OracleDataAdapter adapter = new OracleDataAdapter(cmdSelect);
+                    DataTable dt = new DataTable("Agencia auxiliadora");
+
+                    adapter.Fill(dt);
+
+                    dgvOutrasAgencias.Columns.Clear();
+                    dgvOutrasAgencias.ItemsSource = dt.DefaultView;
+
+                    dgvOutrasAgencias.Columns[0].Header = "ID";
+                    dgvOutrasAgencias.Columns[1].Header = "Nome Agencia";
+                    dgvOutrasAgencias.Columns[2].Header = "Nome Agente";
+
+                    if (dgvOutrasAgencias.Items.Count == 0)
+                    {
+                        dgvOutrasAgencias.Columns[2].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                    }
+
+                    adapter.Update(dt);
+
+                    Oracon.Close();
+
+                    #endregion
+
+                }
+                else
+                {
+                    await this.ShowMessageAsync("Aviso", "Selecione uma agencia auxiliadora para deletar!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         #endregion
@@ -509,9 +675,14 @@ namespace sistemaCorporativo
 
         private void cmbStatusCaso_DropDownClosed(object sender, System.EventArgs e)
         {
-            if (cmbStatusCaso.Text == "Aberto")
+            if (cmbStatusCaso.Text == "Aberto" || cmbStatusCaso.Text == "Jurídico")
             {
                 txtDataFechamento.IsEnabled = false;
+                txtDataFechamento.Text = "";
+            }
+            else
+            {
+                txtDataFechamento.IsEnabled = true;
             }
         }
 
@@ -531,6 +702,13 @@ namespace sistemaCorporativo
 
         private void cmbNomeAgenciaAux_DropDownOpened(object sender, System.EventArgs e)
         {
+            //Se possuir algum texto
+            string texto = null;
+            if (cmbNomeAgenciaAux.Text != "")
+            {
+                texto = cmbNomeAgenciaAux.Text;
+            }
+
             if (cmbNomeAgenciaAux.Items.Count != 0)
             {
                 while (cmbNomeAgenciaAux.HasItems)
@@ -555,11 +733,23 @@ namespace sistemaCorporativo
                 cmbNomeAgenciaAux.Items.Add(nomeagencia);
             }
 
+            if (texto != null)
+            {
+                cmbNomeAgenciaAux.Text = texto;
+            }
+
             Oracon.Close();
         }
 
         private void cmbDeptLocal_DropDownOpened(object sender, System.EventArgs e)
         {
+            //Se possuir algum texto
+            string texto = null;
+            if (cmbDeptLocal.Text != "")
+            {
+                texto = cmbDeptLocal.Text;
+            }
+
             if (cmbDeptLocal.Items.Count != 0)
             {
                 while (cmbDeptLocal.HasItems)
@@ -584,50 +774,264 @@ namespace sistemaCorporativo
                 cmbDeptLocal.Items.Add(unidadeloc);
             }
 
+            if (texto != null)
+            {
+                cmbDeptLocal.Text = texto;
+            }
+
             Oracon.Close();
         }
+
+        #region EVENTOS CMBAGENTE1
+        private void cmbAgente1_DropDownOpened(object sender, System.EventArgs e)
+        {
+            //Se possuir algum texto
+            string texto = null;
+            if (cmbAgente1.Text != "")
+            {
+                texto = cmbAgente1.Text;
+            }
+
+            if (cmbAgente1.Items.Count != 0)
+            {
+                while (cmbAgente1.HasItems)
+                {
+                    int item = 0;
+                    cmbAgente1.Items.RemoveAt(item);
+                    item++;
+                }
+            }
+
+            OracleConnection Oracon = new OracleConnection(db.oradb);
+
+            Oracon.Open();
+
+            #region Carrega combobox agente
+            OracleCommand allagente = new OracleCommand(SELECT_ALL_AGENTE, Oracon);
+            OracleDataReader dr = allagente.ExecuteReader();
+            while (dr.Read())
+            {
+                string id = dr[0].ToString();
+                string nome = dr[1].ToString();
+                cmbAgente1.Items.Add(id + " " + nome);
+            }
+            #endregion
+
+            Oracon.Close();
+
+            if (texto != null)
+            {
+                cmbAgente1.Text = texto;
+            }
+
+            //Removendo Agentes Já usados
+            cmbAgente1.Items.Remove(removeAgente[1]);
+            if (cmbAgente3.Text != "")
+            {
+                cmbAgente1.Items.Remove(removeAgente[2]);
+            }
+            if (cmbAgente4.Text != "")
+            {
+                cmbAgente1.Items.Remove(removeAgente[3]);
+            }
+        }
+
+        private void cmbAgente1_DropDownClosed(object sender, System.EventArgs e)
+        {
+            removeAgente[0] = cmbAgente1.Text;
+        }
+
+        #endregion
+
+        #region EVENTOS CMBAGENTE2
+        private void cmbAgente2_DropDownOpened(object sender, System.EventArgs e)
+        {
+            //Se possuir algum texto
+            string texto = null;
+            if (cmbAgente2.Text != "")
+            {
+                texto = cmbAgente2.Text;
+            }
+
+            if (cmbAgente2.Items.Count != 0)
+            {
+                while (cmbAgente2.HasItems)
+                {
+                    int item = 0;
+                    cmbAgente2.Items.RemoveAt(item);
+                    item++;
+                }
+            }
+
+            OracleConnection Oracon = new OracleConnection(db.oradb);
+
+            Oracon.Open();
+
+            #region Carrega combobox agente
+            OracleCommand allagente = new OracleCommand(SELECT_ALL_AGENTE, Oracon);
+            OracleDataReader dr = allagente.ExecuteReader();
+            while (dr.Read())
+            {
+                string id = dr[0].ToString();
+                string nome = dr[1].ToString();
+                cmbAgente2.Items.Add(id + " " + nome);
+            }
+            #endregion
+
+            Oracon.Close();
+
+            if (texto != null)
+            {
+                cmbAgente2.Text = texto;
+            }
+
+            //Removendo Agentes Já usados
+            cmbAgente2.Items.Remove(removeAgente[0]);
+            if (cmbAgente3.Text != "")
+            {
+                cmbAgente2.Items.Remove(removeAgente[2]);
+            }
+            if (cmbAgente4.Text != "")
+            {
+                cmbAgente2.Items.Remove(removeAgente[3]);
+            }
+        }
+
+        private void cmbAgente2_DropDownClosed(object sender, System.EventArgs e)
+        {
+            removeAgente[1] = cmbAgente2.Text;
+        }
+
+        #endregion
+
+        #region EVENTOS CMBAGENTE3
+        private void cmbAgente3_DropDownOpened(object sender, System.EventArgs e)
+        {
+            //Se possuir algum texto
+            string texto = null;
+            if (cmbAgente3.Text != "")
+            {
+                texto = cmbAgente3.Text;
+            }
+
+            if (cmbAgente3.Items.Count != 0)
+            {
+                while (cmbAgente3.HasItems)
+                {
+                    int item = 0;
+                    cmbAgente3.Items.RemoveAt(item);
+                    item++;
+                }
+            }
+
+            OracleConnection Oracon = new OracleConnection(db.oradb);
+
+            Oracon.Open();
+
+            #region Carrega combobox agente
+            OracleCommand allagente = new OracleCommand(SELECT_ALL_AGENTE, Oracon);
+            OracleDataReader dr = allagente.ExecuteReader();
+            while (dr.Read())
+            {
+                string id = dr[0].ToString();
+                string nome = dr[1].ToString();
+                cmbAgente3.Items.Add(id + " " + nome);
+            }
+            #endregion
+
+            Oracon.Close();
+
+            if (texto != null)
+            {
+                cmbAgente3.Text = texto;
+            }
+
+            //Removendo Agentes Já usados
+            cmbAgente3.Items.Remove(removeAgente[0]);
+            cmbAgente3.Items.Remove(removeAgente[1]);
+            if (cmbAgente4.Text != "")
+            {
+                cmbAgente3.Items.Remove(removeAgente[3]);
+            }
+        }
+
+        private void cmbAgente3_DropDownClosed(object sender, System.EventArgs e)
+        {
+            removeAgente[2] = cmbAgente3.Text;
+        }
+
+        #endregion
+
+        #region EVENTOS CMBAGENTE4
+        private void cmbAgente4_DropDownOpened(object sender, System.EventArgs e)
+        {
+            //Se possuir algum texto
+            string texto = null;
+            if (cmbAgente4.Text != "")
+            {
+                texto = cmbAgente4.Text;
+            }
+
+            if (cmbAgente4.Items.Count != 0)
+            {
+                while (cmbAgente4.HasItems)
+                {
+                    int item = 0;
+                    cmbAgente4.Items.RemoveAt(item);
+                    item++;
+                }
+            }
+
+            OracleConnection Oracon = new OracleConnection(db.oradb);
+
+            Oracon.Open();
+
+            #region Carrega combobox agente
+            OracleCommand allagente = new OracleCommand(SELECT_ALL_AGENTE, Oracon);
+            OracleDataReader dr = allagente.ExecuteReader();
+            while (dr.Read())
+            {
+                string id = dr[0].ToString();
+                string nome = dr[1].ToString();
+                cmbAgente4.Items.Add(id + " " + nome);
+            }
+            #endregion
+
+            Oracon.Close();
+
+            if (texto != null)
+            {
+                cmbAgente4.Text = texto;
+            }
+
+            //Removendo Agentes Já usados
+            cmbAgente4.Items.Remove(removeAgente[0]);
+            cmbAgente4.Items.Remove(removeAgente[1]);
+            if (cmbAgente3.Text != "")
+            {
+                cmbAgente4.Items.Remove(removeAgente[2]);
+            }
+        }
+
+        private void cmbAgente4_DropDownClosed(object sender, System.EventArgs e)
+        {
+            removeAgente[3] = cmbAgente4.Text;
+        }
+
+        #endregion
 
         #endregion
 
         #region Envolvidos
         private void btnCadPessoaFisica_Click(object sender, RoutedEventArgs e)
         {
-            TipoPessoaFisicaWindow wndTipoPesoaFisica = new TipoPessoaFisicaWindow();
+            TipoPessoaFisicaWindow wndTipoPesoaFisica = new TipoPessoaFisicaWindow(idCaso);
             wndTipoPesoaFisica.ShowDialog();
+            carregarEnvolvidos();
         }
 
         #endregion
 
-        private void btnLimpar_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            txtNumCaso.Text = "";
-            txtTituloCaso.Text = "";
-            cmbTipoCaso.Text = "";
-            cmbDeptLocal.Text = "";
-            cmbCatCaso.Text = "";
-            cmbAgente1.Text = "";
-            cmbAgente2.Text = "";
-            cmbAgente3.Text = "";
-            cmbAgente4.Text = "";
-            txtDataAbertura.Text = "";
-            txtDataFechamento.Text = "";
-            cmbStatusCaso.Text = "";
-            cmbNomeAgenciaAux.Text = "";
-            txtNomeAgente.Text = "";
-            while (dgvOutrasAgencias.Items.Count != 0)
-            {
-                dgvOutrasAgencias.Items.RemoveAt(0);
-            }
-            cmbMunicipio.Text = "";
-            cmbEstado.Text = "";
-            cmbTipoLavagem.Text = "";
-            txtForcaTarefa.Text = "";
-            ckbRefOutraAgencia.IsChecked = false;
-            ckbGrandeJuri.IsChecked = false;
-            ckbGrandeJuri.IsChecked = false;
-            ckbInterJuri.IsChecked = false;
-            ckbRelJuri.IsChecked = false;
-        }
 
         private void btnNovaAgenciaAux_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -640,10 +1044,17 @@ namespace sistemaCorporativo
             CadUnidades newUnidadeWnd = new CadUnidades();
             newUnidadeWnd.ShowDialog();
         }
+        private void dgvEnvolvidos_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(System.DateTime))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+        }
 
-        private void btnCancelar_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnFechar_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             this.Close();
         }
+
+   
     }
 }

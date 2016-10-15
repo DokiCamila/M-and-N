@@ -18,9 +18,9 @@ namespace sistemaCorporativo.TO.Caso
         private string agente2;
         private string agente3;
         private string agente4;
-        private string dataabertura;
+        private DateTime dataabertura;
         private string status;
-        private string datafechamento;
+        private DateTime datafechamento;
         private string tipolavagem;
         private string forcatarefa;
         private string municio;
@@ -114,11 +114,11 @@ namespace sistemaCorporativo.TO.Caso
 
         }
 
-        public string getDataAbertura()
+        public DateTime getDataAbertura()
         {
             return this.dataabertura;
         }
-        public void setDataAbertura(string dataabertura)
+        public void setDataAbertura(DateTime dataabertura)
         {
             this.dataabertura = dataabertura;
         }
@@ -133,11 +133,11 @@ namespace sistemaCorporativo.TO.Caso
 
         }
 
-        public string getDataFechamento()
+        public DateTime getDataFechamento()
         {
             return this.datafechamento;
         }
-        public void setDataFechamento(string datafechamento)
+        public void setDataFechamento(DateTime datafechamento)
         {
             this.datafechamento = datafechamento;
         }

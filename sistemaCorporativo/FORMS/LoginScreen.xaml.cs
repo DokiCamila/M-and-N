@@ -132,9 +132,6 @@ namespace sistemaCorporativo
                 btnAcessar_Click(sender, e);
             }
         }
-
-
-
     }
 
 }

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Matheus\Documents\Matheus\WPF\Projects\sistemaCorporativo v5.0.3\sistemaCorporativo\obj\x64\Debug\
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\x64\Debug\
 sistemaCorporativo
 none
 false
 DEBUG;TRACE
-C:\Users\Matheus\Documents\Matheus\WPF\Projects\sistemaCorporativo v5.0.3\sistemaCorporativo\App.xaml
-10-1553143003
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\App.xaml
+241227629220
 
-16-979384142
-21790981787
-FORMS\CadAgente.xaml;FORMS\CadDenuncia.xaml;FORMS\CadDenunciaAnon.xaml;FORMS\CadOcorrencia.xaml;FORMS\CadViatura.xaml;FORMS\LoginScreen.xaml;FORMS\LogoffSplash.xaml;FORMS\PrincipalScreen.xaml;FORMS\SplashScreen.xaml;Resources\Icons.xaml;
+142845098944
+27-882303858
+FORMS\CadOutrasAgencias.xaml;FORMS\CadAgente.xaml;FORMS\CadCaso.xaml;FORMS\CadDenuncia.xaml;FORMS\CadFingerPrints.xaml;FORMS\CadInvestigacao.xaml;FORMS\CadUnidades.xaml;FORMS\CadViatura.xaml;FORMS\ClassificarFingersPrints.xaml;FORMS\CortarImagem.xaml;FORMS\Envolvido Físico\BuscarPessoaFisica.xaml;FORMS\Envolvido Físico\CadPessoaFisica.xaml;FORMS\Envolvido Físico\TipoPessoaFisicaWindow.xaml;SPLASHSCREEN\CrimeManagementSplash.xaml;FORMS\CrimeManagementWindow.xaml;FORMS\GerarLoginWindow.xaml;FORMS\LoginScreen.xaml;SPLASHSCREEN\LogoffSplash.xaml;FORMS\IndividualDactiloscopica.xaml;FORMS\PrincipalScreen.xaml;SPLASHSCREEN\SplashScreen.xaml;FORMS\UcImageCropper.xaml;FORMS\WebcamWindow.xaml;Resources\Icons.xaml;
 
 False
 

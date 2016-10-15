@@ -352,13 +352,18 @@ C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\r
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.csprojResolveAssemblyReference.cache
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadOutrasAgencias.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadAgente.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadCaso.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadDenuncia.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadInvestigacao.baml
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadUnidades.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadViatura.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\ClassificarFingersPrints.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CortarImagem.baml
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\BuscarPessoaFisica.baml
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\CadPessoaFisica.baml
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\TipoPessoaFisicaWindow.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\SPLASHSCREEN\CrimeManagementSplash.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CrimeManagementWindow.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\GerarLoginWindow.baml
@@ -370,14 +375,19 @@ C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\F
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\WebcamWindow.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\Resources\Icons.baml
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\App.baml
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadOutrasAgencias.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadAgente.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadCaso.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadDenuncia.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadFingerPrints.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadInvestigacao.g.cs
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadUnidades.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadViatura.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\ClassificarFingersPrints.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CortarImagem.g.cs
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\BuscarPessoaFisica.g.cs
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\CadPessoaFisica.g.cs
+C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\TipoPessoaFisicaWindow.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\SPLASHSCREEN\CrimeManagementSplash.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CrimeManagementWindow.g.cs
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\GerarLoginWindow.g.cs
@@ -400,13 +410,114 @@ C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\s
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.csproj.GenerateResource.Cache
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.exe
 C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.pdb
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\BuscarPessoaFisica.baml
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\CadPessoaFisica.baml
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\TipoPessoaFisicaWindow.baml
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\BuscarPessoaFisica.g.cs
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\CadPessoaFisica.g.cs
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\TipoPessoaFisicaWindow.g.cs
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadUnidades.baml
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadUnidades.g.cs
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadOutrasAgencias.baml
-C:\Users\Matheus\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadOutrasAgencias.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\sistemaCorporativo.exe.config
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.exe
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.pdb
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\IMAGES\cold_steel_american_lawman.jpg
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\IMAGES\Dark_Wallpaper.png
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\IMAGES\Light_Wallpaper.png
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\IMAGES\Logo Maior.png
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\IMAGES\SplashScreenBackground5.png
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\IMAGES\WallpaperDna_Dark.jpg
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\IMAGES\WallpaperDna_Light.jpg
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\sistemaCorporativo.exe
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\sistemaCorporativo.pdb
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\Dragablz.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\MahApps.Metro.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\Microsoft.Expression.Effects.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AForge.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AForge.Math.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AForge.Imaging.xml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AForge.Video.xml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AForge.Video.DirectShow.xml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\Dragablz.pdb
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\Dragablz.xml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\MahApps.Metro.xml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AForge.xml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AForge.Math.xml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\de\Microsoft.Expression.Effects.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\es\Microsoft.Expression.Effects.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\fr\Microsoft.Expression.Effects.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\it\Microsoft.Expression.Effects.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\ja\Microsoft.Expression.Effects.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\ko\Microsoft.Expression.Effects.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\ru\Microsoft.Expression.Effects.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\zh-Hans\Microsoft.Expression.Effects.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\zh-Hant\Microsoft.Expression.Effects.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.csprojResolveAssemblyReference.cache
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadOutrasAgencias.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadAgente.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadCaso.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadDenuncia.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadInvestigacao.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadUnidades.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadViatura.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\ClassificarFingersPrints.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CortarImagem.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\BuscarPessoaFisica.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\CadPessoaFisica.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\TipoPessoaFisicaWindow.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\SPLASHSCREEN\CrimeManagementSplash.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CrimeManagementWindow.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\GerarLoginWindow.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\LoginScreen.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\SPLASHSCREEN\LogoffSplash.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\PrincipalScreen.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\SPLASHSCREEN\SplashScreen.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\UcImageCropper.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\WebcamWindow.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\Resources\Icons.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\App.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadOutrasAgencias.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadAgente.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadCaso.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadDenuncia.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadFingerPrints.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadInvestigacao.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadUnidades.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadViatura.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\ClassificarFingersPrints.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CortarImagem.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\BuscarPessoaFisica.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\CadPessoaFisica.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\Envolvido Físico\TipoPessoaFisicaWindow.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\SPLASHSCREEN\CrimeManagementSplash.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CrimeManagementWindow.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\GerarLoginWindow.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\LoginScreen.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\SPLASHSCREEN\LogoffSplash.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\IndividualDactiloscopica.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\PrincipalScreen.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\SPLASHSCREEN\SplashScreen.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\UcImageCropper.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\WebcamWindow.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\Resources\Icons.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\App.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo_MarkupCompile.cache
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo_MarkupCompile.lref
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\CadFingerPrints.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\FORMS\IndividualDactiloscopica.baml
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.g.resources
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.Properties.Resources.resources
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\obj\Debug\sistemaCorporativo.csproj.GenerateResource.Cache
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\Oracle.DataAccess.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AForge.Imaging.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AForge.Video.DirectShow.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AForge.Video.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AvalonControlsLibrary.dll
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AvalonControlsLibrary.pdb
+C:\Users\Matheus Buarque\Documents\Matheus\GitHub\M-and-N\sistemaCorporativo\bin\Debug\AvalonControlsLibrary.xml

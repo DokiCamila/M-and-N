@@ -8,14 +8,14 @@
         BorderThickness="1"
         Title="Selecione a Categoria do Envolvido Físico" Height="288.5" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ShowMaxRestoreButton="False" Loaded="wndTipoPessoaFisica_Loaded" >
     <Grid>
-        <DataGrid x:Name="dgvCategogiaEnvolvido" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="237" Width="370" ColumnWidth="Auto" IsReadOnly="True"/>
-        <Button x:Name="btnOk" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="391.5,10,0,0" VerticalAlignment="Top" Width="90" Click="btnOk_Click">
+        <DataGrid x:Name="dgvCategogiaEnvolvido" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="237" Width="370" ColumnWidth="Auto" IsReadOnly="True" TabIndex="0"/>
+        <Button x:Name="btnOk" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="391.5,10,0,0" VerticalAlignment="Top" Width="90" Click="btnOk_Click" TabIndex="1">
             <TextBlock Text="Ok" />
         </Button>
-        <Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="391.5,42.96,0,0" VerticalAlignment="Top" Width="90" Click="btnCancelar_Click">
+        <Button x:Name="btnCancelar" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="391.5,42.96,0,0" VerticalAlignment="Top" Width="90" Click="btnCancelar_Click" TabIndex="2">
             <TextBlock Text="Cancelar" />
         </Button>
-        <Button x:Name="btnAjuda" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="391.5,218.54,0,0" VerticalAlignment="Top" Width="90">
+        <Button x:Name="btnAjuda" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="391.5,218.54,0,0" VerticalAlignment="Top" Width="90" TabIndex="3">
             <TextBlock Text="Ajuda" />
         </Button>
 

@@ -23,9 +23,11 @@ namespace sistemaCorporativo.FORMS
     /// </summary>
     public partial class TipoPessoaFisicaWindow : MetroWindow
     {
-        public TipoPessoaFisicaWindow()
+        string idCaso;
+        public TipoPessoaFisicaWindow(string idCasoInfo)
         {
             InitializeComponent();
+            idCaso = idCasoInfo;
         }
 
         private void wndTipoPessoaFisica_Loaded(object sender, RoutedEventArgs e)
@@ -109,7 +111,7 @@ namespace sistemaCorporativo.FORMS
                 object item = dgvCategogiaEnvolvido.SelectedItem;
                 string cat = (dgvCategogiaEnvolvido.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;
 
-                BuscarPessoaFisica buscarPessoaFWnd = new BuscarPessoaFisica(cat);
+                BuscarPessoaFisica buscarPessoaFWnd = new BuscarPessoaFisica(cat, idCaso);
                 buscarPessoaFWnd.ShowDialog();
                 this.Close();
             }

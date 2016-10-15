@@ -233,6 +233,12 @@ namespace sistemaCorporativo.FORMS.principalScreen
             CadOutrasAgencias wndCadAgencia = new CadOutrasAgencias();
 			wndCadAgencia.ShowDialog();
         }
+		
+        private void tilePessoaF_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+        	CadPessoaFisica wndPessoaF = new CadPessoaFisica(null, null, null);
+			wndPessoaF.ShowDialog();
+        }  
 
         private void btnFzrLogoff_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -309,6 +315,7 @@ namespace sistemaCorporativo.FORMS.principalScreen
 
 
             
-        }  
+        }
+
     }
 }
